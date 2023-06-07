@@ -102,7 +102,7 @@
                                                :on-change="(file)=>handleChange(file,domain)"
                                                :show-file-list="false" action="" :auto-upload="false">
                                         <i :class="['el-input__icon',domain.icon ? domain.icon : 'el-icon-upload']"
-                                           style="color:#01337A ; font-size: 20px; margin-right: 5px;cursor: pointer;"></i>
+                                           style="color:#133B29 ; font-size: 20px; margin-right: 5px;cursor: pointer;"></i>
                                     </el-upload>
                                 </el-input>
                             </div>

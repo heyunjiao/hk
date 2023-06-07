@@ -64,7 +64,8 @@ export default {
     i18n: '国际化',
     externalLink: '外链',
     profile: '个人中心',
-    memberManage:'会员管理'
+    memberManage:'会员管理',
+    memberList:'会员列表'
   },
   navbar: {
     dashboard: '首页',

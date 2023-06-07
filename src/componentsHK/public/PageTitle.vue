@@ -18,7 +18,7 @@ export default {
 .h {
   width: 6px;
   height: 32px;
-  background: #01337A;
+  background: #133B29;
   border-radius: 3px;
 }
 

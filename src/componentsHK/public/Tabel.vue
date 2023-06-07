@@ -405,7 +405,7 @@ export default {
 }
 
 /deep/ .el-table__expand-icon--expanded {
-  background: #01337A !important;
+  background: #133B29 !important;
   color: #fff;
 }
 
@@ -421,12 +421,12 @@ export default {
 }
 
 /deep/ .btn-color {
-  color: #01337A;
+  color: #133B29;
 }
 
 /deep/ .el-table--enable-row-hover .el-table__body tr:hover > td {
   background-color: #E3EEFD !important;
-  color: #01337A !important;
+  color: #133B29 !important;
 }
 
 /deep/ table .el-table__row:last-child td {

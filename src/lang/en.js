@@ -64,7 +64,8 @@ export default {
     i18n: 'I18n',
     externalLink: 'External Link',
     profile: 'Profile',
-    memberManage:'Member Management'
+    memberManage:'Member Management',
+    memberList:'Member List'
   },
   navbar: {
     dashboard: 'Dashboard',

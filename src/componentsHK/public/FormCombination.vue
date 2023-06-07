@@ -426,7 +426,7 @@ export default {
 /*}*/
 
 .label-box {
-  margin: 16px 0 30px 0;
+  margin: 16px 0 20px 0;
 }
 
 .label-box .label-tip {
@@ -454,15 +454,15 @@ export default {
 }
 
 /deep/ .entered .el-input__inner {
-  border: 1px solid #01337A !important;
+  border: 1px solid #133B29 !important;
 }
 
 /deep/ .enteredlabel .el-date-editor--daterange {
-  border: 1px solid #01337A !important;
+  border: 1px solid #133B29 !important;
 }
 
 /deep/ .enteredlabel .el-input__inner {
-  border: 1px solid #01337A !important;
+  border: 1px solid #133B29 !important;
 }
 
 /deep/ .enteredlabel .el-form-item__label {

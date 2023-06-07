@@ -84,10 +84,10 @@ export const constantRoutes = [
     },
     children: [
       {
-        path: 'memberManage',
-        component: () => import('@/views/memberManage/index'),
-        name: 'memberManage',
-        meta: { title: 'memberManage', icon: 'dashboard', affix: true }
+        path: 'memberList',
+        component: () => import('@/views/memberManage/memberList'),
+        name: 'memberList',
+        meta: { title: 'memberList', icon: 'dashboard', affix: true }
       },
       {
         path: 'memberManage',
