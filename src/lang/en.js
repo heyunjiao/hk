@@ -67,6 +67,17 @@ export default {
     memberManage:'Member Management',
     memberList:'Member List'
   },
+  member:{
+    username:'User Name',
+    sex:'Gender',
+    contactInfo:'Contact Information',
+    birthday:'Birthday',
+    address:"Address",
+    allergy:'Allergy',
+    tel:'cell-phone number',
+    cardType:'Card Category',
+    openCard:'activate a bank card'
+  },
   navbar: {
     dashboard: 'Dashboard',
     github: 'Github',

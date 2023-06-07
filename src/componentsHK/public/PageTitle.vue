@@ -1,10 +1,16 @@
 <template>
   <div class="PageTitle">
-    <div class="d-flex">
+    <div style="display: flex;justify-content: space-between;">
+     <div style="display: flex">
       <div class="h"></div>
       <div class="title"><p>{{ $t(title) }} <span v-if="number">-</span> {{ number }}</p></div>
+     </div>
+     <div style="margin-right: 15px;">
+      <slot name="btn"></slot>
     </div>
   </div>
+  </div>
+
 </template>
 
 <script>

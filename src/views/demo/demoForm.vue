@@ -364,7 +364,7 @@ export default {
   },
   computed: {
     ...mapState({
-      // formObj: state => state.form.formObj,
+      formObj: state => state.form.formObj,
     })
   }
 }

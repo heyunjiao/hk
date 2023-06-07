@@ -67,6 +67,18 @@ export default {
     memberManage:'会员管理',
     memberList:'会员列表'
   },
+  member:{
+    username:'姓名',
+    sex:'性别',
+    contactInfo:'联系方式',
+    birthday:'生日',
+    address:"地址",
+    allergy:'过敏',
+    tel:'手机号',
+    cardType:'卡类型',
+    openCard:'开卡',
+    openNewCard:'创建卡'
+  },
   navbar: {
     dashboard: '首页',
     github: '项目地址',

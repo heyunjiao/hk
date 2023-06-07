@@ -308,12 +308,12 @@ export default {
     submit(v, index, data) {
       // domain, index,dynamicValidateForm.domains
       // this.handelSubmit(v, index, this.dynamicValidateForm.domains)
-      // this.$store.commit('keyValue', {
-      //   data,
-      //   Callback: ((response) => {
-      //     this.handelSubmit(v, index, data, response, this.formButtom)
-      //   })
-      // });
+      this.$store.commit('keyValue', {
+        data,
+        Callback: ((response) => {
+          this.handelSubmit(v, index, data, response, this.formButtom)
+        })
+      });
     },
     multilingualClick(v, t) {
       this.handelSubmit(v, this.formButtom, t)

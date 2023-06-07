@@ -79,7 +79,7 @@ export const constantRoutes = [
     name: 'memberManage',
     meta: {
       title: 'memberManage',
-      icon: 'lock',
+      icon: 'dashboard',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
@@ -87,7 +87,12 @@ export const constantRoutes = [
         path: 'memberList',
         component: () => import('@/views/memberManage/memberList'),
         name: 'memberList',
-        meta: { title: 'memberList', icon: 'dashboard', affix: true }
+        meta: { title: 'memberList', icon: 'lock', affix: true }
+      },
+      {
+        path: 'openCard',
+        component: () => import('@/views/memberManage/component/openCard'),
+        hidden:true
       },
       {
         path: 'memberManage',
