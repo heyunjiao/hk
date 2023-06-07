@@ -1,0 +1,70 @@
+import Vue from 'vue';
+import {
+    Form,
+    FormItem,
+    Input,
+    Button,
+    Select,
+    Option,
+    Radio,
+    CheckboxGroup,
+    Checkbox,
+    TimePicker,
+    DatePicker,
+    Switch,
+    Tabs,
+    TabPane,
+    InputNumber,
+    RadioButton,
+    RadioGroup,
+    Tooltip,
+    Dialog,
+    Empty,
+    Table,
+    TableColumn,
+    Pagination,
+    Upload,
+    Rate,
+    Popover,
+    Badge,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    Cascader,
+    CascaderPanel,
+    ButtonGroup,
+} from 'element-ui';
+Vue.use(Cascader);
+Vue.use(CascaderPanel);
+Vue.use(ButtonGroup);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Input);
+Vue.use(Button);
+Vue.use(Select);
+Vue.use(Option);
+Vue.use(Radio);
+Vue.use(CheckboxGroup);
+Vue.use(Checkbox);
+Vue.use(TimePicker);
+Vue.use(DatePicker);
+Vue.use(Switch);
+Vue.use(Tabs);
+Vue.use(TabPane);
+Vue.use(InputNumber);
+Vue.use(RadioButton);
+Vue.use(RadioGroup);
+Vue.use(Tooltip);
+Vue.use(Dialog);
+Vue.use(Empty);
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Pagination);
+Vue.use(Cascader);
+Vue.use(Upload);
+Vue.use(Rate);
+Vue.use(Popover);
+Vue.use(Badge);
+Vue.use(Dropdown);
+Vue.use(DropdownItem);
+Vue.use(DropdownMenu);
