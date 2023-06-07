@@ -115,7 +115,7 @@
                 <div class="grid-content bg-purple btn-box Botton" v-for="(domain, index) in formButtom" :key="index">
                   <!-- 多语言设置按钮 -->
                   <div class="" style="display: flex;align-items: baseline;" v-if="domain.customParameters == 'multilingualSelect'  && domain.status">
-                    <div style="margin-right: 20px"><span style="font-size: 14px;font-weight: 400;color: #606266;">{{ $t('app.sellanguage') }}</span></div>
+                    <div style="margin-right: 20px"><span style="font-size: 14px;font-weight: 400;color: #000;">{{ $t('app.sellanguage') }}</span></div>
                     <div>
                       <div style="height: 44px;" v-if="domain.hidelabels"></div>
                       <el-select v-model="domain.value"

@@ -76,8 +76,20 @@ export default {
     allergy:'过敏',
     tel:'手机号',
     cardType:'卡类型',
+    masterCard:'成人会籍卡(主卡)',
+    secondaryCard:'成人会籍卡(附属卡)',
+    youngCard:'青少年会籍卡',
     openCard:'开卡',
-    openNewCard:'创建卡'
+    openNewCard:'创建卡',
+    preferred:'爱好',
+    male:'男',
+    female:'女',
+    remark:'备注',
+    basicInfo:'基础信息',
+    accountInfo:'账户信息',
+    MembershFipFee:'会籍费',
+    annualFee:'年费' ,
+    MonthlyFees:'月度行政费' 
   },
   navbar: {
     dashboard: '首页',

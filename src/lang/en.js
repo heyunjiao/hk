@@ -76,7 +76,20 @@ export default {
     allergy:'Allergy',
     tel:'cell-phone number',
     cardType:'Card Category',
-    openCard:'activate a bank card'
+    masterCard:'Master Card',
+    secondaryCard:'Secondary Card',
+    youngCard:'Young Card',
+    openCard:'activate a bank card',
+    preferred:"preferred",
+    male:'male',
+    female:'female',
+    remark:'remark',
+    basicInfo:'User Basic Info',
+    accountInfo:'Account Information',
+    MembershFipFee:'MembershFip Fee',
+    annualFee:'Annual Fee' ,
+    MonthlyFees:'Monthly administrative fees'
+
   },
   navbar: {
     dashboard: 'Dashboard',
