@@ -71,7 +71,7 @@ export default {
     username:'姓名',
     sex:'性别',
     contactInfo:'联系方式',
-    birthday:'生日',
+    birthday:'出生日期',
     address:"地址",
     allergy:'过敏',
     tel:'手机号',
@@ -89,7 +89,8 @@ export default {
     accountInfo:'账户信息',
     MembershFipFee:'会籍费',
     annualFee:'年费' ,
-    MonthlyFees:'月度行政费' 
+    MonthlyFees:'月度行政费' ,
+    chooseMasterCard:'选择主卡'
   },
   navbar: {
     dashboard: '首页',

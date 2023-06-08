@@ -6,31 +6,42 @@
         ref="basicInfo"
         :data="formObj"
         :ChangeSubmit="ChangeSubmit"
-        :submit="submitForm"
         :reset="resetForm"
       />
-
-      <!--
-        data： 数据源
-        submit： 确认按钮事件
-        reset： 清空按钮事件
-        resetText：重置按钮文字内容
-        submitText：提交按钮文字内容
-        -->
+    </div>
+    <div class="mrb_20">
+      <Form
+        ref="basicInfo"
+        :data="formObj3"
+        :ChangeSubmit="ChangeSubmit"
+        :reset="resetForm"
+      />
+    </div>
+    <div class="mrb_20">
+      <Form
+        ref="basicInfo"
+        :data="formObj4"
+        :ChangeSubmit="ChangeSubmit"
+        :reset="resetForm"
+      />
     </div>
 
     <div class="mrb_20">
       <Form
+        ref="accountInfo"
         :data="formObj2"
+        :Change="cardSelectFn"
         :ChangeSubmit="ChangeSubmit"
-        :submit="submitAll"
         :reset="resetForm"
       />
     </div>
+    <div class="mrb_20">
+      <Form ref="accountInfo" :data="formObj5" :reset="resetForm" />
+    </div>
 
     <div class="btn-line">
-      <el-button class="Search-btn"
-        >{{ $t(submitText || "Submit") }}
+      <el-button @click="onSubmitFn" class="Search-btn"
+        >{{ $t("page.demo.preservation") }}
       </el-button>
     </div>
   </div>
@@ -41,331 +52,22 @@ import "@/config/ele/elementForm";
 import "@/config/ele/eleLayout";
 import { mapState } from "vuex";
 import Form from "@/componentsHK/public/Form";
-
+import mixin from './mixin'
 export default {
   name: "demoForm",
+  mixins:[mixin],
   components: {
     Form,
   },
   data() {
     return {
+      submitObj: {},
       obj: {},
-      formObj: {
-        title: "member.basicInfo" /*表单标题*/,
-        formproperties: {
-          inline: true,
-          // "width": "100%",  /*表单宽度*/
-          // "labelalignment": "top",  /*标题展示位置 top， left， righr*/
-          // "formlabelwidth": "120px",  /*标题宽度*/
-          // "classname": "",  /*自定义class*/
-        },
-        formData: [
-          {
-            // 单行文本框
-            id: "input",
-            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "member.username",
-            value: "" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
-          },
-          {
-            // 下拉框
-            id: "select",
-            span: 12,
-            assemblyname: "下拉框",
-            label: "member.sex",
-            value: "",
-            type: "",
-            hidelabels: true,
-            classname: "",
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "Please select",
-            category: 1,
-            source: true,
-            apiUrl: "",
-            key: "",
-            val: "",
-            check: false,
-            multiplechoice: false,
-            searchable: false,
-            formStatus: true,
-            options: [
-              { value: 1, label: "member.male" },
-              {
-                value: 2,
-                label: "member.female",
-              },
-            ],
-            customParameters: "select",
-          },
-          {
-            // 单行文本框
-            id: "input",
-            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "member.contactInfo",
-            value: "" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
-          },
-          {
-            // 时间选选择器
-            id: "dateSelection",
-            span: 12,
-            assemblyname: "",
-            label: "member.birthday",
-            value: "",
-            type: "date",
-            hidelabels: true,
-            classname: "",
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "Please select",
-            category: 5,
-            check: true,
-            format: "yyyy-MM-dd",
-            customParameters: "dateSelection",
-            formStatus: true,
-          },
-          {
-            // 单行文本框
-            id: "input",
-            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "member.allergy",
-            value: "" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
-          },
-          {
-            // 单行文本框
-            id: "input",
-            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "member.preferred",
-            value: "" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
-          },
-          {
-            // 多行文本框
-            id: "textarea",
-            span: 24,
-            assemblyname: "多行文本框",
-            label: "member.address",
-            value: "member.address",
-            type: "textarea",
-            hidelabels: true,
-            classname: "",
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "brandMessage",
-            category: 0,
-            check: true,
-            iconChekc: false,
-            customParameters: "textarea",
-            formStatus: true,
-          },
-          {
-            // 多行文本框
-            id: "textarea",
-            span: 24,
-            assemblyname: "多行文本框",
-            label: "member.remark",
-            value: "",
-            type: "textarea",
-            hidelabels: true,
-            classname: "",
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "brandMessage",
-            category: 0,
-            check: true,
-            iconChekc: false,
-            customParameters: "textarea",
-            formStatus: true,
-          },
-        ],
-      },
-
-      formObj2: {
-        title: "member.accountInfo" /*表单标题*/,
-        formproperties: {
-          inline: true,
-          // "width": "100%",  /*表单宽度*/
-          // "labelalignment": "top",  /*标题展示位置 top， left， righr*/
-          // "formlabelwidth": "120px",  /*标题宽度*/
-          // "classname": "",  /*自定义class*/
-        },
-        formData: [
-          {
-            // 下拉框
-            id: "select",
-            span: 12,
-            assemblyname: "下拉框",
-            label: "member.cardType",
-            value: "",
-            type: "",
-            hidelabels: true,
-            classname: "",
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "Please select",
-            category: 1,
-            source: true,
-            apiUrl: "",
-            key: "",
-            val: "",
-            check: false,
-            multiplechoice: false,
-            searchable: false,
-            formStatus: true,
-            options: [
-              { value: 1, label: "member.masterCard" },
-              {
-                value: 2,
-                label: "member.secondaryCard",
-              },
-              {
-                value: 3,
-                label: "member.youngCard",
-              },
-            ],
-            customParameters: "select",
-          },
-          {
-            // 多选框组
-            id: "Checkbox",
-            span: 24,
-            assemblyname: "多选框组",
-            label: "permission.roles",
-            value: [],
-            type: "",
-            hidelabels: true,
-            classname: "",
-            message: "brandMessage",
-            placeholder: "Please select",
-            category: 3,
-            source: false,
-            check: false,
-            layoutmode: 0,
-            formStatus: true,
-            options: [
-              { value: 1, label: "预约课程", disabled: false },
-              {
-                value: 2,
-                label: "店内消费",
-                disabled: true,
-              },
-              {
-                value: 3,
-                label: "线上消费",
-              },
-              {
-                value: 4,
-                label: "运动项目",
-              },
-              {
-                value: 5,
-                label: "会籍转让",
-              },
-            ],
-            customParameters: "Checkbox",
-          },
-          {
-            // 单行文本框
-            id: "input",
-            span: 6 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "member.MembershFipFee",
-            value: "" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
-          },
-          {
-            // 单行文本框
-            id: "input",
-            span: 6 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "member.annualFee",
-            value: "" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
-          },
-          {
-            // 单行文本框
-            id: "input",
-            span: 6 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "member.MonthlyFees",
-            value: "" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
-          },
-        ],
-      },
+     
     };
   },
   created() {
+    // console.log(this.formObj,'formObj');
     // this.$message({message: 'success', type: "warning"});
     // this.$message({message: 'success', type: "info"});
   },
@@ -385,47 +87,153 @@ export default {
     HandleCurrentChange(val) {
       console.debug(val);
     },
+    delItem(key) {
+      const tempIndex = this.formObj2.formData.findIndex(
+        (i) => i.customParameters === key
+      );
+      if (~tempIndex) {
+        this.formObj2.formData.splice(tempIndex, 1);
+      }
+    },
+
+    cardSelectFn(item) {
+      const openMasteCard = {
+        // 下拉框
+        id: "select",
+        span: 12,
+        assemblyname: "下拉框",
+        label: "member.chooseMasterCard",
+        value: "",
+        type: "",
+        hidelabels: true,
+        classname: "",
+        message: "brandMessage",
+        disabled: false,
+        placeholder: "Please select",
+        category: 1,
+        source: true,
+        apiUrl: "",
+        key: "",
+        val: "",
+        check: true,
+        multiplechoice: false,
+        searchable: false,
+        formStatus: true,
+        customParameters: "chooseMasterCard",
+        options: [
+          { value: 4, label: "123456" },
+          {
+            value: 5,
+            label: "99999999",
+          },
+          {
+            value: 6,
+            label: "8988888888",
+          },
+        ],
+      };
+      const MembershFipFee = {
+        // 单行文本框
+        id: "input",
+        span: 6 /*表单占据控件，容器分为 24份，需要整数*/,
+        assemblyname: "input",
+        label: "member.MembershFipFee",
+        value: "" /*控件value / 默认值*/,
+        type: "" /*控件类型 支持原生*/,
+        hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
+        classname: "" /*自定义class*/,
+        message: "brandMessage" /*校验提示语*/,
+        disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+        placeholder: "brandMessage" /*提示语*/,
+        category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+        check: true /*是否校验*/,
+        iconChekc: false /*是否展示icon*/,
+        customParameters: "MembershFipFee" /*对应api的参数名称*/,
+      };
+
+      const MonthlyFees = {
+        // 单行文本框
+        id: "input",
+        span: 6 /*表单占据控件，容器分为 24份，需要整数*/,
+        assemblyname: "input",
+        label: "member.MonthlyFees",
+        value: "" /*控件value / 默认值*/,
+        type: "" /*控件类型 支持原生*/,
+        hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
+        classname: "" /*自定义class*/,
+        message: "brandMessage" /*校验提示语*/,
+        disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+        placeholder: "brandMessage" /*提示语*/,
+        category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+        check: true /*是否校验*/,
+        iconChekc: false /*是否展示icon*/,
+        customParameters: "MonthlyFees" /*对应api的参数名称*/,
+      };
+
+      this.delItem("MembershFipFee");
+        this.delItem("MonthlyFees");
+   
+      // 选择附属卡 要求选择主卡
+      if (item.value === 2 && item.customParameters === "masterCard") {
+        this.formObj2.formData.splice(1, 0, openMasteCard);
+        
+      } else if (item.value === 1 && item.customParameters === "masterCard") {
+        // 选择主卡
+        this.formObj2.formData.push(MembershFipFee);
+        this.formObj2.formData.push(MonthlyFees);
+        console.log(this.formObj2,'this.formObj2');
+      } else if (item.value === 3 && item.customParameters === "masterCard") {
+        // 选择青少年卡
+        this.formObj2.formData.push(MembershFipFee);
+        this.delItem("MonthlyFees");
+        this.delItem("chooseMasterCard");
+
+      } else if (item.customParameters === "masterCard") {
+        this.delItem("chooseMasterCard");
+      }
+    },
     ChangeSubmit(data, obj) {
       // console.debug(data, obj);
       this.obj = obj;
     },
-    submitAll() {
-      console.log(this.$refs.basicInfo, 9999);
-    },
-    submitForm(data, status, obj) {
-      this.$message({ message: "success", type: "success" });
 
-      console.debug(data, obj);
-      let type = "";
-      let working = "";
-      data[3].options.forEach((f) => {
-        if (f.value == obj.type) {
-          type = f.label;
-        }
-      });
-      data[4].options.forEach((f) => {
-        if (f.value == obj.type) {
-          working = f.label;
-        }
-      });
-      this.tableObj.tableData.push({
-        name: obj.name,
-        code: obj.code,
-        power: obj.power,
-        type,
-        working,
-      });
-      /*TODO 表单数据处理方法
-       *  data：根据组件返回的数据一一处理，如data[0].value 为第一个控件的value
-       *  obj：设置customParameters参数调用返回提交表单参数*/
-    },
+    // submitFormBasic(data, status, obj) {
+    //   this.submitObj={...obj,...this.submitObj}
+    // },
+    // submitFormAccount(data, status, obj) {
+    //   this.submitObj={...obj,...this.submitObj}
+
+    // },
     resetForm() {
       console.debug("重置");
+    },
+    getStoreFormValue(key) {
+      let tempdata;
+      this.$store.commit("keyValue", {
+        data: key,
+        Callback: (response) => {
+          tempdata = response;
+        },
+      });
+
+      return tempdata;
+    },
+    onSubmitFn() {
+      let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
+      let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
+      Promise.all([p1, p2])
+        .then((result) => {
+          const form1 = this.getStoreFormValue(this.formObj.formData);
+          const form2 = this.getStoreFormValue(this.formObj2.formData);
+
+          console.log(form1, form2, "form");
+        })
+        .catch((e) => console.log(e));
     },
   },
   computed: {
     ...mapState({
-      // formObj: state => state.form.formObj,
+      formObj: (state) => state.form.formObj,
     }),
   },
 };
@@ -456,6 +264,7 @@ export default {
 }
 
 .btn-line {
+  text-align: right;
   padding: 15px;
   background-color: #fff;
   /* display: flex;

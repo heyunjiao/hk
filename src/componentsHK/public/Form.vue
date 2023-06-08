@@ -123,6 +123,19 @@
                                     </el-select>
                                 </div>
                             </el-input>
+                            <el-input :placeholder="$t(domain.placeholder)" v-model="domain.value" class=""
+                                      v-if="domain.category == 17">
+                                <div slot="prepend">
+                                    <!--                                    append prepend -->
+                                    <el-select v-model="domain.inputSelectValue" slot="prepend"
+                                               :placeholder="$t('Please select')"
+                                               style="width: 130px;display:inline-block;">
+                                        <el-option v-for="(v, index) in domain.inputSelectOptions"
+                                                   :label="$t(v.label)" :value="v.value"
+                                                   :key="index"></el-option>
+                                    </el-select>
+                                </div>
+                            </el-input>
                             <el-select v-if="domain.category == 16" style="width: 100%;"
                                        v-model="domain.value"
                                        filterable
@@ -138,7 +151,7 @@
                                         :value="item.value">
                                 </el-option>
                             </el-select>
-
+                            <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18">{{$t(domain.label)}}</el-button>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -248,9 +261,9 @@ export default {
         },
         selectChange(item) {  /*change 事件自定义方法*/
             this.realtimeform(item);
-            if (this.Change) {
-                this.Change(item)
-            }
+            // if (this.Change) {
+            //     this.Change(item)
+            // }
 
             if (this.ChangeSubmit) {
                 this.$store.commit('keyValue', {
@@ -291,8 +304,14 @@ export default {
                 }
             });
         },
+        validateFormPromis(formName) {
+          return this.$refs[formName].validate();
+        },
         editIcon(domain) {
             this.Change(domain)
+        },
+        btnClick(value){
+            value&& value.clickFn(value)
         }
     },
     watch: {

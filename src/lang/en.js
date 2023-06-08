@@ -88,8 +88,8 @@ export default {
     accountInfo:'Account Information',
     MembershFipFee:'MembershFip Fee',
     annualFee:'Annual Fee' ,
-    MonthlyFees:'Monthly administrative fees'
-
+    MonthlyFees:'Monthly administrative fees',
+    chooseMasterCard:'Select Master Card'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -244,7 +244,7 @@ export default {
     'page.demo.updateTime': 'Update time',
     'page.demo.email': 'Email',
     'page.demo.determine': 'determine',
-    'page.demo.preservation': 'preservation',
+    'page.demo.preservation': 'Save',
     'page.demo.saveAndAdd': 'Save and Add',
     'page.demo.name': 'name',
     'page.demo.power': 'power',

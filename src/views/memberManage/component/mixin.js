@@ -1,46 +1,7 @@
 let userMixin={
     data(){
     return{
-        tableDataMock:[ {
-            name: "1",
-            id: "1",
-            type: "1",
-            workshop: "1",
-            section: "1",
-            status: "1",
-            localDropDownBox: "1",
-            singleLineTextBox: "1",
-            icon: "1",
-            sort: "1",
-            updateTime: "1",
-            email: "1",
-          }, {
-            name: "2",
-            id: "2",
-            type: "1",
-            workshop: "1",
-            section: "1",
-            status: "1",
-            localDropDownBox: "1",
-            singleLineTextBox: "1",
-            icon: "1",
-            sort: "1",
-            updateTime: "1",
-            email: "1",
-          }, {
-            name: "3",
-            id: "3",
-            type: "1",
-            workshop: "1",
-            section: "1",
-            status: "1",
-            localDropDownBox: "1",
-            singleLineTextBox: "1",
-            icon: "1",
-            sort: "1",
-            updateTime: "1",
-            email: "1",
-          },],
+        
           formObj: {
             title: "member.basicInfo" /*表单标题*/,
             formproperties: {
@@ -54,7 +15,7 @@ let userMixin={
               {
                 // 单行文本框
                 id: "input",
-                span: 18 /*表单占据控件，容器分为 24份，需要整数*/,
+                span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
                 assemblyname: "input",
                 label: "会员号码",
                 value: "4567890987544455665" /*控件value / 默认值*/,
@@ -72,19 +33,18 @@ let userMixin={
               {
                 // 单行文本框
                 id: "btn",
-                span: 2 /*表单占据控件，容器分为 24份，需要整数*/,
+                span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
                 label: "激活",
+                disabled:false,
                 value: "" /*控件value / 默认值*/,
                 type: "primary" /*控件类型 支持原生*/,
                 hidelabels: false /*是否展示label*/ /*是否展示label标题*/,
                 classname: "" /*自定义class*/,
                 message: "brandMessage" /*校验提示语*/,
-                disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+              
                 placeholder: "brandMessage" /*提示语*/,
                 category: 18 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-                check: false /*是否校验*/,
-                iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                clickFn:this.statusFn
               },
              
               {
@@ -350,10 +310,7 @@ let userMixin={
             title: "member.accountInfo" /*表单标题*/,
             formproperties: {
               inline: true,
-              // "width": "100%",  /*表单宽度*/
-              // "labelalignment": "top",  /*标题展示位置 top， left， righr*/
-              // "formlabelwidth": "120px",  /*标题宽度*/
-              // "classname": "",  /*自定义class*/
+          
             },
             formData: [
               {
@@ -391,7 +348,6 @@ let userMixin={
                   },
                 ],
               },
-    
               {
                 // 多选框组
                 id: "Checkbox",
@@ -615,6 +571,13 @@ let userMixin={
             ],
           },
 
-    }}
+    }},
+    methods:{
+    statusFn(value){
+    console.log(value,888);
+    this.formObj.formData[1].label='停用'
+
+    }
+    }
 }
 export default userMixin
