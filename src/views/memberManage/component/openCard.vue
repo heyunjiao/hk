@@ -39,7 +39,7 @@
       <Form ref="accountInfo" :data="formObj5" :reset="resetForm" />
     </div>
 
-    <div class="btn-line">
+    <div class="btn-line" v-if=" !this.formObj.formDisabled">
       <el-button @click="onSubmitFn" class="Search-btn"
         >{{ $t("page.demo.preservation") }}
       </el-button>
@@ -52,10 +52,10 @@ import "@/config/ele/elementForm";
 import "@/config/ele/eleLayout";
 import { mapState } from "vuex";
 import Form from "@/componentsHK/public/Form";
-import mixin from './mixin'
+import mixin from "./mixin";
 export default {
   name: "demoForm",
-  mixins:[mixin],
+  mixins: [mixin],
   components: {
     Form,
   },
@@ -63,13 +63,20 @@ export default {
     return {
       submitObj: {},
       obj: {},
-     
+      query:{}
     };
   },
   created() {
-    // console.log(this.formObj,'formObj');
-    // this.$message({message: 'success', type: "warning"});
-    // this.$message({message: 'success', type: "info"});
+    const {type,data}=this.$route.query
+    this.query={...this.query,type,data:JSON.parse(data)}
+    if(this.query.type==='view'){
+    this.formObj.formDisabled=true
+    this.formObj4.formDisabled=true
+    this.formObj2.formDisabled=true
+    this.formObj3.formDisabled=true
+    this.formObj5.formDisabled=true
+    }
+  console.log(this.query);
   },
   methods: {
     saveAndAdd() {
@@ -171,23 +178,20 @@ export default {
       };
 
       this.delItem("MembershFipFee");
-        this.delItem("MonthlyFees");
-   
+      this.delItem("MonthlyFees");
+
       // 选择附属卡 要求选择主卡
       if (item.value === 2 && item.customParameters === "masterCard") {
         this.formObj2.formData.splice(1, 0, openMasteCard);
-        
       } else if (item.value === 1 && item.customParameters === "masterCard") {
         // 选择主卡
         this.formObj2.formData.push(MembershFipFee);
         this.formObj2.formData.push(MonthlyFees);
-        console.log(this.formObj2,'this.formObj2');
       } else if (item.value === 3 && item.customParameters === "masterCard") {
         // 选择青少年卡
         this.formObj2.formData.push(MembershFipFee);
         this.delItem("MonthlyFees");
         this.delItem("chooseMasterCard");
-
       } else if (item.customParameters === "masterCard") {
         this.delItem("chooseMasterCard");
       }

@@ -4,6 +4,7 @@ let userMixin={
         
           formObj: {
             title: "member.basicInfo" /*表单标题*/,
+            formDisabled:false,
             formproperties: {
               inline: true,
               // "width": "100%",  /*表单宽度*/
@@ -308,6 +309,8 @@ let userMixin={
           },
           formObj2: {
             title: "member.accountInfo" /*表单标题*/,
+            formDisabled:false,
+
             formproperties: {
               inline: true,
           
@@ -392,6 +395,8 @@ let userMixin={
           },
           formObj3: {
             title: "个人信息" /*表单标题*/,
+            formDisabled:false,
+
             formproperties: {
               inline: true,
               // "width": "100%",  /*表单宽度*/
@@ -459,6 +464,8 @@ let userMixin={
           },
           formObj4: {
             title: "秘书信息" /*表单标题*/,
+            formDisabled:false,
+
             formproperties: {
               inline: true,
               // "width": "100%",  /*表单宽度*/
@@ -545,6 +552,8 @@ let userMixin={
           },
           formObj5: {
             title: "其他信息" /*表单标题*/,
+            formDisabled:false,
+
             formproperties: {
               inline: true,
             },

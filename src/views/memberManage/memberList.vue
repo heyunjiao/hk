@@ -110,55 +110,65 @@ export default {
             icon: "el-icon-edit-outline" /*按钮icon*/,
           },
           {
-            id: "delete" /*按钮ID*/,
+            id: "view" /*按钮ID*/,
             value: "" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
               "text" /*按钮类型 primary / success / warning / danger / info / text*/,
             size: "mini" /*按钮大小 medium / small / mini*/,
-            icon: "el-icon-delete" /*按钮icon*/,
+            icon: "el-icon-thumb" /*按钮icon*/,
           },
-          {
-            id: "copy" /*按钮ID*/,
-            value: "" /*按钮内容*/,
-            classname: "" /*自定义class*/,
-            disabled: false /*是否被禁用*/,
-            type:
-              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
-            size: "mini" /*按钮大小 medium / small / mini*/,
-            icon: "el-icon-document-copy" /*按钮icon*/,
-          },
-          {
-            id: "connection" /*按钮ID*/,
-            value: "" /*按钮内容*/,
-            classname: "" /*自定义class*/,
-            disabled: false /*是否被禁用*/,
-            type:
-              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
-            size: "mini" /*按钮大小 medium / small / mini*/,
-            icon: "el-icon-connection" /*按钮icon*/,
-          },
-          {
-            id: "lock" /*按钮ID*/,
-            value: "" /*按钮内容*/,
-            classname: "" /*自定义class*/,
-            disabled: false /*是否被禁用*/,
-            type:
-              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
-            size: "mini" /*按钮大小 medium / small / mini*/,
-            icon: "el-icon-lock" /*按钮icon*/,
-          },
-          {
-            id: "check" /*按钮ID*/,
-            value: "" /*按钮内容*/,
-            classname: "" /*自定义class*/,
-            disabled: false /*是否被禁用*/,
-            type:
-              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
-            size: "mini" /*按钮大小 medium / small / mini*/,
-            icon: "el-icon-s-check" /*按钮icon*/,
-          },
+          // {
+          //   id: "delete" /*按钮ID*/,
+          //   value: "" /*按钮内容*/,
+          //   classname: "" /*自定义class*/,
+          //   disabled: false /*是否被禁用*/,
+          //   type:
+          //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+          //   size: "mini" /*按钮大小 medium / small / mini*/,
+          //   icon: "el-icon-delete" /*按钮icon*/,
+          // },
+          // {
+          //   id: "copy" /*按钮ID*/,
+          //   value: "" /*按钮内容*/,
+          //   classname: "" /*自定义class*/,
+          //   disabled: false /*是否被禁用*/,
+          //   type:
+          //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+          //   size: "mini" /*按钮大小 medium / small / mini*/,
+          //   icon: "el-icon-document-copy" /*按钮icon*/,
+          // },
+          // {
+          //   id: "connection" /*按钮ID*/,
+          //   value: "" /*按钮内容*/,
+          //   classname: "" /*自定义class*/,
+          //   disabled: false /*是否被禁用*/,
+          //   type:
+          //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+          //   size: "mini" /*按钮大小 medium / small / mini*/,
+          //   icon: "el-icon-connection" /*按钮icon*/,
+          // },
+          // {
+          //   id: "lock" /*按钮ID*/,
+          //   value: "" /*按钮内容*/,
+          //   classname: "" /*自定义class*/,
+          //   disabled: false /*是否被禁用*/,
+          //   type:
+          //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+          //   size: "mini" /*按钮大小 medium / small / mini*/,
+          //   icon: "el-icon-lock" /*按钮icon*/,
+          // },
+          // {
+          //   id: "check" /*按钮ID*/,
+          //   value: "" /*按钮内容*/,
+          //   classname: "" /*自定义class*/,
+          //   disabled: false /*是否被禁用*/,
+          //   type:
+          //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+          //   size: "mini" /*按钮大小 medium / small / mini*/,
+          //   icon: "el-icon-s-check" /*按钮icon*/,
+          // },
         ],
         childrenOperationData: [
           /*字表操作栏*/
@@ -216,20 +226,20 @@ export default {
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
-          {
-          "id": 'collape',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-          "label": "",/*todo 修改 控件label*/
-          "value": "collape",
-          "hidelabels": true, /*是否展示label标题*/
-          "disabled": false, /*是否禁用 true 禁用 false 启用*/
-          "placeholder": "Please select", /*todo 修改 placeholder 提示语*/
-          "category": 7, /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-          "type": "Filter-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-          "size": "", /*按钮大小 medium / small / mini*/
-          "icon": "el-icon-arrow-up",/*自定义icon，在 模糊搜索或按钮时候生效*/
-          "classname": '', /*默认为空*/
-          "classnameitem": '' /*默认为空*/
-        }, 
+        //   {
+        //   "id": 'collape',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
+        //   "label": "",/*todo 修改 控件label*/
+        //   "value": "collape",
+        //   "hidelabels": true, /*是否展示label标题*/
+        //   "disabled": false, /*是否禁用 true 禁用 false 启用*/
+        //   "placeholder": "Please select", /*todo 修改 placeholder 提示语*/
+        //   "category": 7, /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
+        //   "type": "Filter-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
+        //   "size": "", /*按钮大小 medium / small / mini*/
+        //   "icon": "el-icon-arrow-up",/*自定义icon，在 模糊搜索或按钮时候生效*/
+        //   "classname": '', /*默认为空*/
+        //   "classnameitem": '' /*默认为空*/
+        // }, 
         {
           "id": 'Search1',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
           "label": "",/*todo 修改 控件label*/
@@ -305,59 +315,68 @@ export default {
                    value: v.value
                  })*/
       }
+      
 
-      if (v.id == 1) {
-        this.title = "高级搜索展开样式";
-        this.status = false;
+      // if (v.id == 1) {
+      //   this.title = "高级搜索展开样式";
+      //   this.status = false;
 
-        this.$store.commit("functionAmbiguity", {
-          data: data,
-          formObj1: this.formObj1,
-          Callback: (response) => {
-            this.formObj1 = response.formObj1;
-          },
-        });
-        return "";
-      }
-      if (v.id == "collape") {
-        this.title = this.$t("page.demo.fuzzySearch");
-        this.status = true;
-        this.tabData = [];
-        this.$store.commit("functionTabData", {
-          data: data,
-          formObj: this.formObj,
-          tabData: this.tabData,
-          Callback: (response) => {
-            this.formObj = response.formObj;
-            this.tabData = response.tabData;
-          },
-        });
-        return "";
-      }
-      if (v.id == 2 || v.id == 10) {
-        console.debug("批处理");
-        this.$message(this.$t("page.demo.batchProcessing"));
-        return "";
-      }
-      if (v.id == 3 || v.id == 11) {
-        console.debug("新增");
-        /* this.$router.push({
-                   path: '/Form'
-                 })*/
-        window.open("/Form");
-        return "";
-      }
+      //   this.$store.commit("functionAmbiguity", {
+      //     data: data,
+      //     formObj1: this.formObj1,
+      //     Callback: (response) => {
+      //       this.formObj1 = response.formObj1;
+      //     },
+      //   });
+      //   return "";
+      // }
+      // if (v.id == "collape") {
+      //   this.title = this.$t("page.demo.fuzzySearch");
+      //   this.status = true;
+      //   this.tabData = [];
+      //   this.$store.commit("functionTabData", {
+      //     data: data,
+      //     formObj: this.formObj,
+      //     tabData: this.tabData,
+      //     Callback: (response) => {
+      //       this.formObj = response.formObj;
+      //       this.tabData = response.tabData;
+      //     },
+      //   });
+      //   return "";
+      // }
+      // if (v.id == 2 || v.id == 10) {
+      //   console.debug("批处理");
+      //   this.$message(this.$t("page.demo.batchProcessing"));
+      //   return "";
+      // }
+      // if (v.id == 3 || v.id == 11) {
+      //   console.debug("新增");
+      //   /* this.$router.push({
+      //              path: '/Form'
+      //            })*/
+      //   window.open("/Form");
+      //   return "";
+      // }
     },
     operationSubmit(v, index, row) {
       /*
        * v：当前点击按钮内容
        * index：当前点击行数索引
        * row：当前点击行数对象*/
-      console.debug(v, index, row);
-      if (v.id == 13) {
-        console.log("审批");
-        this.$message("审批");
+      console.log(v, index, row);
+      if (v.id == 'edit') {
+       this.$router.push({
+        path:'/openCard',query:{type:v.id ,data:JSON.stringify(row)}})
       }
+      if (v.id == 'view') {
+       this.$router.push({
+        path:'/openCard',query:{type:v.id ,data:JSON.stringify(row)}})
+      }
+      // if (v.id == 13) {
+      //   console.log("审批");
+      //   this.$message("审批");
+      // }
     },
     openCardFn(){
         console.log(111);

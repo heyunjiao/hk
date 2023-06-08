@@ -8,7 +8,7 @@
                      :label-position="formObj.formproperties.labelalignment || 'left'"
                      :label-width="formObj.formproperties.formlabelwidth || '120px'"
                      class="demo-dynamic" :class="formObj.formproperties.classname"
-                     :style="'width: ' + formObj.formproperties.width">
+                     :style="'width: ' + formObj.formproperties.width" :disabled="formObj.formDisabled">
                 <el-row :gutter="24">
                     <el-col v-for="(domain, index) in dynamicValidateForm.domains" :span="Number(domain.span) || 12"
                             style="height: 60px!important;"
@@ -151,7 +151,7 @@
                                         :value="item.value">
                                 </el-option>
                             </el-select>
-                            <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18">{{$t(domain.label)}}</el-button>
+                            <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18&&!formObj.formDisabled">{{$t(domain.label)}}</el-button>
                         </el-form-item>
                     </el-col>
                 </el-row>
