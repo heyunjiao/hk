@@ -52,7 +52,7 @@ export default {
         operation: true /*是否展示操作按钮功能*/,
         childrenOperation: true /*是否展示子表操作按钮功能*/,
         operationText: "operation" /*操作栏标题*/,
-        selectionStatus: true /*是否需要复选框*/,
+        selectionStatus: false /*是否需要复选框*/,
         childrenOperationText: "operation" /*子表操作栏标题*/,
         paginationStatus: true /*是否启用分页组件*/,
         operationWidth: "200",
@@ -61,8 +61,22 @@ export default {
         head: [
           /*表头数据*/
           {
+            label: "会员号码" /*标题*/,
+            prop: "id" /*绑定数据源obj展示字段*/,
+            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            width: "180" /*表头宽度*/,
+            // slot: false,  /*是否需要插槽*/
+          },
+          {
             label: "member.cardType" /*标题*/,
-            prop: "name" /*绑定数据源obj展示字段*/,
+            prop: "type" /*绑定数据源obj展示字段*/,
+            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            width: "140" /*表头宽度*/,
+            // slot: false,  /*是否需要插槽*/
+          },
+          {
+            label: "头衔" /*标题*/,
+            prop: "nikename" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
@@ -76,23 +90,25 @@ export default {
           },
           {
             label: "member.sex" /*标题*/,
-            prop: "id" /*绑定数据源obj展示字段*/,
+            prop: "sex" /*绑定数据源obj展示字段*/,
+            width: "80" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "member.tel" /*标题*/,
+            prop: "tel" /*绑定数据源obj展示字段*/,
             width: "" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "member.contactInfo" /*标题*/,
-            prop: "type" /*绑定数据源obj展示字段*/,
+            label: "秘书姓名" /*标题*/,
+            prop: "name" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
-            slot: true /*表头宽度*/,
           },
           {
-            label: "member.birthday" /*标题*/,
-            prop: "workshop" /*绑定数据源obj展示字段*/,
+            label: "秘书电话" /*标题*/,
+            prop: "tel" /*绑定数据源obj展示字段*/,
           },
-          {
-            label: "member.address" /*标题*/,
-            prop: "section" /*绑定数据源obj展示字段*/,
-          },
+         
+          
           
         ],
         childrenHead: [

@@ -31,22 +31,41 @@ let userMixin={
                 iconChekc: false /*是否展示icon*/,
                 customParameters: "input" /*对应api的参数名称*/,
               },
-              {
-                // 单行文本框
-                id: "btn",
-                span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-                label: "激活",
-                disabled:false,
-                value: "" /*控件value / 默认值*/,
-                type: "primary" /*控件类型 支持原生*/,
-                hidelabels: false /*是否展示label*/ /*是否展示label标题*/,
-                classname: "" /*自定义class*/,
-                message: "brandMessage" /*校验提示语*/,
-              
-                placeholder: "brandMessage" /*提示语*/,
-                category: 18 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-                clickFn:this.statusFn
+              { // switch开关
+                "id": 'switch',
+                "span": 12,
+                "assemblyname": "",
+                "label": "是否激活",
+                "value": "",
+                "hidelabels": true,
+                "classname": "",
+                "message": "brandMessage",
+                "disabled": false,
+                "placeholder": "Please select",
+                "category": 6,
+                "check": true,
+                "activecolor": "",
+                "inactivecolor": "",
+                "customParameters": "switch",
+                "formStatus": true,
+                activecolor:''
               },
+              // {
+              //   // 单行文本框
+              //   id: "btn",
+              //   span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
+              //   label: "激活",
+              //   disabled:false,
+              //   value: "" /*控件value / 默认值*/,
+              //   type: "primary" /*控件类型 支持原生*/,
+              //   hidelabels: false /*是否展示label*/ /*是否展示label标题*/,
+              //   classname: "" /*自定义class*/,
+              //   message: "brandMessage" /*校验提示语*/,
+              
+              //   placeholder: "brandMessage" /*提示语*/,
+              //   category: 18 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+              //   clickFn:this.statusFn
+              // },
              
               {
                 id: "email",
@@ -527,6 +546,29 @@ let userMixin={
                 check: true /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
                 customParameters: "input" /*对应api的参数名称*/,
+              },
+              { // 多选框组
+                "id": 'Checkbox',
+                "span": 12,
+                "assemblyname": "多选框组",
+                "label": "优先联系秘书",
+                "value": [],
+                "type": "",
+                "hidelabels": true,
+                "classname": "",
+                "message": "brandMessage",
+                "placeholder": "Please select",
+                "category": 3,
+                "source": false,
+                "check": false,
+                "layoutmode": 0,
+                "formStatus": true,
+                "options": [{"value": 1, "label": "是", "disabled": false}, {
+                  "value": 2,
+                  "label": "否",
+                 
+                }],
+                "customParameters": "Checkbox"
               },
     
               {

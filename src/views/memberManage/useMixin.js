@@ -2,9 +2,10 @@ let userMixin={
     data(){
     return{
         tableDataMock:[ {
-            name: "1",
-            id: "1",
-            type: "1",
+            name: "LUCY",
+            id: "5438948395793574839758",
+            type: "成人会籍卡（主卡）",
+            sex:'男',
             workshop: "1",
             section: "1",
             status: "1",
@@ -14,10 +15,17 @@ let userMixin={
             sort: "1",
             updateTime: "1",
             email: "1",
+            tel:'17766666666',
+            birthday:"2023/2/3",
+            nikename:"爵士"
+
           }, {
-            name: "2",
-            id: "2",
-            type: "1",
+            name: "HELLO",
+            id: "4555543894839579357483",
+            type: "成人会籍卡（附属卡）",
+            sex:'男',
+            birthday:"2023/2/3",
+
             workshop: "1",
             section: "1",
             status: "1",
@@ -27,11 +35,16 @@ let userMixin={
             sort: "1",
             updateTime: "1",
             email: "1",
+            tel:'17766666666'
           }, {
-            name: "3",
-            id: "3",
-            type: "1",
+            name: "MODY",
+            id: "578667586787687695899",
+            type: "青少年会籍卡",
             workshop: "1",
+            sex:'女',
+            tel:'17766666666',
+            birthday:"2023/2/3",
+
             section: "1",
             status: "1",
             localDropDownBox: "1",

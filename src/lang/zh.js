@@ -79,7 +79,7 @@ export default {
     masterCard:'成人会籍卡(主卡)',
     secondaryCard:'成人会籍卡(附属卡)',
     youngCard:'青少年会籍卡',
-    openCard:'开卡',
+    openCard:'新建会员',
     openNewCard:'创建卡',
     preferred:'爱好',
     male:'男',

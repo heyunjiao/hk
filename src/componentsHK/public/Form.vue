@@ -84,8 +84,8 @@
                             <el-switch v-if="domain.category == 6"
                                        :disabled="domain.disabled"
                                        v-model="domain.value" @change="realtimeform(domain)"
-                                       :active-color="domain.activecolor || '#00B38A'"
-                                       :inactive-color="domain.inactivecolor || '#999999'">
+                                       :active-color="domain.activecolor || '#123A28'"
+                                       :inactive-color="domain.inactivecolor || '#999'">
                             </el-switch>
                             <el-input-number v-if="domain.category == 14" v-model="domain.value"
                                              :disabled="domain.disabled"
@@ -151,7 +151,7 @@
                                         :value="item.value">
                                 </el-option>
                             </el-select>
-                            <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18&&!formObj.formDisabled">{{$t(domain.label)}}</el-button>
+                            <!-- <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18&&!formObj.formDisabled">{{$t(domain.label)}}</el-button> -->
                         </el-form-item>
                     </el-col>
                 </el-row>
