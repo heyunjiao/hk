@@ -17,7 +17,8 @@ let userMixin={
             email: "1",
             tel:'17766666666',
             birthday:"2023/2/3",
-            nikename:"爵士"
+            nikename:"爵士",
+            yes:'是'
 
           }, {
             name: "HELLO",
