@@ -89,18 +89,70 @@ export const constantRoutes = [
         name: 'memberList',
         meta: { title: 'memberList', icon: 'lock', affix: true }
       },
+      // 创建会员卡
       {
         path: 'openCard',
         component: () => import('@/views/memberManage/component/openCard'),
         hidden:true
       },
+      
+      
+    ]
+  },
+ 
+  {
+    path: '/appointmentManage',
+    component: Layout,
+    redirect: '/appointmentManage/index',
+    alwaysShow: true, // will always show the root menu
+    name: 'appointmentManage',
+    meta: {
+      title: 'appointeManage',
+      icon: 'guide',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
       {
-        path: 'memberManage',
-        component: () => import('@/views/memberManage/index'),
-        name: 'memberManage',
-        meta: { title: 'memberManage', icon: 'dashboard', affix: true }
+        path: 'index',
+        component: () => import('@/views/appointmentManage/index'),
+        name: 'PagePermission',
+        meta: {
+          title: 'appointeList',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      // 创建预约
+      {
+        path: 'openAppoint',
+        component: () => import('@/views/appointmentManage/component/openAppoint'),
+        hidden:true
       },
       
+      
+      
+    ]
+  },
+  {
+    path: '/orderManage',
+    component: Layout,
+    redirect: '/orderManage/index',
+    alwaysShow: true, // will always show the root menu
+    name: 'orderManage',
+    meta: {
+      title: 'orderManage',
+      icon: 'guide',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/orderManage/index'),
+        name: 'orderManage',
+        meta: {
+          title: 'orderManage',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
     ]
   },
   {

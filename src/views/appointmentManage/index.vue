@@ -1,10 +1,10 @@
 <template>
   <div class="member-list">
     <div class="page-title">
-      <PageTitle title="route.memberList">
+      <PageTitle title="route.appointeList">
         <template slot="btn">
           <el-button @click="openCardFn" size="large" type="primary">{{
-            $t("member.openCard")
+            $t("appointeManage.openAppoint")
           }}</el-button>
         </template>
       </PageTitle>
@@ -17,12 +17,17 @@
         :tabClose="tabClose"
         :handelSubmit="submit"
       />
-      <FormCombination :formObj="formObj" v-show="!status" :handelSubmit="submit"/>
+      <FormCombination
+        :formObj="formObj"
+        v-show="!status"
+        :handelSubmit="submit"
+      />
     </div>
 
     <div class="table-list">
       <div>
         <!--table表格-->
+
         <Table
           :Obj="tableObj"
           :handelSubmit="operationSubmit"
@@ -30,20 +35,9 @@
           :handleSelectionChangeCom="handleSelectionChangeCom"
           :HandleCurrentChange="HandleCurrentChange"
         >
-          <template slot="status" scope="{row}"
+          <template slot="viewOrderDetail" scope="{row}"
             ><!--switch控件插槽-->
-            <el-switch
-              v-model="row.status"
-             
-            >
-            </el-switch>
-          </template>
-          <!-- c查看订单详情 -->
-          <template slot="orderView" scope="{row}"
-            ><!--switch控件插槽-->
-           <a class="a_link" href="#" @click="viewOrderFn">
-          查看
-          </a>
+            <a class="a_link" @click="viewOrderFn">查看</a>
           </template>
         </Table>
       </div>
@@ -55,17 +49,20 @@
 import PageTitle from "@/componentsHK/public/PageTitle.vue";
 import FormCombination from "@/componentsHK/public/FormCombination.vue";
 import Table from "@/componentsHK/public/Tabel";
-import userMixin from "./useMixin";
+import userMixin from "../memberManage/useMixin";
+import selectOption from '@/views/global-data/selectOption'
 import {window_open} from '@/utils/index'
-
 export default {
   name: "memberList",
-  mixins: [userMixin],
+  mixins: [userMixin,],
   components: { PageTitle, FormCombination, Table },
   data() {
+    
+
     return {
+        
       status: true,
-      title:'',
+      title: "",
       tabData: [],
       tableObj: {
         son: false /*是否有子级表单*/,
@@ -88,34 +85,46 @@ export default {
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "member.cardType" /*标题*/,
+            label: "会员姓名" /*标题*/,
+            prop: "id" /*绑定数据源obj展示字段*/,
+            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            width: "80" /*表头宽度*/,
+            // slot: false,  /*是否需要插槽*/
+          },
+          {
+            label: "联系方式" /*标题*/,
             prop: "type" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "头衔" /*标题*/,
+            label: "预约时间" /*标题*/,
             prop: "nikename" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
+        
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "member.username" /*标题*/,
-            prop: "name" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            label: "预约项目" /*标题*/,
+            prop: "birthday" /*绑定数据源obj展示字段*/,
+        
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
-         
+
           {
-            label: "member.sex" /*标题*/,
+            label: "房间/桌位" /*标题*/,
             prop: "sex" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "member.tel" /*标题*/,
+            label: "教练名称" /*标题*/,
+            prop: "tel" /*绑定数据源obj展示字段*/,
+            width: "" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "教练电话" /*标题*/,
             prop: "tel" /*绑定数据源obj展示字段*/,
             width: "" /*表头固定，参数：left / right / ''*/,
           },
@@ -133,19 +142,23 @@ export default {
           {
             label: "秘书电话" /*标题*/,
             prop: "tel" /*绑定数据源obj展示字段*/,
-            width:'120'
-          },
-          {
-            label: "激活状态" /*标题*/,
-            prop: "status" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-            slot: true /*表头宽度*/,
+            width: "120",
           },
           {
             label: "查看订单详情" /*标题*/,
-            prop: "orderView" /*绑定数据源obj展示字段*/,
-            width: "100" /*表头固定，参数：left / right / ''*/,
+            prop: "viewOrderDetail" /*绑定数据源obj展示字段*/,
+            width: "120" /*表头固定，参数：left / right / ''*/,
             slot: true /*表头宽度*/,
+          },
+          {
+            label: "操作人" /*标题*/,
+            prop: "name" /*绑定数据源obj展示字段*/,
+            width: "80" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "操作时间" /*标题*/,
+            prop: "birthday" /*绑定数据源obj展示字段*/,
+            width: "120" /*表头固定，参数：left / right / ''*/,
           },
         ],
         childrenHead: [
@@ -172,7 +185,6 @@ export default {
             size: "mini" /*按钮大小 medium / small / mini*/,
             icon: "el-icon-view" /*按钮icon*/,
           },
-        
         ],
         childrenOperationData: [
           /*字表操作栏*/
@@ -199,7 +211,7 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "member.username" /*todo 修改 控件label*/,
+            label: "预约姓名" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
@@ -211,7 +223,7 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "member.tel" /*todo 修改 控件label*/,
+            label: "预约手机号" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
@@ -221,137 +233,200 @@ export default {
             classnameitem: "" /*默认为空*/,
           },
           {
+            // 日期选择器
+            id:
+              "dateSelection" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "预约日期" /*todo 修改 控件label*/,
+            value: "",
+            type:
+              "date" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 5 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            format: "yyyy-MM-dd",
+            customParameters: "DateSelection" /*对应api的参数名称*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+            max: "" /*最大范围*/,
+            min: "" /*最小范围*/,
+          },
+          {
             // 下拉框本地取值
             id: "localDropDownBox" /*下拉框例子*/,
-            label: "member.cardType" /*todo 修改 控件label*/,
+            label: "预约项目" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
             placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
             category: 1 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            options: [
-              /*筛选 数据源*/ {
-                value: 1,
-                label: "成人会籍卡",
-                disabled: false,
-              },
-              {
-                value: 2 /*选中参数*/,
-                label: "青少年会籍卡" /*选中标题*/,
-                disabled: false /*选项是否禁用*/,
-              },
-            ],
+            options:selectOption.projectType,
             customParameters: "Select" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
-         
           {
-            // 文本框
-            id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "秘书姓名" /*todo 修改 控件label*/,
+            // 下拉框本地取值
+            id: "localDropDownBox" /*下拉框例子*/,
+            label: "预约教练" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
-            placeholder: "brandMessage",
-            category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "mishuname" /*对应api的参数名称*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 1 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+            options:selectOption.coach,
+            customParameters: "Select" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
           {
-            // 文本框
-            id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "秘书电话" /*todo 修改 控件label*/,
+            // 下拉框本地取值
+            id: "localDropDownBox" /*下拉框例子*/,
+            label: "预约状态" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
-            placeholder: "brandMessage",
-            category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "mishuTel" /*对应api的参数名称*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 1 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+            options:selectOption.apponitStatus,
+            customParameters: "Select" /*对应api的参数名称*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+          },
+          {
+            // 下拉框本地取值
+            id: "localDropDownBox" /*下拉框例子*/,
+            label: "操作人" /*todo 修改 控件label*/,
+            value: "",
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 1 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+            options:selectOption.coach,
+            customParameters: "Select" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
 
+        //   {
+        //     // 文本框
+        //     id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+        //     label: "秘书姓名" /*todo 修改 控件label*/,
+        //     value: "",
+        //     hidelabels: true /*是否展示label标题*/,
+        //     placeholder: "brandMessage",
+        //     category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+        //     customParameters: "mishuname" /*对应api的参数名称*/,
+        //     classname: "" /*默认为空*/,
+        //     classnameitem: "" /*默认为空*/,
+        //   },
+        //   {
+        //     // 文本框
+        //     id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+        //     label: "秘书电话" /*todo 修改 控件label*/,
+        //     value: "",
+        //     hidelabels: true /*是否展示label标题*/,
+        //     placeholder: "brandMessage",
+        //     category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+        //     customParameters: "mishuTel" /*对应api的参数名称*/,
+        //     classname: "" /*默认为空*/,
+        //     classnameitem: "" /*默认为空*/,
+        //   },
+
           {
-          "id": 'collape',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-          "label": "",/*todo 修改 控件label*/
-          "value": "collape",
-          "hidelabels": true, /*是否展示label标题*/
-          "disabled": false, /*是否禁用 true 禁用 false 启用*/
-          "placeholder": "Please select", /*todo 修改 placeholder 提示语*/
-          "category": 7, /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-          "type": "Filter-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-          "size": "", /*按钮大小 medium / small / mini*/
-          "icon": "el-icon-arrow-up",/*自定义icon，在 模糊搜索或按钮时候生效*/
-          "classname": '', /*默认为空*/
-          "classnameitem": '' /*默认为空*/
-        }, {
-          "id": 'Search1',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-          "label": "",/*todo 修改 控件label*/
-          "value": "Search",
-          "hidelabels": true, /*是否展示label标题*/
-          "disabled": false, /*是否禁用 true 禁用 false 启用*/
-          "placeholder": "Please select", /*todo 修改 placeholder 提示语*/
-          "category": 7, /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-          "activecolor": "",/*switch 开启颜色*/
-          "inactivecolor": "",  /*switch 关闭颜色*/
-          "type": "Search-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-          "size": "", /*按钮大小 medium / small / mini*/
-          "icon": "el-icon-search", /*自定义icon，在 模糊搜索或按钮时候生效*/
-          "classname": '', /*默认为空*/
-          "classnameitem": '' /*默认为空*/
-        },
+            id: "collape" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "" /*todo 修改 控件label*/,
+            value: "collape",
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 7 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            type:
+              "Filter-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
+            size: "" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-arrow-up" /*自定义icon，在 模糊搜索或按钮时候生效*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+          },
+          {
+            id: "Search1" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "" /*todo 修改 控件label*/,
+            value: "Search",
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 7 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            activecolor: "" /*switch 开启颜色*/,
+            inactivecolor: "" /*switch 关闭颜色*/,
+            type:
+              "Search-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
+            size: "" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-search" /*自定义icon，在 模糊搜索或按钮时候生效*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+          },
         ],
       },
-      formObj1: {  /*TODO 组件数据集合*/
-                "formproperties": {
-                    "classname": "form-box",  /*自定义class参数，组合查询模糊搜索必须有 form-box*/
-                },
-                "formData": [/*TODO 控件配置数组*/{
-                    "id": 0,  /*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-                    "label": "demo.page.singleLineTextBox", /*todo 修改 控件label*/
-                    "value": "", /*todo 修改 控件 v-model 参数*/
-                    "hidelabels": false, /*是否展示label标题*/
-                    "disabled": false,  /*是否禁用 true 禁用 false 启用*/
-                    "placeholder": "模糊搜索",  /*todo 修改 placeholder 提示语*/
-                    "category": 0,  /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-                    "iconChekc": true,  /*是否带icon 模糊搜索 icon搜索框一体时候使用*/
-                    "classname": "", /*自定义class*/
-                }, {
-                    "id": 1,
-                    "label": "",
-                    "value": "展开",
-                    "hidelabels": false,
-                    "classname": "", /*自定义class*/
-                    "message": "brandMessage",
-                    "disabled": false,
-                    "placeholder": "Please select",
-                    "category": 8,
-                    "type": "Filter-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-                }],
-                // "buttom": [{/*右侧展示按钮*/
-                //     "id": 2,
-                //     "value": "Batch Approval",
-                //     "hidelabels": true,
-                //     "message": "brandMessage",
-                //     "category": 7,
-                //     "type": "Filter-btn", /*按钮样式 */
-                //     "icon": 'el-icon-coordinate', /*图标*/
-                //     "customParameters": 3
-                // }, {
-                //     "id": 3,
-                //     "value": "New",
-                //     "hidelabels": true,
-                //     "message": "brandMessage",
-                //     "category": 7,
-                //     "type": "Search-btn",
-                //     "icon": 'el-icon-circle-plus-outline',
-                //     "customParameters": 3
-                // }]
-            },
+      formObj1: {
+        /*TODO 组件数据集合*/
+        formproperties: {
+          classname:
+            "form-box" /*自定义class参数，组合查询模糊搜索必须有 form-box*/,
+        },
+        formData: [
+          /*TODO 控件配置数组*/ {
+            id: 0 /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "demo.page.singleLineTextBox" /*todo 修改 控件label*/,
+            value: "" /*todo 修改 控件 v-model 参数*/,
+            hidelabels: false /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "模糊搜索" /*todo 修改 placeholder 提示语*/,
+            category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            iconChekc: true /*是否带icon 模糊搜索 icon搜索框一体时候使用*/,
+            classname: "" /*自定义class*/,
+          },
+          {
+            id: 1,
+            label: "",
+            value: "展开",
+            hidelabels: false,
+            classname: "" /*自定义class*/,
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "Please select",
+            category: 8,
+            type:
+              "Filter-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
+          },
+        ],
+        // "buttom": [{/*右侧展示按钮*/
+        //     "id": 2,
+        //     "value": "Batch Approval",
+        //     "hidelabels": true,
+        //     "message": "brandMessage",
+        //     "category": 7,
+        //     "type": "Filter-btn", /*按钮样式 */
+        //     "icon": 'el-icon-coordinate', /*图标*/
+        //     "customParameters": 3
+        // }, {
+        //     "id": 3,
+        //     "value": "New",
+        //     "hidelabels": true,
+        //     "message": "brandMessage",
+        //     "category": 7,
+        //     "type": "Search-btn",
+        //     "icon": 'el-icon-circle-plus-outline',
+        //     "customParameters": 3
+        // }]
+      },
     };
   },
   created() {
+   
     this.list(this.tableObj.page, this.tableObj.pageSize, "");
   },
   methods: {
@@ -403,8 +478,8 @@ export default {
         this.$message("搜索");
         console.debug("搜索");
         /* getTableData({
-                   value: v.value
-                 })*/
+                     value: v.value
+                   })*/
       }
 
       if (v.id == 1) {
@@ -458,13 +533,13 @@ export default {
       console.log(v, index, row);
       if (v.id == "edit") {
         this.$router.push({
-          path: "/openCard",
+          path: "/appointmentManage/openAppoint",
           query: { type: v.id, data: JSON.stringify(row) },
         });
       }
       if (v.id == "view") {
         this.$router.push({
-          path: "/openCard",
+          path: "/appointmentManage/openAppoint",
           query: { type: v.id, data: JSON.stringify(row) },
         });
       }
@@ -476,9 +551,8 @@ export default {
     openCardFn() {
       console.log(111);
       this.$router.push({
-        path: "/openCard",
-        query: { type: 'add'},
-
+        path: "/appointmentManage/openAppoint",
+        query: { type: "add" },
       });
     },
     viewOrderFn(e) {

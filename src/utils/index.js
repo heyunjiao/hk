@@ -355,3 +355,17 @@ export function removeClass(ele, cls) {
     ele.className = ele.className.replace(reg, ' ')
   }
 }
+
+
+// 新开页签的路由跳转发放
+export function window_open(e=null,path,query={}, $router) {
+if(e){
+  e.preventDefault();}
+  let routeData = $router.resolve({
+    path: path,
+    query: query,
+  });
+
+  window.open(routeData.href, "_blank");
+
+}

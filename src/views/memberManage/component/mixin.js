@@ -31,25 +31,7 @@ let userMixin={
                 iconChekc: false /*是否展示icon*/,
                 customParameters: "input" /*对应api的参数名称*/,
               },
-              { // switch开关
-                "id": 'switch',
-                "span": 12,
-                "assemblyname": "",
-                "label": "是否激活",
-                "value": "",
-                "hidelabels": true,
-                "classname": "",
-                "message": "brandMessage",
-                "disabled": false,
-                "placeholder": "Please select",
-                "category": 6,
-                "check": true,
-                "activecolor": "",
-                "inactivecolor": "",
-                "customParameters": "switch",
-                "formStatus": true,
-                activecolor:''
-              },
+             
               // {
               //   // 单行文本框
               //   id: "btn",

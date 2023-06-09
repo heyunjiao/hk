@@ -65,7 +65,11 @@ export default {
     externalLink: '外链',
     profile: '个人中心',
     memberManage:'会员管理',
-    memberList:'会员列表'
+    memberList:'会员列表',
+    appointeManage:'预约管理',
+    appointeList:'预约列表',
+    orderManage:'订单管理'
+
   },
   member:{
     username:'姓名',
@@ -80,7 +84,6 @@ export default {
     secondaryCard:'成人会籍卡(附属卡)',
     youngCard:'青少年会籍卡',
     openCard:'新建会员',
-    openNewCard:'创建卡',
     preferred:'爱好',
     male:'男',
     female:'女',
@@ -91,6 +94,9 @@ export default {
     annualFee:'年费' ,
     MonthlyFees:'月度行政费' ,
     chooseMasterCard:'选择主卡'
+  },
+  appointeManage:{
+    openAppoint:'新建预约'
   },
   navbar: {
     dashboard: '首页',

@@ -65,7 +65,11 @@ export default {
     externalLink: 'External Link',
     profile: 'Profile',
     memberManage:'Member Management',
-    memberList:'Member List'
+    memberList:'Member List',
+    appointeManage:'Appointe Manage',
+    appointeList:'Appointe Manage List',
+    orderManage:'Order Manage'
+
   },
   member:{
     username:'User Name',
@@ -90,6 +94,9 @@ export default {
     annualFee:'Annual Fee' ,
     MonthlyFees:'Monthly administrative fees',
     chooseMasterCard:'Select Master Card'
+  },
+  appointeManage:{
+    openAppoint:'New Appointment'
   },
   navbar: {
     dashboard: 'Dashboard',

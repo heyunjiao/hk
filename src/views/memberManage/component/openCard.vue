@@ -63,7 +63,26 @@ export default {
     return {
       submitObj: {},
       obj: {},
-      query:{}
+      query:{},
+      activeBtnCfg: { // switch开关
+                "id": 'switch',
+                "span": 12,
+                "assemblyname": "",
+                "label": "是否激活",
+                "value": "",
+                "hidelabels": true,
+                "classname": "",
+                "message": "brandMessage",
+                "disabled": false,
+                "placeholder": "Please select",
+                "category": 6,
+                "check": true,
+                "activecolor": "",
+                "inactivecolor": "",
+                "customParameters": "active",
+                "formStatus": true,
+                activecolor:''
+              },
     };
   },
   created() {
@@ -75,6 +94,10 @@ export default {
     this.formObj2.formDisabled=true
     this.formObj3.formDisabled=true
     this.formObj5.formDisabled=true
+    } if(this.query.type==='add'){
+      delItem(this.formObj,'active')
+    }else{
+      this.formObj.formData[1]=this.activeBtnCfg
     }
   console.log(this.query);
   },
@@ -94,12 +117,12 @@ export default {
     HandleCurrentChange(val) {
       console.debug(val);
     },
-    delItem(key) {
-      const tempIndex = this.formObj2.formData.findIndex(
+    delItem(formType,key) {
+      const tempIndex = formType.formData.findIndex(
         (i) => i.customParameters === key
       );
       if (~tempIndex) {
-        this.formObj2.formData.splice(tempIndex, 1);
+        formType.formData.splice(tempIndex, 1);
       }
     },
 
@@ -177,8 +200,8 @@ export default {
         customParameters: "MonthlyFees" /*对应api的参数名称*/,
       };
 
-      this.delItem("MembershFipFee");
-      this.delItem("MonthlyFees");
+      this.delItem(this.formObj2,"MembershFipFee");
+      this.delItem(this.formObj2,"MonthlyFees");
 
       // 选择附属卡 要求选择主卡
       if (item.value === 2 && item.customParameters === "masterCard") {
@@ -190,10 +213,10 @@ export default {
       } else if (item.value === 3 && item.customParameters === "masterCard") {
         // 选择青少年卡
         this.formObj2.formData.push(MembershFipFee);
-        this.delItem("MonthlyFees");
-        this.delItem("chooseMasterCard");
+        this.delItem(this.formObj2,"MonthlyFees");
+        this.delItem(this.formObj2,"chooseMasterCard");
       } else if (item.customParameters === "masterCard") {
-        this.delItem("chooseMasterCard");
+        this.delItem(this.formObj2,"chooseMasterCard");
       }
     },
     ChangeSubmit(data, obj) {
