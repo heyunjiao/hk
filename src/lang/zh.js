@@ -68,8 +68,14 @@ export default {
     memberList:'会员列表',
     appointeManage:'预约管理',
     appointeList:'预约列表',
-    orderManage:'订单管理'
-
+    orderManage:'订单管理',
+    AddOrder:"新建订单",
+    clubManage:'俱乐部管理',
+    room:'房间管理',
+    class:'课程管理',
+    account:'个人中心',
+    staff:'员工管理',
+    accountingManage:'账务管理'
   },
   member:{
     username:'姓名',

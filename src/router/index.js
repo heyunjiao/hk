@@ -153,6 +153,128 @@ export const constantRoutes = [
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
+      {
+        path: 'AddOrder',
+        component: () => import('@/views/orderManage/component/AddOrder'),
+        name: 'AddOrder',
+        hidden:true,
+        meta: {
+          title: 'AddOrder',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+    ]
+  },
+  // 项目管理
+  {
+    path: '/clubManage',
+    component: Layout,
+    redirect: '/clubManage/room',
+    alwaysShow: true, // will always show the root menu
+    name: 'clubManage',
+    meta: {
+      title: 'clubManage',
+      icon: 'guide',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+     
+      {
+        path: 'room',
+        component: () => import('@/views/clubManage/room'),
+        name: 'room',
+        meta: {
+          title: 'room',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'class',
+        component: () => import('@/views/clubManage/class'),
+        name: 'class',
+        meta: {
+          title: 'class',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+    ]
+  },
+  // 个人中心
+  {
+    path: '/account',
+    component: Layout,
+    redirect: '/account/setting',
+    alwaysShow: true, // will always show the root menu
+    name: 'account',
+    meta: {
+      title: 'account',
+      icon: 'guide',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+     
+      {
+        path: 'setting',
+        component: () => import('@/views/account/setting'),
+        name: 'setting',
+        meta: {
+          title: 'account',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      
+    ]
+  },
+  // 财务管理
+  {
+    path: '/accountingManage ',
+    component: Layout,
+    redirect: '/accountingManage/index',
+    alwaysShow: true, // will always show the root menu
+    name: 'accountingManage',
+    meta: {
+      title: 'accountingManage',
+      icon: 'guide',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+     
+      {
+        path: 'setting',
+        component: () => import('@/views/accountingManage/index'),
+        name: 'setting',
+        meta: {
+          title: 'accountingManage',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      
+    ]
+  },
+  // 员工管理
+  {
+    path: '/staff',
+    component: Layout,
+    redirect: '/staff/index',
+    alwaysShow: true, // will always show the root menu
+    name: 'staff',
+    meta: {
+      title: 'staff',
+      icon: 'guide',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+     
+      {
+        path: 'setting',
+        component: () => import('@/views/account/setting'),
+        name: 'setting',
+        meta: {
+          title: 'staff',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      
     ]
   },
   {

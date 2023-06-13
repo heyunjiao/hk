@@ -68,7 +68,14 @@ export default {
     memberList:'Member List',
     appointeManage:'Appointe Manage',
     appointeList:'Appointe Manage List',
-    orderManage:'Order Manage'
+    orderManage:'Order Manage',
+    AddOrder:"New order",
+    clubManage:'Club management',
+    room:'room Management',
+    class:'class Management',
+    account:'Personal Center',
+    staff:'staff Management',
+    accountingManage:'accounting management'
 
   },
   member:{
