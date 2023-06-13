@@ -189,11 +189,32 @@ export const constantRoutes = [
         }
       },
       {
+        path: 'addRoom',
+        component: () => import('@/views/clubManage/addRoom'),
+        name: 'addRoom',
+        hidden:true,
+        meta: {
+          title: 'addRoom',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
         path: 'class',
         component: () => import('@/views/clubManage/class'),
         name: 'class',
         meta: {
           title: 'class',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+
+      },
+      {
+        path: 'addClass',
+        component: () => import('@/views/clubManage/addClass'),
+        name: 'addClass',
+        hidden:true,
+        meta: {
+          title: 'addClass',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },

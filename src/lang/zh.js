@@ -72,6 +72,7 @@ export default {
     AddOrder:"新建订单",
     clubManage:'俱乐部管理',
     room:'房间管理',
+    addRoom:'新建房间',
     class:'课程管理',
     account:'个人中心',
     staff:'员工管理',

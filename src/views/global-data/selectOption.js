@@ -91,6 +91,25 @@ const apponitMethod=[{
   label: "现场",
   disabled: false ,
 }]
+
+const classType=[{
+  value: 1,
+  label: "单节",
+  disabled: false,
+},
+{
+  value: 2 ,
+  label: "套餐",
+  disabled: false ,
+},
+{
+  value: 3 ,
+  label: "月费",
+  disabled: false ,
+}]
+
+
+
 // 是否 的下拉或者checkbox
 const yesOrNo= [{"value": 1, "label": "是", "disabled": false}, {
   "value": 2,
@@ -102,5 +121,6 @@ const yesOrNo= [{"value": 1, "label": "是", "disabled": false}, {
     coach,
     apponitStatus,
     apponitMethod,
-    yesOrNo
+    yesOrNo,
+    classType
   }

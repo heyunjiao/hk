@@ -72,6 +72,7 @@ export default {
     AddOrder:"New order",
     clubManage:'Club management',
     room:'room Management',
+    addRoom:'New Room',
     class:'class Management',
     account:'Personal Center',
     staff:'staff Management',
