@@ -239,7 +239,7 @@ export const constantRoutes = [
         component: () => import('@/views/account/personInfo'),
         name: 'personInfo',
         meta: {
-          title: 'account',
+          title: 'accountInfo',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -256,31 +256,31 @@ export const constantRoutes = [
     ]
   },
   // 财务管理
-  {
-    path: '/accountingManage ',
-    component: Layout,
-    redirect: '/accountingManage/index',
-    alwaysShow: true, // will always show the root menu
-    name: 'accountingManage',
-    meta: {
-      title: 'accountingManage',
-      icon: 'guide',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [
+  // {
+  //   path: '/accountingManage ',
+  //   component: Layout,
+  //   redirect: '/accountingManage/index',
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'accountingManage',
+  //   meta: {
+  //     title: 'accountingManage',
+  //     icon: 'guide',
+  //     roles: ['admin', 'editor'] // you can set roles in root nav
+  //   },
+  //   children: [
      
-      {
-        path: 'setting',
-        component: () => import('@/views/accountingManage/index'),
-        name: 'setting',
-        meta: {
-          title: 'accountingManage',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
+  //     {
+  //       path: 'setting',
+  //       component: () => import('@/views/accountingManage/index'),
+  //       name: 'setting',
+  //       meta: {
+  //         title: 'accountingManage',
+  //         roles: ['admin'] // or you can only set roles in sub nav
+  //       }
+  //     },
       
-    ]
-  },
+  //   ]
+  // },
   // 员工管理
   {
     path: '/staff',
@@ -297,10 +297,37 @@ export const constantRoutes = [
      
       {
         path: 'setting',
-        component: () => import('@/views/account/personInfo'),
+        component: () => import('@/views/staffManage/staffList'),
         name: 'setting',
         meta: {
-          title: 'staff',
+          title: '成员管理',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'nameplate',
+        component: () => import('@/views/staffManage/nameplate'),
+        name: 'setting',
+        meta: {
+          title: '铭牌管理',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'roleManage',
+        component: () => import('@/views/staffManage/roleManage'),
+        name: 'setting',
+        meta: {
+          title: '角色管理',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'use',
+        component: () => import('@/views/staffManage/useManage'),
+        name: 'useManage',
+        meta: {
+          title: '功能管理',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },

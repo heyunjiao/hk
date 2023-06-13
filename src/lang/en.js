@@ -75,6 +75,7 @@ export default {
     addRoom:'New Room',
     class:'class Management',
     account:'Personal Center',
+    accountInfo:'Personal Account Info',
     staff:'staff Management',
     accountingManage:'Accounting management',
     accountNumber:'Account Number management'

@@ -1,13 +1,46 @@
 <template>
   <div class="setting">
-   
+   <div class="mrb_20">
     <Form
           ref="basicInfo"
           :data="formObj"
           :ChangeSubmit="ChangeSubmit"
           :reset="resetForm"
         />
-        <div class="btn-line" v-if=" !this.formObj.formDisabled">
+       
+      </div>
+
+    <div class="table-list mrb_20" >
+      <div>
+        <!--table表格-->
+        <Table
+          :Obj="tableObj"
+          :HandleSizeChange="HandleSizeChange"
+          :HandleCurrentChange="HandleCurrentChange"
+        >
+          <template slot="status" scope="{row}"
+            ><!--switch控件插槽-->
+            <el-switch
+              v-model="row.status"
+             
+            >
+            </el-switch>
+          </template>
+          <!-- c查看订单详情 -->
+          <template slot="orderView" scope="{row}"
+            ><!--switch控件插槽-->
+           <a class="a_link" href="#" @click="viewOrderFn">
+          查看
+          </a>
+          </template>
+        </Table>
+      </div>
+
+
+     
+    </div>
+
+    <div class="btn-line" v-if=" !this.formObj.formDisabled">
       <el-button @click="onSubmitFn" class="Search-btn"
         >{{ $t("page.demo.preservation") }}
       </el-button>
@@ -19,11 +52,14 @@
   import "@/config/ele/elementForm";
   import "@/config/ele/eleLayout";
   import { mapState } from "vuex";
+import Table from "@/componentsHK/public/Tabel";
+
   import Form from "@/componentsHK/public/Form";
   import selectOption from "@/views/global-data/selectOption";
 export default {
   components: {
       Form,
+      Table
     },
   data(){
   return{
@@ -35,31 +71,7 @@ export default {
             inline: true,
           },
           formData: [
-          // {
-          //     // 下拉框
-          //     id: "select",
-          //     span: 12,
-          //     assemblyname: "下拉框",
-          //     label: "项目类型",
-          //     value: 1,
-          //     type: "",
-          //     hidelabels: true,
-          //     classname: "",
-          //     message: "brandMessage",
-          //     disabled: false,
-          //     placeholder: "Please select",
-          //     category: 1,
-          //     source: true,
-          //     apiUrl: "",
-          //     key: "",
-          //     val: "",
-          //     check: false,
-          //     multiplechoice: false,
-          //     searchable: false,
-          //     formStatus: true,
-          //     options: selectOption.projectType,
-          //     customParameters: "select",
-          //   },
+        
           {
               // 单行文本框
               id: "input",
@@ -101,6 +113,56 @@ export default {
               searchable: false,
               formStatus: true,
               options: selectOption.sexType,
+              customParameters: "select",
+            },
+          {
+              // 下拉框
+              id: "select",
+              span: 12,
+              assemblyname: "下拉框",
+              label: "在职状态",
+              value: 1,
+              type: "",
+              hidelabels: true,
+              classname: "",
+              message: "brandMessage",
+              disabled: false,
+              placeholder: "Please select",
+              category: 1,
+              source: true,
+              apiUrl: "",
+              key: "",
+              val: "",
+              check: false,
+              multiplechoice: false,
+              searchable: false,
+              formStatus: true,
+              options: selectOption.yesOrNo,
+              customParameters: "select",
+            },
+            {
+              // 下拉框
+              id: "select",
+              span: 12,
+              assemblyname: "下拉框",
+              label: "职位",
+              value: 1,
+              type: "",
+              hidelabels: true,
+              classname: "",
+              message: "brandMessage",
+              disabled: false,
+              placeholder: "Please select",
+              category: 1,
+              source: true,
+              apiUrl: "",
+              key: "",
+              val: "",
+              check: false,
+              multiplechoice: false,
+              searchable: false,
+              formStatus: true,
+              options: selectOption.projectType,
               customParameters: "select",
             },
          
@@ -160,11 +222,116 @@ export default {
                 customParameters: "dateSelection",
                 formStatus: true,
               },
+            {
+                // 时间选选择器
+                id: "dateSelection",
+                span: 12,
+                assemblyname: "",
+                label: "头像",
+                value: "",
+                type: "date",
+                hidelabels: true,
+                classname: "",
+                message: "brandMessage",
+                disabled: false,
+                placeholder: "Please select",
+                category: 12,
+                check: false,
+                format: "yyyy-MM-dd",
+                customParameters: "dateSelection",
+                formStatus: true,
+              },
            
-            
+              
        
           ],
         },
+        tableObj: {
+        son: false /*是否有子级表单*/,
+        operation: false /*是否展示操作按钮功能*/,
+        childrenOperation: true /*是否展示子表操作按钮功能*/,
+        operationText: "operation" /*操作栏标题*/,
+        selectionStatus: false /*是否需要复选框*/,
+        childrenOperationText: "operation" /*子表操作栏标题*/,
+        paginationStatus: true /*是否启用分页组件*/,
+        operationWidth: "200",
+        total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
+        page: 1,
+        head: [
+          /*表头数据*/
+          {
+            label: "订单编号" /*标题*/,
+            prop: "id" /*绑定数据源obj展示字段*/,
+            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            width: "200" /*表头宽度*/,
+            // slot: false,  /*是否需要插槽*/
+          },
+          {
+            label: "是否核销" /*标题*/,
+            prop: "hexiao" /*绑定数据源obj展示字段*/,
+            width: "100" /*表头宽度*/,
+            // slot: false,  /*是否需要插槽*/
+          },
+          {
+            label: "会员姓名" /*标题*/,
+            prop: "type" /*绑定数据源obj展示字段*/,
+            width: "140" /*表头宽度*/,
+            // slot: false,  /*是否需要插槽*/
+          },
+         
+          {
+            label: "预约时间" /*标题*/,
+            prop: "timeLong" /*绑定数据源obj展示字段*/,
+            width: "200" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "订单创建时间" /*标题*/,
+            prop: "timeLong" /*绑定数据源obj展示字段*/,
+            width: "200" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "预约项目" /*标题*/,
+            prop: "type" /*绑定数据源obj展示字段*/,
+            width: "120" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "预约房间" /*标题*/,
+            prop: "home" /*绑定数据源obj展示字段*/,
+            width: "80" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "预约详情" /*标题*/,
+            prop: "appoint" /*绑定数据源obj展示字段*/,
+            width: "80" /*表头固定，参数：left / right / ''*/,
+            slot:true
+          },
+          {
+            label: "支付方式" /*标题*/,
+            prop: "pay" /*绑定数据源obj展示字段*/,
+            width: "80" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "订单状态" /*标题*/,
+            prop: "pay" /*绑定数据源obj展示字段*/,
+            width: "80" /*表头固定，参数：left / right / ''*/,
+          },
+         
+          {
+            label: "备注信息" /*标题*/,
+            prop: "remark" /*绑定数据源obj展示字段*/,
+          },
+          
+         
+        ],
+        childrenHead: [
+          /*子表头数组*/
+        ],
+        operationData: [],
+        childrenOperationData: [
+          /*字表操作栏*/
+        ],
+        tableData: [{}],
+      },
   }},
   methods: {
     ChangeSubmit(data, obj) {
@@ -185,6 +352,19 @@ export default {
           console.log(form1, form2, "form");
         })
         .catch((e) => console.log(e));
+    },
+    HandleSizeChange(val) {
+      /*每页多少条*/
+      console.debug(val);
+      this.tableObj.page = 1;
+      this.tableObj.pageSize = val;
+      this.list();
+    },
+    HandleCurrentChange(val) {
+      /*当前页*/
+      console.debug(val);
+      this.tableObj.page = val;
+      this.list();
     },
     }
 }
