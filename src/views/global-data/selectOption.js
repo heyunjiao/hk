@@ -107,6 +107,17 @@ const classType=[{
   label: "月费",
   disabled: false ,
 }]
+const sexType=[{
+  value: 1,
+  label: "男",
+  disabled: false,
+},
+{
+  value: 2 ,
+  label: "女",
+  disabled: false ,
+},
+]
 
 
 
@@ -122,5 +133,6 @@ const yesOrNo= [{"value": 1, "label": "是", "disabled": false}, {
     apponitStatus,
     apponitMethod,
     yesOrNo,
-    classType
+    classType,
+    sexType
   }

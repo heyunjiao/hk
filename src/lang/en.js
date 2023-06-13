@@ -76,7 +76,9 @@ export default {
     class:'class Management',
     account:'Personal Center',
     staff:'staff Management',
-    accountingManage:'accounting management'
+    accountingManage:'Accounting management',
+    accountNumber:'Account Number management'
+
 
   },
   member:{

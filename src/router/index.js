@@ -224,7 +224,7 @@ export const constantRoutes = [
   {
     path: '/account',
     component: Layout,
-    redirect: '/account/setting',
+    redirect: '/account/personInfo',
     alwaysShow: true, // will always show the root menu
     name: 'account',
     meta: {
@@ -235,11 +235,20 @@ export const constantRoutes = [
     children: [
      
       {
-        path: 'setting',
-        component: () => import('@/views/account/setting'),
-        name: 'setting',
+        path: 'personInfo',
+        component: () => import('@/views/account/personInfo'),
+        name: 'personInfo',
         meta: {
           title: 'account',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'accountNumber',
+        component: () => import('@/views/account/accountNumber'),
+        name: 'accountNumber',
+        meta: {
+          title: 'accountNumber',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -288,7 +297,7 @@ export const constantRoutes = [
      
       {
         path: 'setting',
-        component: () => import('@/views/account/setting'),
+        component: () => import('@/views/account/personInfo'),
         name: 'setting',
         meta: {
           title: 'staff',

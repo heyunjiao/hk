@@ -74,9 +74,10 @@ export default {
     room:'房间管理',
     addRoom:'新建房间',
     class:'课程管理',
-    account:'个人中心',
+    account:'个人信息',
     staff:'员工管理',
-    accountingManage:'账务管理'
+    accountingManage:'账务管理',
+    accountNumber:'账号管理'
   },
   member:{
     username:'姓名',
