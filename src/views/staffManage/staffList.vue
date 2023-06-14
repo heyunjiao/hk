@@ -46,6 +46,9 @@
           </Table>
         </div>
       </div>
+
+
+
     </div>
   </template>
   
@@ -61,7 +64,9 @@
     mixins: [userMixin],
     components: { PageTitle, FormCombination, Table },
     data() {
+       
       return {
+       
         status: true,
         title:'',
         tabData: [],
@@ -153,7 +158,7 @@
           operationData: [
             {
               id: "edit" /*按钮ID*/,
-              value: "" /*按钮内容*/,
+              value: "编辑" /*按钮内容*/,
               classname: "" /*自定义class*/,
               disabled: false /*是否被禁用*/,
               type:
@@ -163,24 +168,34 @@
             },
             {
               id: "view" /*按钮ID*/,
-              value: "" /*按钮内容*/,
+              value: "查看" /*按钮内容*/,
               classname: "" /*自定义class*/,
               disabled: false /*是否被禁用*/,
               type:
                 "text" /*按钮类型 primary / success / warning / danger / info / text*/,
               size: "mini" /*按钮大小 medium / small / mini*/,
-              icon: "el-icon-view" /*按钮icon*/,
+              icon: "" /*按钮icon*/,
             },
             {
               id: "cancel" /*按钮ID*/,
-              value: "" /*按钮内容*/,
+              value: "删除" /*按钮内容*/,
               classname: "" /*自定义class*/,
               disabled: false /*是否被禁用*/,
               type:
                 "text" /*按钮类型 primary / success / warning / danger / info / text*/,
               size: "mini" /*按钮大小 medium / small / mini*/,
-              icon: "el-icon-warning-outline" /*按钮icon*/,
+             
             },
+            // {
+            //   id: "cancel" /*按钮ID*/,
+            //   value: "角色授权" /*按钮内容*/,
+            //   classname: "" /*自定义class*/,
+            //   disabled: false /*是否被禁用*/,
+            //   type:
+            //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+            //   size: "mini" /*按钮大小 medium / small / mini*/,
+            //   icon: "" /*按钮icon*/,
+            // },
           
           ],
           childrenOperationData: [
@@ -429,8 +444,8 @@
           });
         }
         if (v.id == "cancel") {
-         
-          this.$message.error('取消订单')
+         this.dialogFormVisible=true
+        //   this.$message.error('取消订单')
         }
         // if (v.id == 13) {
         //   console.log("审批");
@@ -438,9 +453,8 @@
         // }
       },
       openOrderFn() {
-        console.log(111);
         this.$router.push({
-          path: "/orderManage/AddOrder",
+          path: "/staff/addStaff",
           query: { type: 'add'},
   
         });
@@ -453,8 +467,19 @@
   };
   </script>
   
-  <style scoped>
+  <style lang="scss" scoped>
+  .role{
+
+    .tree {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 20px;
+
+  }
+}
   .member-list {
+
+    
   }
   </style>
   

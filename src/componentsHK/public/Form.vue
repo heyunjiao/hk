@@ -352,6 +352,8 @@
             </el-button>
           </div>
         </el-form-item>
+
+        <slot></slot>
       </el-form>
     </div>
   </div>

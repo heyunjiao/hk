@@ -39,55 +39,17 @@ import nestedRouter from './modules/nested'
  * all roles can be accessed
  */
 export const constantRoutes = [
-  {
-    path: '/redirect',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index')
-      }
-    ]
-  },
-  {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
+ 
   
-  {
-    path: '/auth-redirect',
-    component: () => import('@/views/login/auth-redirect'),
-    hidden: true
-  },
-  {
-    path: '/404',
-    component: () => import('@/views/error-page/404'),
-    hidden: true
-  },
-  {
-    path: '/401',
-    component: () => import('@/views/error-page/401'),
-    hidden: true
-  },
   {
     path: '/',
     component: Layout,
-    redirect: '/memberManage',
-    alwaysShow: true, // will always show the root menu
-    name: 'memberManage',
-    meta: {
-      title: 'memberManage',
-      icon: 'dashboard',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
     children: [
       {
-        path: 'memberList',
+        path: 'memberManage',
         component: () => import('@/views/memberManage/memberList'),
-        name: 'memberList',
-        meta: { title: 'memberList', icon: 'lock', affix: true }
+        name: 'memberManage',
+        meta: { title: 'memberManage', icon: 'user', affix: true }
       },
       // 创建会员卡
       {
@@ -103,12 +65,7 @@ export const constantRoutes = [
   {
     path: '/appointmentManage',
     component: Layout,
-    redirect: '/appointmentManage/index',
-    alwaysShow: true, // will always show the root menu
-    name: 'appointmentManage',
     meta: {
-      title: 'appointeManage',
-      icon: 'guide',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
@@ -117,6 +74,7 @@ export const constantRoutes = [
         component: () => import('@/views/appointmentManage/index'),
         name: 'PagePermission',
         meta: {
+          icon:'link',
           title: 'appointeList',
           roles: ['admin'] // or you can only set roles in sub nav
         }
@@ -135,12 +93,9 @@ export const constantRoutes = [
   {
     path: '/orderManage',
     component: Layout,
-    redirect: '/orderManage/index',
-    alwaysShow: true, // will always show the root menu
-    name: 'orderManage',
+   
     meta: {
       title: 'orderManage',
-      icon: 'guide',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
@@ -149,6 +104,7 @@ export const constantRoutes = [
         component: () => import('@/views/orderManage/index'),
         name: 'orderManage',
         meta: {
+          icon:'order',
           title: 'orderManage',
           roles: ['admin'] // or you can only set roles in sub nav
         }
@@ -165,16 +121,87 @@ export const constantRoutes = [
       },
     ]
   },
+   // 员工管理
+   {
+    path: '/staff',
+    component: Layout,
+    meta: {
+      title: 'staff',
+      icon: 'staff',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+     
+      {
+        path: 'staffList',
+        component: () => import('@/views/staffManage/staffList'),
+        name: 'setting',
+        meta: {
+          title: '成员管理',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'addStaff',
+        component: () => import('@/views/staffManage/addStaff'),
+        name: 'setting',
+        hidden:true,
+        meta: {
+          title: '新建成员',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      // {
+      //   path: 'nameplate',
+      //   component: () => import('@/views/staffManage/nameplate'),
+      //   name: 'setting',
+      //   meta: {
+      //     title: '铭牌管理',
+      //     roles: ['admin'] // or you can only set roles in sub nav
+      //   }
+      // },
+      // {
+      //   path: 'roleManage',
+      //   component: () => import('@/views/staffManage/roleManage'),
+      //   name: 'setting',
+      //   meta: {
+      //     title: '角色管理',
+      //     roles: ['admin'] // or you can only set roles in sub nav
+      //   }
+      // },
+      // {
+      //   path: 'addRole',
+      //   component: () => import('@/views/staffManage/addRole'),
+      //   name: 'setting',
+      //   hidden:true,
+      //   meta: {
+      //     title: '新建角色',
+      //     roles: ['admin'] // or you can only set roles in sub nav
+      //   }
+      // },
+      // {
+      //   path: 'use',
+      //   component: () => import('@/views/staffManage/useManage'),
+      //   name: 'useManage',
+      //   meta: {
+      //     title: '功能管理',
+      //     roles: ['admin'] // or you can only set roles in sub nav
+      //   }
+      // },
+
+
+      
+      
+    ]
+  },
   // 项目管理
   {
     path: '/clubManage',
     component: Layout,
-    redirect: '/clubManage/room',
-    alwaysShow: true, // will always show the root menu
-    name: 'clubManage',
+    
     meta: {
       title: 'clubManage',
-      icon: 'guide',
+      icon: 'club',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
@@ -224,12 +251,10 @@ export const constantRoutes = [
   {
     path: '/account',
     component: Layout,
-    redirect: '/account/personInfo',
-    alwaysShow: true, // will always show the root menu
-    name: 'account',
+   
     meta: {
       title: 'account',
-      icon: 'guide',
+      icon: 'person',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
@@ -281,65 +306,14 @@ export const constantRoutes = [
       
   //   ]
   // },
-  // 员工管理
-  {
-    path: '/staff',
-    component: Layout,
-    redirect: '/staff/index',
-    alwaysShow: true, // will always show the root menu
-    name: 'staff',
-    meta: {
-      title: 'staff',
-      icon: 'guide',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [
-     
-      {
-        path: 'setting',
-        component: () => import('@/views/staffManage/staffList'),
-        name: 'setting',
-        meta: {
-          title: '成员管理',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'nameplate',
-        component: () => import('@/views/staffManage/nameplate'),
-        name: 'setting',
-        meta: {
-          title: '铭牌管理',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'roleManage',
-        component: () => import('@/views/staffManage/roleManage'),
-        name: 'setting',
-        meta: {
-          title: '角色管理',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'use',
-        component: () => import('@/views/staffManage/useManage'),
-        name: 'useManage',
-        meta: {
-          title: '功能管理',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      
-    ]
-  },
+ 
   {
     path: '/demo',
     component: Layout,
     redirect: '/demo/index',
     alwaysShow: true, // will always show the root menu
     name: 'demo',
+    hidden:true,
     meta: {
       title: 'demo',
       icon: 'lock',
@@ -406,6 +380,39 @@ export const constantRoutes = [
   //     }
   //   ]
   // }
+
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
+  
+  {
+    path: '/auth-redirect',
+    component: () => import('@/views/login/auth-redirect'),
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/error-page/404'),
+    hidden: true
+  },
+  {
+    path: '/401',
+    component: () => import('@/views/error-page/401'),
+    hidden: true
+  },
 ]
 
 /**

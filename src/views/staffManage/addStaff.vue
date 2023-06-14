@@ -6,45 +6,15 @@
         :data="formObj"
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
-      >
-        <template>
-          <el-form-item label="头像">
-            <el-upload
-              class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
-            >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
-        </template>
-      </Form>
+      />
     </div>
-
-    <div class="table-list mrb_20">
-      <div>
-        <!--table表格-->
-        <Table
-          :Obj="tableObj"
-          :HandleSizeChange="HandleSizeChange"
-          :HandleCurrentChange="HandleCurrentChange"
-        >
-          <template slot="status" scope="{row}"
-            ><!--switch控件插槽-->
-            <el-switch v-model="row.status"> </el-switch>
-          </template>
-          <!-- c查看订单详情 -->
-          <template slot="orderView" scope="{row}"
-            ><!--switch控件插槽-->
-            <a class="a_link" href="#" @click="viewOrderFn">
-              查看
-            </a>
-          </template>
-        </Table>
-      </div>
+    <div class="mrb_20">
+      <Form
+        ref="basicInfo"
+        :data="formObj1"
+        :ChangeSubmit="ChangeSubmit"
+        :reset="resetForm"
+      />
     </div>
 
     <div class="btn-line" v-if="!this.formObj.formDisabled">
@@ -70,9 +40,8 @@ export default {
   },
   data() {
     return {
-      imageUrl: "",
       formObj: {
-        title: "个人信息" /*表单标题*/,
+        title: "新建成员" /*表单标题*/,
 
         formDisabled: false,
         formproperties: {
@@ -90,7 +59,7 @@ export default {
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,
             message: "brandMessage" /*校验提示语*/,
-            disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: false /*是否校验*/,
@@ -108,7 +77,7 @@ export default {
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,
             message: "brandMessage" /*校验提示语*/,
-            disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: false /*是否校验*/,
@@ -247,110 +216,78 @@ export default {
             customParameters: "dateSelection",
             formStatus: true,
           },
-          // {
-          //   // 时间选选择器
-          //   id: "dateSelection",
-          //   span: 12,
-          //   assemblyname: "",
-          //   label: "头像",
-          //   value: "",
-          //   type: "date",
-          //   hidelabels: true,
-          //   classname: "",
-          //   message: "brandMessage",
-          //   disabled: false,
-          //   placeholder: "Please select",
-          //   category: 12,
-          //   check: false,
-          //   format: "yyyy-MM-dd",
-          //   customParameters: "dateSelection",
-          //   formStatus: true,
-          // },
+          {
+            // 时间选选择器
+            id: "dateSelection",
+            span: 12,
+            assemblyname: "",
+            label: "头像",
+            value: "",
+            type: "date",
+            hidelabels: true,
+            classname: "",
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "Please select",
+            category: 12,
+            check: false,
+            format: "yyyy-MM-dd",
+            customParameters: "dateSelection",
+            formStatus: true,
+          },
         ],
       },
-      tableObj: {
-        son: false /*是否有子级表单*/,
-        operation: false /*是否展示操作按钮功能*/,
-        childrenOperation: true /*是否展示子表操作按钮功能*/,
-        operationText: "operation" /*操作栏标题*/,
-        selectionStatus: false /*是否需要复选框*/,
-        childrenOperationText: "operation" /*子表操作栏标题*/,
-        paginationStatus: true /*是否启用分页组件*/,
-        operationWidth: "200",
-        total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
-        page: 1,
-        head: [
-          /*表头数据*/
-          {
-            label: "订单编号" /*标题*/,
-            prop: "id" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "200" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
-          },
-          {
-            label: "是否核销" /*标题*/,
-            prop: "hexiao" /*绑定数据源obj展示字段*/,
-            width: "100" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
-          },
-          {
-            label: "会员姓名" /*标题*/,
-            prop: "type" /*绑定数据源obj展示字段*/,
-            width: "140" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
-          },
+      formObj1: {
+        title: "角色授权" /*表单标题*/,
 
+        formDisabled: false,
+        formproperties: {
+          inline: true,
+        },
+        formData: [
           {
-            label: "预约时间" /*标题*/,
-            prop: "timeLong" /*绑定数据源obj展示字段*/,
-            width: "200" /*表头固定，参数：left / right / ''*/,
-          },
-          {
-            label: "订单创建时间" /*标题*/,
-            prop: "timeLong" /*绑定数据源obj展示字段*/,
-            width: "200" /*表头固定，参数：left / right / ''*/,
-          },
-          {
-            label: "预约项目" /*标题*/,
-            prop: "type" /*绑定数据源obj展示字段*/,
-            width: "120" /*表头固定，参数：left / right / ''*/,
-          },
-          {
-            label: "预约房间" /*标题*/,
-            prop: "home" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-          },
-          {
-            label: "预约详情" /*标题*/,
-            prop: "appoint" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-            slot: true,
-          },
-          {
-            label: "支付方式" /*标题*/,
-            prop: "pay" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-          },
-          {
-            label: "订单状态" /*标题*/,
-            prop: "pay" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-          },
-
-          {
-            label: "备注信息" /*标题*/,
-            prop: "remark" /*绑定数据源obj展示字段*/,
+            // 多选框组
+            id: "Checkbox",
+            span: 24,
+            assemblyname: "多选框组",
+            label: "授权角色",
+            value: [],
+            type: "",
+            hidelabels: true,
+            classname: "",
+            message: "brandMessage",
+            placeholder: "Please select",
+            category: 3,
+            source: false,
+            check: false,
+            layoutmode: 0,
+            formStatus: true,
+            options: [
+              { value: 1, label: "员工（前台）", disabled: false },
+              {
+                value: 2,
+                label: "员工（餐厅）",
+              },
+              {
+                value: 3,
+                label: "员工（教练）",
+              },
+              {
+                value: 4,
+                label: "财务",
+              },
+              {
+                value: 5,
+                label: "主管",
+              },
+              {
+                value: 6,
+                label: "管理员",
+              },
+            ],
+            customParameters: "Checkbox",
           },
         ],
-        childrenHead: [
-          /*子表头数组*/
-        ],
-        operationData: [],
-        childrenOperationData: [
-          /*字表操作栏*/
-        ],
-        tableData: [{}],
       },
     };
   },
@@ -374,35 +311,6 @@ export default {
         })
         .catch((e) => console.log(e));
     },
-    HandleSizeChange(val) {
-      /*每页多少条*/
-      console.debug(val);
-      this.tableObj.page = 1;
-      this.tableObj.pageSize = val;
-      this.list();
-    },
-    HandleCurrentChange(val) {
-      /*当前页*/
-      console.debug(val);
-      this.tableObj.page = val;
-      this.list();
-    },
-
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isJPG && isLt2M;
-    },
   },
 };
 </script>
@@ -414,30 +322,5 @@ export default {
   background-color: #fff;
   /* display: flex;
     flex-direction: column-reverse; */
-}
-
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  text-align: center;
-  border: 1px dashed #ccc;
-}
-.avatar {
-  width: 100px;
-  height: 100px;
-  display: block;
 }</style
 >>
