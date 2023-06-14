@@ -1,4 +1,74 @@
 // 项目类型
+const  cardType=[
+   {
+    value: 1,
+    label: "成人会籍卡（主卡）",
+    disabled: false,
+  },
+  {
+    value: 2 ,
+    label: "成人会籍卡（附属卡）",
+    disabled: false ,
+  },
+  {
+    value: 3 ,
+    label: "青少年会籍卡",
+    disabled: false ,
+  },
+]
+// 头衔/称谓
+const  nickNameType=[
+  {
+    label: "男爵",
+    value: "1",
+  },
+  {
+    label: "子爵",
+    value: "2",
+  },
+  {
+    label: "侯爵",
+    value: "3",
+  },
+  {
+    label: "公爵",
+    value: "4",
+  },
+  {
+    label: "伯爵",
+    value: "5",
+  },
+]
+// 证件类型
+const documentType=[  {
+  label: "身份证",
+  value: "1",
+},
+{
+  label: "护照",
+  value: "2",
+},]
+// 账户权限
+const accountAuth=[
+  { value: 1, label: "预约课程", disabled: false },
+  {
+    value: 2,
+    label: "店内消费",
+  },
+  {
+    value: 3,
+    label: "线上消费",
+  },
+  {
+    value: 4,
+    label: "运动项目",
+  },
+  {
+    value: 5,
+    label: "会籍转让",
+  },
+]
+// 项目类型
 const  projectType=[
    {
     value: 1,
@@ -128,11 +198,15 @@ const yesOrNo= [{"value": 1, "label": "是", "disabled": false}, {
   "disabled": false
 }]
   export default {
+    cardType,
     projectType,
     coach,
     apponitStatus,
     apponitMethod,
     yesOrNo,
     classType,
-    sexType
+    sexType,
+    nickNameType,
+    documentType,
+    accountAuth
   }

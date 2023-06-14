@@ -7,11 +7,12 @@
         :data="formObj"
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
+        :realtimeform="realtimeform1"
       />
     </div>
     <div class="mrb_20">
       <Form
-        ref="basicInfo"
+        ref="personInfo"
         :data="formObj3"
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
@@ -19,7 +20,7 @@
     </div>
     <div class="mrb_20">
       <Form
-        ref="basicInfo"
+        ref="secretaryInfo"
         :data="formObj4"
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
@@ -36,7 +37,7 @@
       />
     </div>
     <div class="mrb_20">
-      <Form ref="accountInfo" :data="formObj5" :reset="resetForm" />
+      <Form ref="otherInfo" :data="formObj5" :reset="resetForm" />
     </div>
 
     <div class="btn-line" v-if=" !this.formObj.formDisabled">
@@ -76,7 +77,7 @@ export default {
                 "disabled": false,
                 "placeholder": "Please select",
                 "category": 6,
-                "check": true,
+                "check": false,
                 "activecolor": "",
                 "inactivecolor": "",
                 "customParameters": "active",
@@ -248,12 +249,16 @@ export default {
     onSubmitFn() {
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
       let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
-      Promise.all([p1, p2])
+      let p3 = this.$refs.personInfo.validateFormPromis("dynamicValidateForm");
+      let p4 = this.$refs.secretaryInfo.validateFormPromis("dynamicValidateForm");
+      Promise.all([p1, p2,p3,p4])
         .then((result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
           const form2 = this.getStoreFormValue(this.formObj2.formData);
+          const form3 = this.getStoreFormValue(this.formObj3.formData);
+          const form4 = this.getStoreFormValue(this.formObj4.formData);
 
-          console.log(form1, form2, "form");
+          console.log(form1, form2,form3, form4, "form");
         })
         .catch((e) => console.log(e));
     },

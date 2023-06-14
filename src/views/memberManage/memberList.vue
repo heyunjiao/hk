@@ -84,14 +84,14 @@ export default {
             label: "会员号码" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "180" /*表头宽度*/,
+            width: "200" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
             label: "member.cardType" /*标题*/,
             prop: "type" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "140" /*表头宽度*/,
+            width: "160" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
@@ -122,7 +122,7 @@ export default {
           {
             label: "是否优先联系秘书" /*标题*/,
             prop: "yes" /*绑定数据源obj展示字段*/,
-            width: "120" /*表头宽度*/,
+            width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
@@ -144,7 +144,7 @@ export default {
           {
             label: "查看订单详情" /*标题*/,
             prop: "orderView" /*绑定数据源obj展示字段*/,
-            width: "100" /*表头固定，参数：left / right / ''*/,
+            width: "140" /*表头固定，参数：left / right / ''*/,
             slot: true /*表头宽度*/,
           },
         ],
