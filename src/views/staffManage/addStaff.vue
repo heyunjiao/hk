@@ -6,7 +6,23 @@
         :data="formObj"
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
-      />
+      >
+    
+      <template>
+          <el-form-item label="头像">
+            <el-upload
+              class="avatar-uploader"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+        </template>
+    </Form>
     </div>
     <div class="mrb_20">
       <Form
@@ -40,6 +56,8 @@ export default {
   },
   data() {
     return {
+      imageUrl: "",
+
       formObj: {
         title: "新建成员" /*表单标题*/,
 
@@ -62,7 +80,7 @@ export default {
             disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -80,7 +98,7 @@ export default {
             disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -127,7 +145,7 @@ export default {
             apiUrl: "",
             key: "",
             val: "",
-            check: false,
+            check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
@@ -152,7 +170,7 @@ export default {
             apiUrl: "",
             key: "",
             val: "",
-            check: false,
+            check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
@@ -174,7 +192,7 @@ export default {
             disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -216,25 +234,7 @@ export default {
             customParameters: "dateSelection",
             formStatus: true,
           },
-          {
-            // 时间选选择器
-            id: "dateSelection",
-            span: 12,
-            assemblyname: "",
-            label: "头像",
-            value: "",
-            type: "date",
-            hidelabels: true,
-            classname: "",
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "Please select",
-            category: 12,
-            check: false,
-            format: "yyyy-MM-dd",
-            customParameters: "dateSelection",
-            formStatus: true,
-          },
+          
         ],
       },
       formObj1: {
@@ -257,9 +257,9 @@ export default {
             classname: "",
             message: "brandMessage",
             placeholder: "Please select",
-            category: 3,
+            category: 2,
             source: false,
-            check: false,
+            check: true,
             layoutmode: 0,
             formStatus: true,
             options: [
@@ -311,6 +311,22 @@ export default {
         })
         .catch((e) => console.log(e));
     },
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "png";
+      console.log(isJPG,'isJPG');
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      // if (!isJPG) {
+      //   this.$message.error("上传头像图片只能是 JPG 格式!");
+      // }
+      // if (!isLt2M) {
+      //   this.$message.error("上传头像图片大小不能超过 2MB!");
+      // }
+      // return isJPG && isLt2M;
+    },
   },
 };
 </script>
@@ -322,5 +338,30 @@ export default {
   background-color: #fff;
   /* display: flex;
     flex-direction: column-reverse; */
-}</style
->>
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  border: 1px dashed #ccc;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+</style>

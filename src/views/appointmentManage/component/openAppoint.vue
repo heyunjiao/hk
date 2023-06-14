@@ -68,7 +68,7 @@ export default {
             disabled:false/*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -86,7 +86,7 @@ export default {
             disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -109,7 +109,7 @@ export default {
             apiUrl: "",
             key: "",
             val: "",
-            check: false,
+            check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
@@ -130,7 +130,7 @@ export default {
             disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -150,6 +150,8 @@ export default {
             customParameters: "DateSelection",
             classname: "",
             classnameitem: "",
+            check:true,
+            message: "brandMessage" /*校验提示语*/,
           },
           {
             // 下拉框
@@ -169,7 +171,7 @@ export default {
             apiUrl: "",
             key: "",
             val: "",
-            check: false,
+            check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
@@ -218,7 +220,7 @@ export default {
          
           {
             id: 3,
-            label: "包间号",
+            label: "房间名称",
             value: "",
             hidelabels: true,
             message: "brandMessage",
@@ -272,24 +274,24 @@ export default {
             classname: "",
             classnameitem: "",
           },
-          {
-            id: 3,
-            label: "消费金额",
-            value: "￥2984973",
-            hidelabels: true,
-            message: "brandMessage",
-            disabled: true,
-            placeholder: "Please select",
-            category: 1,
-            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            apiUrl: "" /*接口api*/,
-            key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
-            val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
-            options: selectOption.coach,
-            customParameters: "Select",
-            classname: "",
-            classnameitem: "",
-          },
+          // {
+          //   id: 3,
+          //   label: "消费金额",
+          //   value: "￥2984973",
+          //   hidelabels: true,
+          //   message: "brandMessage",
+          //   disabled: true,
+          //   placeholder: "Please select",
+          //   category: 1,
+          //   source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+          //   apiUrl: "" /*接口api*/,
+          //   key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
+          //   val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
+          //   options: selectOption.coach,
+          //   customParameters: "Select",
+          //   classname: "",
+          //   classnameitem: "",
+          // },
 
           {
             // 多行文本框
@@ -359,99 +361,7 @@ export default {
       }
     },
 
-    cardSelectFn(item) {
-      const openMasteCard = {
-        // 下拉框
-        id: "select",
-        span: 12,
-        assemblyname: "下拉框",
-        label: "member.chooseMasterCard",
-        value: "",
-        type: "",
-        hidelabels: true,
-        classname: "",
-        message: "brandMessage",
-        disabled: false,
-        placeholder: "Please select",
-        category: 1,
-        source: true,
-        apiUrl: "",
-        key: "",
-        val: "",
-        check: true,
-        multiplechoice: false,
-        searchable: false,
-        formStatus: true,
-        customParameters: "chooseMasterCard",
-        options: [
-          { value: 4, label: "123456" },
-          {
-            value: 5,
-            label: "99999999",
-          },
-          {
-            value: 6,
-            label: "8988888888",
-          },
-        ],
-      };
-      const MembershFipFee = {
-        // 单行文本框
-        id: "input",
-        span: 6 /*表单占据控件，容器分为 24份，需要整数*/,
-        assemblyname: "input",
-        label: "member.MembershFipFee",
-        value: "" /*控件value / 默认值*/,
-        type: "" /*控件类型 支持原生*/,
-        hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-        classname: "" /*自定义class*/,
-        message: "brandMessage" /*校验提示语*/,
-        disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-        placeholder: "brandMessage" /*提示语*/,
-        category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-        check: true /*是否校验*/,
-        iconChekc: false /*是否展示icon*/,
-        customParameters: "MembershFipFee" /*对应api的参数名称*/,
-      };
-
-      const MonthlyFees = {
-        // 单行文本框
-        id: "input",
-        span: 6 /*表单占据控件，容器分为 24份，需要整数*/,
-        assemblyname: "input",
-        label: "member.MonthlyFees",
-        value: "" /*控件value / 默认值*/,
-        type: "" /*控件类型 支持原生*/,
-        hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-        classname: "" /*自定义class*/,
-        message: "brandMessage" /*校验提示语*/,
-        disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-        placeholder: "brandMessage" /*提示语*/,
-        category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-        check: true /*是否校验*/,
-        iconChekc: false /*是否展示icon*/,
-        customParameters: "MonthlyFees" /*对应api的参数名称*/,
-      };
-
-      this.delItem(this.formObj2, "MembershFipFee");
-      this.delItem(this.formObj2, "MonthlyFees");
-
-      // 选择附属卡 要求选择主卡
-      if (item.value === 2 && item.customParameters === "masterCard") {
-        this.formObj2.formData.splice(1, 0, openMasteCard);
-      } else if (item.value === 1 && item.customParameters === "masterCard") {
-        // 选择主卡
-        this.formObj2.formData.push(MembershFipFee);
-        this.formObj2.formData.push(MonthlyFees);
-      } else if (item.value === 3 && item.customParameters === "masterCard") {
-        // 选择青少年卡
-        this.formObj2.formData.push(MembershFipFee);
-        this.delItem(this.formObj2, "MonthlyFees");
-        this.delItem(this.formObj2, "chooseMasterCard");
-      } else if (item.customParameters === "masterCard") {
-        this.delItem(this.formObj2, "chooseMasterCard");
-      }
-    },
+   
     ChangeSubmit(data, obj) {
       // console.debug(data, obj);
       this.obj = obj;
@@ -480,13 +390,11 @@ export default {
     },
     onSubmitFn() {
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
-      let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
-      Promise.all([p1, p2])
+      Promise.all([p1])
         .then((result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
-          const form2 = this.getStoreFormValue(this.formObj2.formData);
 
-          console.log(form1, form2, "form");
+          console.log(form1, "form");
         })
         .catch((e) => console.log(e));
     },

@@ -3,8 +3,19 @@
     <div class="page-title">
       <PageTitle title="订单管理">
         <template slot="btn">
-          <el-button @click="openOrderFn" size="large" type="primary">新建订单</el-button>
-          <el-button @click="openOrderFn" size="large" type="primary">批量导入</el-button>
+          <el-button @click="openOrderFn" size="large" type="primary"
+            >新建订单</el-button
+          >
+          <el-button
+            @click="
+              () => {
+                this.$message.warning('上传文件');
+              }
+            "
+            size="large"
+            type="primary"
+            >批量导入</el-button
+          >
         </template>
       </PageTitle>
     </div>
@@ -16,7 +27,11 @@
         :tabClose="tabClose"
         :handelSubmit="submit"
       />
-      <FormCombination :formObj="formObj" v-show="!status" :handelSubmit="submit"/>
+      <FormCombination
+        :formObj="formObj"
+        v-show="!status"
+        :handelSubmit="submit"
+      />
     </div>
 
     <div class="table-list">
@@ -31,22 +46,34 @@
         >
           <template slot="status" scope="{row}"
             ><!--switch控件插槽-->
-            <el-switch
-              v-model="row.status"
-             
-            >
-            </el-switch>
+            <el-switch v-model="row.status"> </el-switch>
           </template>
-         
+
           <template slot="appoint" scope="{row}"
             ><!--switch控件插槽-->
-           <a class="a_link" href="#" @click="viewOrderFn">
-          查看详情
-          </a>
+            <a class="a_link" href="#" @click="viewOrderFn">
+              查看详情
+            </a>
           </template>
         </Table>
       </div>
     </div>
+
+    <el-dialog
+      title="提示"
+      :visible.sync="centerDialogVisible"
+      width="30%"
+      center
+      custom-class="cancel-class"
+    >
+      <span><i style="color:red;margin-right: 10px;" class="el-icon-warning-outline"></i>是否确定取消此订单</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="centerDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="cancelConfirm"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -55,7 +82,7 @@ import PageTitle from "@/componentsHK/public/PageTitle.vue";
 import FormCombination from "@/componentsHK/public/FormCombination.vue";
 import Table from "@/componentsHK/public/Tabel";
 import userMixin from "@/views/memberManage/useMixin";
-import {window_open} from '@/utils/index'
+import { window_open } from "@/utils/index";
 
 export default {
   name: "memberList",
@@ -63,8 +90,9 @@ export default {
   components: { PageTitle, FormCombination, Table },
   data() {
     return {
+      centerDialogVisible: false,
       status: true,
-      title:'',
+      title: "",
       tabData: [],
       tableObj: {
         son: false /*是否有子级表单*/,
@@ -86,15 +114,15 @@ export default {
             width: "200" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
-          {
-            label: "是否核销" /*标题*/,
-            prop: "hexiao" /*绑定数据源obj展示字段*/,
-            width: "100" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
-          },
+          // {
+          //   label: "是否核销" /*标题*/,
+          //   prop: "hexiao" /*绑定数据源obj展示字段*/,
+          //   width: "100" /*表头宽度*/,
+          //   // slot: false,  /*是否需要插槽*/
+          // },
           {
             label: "会员姓名" /*标题*/,
-            prop: "type" /*绑定数据源obj展示字段*/,
+            prop: "name" /*绑定数据源obj展示字段*/,
             width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
@@ -103,7 +131,7 @@ export default {
           //   prop: "nikename" /*绑定数据源obj展示字段*/,
           //   width: "80" /*表头宽度*/,
           //   // slot: false,  /*是否需要插槽*/
-          // },  
+          // },
           // {
           //   label: "member.username" /*标题*/,
           //   prop: "name" /*绑定数据源obj展示字段*/,
@@ -122,12 +150,12 @@ export default {
           },
           {
             label: "订单创建时间" /*标题*/,
-            prop: "timeLong" /*绑定数据源obj展示字段*/,
+            prop: "birthday" /*绑定数据源obj展示字段*/,
             width: "200" /*表头固定，参数：left / right / ''*/,
           },
           {
             label: "预约项目" /*标题*/,
-            prop: "type" /*绑定数据源obj展示字段*/,
+            prop: "workshop" /*绑定数据源obj展示字段*/,
             width: "120" /*表头固定，参数：left / right / ''*/,
           },
           {
@@ -139,7 +167,7 @@ export default {
             label: "预约详情" /*标题*/,
             prop: "appoint" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
-            slot:true
+            slot: true,
           },
           {
             label: "支付方式" /*标题*/,
@@ -148,7 +176,7 @@ export default {
           },
           {
             label: "订单状态" /*标题*/,
-            prop: "pay" /*绑定数据源obj展示字段*/,
+            prop: "status" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           // {
@@ -171,8 +199,6 @@ export default {
             prop: "remark" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
-          
-         
         ],
         childrenHead: [
           /*子表头数组*/
@@ -208,7 +234,6 @@ export default {
             size: "mini" /*按钮大小 medium / small / mini*/,
             icon: "el-icon-warning-outline" /*按钮icon*/,
           },
-        
         ],
         childrenOperationData: [
           /*字表操作栏*/
@@ -309,82 +334,91 @@ export default {
             classnameitem: "" /*默认为空*/,
           },
           {
-          "id": 'collape',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-          "label": "",/*todo 修改 控件label*/
-          "value": "collape",
-          "hidelabels": true, /*是否展示label标题*/
-          "disabled": false, /*是否禁用 true 禁用 false 启用*/
-          "placeholder": "Please select", /*todo 修改 placeholder 提示语*/
-          "category": 7, /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-          "type": "Filter-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-          "size": "", /*按钮大小 medium / small / mini*/
-          "icon": "el-icon-arrow-up",/*自定义icon，在 模糊搜索或按钮时候生效*/
-          "classname": '', /*默认为空*/
-          "classnameitem": '' /*默认为空*/
-        }, {
-          "id": 'Search1',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-          "label": "",/*todo 修改 控件label*/
-          "value": "Search",
-          "hidelabels": true, /*是否展示label标题*/
-          "disabled": false, /*是否禁用 true 禁用 false 启用*/
-          "placeholder": "Please select", /*todo 修改 placeholder 提示语*/
-          "category": 7, /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-          "activecolor": "",/*switch 开启颜色*/
-          "inactivecolor": "",  /*switch 关闭颜色*/
-          "type": "Search-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-          "size": "", /*按钮大小 medium / small / mini*/
-          "icon": "el-icon-search", /*自定义icon，在 模糊搜索或按钮时候生效*/
-          "classname": '', /*默认为空*/
-          "classnameitem": '' /*默认为空*/
-        },
+            id: "collape" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "" /*todo 修改 控件label*/,
+            value: "collape",
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 7 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            type:
+              "Filter-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
+            size: "" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-arrow-up" /*自定义icon，在 模糊搜索或按钮时候生效*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+          },
+          {
+            id: "Search1" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "" /*todo 修改 控件label*/,
+            value: "Search",
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 7 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            activecolor: "" /*switch 开启颜色*/,
+            inactivecolor: "" /*switch 关闭颜色*/,
+            type:
+              "Search-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
+            size: "" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-search" /*自定义icon，在 模糊搜索或按钮时候生效*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+          },
         ],
       },
-      formObj1: {  /*TODO 组件数据集合*/
-                "formproperties": {
-                    "classname": "form-box",  /*自定义class参数，组合查询模糊搜索必须有 form-box*/
-                },
-                "formData": [/*TODO 控件配置数组*/{
-                    "id": 0,  /*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-                    "label": "demo.page.singleLineTextBox", /*todo 修改 控件label*/
-                    "value": "", /*todo 修改 控件 v-model 参数*/
-                    "hidelabels": false, /*是否展示label标题*/
-                    "disabled": false,  /*是否禁用 true 禁用 false 启用*/
-                    "placeholder": "模糊搜索",  /*todo 修改 placeholder 提示语*/
-                    "category": 0,  /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-                    "iconChekc": true,  /*是否带icon 模糊搜索 icon搜索框一体时候使用*/
-                    "classname": "", /*自定义class*/
-                }, {
-                    "id": 1,
-                    "label": "",
-                    "value": "展开",
-                    "hidelabels": false,
-                    "classname": "", /*自定义class*/
-                    "message": "brandMessage",
-                    "disabled": false,
-                    "placeholder": "Please select",
-                    "category": 8,
-                    "type": "Filter-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-                }],
-                // "buttom": [{/*右侧展示按钮*/
-                //     "id": 2,
-                //     "value": "Batch Approval",
-                //     "hidelabels": true,
-                //     "message": "brandMessage",
-                //     "category": 7,
-                //     "type": "Filter-btn", /*按钮样式 */
-                //     "icon": 'el-icon-coordinate', /*图标*/
-                //     "customParameters": 3
-                // }, {
-                //     "id": 3,
-                //     "value": "New",
-                //     "hidelabels": true,
-                //     "message": "brandMessage",
-                //     "category": 7,
-                //     "type": "Search-btn",
-                //     "icon": 'el-icon-circle-plus-outline',
-                //     "customParameters": 3
-                // }]
-            },
+      formObj1: {
+        /*TODO 组件数据集合*/
+        formproperties: {
+          classname:
+            "form-box" /*自定义class参数，组合查询模糊搜索必须有 form-box*/,
+        },
+        formData: [
+          /*TODO 控件配置数组*/ {
+            id: 0 /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "demo.page.singleLineTextBox" /*todo 修改 控件label*/,
+            value: "" /*todo 修改 控件 v-model 参数*/,
+            hidelabels: false /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "模糊搜索" /*todo 修改 placeholder 提示语*/,
+            category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            iconChekc: true /*是否带icon 模糊搜索 icon搜索框一体时候使用*/,
+            classname: "" /*自定义class*/,
+          },
+          {
+            id: 1,
+            label: "",
+            value: "展开",
+            hidelabels: false,
+            classname: "" /*自定义class*/,
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "Please select",
+            category: 8,
+            type:
+              "Filter-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
+          },
+        ],
+        // "buttom": [{/*右侧展示按钮*/
+        //     "id": 2,
+        //     "value": "Batch Approval",
+        //     "hidelabels": true,
+        //     "message": "brandMessage",
+        //     "category": 7,
+        //     "type": "Filter-btn", /*按钮样式 */
+        //     "icon": 'el-icon-coordinate', /*图标*/
+        //     "customParameters": 3
+        // }, {
+        //     "id": 3,
+        //     "value": "New",
+        //     "hidelabels": true,
+        //     "message": "brandMessage",
+        //     "category": 7,
+        //     "type": "Search-btn",
+        //     "icon": 'el-icon-circle-plus-outline',
+        //     "customParameters": 3
+        // }]
+      },
     };
   },
   created() {
@@ -505,8 +539,7 @@ export default {
         });
       }
       if (v.id == "cancel") {
-       
-        this.$message.error('取消订单')
+        this.centerDialogVisible = true;
       }
       // if (v.id == 13) {
       //   console.log("审批");
@@ -517,19 +550,35 @@ export default {
       console.log(111);
       this.$router.push({
         path: "/orderManage/AddOrder",
-        query: { type: 'add'},
-
+        query: { type: "add" },
       });
     },
     viewOrderFn(e) {
-        window_open(e,'/appointmentManage/openAppoint',{ type: 'view',data:JSON.stringify({a:'1'})},this.$router)
-   
+      window_open(
+        e,
+        "/appointmentManage/openAppoint",
+        { type: "view", data: JSON.stringify({ a: "1" }) },
+        this.$router
+      );
     },
+    cancelConfirm(){
+      this.centerDialogVisible = false
+      this.$message.success('订单取消成功')
+    }
   },
 };
 </script>
 
-<style scoped>
-.member-list {
+<style lang="scss" scoped>
+
+</style>
+
+<style lang="scss">
+.cancel-class{
+.el-dialog__body{
+   text-align: center;
+ 
+ }
 }
+
 </style>

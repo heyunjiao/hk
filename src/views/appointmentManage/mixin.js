@@ -3,10 +3,10 @@ let userMixin={
     return{
         tableDataMock:[ {
             name: "LUCY",
-            id: "5438948395793574839758",
+            id: "1",
             type: "成人会籍卡（主卡）",
             sex:'男',
-            workshop: "乒乓球",
+            workshop: "1",
             section: "1",
             status: "1",
             localDropDownBox: "1",
@@ -20,21 +20,20 @@ let userMixin={
             nikename:"爵士",
             yes:'是',
             timeLong:'2023/1/10-2023/2/3',
+            project:'乒乓球',
           home:'A1',
           all:'是',
           jiaolian:'HUUU',
           remark:'靠窗房间',
-          hexiao:'否',
-          pay:'现金',
-          status:"已确定",
-          role:'员工（前台）'
+          hexiao:'否'
           }, {
             name: "HELLO",
-            id: "4555543894839579357483",
+            id: "2",
             type: "成人会籍卡（附属卡）",
             sex:'男',
             birthday:"2023/2/3",
             timeLong:'2023/1/10-2023/2/3',
+            project:'高尔夫',
 
             workshop: "1",
             section: "1",
@@ -45,18 +44,17 @@ let userMixin={
             sort: "1",
             updateTime: "1",
             email: "1",
-            tel:'17766666666',
-          role:'财务'
-
+            tel:'17766666666'
           }, {
             name: "MODY",
-            id: "578667586787687695899",
+            id: "3",
             type: "青少年会籍卡",
             workshop: "1",
             sex:'女',
             tel:'17766666666',
             birthday:"2023/2/3",
             timeLong:'2023/1/10-2023/2/3',
+            project:'乒乓球',
 
             section: "1",
             status: "1",
@@ -66,8 +64,6 @@ let userMixin={
             sort: "1",
             updateTime: "1",
             email: "1",
-          role:'主管'
-
           },],
           formObj: {
             title: "member.basicInfo" /*表单标题*/,

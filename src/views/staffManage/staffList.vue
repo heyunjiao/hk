@@ -28,6 +28,10 @@
             :handleSelectionChangeCom="handleSelectionChangeCom"
             :HandleCurrentChange="HandleCurrentChange"
           >
+          <template slot="atvatar">
+            <el-avatar shape="square" :size="100" fit="fill" src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"></el-avatar>
+
+          </template>
             <template slot="status" scope="{row}"
               ><!--switch控件插槽-->
               <el-switch
@@ -92,20 +96,18 @@
             },
             {
               label: "头像" /*标题*/,
-              prop: "id" /*绑定数据源obj展示字段*/,
-              fixed: "left" /*表头固定，参数：left / right / ''*/,
+              prop: "atvatar" /*绑定数据源obj展示字段*/,
               width: "200" /*表头宽度*/,
-              // slot: false,  /*是否需要插槽*/
+              slot: true,  /*是否需要插槽*/
             },
             {
               label: "职位" /*标题*/,
               prop: "hexiao" /*绑定数据源obj展示字段*/,
               width: "100" /*表头宽度*/,
-              // slot: false,  /*是否需要插槽*/
             },
             {
               label: "姓名" /*标题*/,
-              prop: "id" /*绑定数据源obj展示字段*/,
+              prop: "name" /*绑定数据源obj展示字段*/,
               fixed: "left" /*表头固定，参数：left / right / ''*/,
               width: "200" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
@@ -113,38 +115,38 @@
             
             {
               label: "手机号" /*标题*/,
-              prop: "type" /*绑定数据源obj展示字段*/,
+              prop: "tel" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
            
             {
               label: "性别" /*标题*/,
-              prop: "type" /*绑定数据源obj展示字段*/,
+              prop: "sex" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
             {
               label: "邮箱" /*标题*/,
-              prop: "type" /*绑定数据源obj展示字段*/,
+              prop: "email" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
             {
               label: "拥有角色" /*标题*/,
-              prop: "type" /*绑定数据源obj展示字段*/,
+              prop: "role" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
             {
               label: "状态" /*标题*/,
-              prop: "type" /*绑定数据源obj展示字段*/,
+              prop: "status" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
             {
               label: "最后登录时间" /*标题*/,
-              prop: "type" /*绑定数据源obj展示字段*/,
+              prop: "time" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },

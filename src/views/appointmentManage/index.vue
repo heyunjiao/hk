@@ -53,7 +53,7 @@
 import PageTitle from "@/componentsHK/public/PageTitle.vue";
 import FormCombination from "@/componentsHK/public/FormCombination.vue";
 import Table from "@/componentsHK/public/Tabel";
-import userMixin from "../memberManage/useMixin";
+import userMixin from "./mixin";
 import selectOption from "@/views/global-data/selectOption";
 import { window_open } from "@/utils/index";
 export default {
@@ -87,52 +87,50 @@ export default {
           },
           {
             label: "会员姓名" /*标题*/,
-            prop: "id" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            prop: "name" /*绑定数据源obj展示字段*/,
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
             label: "联系方式" /*标题*/,
-            prop: "type" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            prop: "tel" /*绑定数据源obj展示字段*/,
             width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
             label: "预约时间" /*标题*/,
-            prop: "nikename" /*绑定数据源obj展示字段*/,
+            prop: "timeLong" /*绑定数据源obj展示字段*/,
 
-            width: "80" /*表头宽度*/,
+            width: "200" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
             label: "预约项目" /*标题*/,
-            prop: "birthday" /*绑定数据源obj展示字段*/,
+            prop: "project" /*绑定数据源obj展示字段*/,
 
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
 
           {
-            label: "房间/桌位" /*标题*/,
-            prop: "sex" /*绑定数据源obj展示字段*/,
+            label: "房间" /*标题*/,
+            prop: "home" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
             label: "教练名称" /*标题*/,
-            prop: "tel" /*绑定数据源obj展示字段*/,
-            width: "" /*表头固定，参数：left / right / ''*/,
+            prop: "name" /*绑定数据源obj展示字段*/,
+            width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
             label: "教练电话" /*标题*/,
             prop: "tel" /*绑定数据源obj展示字段*/,
-            width: "" /*表头固定，参数：left / right / ''*/,
+            width: "120" /*表头固定，参数：left / right / ''*/,
           },
           {
             label: "是否优先联系秘书" /*标题*/,
             prop: "yes" /*绑定数据源obj展示字段*/,
-            width: "120" /*表头宽度*/,
+            width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {

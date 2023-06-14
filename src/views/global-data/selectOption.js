@@ -192,11 +192,42 @@ const sexType=[{
 
 
 // 是否 的下拉或者checkbox
-const yesOrNo= [{"value": 1, "label": "是", "disabled": false}, {
+const yesOrNo= [
+  {"value": 1, 
+  "label": "是",
+   "disabled": false
+  },
+   {
   "value": 2,
   "label": "否",
   "disabled": false
 }]
+// 核销状态
+const writeOff=[
+  { value: 1, label: "已核销" },
+  {
+    value: 2,
+    label: "未核销",
+  },
+]
+// 商品分类
+const shopList=[
+  { value: 1, label: "纪念品" },
+  {
+    value: 2,
+    label: "课时包",
+  },
+  {
+    value: 3,
+    label: "其他商品",
+  },
+]
+// 支付状态
+const payStatus=[ { value: 1, label: "已支付" },
+{
+  value: 2,
+  label: "未支付",
+},]
   export default {
     cardType,
     projectType,
@@ -208,5 +239,8 @@ const yesOrNo= [{"value": 1, "label": "是", "disabled": false}, {
     sexType,
     nickNameType,
     documentType,
-    accountAuth
+    accountAuth,
+    writeOff,
+    shopList,
+    payStatus
   }
