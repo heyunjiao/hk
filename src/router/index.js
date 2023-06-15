@@ -85,6 +85,11 @@ export const constantRoutes = [
         component: () => import('@/views/appointmentManage/component/openAppoint'),
         hidden:true
       },
+      {
+        path: 'batchopenAppoint',
+        component: () => import('@/views/appointmentManage/component/batchopenAppoint'),
+        hidden:true
+      },
       
       
       

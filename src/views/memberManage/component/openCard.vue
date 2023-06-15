@@ -29,6 +29,24 @@
 
     <div class="mrb_20">
       <Form
+        ref="family"
+        :data="formObj6"
+        :Change="cardSelectFn"
+        :ChangeSubmit="ChangeSubmit"
+        :reset="resetForm"
+      />
+    </div>
+    <div class="mrb_20">
+      <Form
+        ref="petInfo"
+        :data="formObj7"
+        :Change="cardSelectFn"
+        :ChangeSubmit="ChangeSubmit"
+        :reset="resetForm"
+      />
+    </div>
+    <div class="mrb_20">
+      <Form
         ref="accountInfo"
         :data="formObj2"
         :Change="cardSelectFn"
@@ -40,9 +58,10 @@
       <Form ref="otherInfo" :data="formObj5" :reset="resetForm" />
     </div>
 
-    <div class="btn-line" v-if=" !this.formObj.formDisabled">
-      <el-button @click="onSubmitFn" class="Search-btn"
-        >{{ $t("page.demo.preservation") }}
+    <div class="btn-line" v-if="!this.formObj.formDisabled">
+      <el-checkbox v-model="confirmchecked"><span class="whrite-red">已核对以上信息，确认无误</span></el-checkbox>
+      <el-button @click="onSubmitFn" type="primary"  :disabled="!confirmchecked"
+        >{{ query.type == "add" ? "创建会籍" : "更新会籍" }}
       </el-button>
     </div>
   </div>
@@ -62,45 +81,68 @@ export default {
   },
   data() {
     return {
+      confirmchecked:false,
       submitObj: {},
       obj: {},
-      query:{},
-      activeBtnCfg: { // switch开关
-                "id": 'switch',
-                "span": 12,
-                "assemblyname": "",
-                "label": "是否激活",
-                "value": "",
-                "hidelabels": true,
-                "classname": "",
-                "message": "brandMessage",
-                "disabled": false,
-                "placeholder": "Please select",
-                "category": 6,
-                "check": false,
-                "activecolor": "",
-                "inactivecolor": "",
-                "customParameters": "active",
-                "formStatus": true,
-                activecolor:''
-              },
+      query: {},
+      activeBtnCfg: {
+        // switch开关
+        id: "switch",
+        span: 12,
+        assemblyname: "",
+        label: "是否激活",
+        value: "",
+        hidelabels: true,
+        classname: "",
+        message: "brandMessage",
+        disabled: false,
+        placeholder: "Please select",
+        category: 6,
+        check: false,
+        activecolor: "",
+        inactivecolor: "",
+        customParameters: "active",
+        formStatus: true,
+        activecolor: "",
+      },
     };
   },
+  watch: {
+    // query: {
+    //   handler(newVal, oldVal) {
+    //     console.log(`新的值: ${newVal}`);
+    //     console.log(`旧的值: ${oldVal}`);
+    //   },
+    //   immediate: true,
+    // },
+  },
   created() {
-    const {type,data}=this.$route.query
-    this.query={...this.query,type,data:JSON.parse(data)}
-    if(this.query.type==='view'){
-    this.formObj.formDisabled=true
-    this.formObj4.formDisabled=true
-    this.formObj2.formDisabled=true
-    this.formObj3.formDisabled=true
-    this.formObj5.formDisabled=true
-    } if(this.query.type==='add'){
-      delItem(this.formObj,'active')
-    }else{
-      this.formObj.formData[1]=this.activeBtnCfg
+    const { type, data } = this.$route.query;
+    if (data) {
+      this.query = { ...this.query, type, data: JSON.parse(data) };
+    } else {
+      this.query = { ...this.query, type };
+      console.log(this.query, "created");
     }
-  console.log(this.query);
+
+    if (this.query.type === "view") {
+     
+      this.formObj.formDisabled = true;
+      this.formObj4.formDisabled = true;
+      this.formObj2.formDisabled = true;
+      this.formObj3.formDisabled = true;
+      this.formObj5.formDisabled = true;
+      this.formObj6.formDisabled = true;
+      this.formObj7.formDisabled = true;
+    }
+    if (this.query.type === "add") {
+      this.delItem(this.formObj, "active");
+    } else {
+      this.formObj.formData[0].disabled=true
+      this.formObj2.formData[0].disabled=true
+      this.formObj.formData.push(this.activeBtnCfg)
+    }
+    console.log(this.query);
   },
   methods: {
     saveAndAdd() {
@@ -118,7 +160,7 @@ export default {
     HandleCurrentChange(val) {
       console.debug(val);
     },
-    delItem(formType,key) {
+    delItem(formType, key) {
       const tempIndex = formType.formData.findIndex(
         (i) => i.customParameters === key
       );
@@ -201,23 +243,29 @@ export default {
         customParameters: "MonthlyFees" /*对应api的参数名称*/,
       };
 
-      this.delItem(this.formObj2,"MembershFipFee");
-      this.delItem(this.formObj2,"MonthlyFees");
+      this.delItem(this.formObj2, "MembershFipFee");
+      this.delItem(this.formObj2, "MonthlyFees");
 
       // 选择附属卡 要求选择主卡
       if (item.value === 2 && item.customParameters === "masterCard") {
         this.formObj2.formData.splice(1, 0, openMasteCard);
-      } else if (item.value === 1 && item.customParameters === "masterCard") {
+      } else if (
+        (item.value === 1 || item.value === 4 || item.value === 8) &&
+        item.customParameters === "masterCard"
+      ) {
         // 选择主卡
         this.formObj2.formData.push(MembershFipFee);
         this.formObj2.formData.push(MonthlyFees);
-      } else if (item.value === 3 && item.customParameters === "masterCard") {
+      } else if (
+        (item.value === 5 || item.value === 6 || item.value === 7) &&
+        item.customParameters === "masterCard"
+      ) {
         // 选择青少年卡
         this.formObj2.formData.push(MembershFipFee);
-        this.delItem(this.formObj2,"MonthlyFees");
-        this.delItem(this.formObj2,"chooseMasterCard");
+        this.delItem(this.formObj2, "MonthlyFees");
+        this.delItem(this.formObj2, "chooseMasterCard");
       } else if (item.customParameters === "masterCard") {
-        this.delItem(this.formObj2,"chooseMasterCard");
+        this.delItem(this.formObj2, "chooseMasterCard");
       }
     },
     ChangeSubmit(data, obj) {
@@ -250,15 +298,17 @@ export default {
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
       let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
       let p3 = this.$refs.personInfo.validateFormPromis("dynamicValidateForm");
-      let p4 = this.$refs.secretaryInfo.validateFormPromis("dynamicValidateForm");
-      Promise.all([p1, p2,p3,p4])
+      let p4 = this.$refs.secretaryInfo.validateFormPromis(
+        "dynamicValidateForm"
+      );
+      Promise.all([p1, p2, p3, p4])
         .then((result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
           const form2 = this.getStoreFormValue(this.formObj2.formData);
           const form3 = this.getStoreFormValue(this.formObj3.formData);
           const form4 = this.getStoreFormValue(this.formObj4.formData);
 
-          console.log(form1, form2,form3, form4, "form");
+          console.log(form1, form2, form3, form4, "form");
         })
         .catch((e) => console.log(e));
     },
@@ -296,7 +346,9 @@ export default {
 }
 
 .btn-line {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 15px;
   background-color: #fff;
   /* display: flex;

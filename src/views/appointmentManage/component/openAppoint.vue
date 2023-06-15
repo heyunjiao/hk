@@ -34,6 +34,7 @@ export default {
   },
   data() {
     return {
+      minTime:'08:30',
       submitObj: {},
       obj: {},
       query: {},
@@ -90,7 +91,73 @@ export default {
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
-
+          {
+            span:"12",
+            id: 6,
+            label: "预约日期",
+            value: "",
+            type:
+              "date" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
+            hidelabels: true,
+            message: "date",
+            disabled: false,
+            placeholder: "Please select",
+            category: 5,
+            format: "yyyy-MM-dd",
+            customParameters: "DateSelection",
+            classname: "",
+            classnameitem: "",
+            check:true,
+            message: "brandMessage" /*校验提示语*/,
+          },
+          
+          {
+            span:"6",
+            id: '',
+            label: "开始时间",
+            value: "",
+            type:
+              "timeSel" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
+            hidelabels: true,
+            startTime:'',
+            endTime:'',
+            message: "date",
+            disabled: false,
+            placeholder: "Please select",
+            category: '20',
+            format: "yyyy-MM-dd",
+            customParameters: "ww",
+            classname: "timeSel",
+            classnameitem: "mm",
+            startTime:'',
+            endTime:'',
+            check:true,
+            message: "333" /*校验提示语*/,
+          },
+          {
+            span:"6",
+            id: '',
+            label: "结束时间",
+            value: "",
+            type:
+              "timeSel" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
+            hidelabels: true,
+            startTime:'',
+            endTime:'',
+            message: "date",
+            disabled: false,
+            placeholder: "Please select",
+            category: '21',
+            format: "yyyy-MM-dd",
+            customParameters: "DateSelection",
+            classname: "timeSel",
+            classnameitem: "mm",
+            startTime:'',
+            endTime:'',
+            check:true,
+            minTime:this.minTime,
+            message: "hhhhhhhhhh" /*校验提示语*/,
+          },
           {
             // 下拉框
             id: "select",
@@ -116,6 +183,27 @@ export default {
             options: selectOption.apponitMethod,
             customParameters: "select",
           },
+        {span:12},
+         
+          
+          {
+            // 单行文本框
+            id: "input",
+            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
+            assemblyname: "input",
+            label: "联系人",
+            value: "19988867888" /*控件value / 默认值*/,
+            type: "" /*控件类型 支持原生*/,
+            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
+            classname: "" /*自定义class*/,
+            message: "brandMessage" /*校验提示语*/,
+            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "brandMessage" /*提示语*/,
+            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+            check: true /*是否校验*/,
+            iconChekc: false /*是否展示icon*/,
+            customParameters: "input" /*对应api的参数名称*/,
+          },
           {
             // 单行文本框
             id: "input",
@@ -135,24 +223,7 @@ export default {
             customParameters: "input" /*对应api的参数名称*/,
           },
 
-          {
-            id: 6,
-            label: "预约时间",
-            value: "",
-            type:
-              "daterange" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
-            hidelabels: true,
-            message: "date",
-            disabled: false,
-            placeholder: "Please select",
-            category: 5,
-            format: "yyyy-MM-dd",
-            customParameters: "DateSelection",
-            classname: "",
-            classnameitem: "",
-            check:true,
-            message: "brandMessage" /*校验提示语*/,
-          },
+          
           {
             // 下拉框
             id: "select",
@@ -179,6 +250,65 @@ export default {
             customParameters: "select",
           },
 
+          {span:12},
+         
+          {
+            id: 3,
+            label: "房间名称",
+            value: "",
+            hidelabels: true,
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "Please select",
+            category: 1,
+            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+            apiUrl: "" /*接口api*/,
+            key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
+            val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
+            options: selectOption.coach,
+            check:true,
+            customParameters: "Select",
+            classname: "",
+            classnameitem: "",
+          },
+          // {
+          //   // 多选框组
+          //   id: "Checkbox",
+          //   span: 12,
+          //   assemblyname: "多选框组",
+          //   label: "是否包场",
+          //   value: [],
+          //   type: "",
+          //   hidelabels: true,
+          //   classname: "",
+          //   message: "brandMessage",
+          //   placeholder: "Please select",
+          //   category: 2,
+          //   source: false,
+          //   check: false,
+          //   layoutmode: 0,
+          //   formStatus: true,
+          //   options: selectOption.yesOrNo,
+          //   customParameters: "Checkbox",
+          // },
+          {
+            id: 3,
+            label: "桌位号",
+            value: "",
+            hidelabels: true,
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "Please select",
+            category: 1,
+            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+            apiUrl: "" /*接口api*/,
+            key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
+            val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
+            options: selectOption.coach,
+            customParameters: "Select",
+            classname: "",
+            classnameitem: "",
+          },
           {
             // 多选框组
             id: "Checkbox",
@@ -202,63 +332,6 @@ export default {
           {
             id: 3,
             label: "教练姓名",
-            value: "",
-            hidelabels: true,
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "Please select",
-            category: 1,
-            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            apiUrl: "" /*接口api*/,
-            key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
-            val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
-            options: selectOption.coach,
-            customParameters: "Select",
-            classname: "",
-            classnameitem: "",
-          },
-         
-          {
-            id: 3,
-            label: "房间名称",
-            value: "",
-            hidelabels: true,
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "Please select",
-            category: 1,
-            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            apiUrl: "" /*接口api*/,
-            key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
-            val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
-            options: selectOption.coach,
-            customParameters: "Select",
-            classname: "",
-            classnameitem: "",
-          },
-          {
-            // 多选框组
-            id: "Checkbox",
-            span: 12,
-            assemblyname: "多选框组",
-            label: "是否包场",
-            value: [],
-            type: "",
-            hidelabels: true,
-            classname: "",
-            message: "brandMessage",
-            placeholder: "Please select",
-            category: 2,
-            source: false,
-            check: false,
-            layoutmode: 0,
-            formStatus: true,
-            options: selectOption.yesOrNo,
-            customParameters: "Checkbox",
-          },
-          {
-            id: 3,
-            label: "桌位号",
             value: "",
             hidelabels: true,
             message: "brandMessage",
@@ -437,5 +510,13 @@ export default {
   background-color: #fff;
   /* display: flex;
       flex-direction: column-reverse; */
+}
+</style>
+
+
+<style lang="scss">
+.timeSel{
+  // margin-left: -120px;
+
 }
 </style>

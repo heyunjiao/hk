@@ -1,53 +1,77 @@
 // 项目类型
 const  cardType=[
    {
-    value: 1,
-    label: "成人会籍卡（主卡）",
+    value:1 ,
+    label: "家庭卡（全权会籍）",
     disabled: false,
   },
   {
-    value: 2 ,
-    label: "成人会籍卡（附属卡）",
+    value: 8 ,
+    label: "家庭卡（个人传承会籍）",
     disabled: false ,
   },
   {
-    value: 3 ,
-    label: "青少年会籍卡",
+    value: 4 ,
+    label: "家庭卡（公司/企业会籍）",
     disabled: false ,
   },
+  {
+    value: 2 ,
+    label: "家庭卡（附属卡）",
+    disabled: false ,
+  },
+  {
+    value: 5 ,
+    label: "青少年卡（全会籍）",
+    disabled: false ,
+  },
+  {
+    value: 6 ,
+    label: "青少年卡（指定单项运动会籍）",
+    disabled: false ,
+  },
+  {
+    value: 7 ,
+    label: "青少年卡（指定双项运动会籍）",
+    disabled: false ,
+  },
+  
 ]
 // 头衔/称谓
 const  nickNameType=[
   {
-    label: "男爵",
+    label: "Mrs.",
     value: "1",
   },
   {
-    label: "子爵",
+    label: "Miss",
     value: "2",
   },
   {
-    label: "侯爵",
+    label: "Sir",
     value: "3",
   },
   {
-    label: "公爵",
+    label: "Lord",
     value: "4",
   },
-  {
-    label: "伯爵",
-    value: "5",
-  },
+  
 ]
 // 证件类型
 const documentType=[  {
-  label: "身份证",
+  label: "香港身份证",
   value: "1",
 },
 {
-  label: "护照",
+  label: "香港永久居民身份证",
   value: "2",
-},]
+},{
+  label: "香港护照",
+  value: "3",
+},{
+  label: "其他",
+  value: "4",
+}]
 // 账户权限
 const accountAuth=[
   { value: 1, label: "预约课程", disabled: false },
@@ -72,7 +96,7 @@ const accountAuth=[
 const  projectType=[
    {
     value: 1,
-    label: "拉丁",
+    label: "乒乓球",
     disabled: false,
   },
   {
@@ -82,17 +106,17 @@ const  projectType=[
   },
   {
     value: 3 ,
-    label: "乒乓球",
+    label: "餐厅",
     disabled: false ,
   },
   {
     value: 4 ,
-    label: "理疗",
+    label: "舞蹈",
     disabled: false ,
   },
   {
     value: 5 ,
-    label: "餐饮",
+    label: "理疗室",
     disabled: false ,
   },
 ]
@@ -154,7 +178,7 @@ const apponitMethod=[{
 },
 {
   value: 3 ,
-  label: "微信",
+  label: "微信/WhatsApp",
   disabled: false ,
 },{
   value: 3 ,
@@ -185,6 +209,11 @@ const sexType=[{
 {
   value: 2 ,
   label: "女",
+  disabled: false ,
+},
+{
+  value: 3 ,
+  label: "其他",
   disabled: false ,
 },
 ]
@@ -227,7 +256,20 @@ const payStatus=[ { value: 1, label: "已支付" },
 {
   value: 2,
   label: "未支付",
+},
+{
+  value: 3,
+  label: "已取消",
 },]
+
+// 支付方式
+
+const payMethods=[ { value: 1, label: "POS" },
+{
+  value: 2,
+  label: "线上",
+},
+]
   export default {
     cardType,
     projectType,
@@ -242,5 +284,6 @@ const payStatus=[ { value: 1, label: "已支付" },
     accountAuth,
     writeOff,
     shopList,
-    payStatus
+    payStatus,
+    payMethods
   }

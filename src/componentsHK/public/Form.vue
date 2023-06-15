@@ -8,7 +8,7 @@
             slot="btn"
           >
             <el-button
-              @click="()=>formObj.pageTitleSlot.fn()"
+              @click="() => formObj.pageTitleSlot.fn()"
               size="large"
               type="primary"
               >{{ $t(formObj.pageTitleSlot.text) || "按钮" }}</el-button
@@ -175,6 +175,35 @@
                 :placeholder="$t(domain.placeholder)"
               >
               </el-date-picker>
+              <!-- time -->
+              <div style="display: flex" :class="domain.classname">
+
+                <el-time-select
+                v-if="domain.category == 20"
+                placeholder="起始时间"
+                v-model="domain.value"
+                @change="realtimeform(domain)"
+                :picker-options="{
+                  start: '08:30',
+                  step: '00:15',
+                  end: '18:30',
+                }"
+              >
+              </el-time-select>
+              <el-time-select
+              v-if="domain.category == 21"
+                placeholder="结束时间"
+                v-model="domain.value"
+                @change="realtimeform(domain)"
+                :picker-options="{
+                  start: '08:30',
+                  step: '00:15',
+                  end: '18:30',
+                  minTime: domain.minTime,
+                }"
+              >
+              </el-time-select>
+              </div>
               <el-switch
                 v-if="domain.category == 6"
                 :disabled="domain.disabled"
@@ -314,6 +343,7 @@
                 >
                 </el-option>
               </el-select>
+              
               <!-- <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18&&!formObj.formDisabled">{{$t(domain.label)}}</el-button> -->
             </el-form-item>
           </el-col>

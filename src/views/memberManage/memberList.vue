@@ -39,11 +39,17 @@
             </el-switch>
           </template>
           <!-- c查看订单详情 -->
-          <template slot="orderView" scope="{row}"
+          <template slot="id" scope="{row}"
             ><!--switch控件插槽-->
-           <a class="a_link" href="#" @click="viewOrderFn">
-          查看
-          </a>
+           <p class="a_link" href="#" @click="()=>pushToDetail({id:'view'},row)">
+         {{row.id}}
+           </p>
+          </template>
+          <template slot="cardType" scope="{row}"
+            ><!--switch控件插槽-->
+           <p class="a_link" href="#" @click="pushToDetail({id:'view'},row)">
+         {{row.type}}
+           </p>
           </template>
         </Table>
       </div>
@@ -85,14 +91,14 @@ export default {
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "200" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
+            slot: true,  /*是否需要插槽*/
           },
           {
             label: "member.cardType" /*标题*/,
-            prop: "type" /*绑定数据源obj展示字段*/,
+            prop: "cardType" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "160" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
+            slot: true,  /*是否需要插槽*/
           },
           {
             label: "头衔" /*标题*/,
@@ -119,34 +125,34 @@ export default {
             prop: "tel" /*绑定数据源obj展示字段*/,
             width: "" /*表头固定，参数：left / right / ''*/,
           },
-          {
-            label: "是否优先联系秘书" /*标题*/,
-            prop: "yes" /*绑定数据源obj展示字段*/,
-            width: "140" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
-          },
-          {
-            label: "秘书姓名" /*标题*/,
-            prop: "name" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-          },
-          {
-            label: "秘书电话" /*标题*/,
-            prop: "tel" /*绑定数据源obj展示字段*/,
-            width:'120'
-          },
+          // {
+          //   label: "是否优先联系秘书" /*标题*/,
+          //   prop: "yes" /*绑定数据源obj展示字段*/,
+          //   width: "140" /*表头宽度*/,
+          //   // slot: false,  /*是否需要插槽*/
+          // },
+          // {
+          //   label: "秘书姓名" /*标题*/,
+          //   prop: "name" /*绑定数据源obj展示字段*/,
+          //   width: "80" /*表头固定，参数：left / right / ''*/,
+          // },
+          // {
+          //   label: "秘书电话" /*标题*/,
+          //   prop: "tel" /*绑定数据源obj展示字段*/,
+          //   width:'120'
+          // },
           {
             label: "激活状态" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
             slot: true /*表头宽度*/,
           },
-          {
-            label: "查看订单详情" /*标题*/,
-            prop: "orderView" /*绑定数据源obj展示字段*/,
-            width: "140" /*表头固定，参数：left / right / ''*/,
-            slot: true /*表头宽度*/,
-          },
+          // {
+          //   label: "查看订单详情" /*标题*/,
+          //   prop: "orderView" /*绑定数据源obj展示字段*/,
+          //   width: "140" /*表头固定，参数：left / right / ''*/,
+          //   slot: true /*表头宽度*/,
+          // },
         ],
         childrenHead: [
           /*子表头数组*/
@@ -154,7 +160,7 @@ export default {
         operationData: [
           {
             id: "edit" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "编辑" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -164,7 +170,17 @@ export default {
           },
           {
             id: "view" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "查看" /*按钮内容*/,
+            classname: "" /*自定义class*/,
+            disabled: false /*是否被禁用*/,
+            type:
+              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+            size: "mini" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-view" /*按钮icon*/,
+          },
+          {
+            id: "view" /*按钮ID*/,
+            value: "订单" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -271,6 +287,18 @@ export default {
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
+          {
+            // 文本框
+            id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "公司名称" /*todo 修改 控件label*/,
+            value: "",
+            hidelabels: true /*是否展示label标题*/,
+            placeholder: "brandMessage",
+            category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            customParameters: "mishuTel" /*对应api的参数名称*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+          },
 
           {
           "id": 'collape',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
@@ -313,7 +341,7 @@ export default {
                     "value": "", /*todo 修改 控件 v-model 参数*/
                     "hidelabels": false, /*是否展示label标题*/
                     "disabled": false,  /*是否禁用 true 禁用 false 启用*/
-                    "placeholder": "模糊搜索",  /*todo 修改 placeholder 提示语*/
+                    "placeholder": "姓名搜索",  /*todo 修改 placeholder 提示语*/
                     "category": 0,  /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
                     "iconChekc": true,  /*是否带icon 模糊搜索 icon搜索框一体时候使用*/
                     "classname": "", /*自定义class*/
@@ -473,6 +501,12 @@ export default {
       //   this.$message("审批");
       // }
     },
+  pushToDetail(v,row){
+     this.$router.push({
+          path: "/openCard",
+          query: { type: v.id, data: JSON.stringify(row) },
+        });
+  },
     openCardFn() {
       console.log(111);
       this.$router.push({

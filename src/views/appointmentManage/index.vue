@@ -6,6 +6,9 @@
           <el-button @click="openCardFn" size="large" type="primary">{{
             $t("appointeManage.openAppoint")
           }}</el-button>
+          <el-button @click="batchopenCardFn" size="large" type="primary">
+            批量预约
+          </el-button>
         </template>
       </PageTitle>
     </div>
@@ -104,13 +107,13 @@ export default {
             width: "200" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
-          {
-            label: "预约项目" /*标题*/,
-            prop: "project" /*绑定数据源obj展示字段*/,
+          // {
+          //   label: "预约项目" /*标题*/,
+          //   prop: "project" /*绑定数据源obj展示字段*/,
 
-            width: "80" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
-          },
+          //   width: "80" /*表头宽度*/,
+          //   // slot: false,  /*是否需要插槽*/
+          // },
 
           {
             label: "房间" /*标题*/,
@@ -127,42 +130,42 @@ export default {
             prop: "tel" /*绑定数据源obj展示字段*/,
             width: "120" /*表头固定，参数：left / right / ''*/,
           },
-          {
-            label: "是否优先联系秘书" /*标题*/,
-            prop: "yes" /*绑定数据源obj展示字段*/,
-            width: "140" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
-          },
-          {
-            label: "秘书姓名" /*标题*/,
-            prop: "name" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-          },
-          {
-            label: "秘书电话" /*标题*/,
-            prop: "tel" /*绑定数据源obj展示字段*/,
-            width: "120",
-          },
-          {
-            label: "查看订单详情" /*标题*/,
-            prop: "viewOrderDetail" /*绑定数据源obj展示字段*/,
-            width: "120" /*表头固定，参数：left / right / ''*/,
-            slot: true /*表头宽度*/,
-          },
-          {
-            label: "操作人" /*标题*/,
-            prop: "name" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-          },
-          {
-            label: "操作时间" /*标题*/,
-            prop: "birthday" /*绑定数据源obj展示字段*/,
-            width: "120" /*表头固定，参数：left / right / ''*/,
-          },
+          // {
+          //   label: "是否优先联系秘书" /*标题*/,
+          //   prop: "yes" /*绑定数据源obj展示字段*/,
+          //   width: "140" /*表头宽度*/,
+          //   // slot: false,  /*是否需要插槽*/
+          // },
+          // {
+          //   label: "秘书姓名" /*标题*/,
+          //   prop: "name" /*绑定数据源obj展示字段*/,
+          //   width: "80" /*表头固定，参数：left / right / ''*/,
+          // },
+          // {
+          //   label: "秘书电话" /*标题*/,
+          //   prop: "tel" /*绑定数据源obj展示字段*/,
+          //   width: "120",
+          // },
+          // {
+          //   label: "查看订单详情" /*标题*/,
+          //   prop: "viewOrderDetail" /*绑定数据源obj展示字段*/,
+          //   width: "120" /*表头固定，参数：left / right / ''*/,
+          //   slot: true /*表头宽度*/,
+          // },
+          // {
+          //   label: "操作人" /*标题*/,
+          //   prop: "name" /*绑定数据源obj展示字段*/,
+          //   width: "80" /*表头固定，参数：left / right / ''*/,
+          // },
+          // {
+          //   label: "操作时间" /*标题*/,
+          //   prop: "birthday" /*绑定数据源obj展示字段*/,
+          //   width: "120" /*表头固定，参数：left / right / ''*/,
+          // },
           {
             label: "预约状态" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
-            width: "120",
+            // width: "120",
             slot: true,
           },
         ],
@@ -172,7 +175,7 @@ export default {
         operationData: [
           {
             id: "edit" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "编辑" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -182,7 +185,7 @@ export default {
           },
           {
             id: "delete" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "删除" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -191,17 +194,28 @@ export default {
             icon: "el-icon-delete" /*按钮icon*/,
           },
           {
-                        "id": 'connection',/*按钮ID*/
-                        "value": "",/*按钮内容*/
-                        "classname": "",/*自定义class*/
-                        "disabled": false,/*是否被禁用*/
-                        "type": "text",/*按钮类型 primary / success / warning / danger / info / text*/
-                        "size": "mini",/*按钮大小 medium / small / mini*/
-                        "icon": "el-icon-connection",/*按钮icon*/
-                    },
+            id: "connection" /*按钮ID*/,
+            value: "取消" /*按钮内容*/,
+            classname: "" /*自定义class*/,
+            disabled: false /*是否被禁用*/,
+            type:
+              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+            size: "mini" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-connection" /*按钮icon*/,
+          },
           {
             id: "view" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "查看" /*按钮内容*/,
+            classname: "" /*自定义class*/,
+            disabled: false /*是否被禁用*/,
+            type:
+              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+            size: "mini" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-view" /*按钮icon*/,
+          },
+          {
+            id: "view" /*按钮ID*/,
+            value: "订单" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -244,18 +258,18 @@ export default {
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
-          {
-            // 文本框
-            id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "预约手机号" /*todo 修改 控件label*/,
-            value: "",
-            hidelabels: true /*是否展示label标题*/,
-            placeholder: "brandMessage",
-            category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "Tel" /*对应api的参数名称*/,
-            classname: "" /*默认为空*/,
-            classnameitem: "" /*默认为空*/,
-          },
+          // {
+          //   // 文本框
+          //   id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+          //   label: "预约手机号" /*todo 修改 控件label*/,
+          //   value: "",
+          //   hidelabels: true /*是否展示label标题*/,
+          //   placeholder: "brandMessage",
+          //   category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+          //   customParameters: "Tel" /*对应api的参数名称*/,
+          //   classname: "" /*默认为空*/,
+          //   classnameitem: "" /*默认为空*/,
+          // },
           {
             // 日期选择器
             id:
@@ -263,7 +277,7 @@ export default {
             label: "预约日期" /*todo 修改 控件label*/,
             value: "",
             type:
-              "date" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
+              "daterange" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
             placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
@@ -561,10 +575,10 @@ export default {
         });
       }
       if (v.id == "delete") {
-        this.$message.success('成功删除此条预约！')
+        this.$message.success("成功删除此条预约！");
       }
       if (v.id == "connection") {
-        this.$message.success('成功取消预约！')
+        this.$message.success("成功取消预约！");
       }
       if (v.id == "view") {
         this.$router.push({
@@ -584,8 +598,20 @@ export default {
         query: { type: "add" },
       });
     },
+    batchopenCardFn() {
+      console.log(111);
+      this.$router.push({
+        path: "/appointmentManage/batchopenAppoint",
+        query: { type: "add" },
+      });
+    },
     viewOrderFn(e) {
-      window_open(e, "/orderManage/AddOrder", {query:{type:'view',data:JSON.stringify({a:'1'})}}, this.$router);
+      window_open(
+        e,
+        "/orderManage/AddOrder",
+        { query: { type: "view", data: JSON.stringify({ a: "1" }) } },
+        this.$router
+      );
     },
   },
 };
