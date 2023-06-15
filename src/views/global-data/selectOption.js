@@ -56,6 +56,11 @@ const  nickNameType=[
     value: "4",
   },
   
+  {
+    label: "Mr.",
+    value: "5",
+  },
+  
 ]
 // 证件类型
 const documentType=[  {

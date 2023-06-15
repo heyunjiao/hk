@@ -7,8 +7,7 @@
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
       >
-    
-      <!-- <template>
+        <!-- <template>
           <el-form-item label="头像">
             <el-upload
               class="avatar-uploader"
@@ -22,15 +21,32 @@
             </el-upload>
           </el-form-item>
         </template> -->
-    </Form>
+      </Form>
     </div>
     <div class="mrb_20">
       <Form
         ref="basicInfo"
         :data="formObj1"
-        :ChangeSubmit="ChangeSubmit"
+        :ChangeSubmit="ChangeSubmit1"
         :reset="resetForm"
-      />
+        :Change="ChangeSel"
+      >
+        <template>
+          <el-form-item label="角色功能">
+            <el-tree
+              class="role-tree"
+              :data="data"
+              show-checkbox
+              default-expand-all
+              node-key="id"
+              :default-checked-keys="roleKeys"
+              :current-node-key="roleKeyString"
+              ref="tree"
+            >
+            </el-tree>
+          </el-form-item>
+        </template>
+      </Form>
     </div>
 
     <div class="btn-line" v-if="!this.formObj.formDisabled">
@@ -56,6 +72,73 @@ export default {
   },
   data() {
     return {
+      roleKeys: [1, 2, 3, 4, 9, 10],
+      roleKeyString: "1,2,3,4,9,10",
+      data: [
+        {
+          id: 1,
+          label: "会员管理",
+          disabled: true,
+        },
+        {
+          id: 2,
+          label: "预约列表",
+          disabled: true,
+        },
+        {
+          id: 3,
+          label: "订单管理",
+          disabled: true,
+        },
+        {
+          id: 11,
+          label: "员工管理",
+          disabled: true,
+        },
+        {
+          id: 5,
+          label: "俱乐部管理",
+          disabled: true,
+          children: [
+            {
+              id: 7,
+              label: "房间管理",
+              disabled: true,
+            },
+            {
+              id: 8,
+              label: "课时包管理",
+              disabled: true,
+            },
+          ],
+        },
+        {
+          id: 4,
+          label: "个人中心",
+          disabled: true,
+          children: [
+            {
+              id: 9,
+              label: "个人信息",
+              disabled: true,
+            },
+            {
+              id: 10,
+              label: "账号管理",
+              disabled: true,
+            },
+          ],
+        },
+        {
+          id: 6,
+          label: "财务管理",
+          disabled: true,
+        },
+      ],
+      defaultProps: {
+        children: "children",
+        label: "label",
+      },
       imageUrl: "",
 
       formObj: {
@@ -253,7 +336,6 @@ export default {
             customParameters: "dateSelection",
             formStatus: true,
           },
-          
         ],
       },
       formObj1: {
@@ -270,7 +352,7 @@ export default {
             span: 24,
             assemblyname: "多选框组",
             label: "授权角色",
-            value: [],
+            value: 1,
             type: "",
             hidelabels: true,
             classname: "",
@@ -314,6 +396,55 @@ export default {
     ChangeSubmit(data, obj) {
       // console.debug(data, obj);
       this.obj = obj;
+      console.log(data, obj);
+    },
+    ChangeSubmit1(data, obj) {
+      // console.debug(data, obj);
+      this.obj = obj;
+      console.log(data, obj);
+    },
+    ChangeSel(data) {
+      console.log(data);
+      switch (data.value) {
+        case 1:
+          this.roleKeys = [1, 2, 3, 4, 9, 10];
+          this.roleKeyString = "1,2,3,4,9,10";
+          this.$refs.tree.setCheckedKeys([1, 2, 3, 4, 9, 10]);
+          break;
+        case 2:
+          this.roleKeys = [];
+          this.roleKeyString = "";
+          this.$refs.tree.setCheckedKeys([]);
+
+          break;
+        case 3:
+          this.roleKeys = [4, 9, 10];
+          this.roleKeyString = "4,9,10";
+          this.$refs.tree.setCheckedKeys([4, 9, 10]);
+
+          break;
+        case 4:
+          this.roleKeys = [6, 4, 9, 10];
+          this.roleKeyString = "6,4,9,10";
+          this.$refs.tree.setCheckedKeys([6, 4, 9, 10]);
+
+          break;
+        case 5:
+          this.roleKeys = [1, 3, 4, 5, 7, 8, 9, 10];
+          this.roleKeyString = "1,3,4,5,7,8,9,10";
+          this.$refs.tree.setCheckedKeys([1, 3, 4, 5, 7, 8, 9, 10,11]);
+
+          break;
+        case 6:
+          this.roleKeys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11];
+          this.roleKeyString = "1,2,3,4,5,6,7,8,9,10";
+          this.$refs.tree.setCheckedKeys([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+          break;
+
+        default:
+          break;
+      }
     },
     resetForm() {
       console.debug("重置");
@@ -335,7 +466,7 @@ export default {
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "png";
-      console.log(isJPG,'isJPG');
+      console.log(isJPG, "isJPG");
       const isLt2M = file.size / 1024 / 1024 < 2;
 
       // if (!isJPG) {
@@ -358,29 +489,14 @@ export default {
   /* display: flex;
     flex-direction: column-reverse; */
 }
-
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  text-align: center;
-  border: 1px dashed #ccc;
-}
-.avatar {
-  width: 100px;
-  height: 100px;
-  display: block;
+</style>
+<style lang="scss">
+.role-tree {
+  .el-tree-node__content {
+    cursor: not-allowed;
+    &:hover {
+      background-color: #fff;
+    }
+  }
 }
 </style>

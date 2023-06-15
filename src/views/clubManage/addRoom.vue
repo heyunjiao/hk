@@ -120,7 +120,7 @@
               assemblyname: "input",
               label: "数量",
               value: "" /*控件value / 默认值*/,
-              type: "" /*控件类型 支持原生*/,
+              type: "number" /*控件类型 支持原生*/,
               hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
               classname: "" /*自定义class*/,
               message: "brandMessage" /*校验提示语*/,
