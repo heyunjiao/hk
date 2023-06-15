@@ -142,7 +142,7 @@ export const constantRoutes = [
         component: () => import('@/views/staffManage/staffList'),
         name: 'setting',
         meta: {
-          title: '成员管理',
+          title: '员工管理',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -235,7 +235,7 @@ export const constantRoutes = [
         component: () => import('@/views/clubManage/class'),
         name: 'class',
         meta: {
-          title: 'class',
+          title: '课时包管理',
           roles: ['admin'] // or you can only set roles in sub nav
         }
 
@@ -286,31 +286,23 @@ export const constantRoutes = [
     ]
   },
   // 财务管理
-  // {
-  //   path: '/accountingManage ',
-  //   component: Layout,
-  //   redirect: '/accountingManage/index',
-  //   alwaysShow: true, // will always show the root menu
-  //   name: 'accountingManage',
-  //   meta: {
-  //     title: 'accountingManage',
-  //     icon: 'guide',
-  //     roles: ['admin', 'editor'] // you can set roles in root nav
-  //   },
-  //   children: [
-     
-  //     {
-  //       path: 'setting',
-  //       component: () => import('@/views/accountingManage/index'),
-  //       name: 'setting',
-  //       meta: {
-  //         title: 'accountingManage',
-  //         roles: ['admin'] // or you can only set roles in sub nav
-  //       }
-  //     },
+  {
+    path: '/accountingManage ',
+    component: Layout,
+    children: [
+      {
+        path: 'setting',
+        component: () => import('@/views/accountingManage/index'),
+        name: 'setting',
+        meta: {
+          icon:'guide',
+          title: 'accountingManage',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
       
-  //   ]
-  // },
+    ]
+  },
  
   {
     path: '/demo',

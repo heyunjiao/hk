@@ -44,6 +44,12 @@
           :handleSelectionChangeCom="handleSelectionChangeCom"
           :HandleCurrentChange="HandleCurrentChange"
         >
+        <template slot="id" scope="{row}"
+            ><!--switch控件插槽-->
+           <p class="a_link" href="#" @click="()=>pushToDetail({id:'view'},row)">
+         {{row.id}}
+           </p>
+          </template>
           <template slot="status" scope="{row}"
             ><!--switch控件插槽-->
             <el-switch v-model="row.status"> </el-switch>
@@ -83,6 +89,7 @@ import FormCombination from "@/componentsHK/public/FormCombination.vue";
 import Table from "@/componentsHK/public/Tabel";
 import userMixin from "@/views/memberManage/useMixin";
 import { window_open } from "@/utils/index";
+import selectOption from "@/views/global-data/selectOption";
 
 export default {
   name: "memberList",
@@ -112,7 +119,7 @@ export default {
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "200" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
+            slot: true,  /*是否需要插槽*/
           },
           // {
           //   label: "是否核销" /*标题*/,
@@ -144,15 +151,11 @@ export default {
           //   width: "80" /*表头固定，参数：left / right / ''*/,
           // },
           {
-            label: "预约时间" /*标题*/,
+            label: "消费时间" /*标题*/,
             prop: "timeLong" /*绑定数据源obj展示字段*/,
             width: "200" /*表头固定，参数：left / right / ''*/,
           },
-          {
-            label: "订单创建时间" /*标题*/,
-            prop: "birthday" /*绑定数据源obj展示字段*/,
-            width: "200" /*表头固定，参数：left / right / ''*/,
-          },
+          
           {
             label: "预约项目" /*标题*/,
             prop: "workshop" /*绑定数据源obj展示字段*/,
@@ -163,22 +166,13 @@ export default {
             prop: "home" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
-          {
-            label: "预约详情" /*标题*/,
-            prop: "appoint" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-            slot: true,
-          },
-          {
-            label: "支付方式" /*标题*/,
-            prop: "pay" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-          },
-          {
-            label: "订单状态" /*标题*/,
-            prop: "status" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-          },
+          
+          // {
+          //   label: "支付方式" /*标题*/,
+          //   prop: "pay" /*绑定数据源obj展示字段*/,
+          //   width: "80" /*表头固定，参数：left / right / ''*/,
+          // },
+         
           // {
           //   label: "是否包场" /*标题*/,
           //   prop: "all" /*绑定数据源obj展示字段*/,
@@ -189,16 +183,26 @@ export default {
           //   prop: "all" /*绑定数据源obj展示字段*/,
           //   width: "120" /*表头固定，参数：left / right / ''*/,
           // },
-          // {
-          //   label: "教练姓名" /*标题*/,
-          //   prop: "jiaolian" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头固定，参数：left / right / ''*/,
-          // },
           {
-            label: "备注信息" /*标题*/,
-            prop: "remark" /*绑定数据源obj展示字段*/,
+            label: "教练姓名" /*标题*/,
+            prop: "jiaolian" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
+          {
+            label: "金额" /*标题*/,
+            prop: "jiaolian" /*绑定数据源obj展示字段*/,
+            width: "80" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "订单状态" /*标题*/,
+            prop: "status" /*绑定数据源obj展示字段*/,
+            width: "80" /*表头固定，参数：left / right / ''*/,
+          },
+          // {
+          //   label: "备注信息" /*标题*/,
+          //   prop: "remark" /*绑定数据源obj展示字段*/,
+          //   width: "80" /*表头固定，参数：left / right / ''*/,
+          // },
         ],
         childrenHead: [
           /*子表头数组*/
@@ -206,7 +210,7 @@ export default {
         operationData: [
           {
             id: "edit" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "编辑" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -216,7 +220,7 @@ export default {
           },
           {
             id: "view" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "详情" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -224,9 +228,19 @@ export default {
             size: "mini" /*按钮大小 medium / small / mini*/,
             icon: "el-icon-view" /*按钮icon*/,
           },
+          // {
+          //   id: "cancel" /*按钮ID*/,
+          //   value: "删除" /*按钮内容*/,
+          //   classname: "" /*自定义class*/,
+          //   disabled: false /*是否被禁用*/,
+          //   type:
+          //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+          //   size: "mini" /*按钮大小 medium / small / mini*/,
+          //   icon: "el-icon-warning-outline" /*按钮icon*/,
+          // },
           {
             id: "cancel" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "预约" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -272,37 +286,28 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "member.tel" /*todo 修改 控件label*/,
+            label: "商品内容" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "Tel" /*对应api的参数名称*/,
+            customParameters: "Product name" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
+         
+        
           {
             // 下拉框本地取值
             id: "localDropDownBox" /*下拉框例子*/,
-            label: "是否核销" /*todo 修改 控件label*/,
+            label: "卡类型" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
             placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
             category: 1 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            options: [
-              /*筛选 数据源*/ {
-                value: 1,
-                label: "已核销",
-                disabled: false,
-              },
-              {
-                value: 2 /*选中参数*/,
-                label: "未核销" /*选中标题*/,
-                disabled: false /*选项是否禁用*/,
-              },
-            ],
+            options:selectOption.cardType,
             customParameters: "Select" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
@@ -317,21 +322,44 @@ export default {
             placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
             category: 1 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            options: [
-              /*筛选 数据源*/ {
-                value: 1,
-                label: "已核销",
-                disabled: false,
-              },
-              {
-                value: 2 /*选中参数*/,
-                label: "未核销" /*选中标题*/,
-                disabled: false /*选项是否禁用*/,
-              },
-            ],
+            options:selectOption.coach,
             customParameters: "Select" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
+          },
+          {
+            // 下拉框本地取值
+            id: "localDropDownBox" /*下拉框例子*/,
+            label: "状态" /*todo 修改 控件label*/,
+            value: "",
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 1 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+            options: selectOption.orderStatus,
+            customParameters: "Select" /*对应api的参数名称*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+          },
+          {
+            // 日期选择器
+            id:
+              "dateSelection" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "日期" /*todo 修改 控件label*/,
+            value: "",
+            type:
+              "daterange" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 5 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            format: "yyyy-MM-dd",
+            customParameters: "DateSelection" /*对应api的参数名称*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+            max: "" /*最大范围*/,
+            min: "" /*最小范围*/,
           },
           {
             id: "collape" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
@@ -564,7 +592,13 @@ export default {
     cancelConfirm(){
       this.centerDialogVisible = false
       this.$message.success('订单取消成功')
-    }
+    },
+     pushToDetail(v,row){
+     this.$router.push({
+           path: "/orderManage/AddOrder",
+          query: { type: v.id, data: JSON.stringify(row) },
+        });
+  },
   },
 };
 </script>

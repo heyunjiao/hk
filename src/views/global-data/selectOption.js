@@ -270,6 +270,12 @@ const payMethods=[ { value: 1, label: "POS" },
   label: "线上",
 },
 ]
+
+const orderStatus=[{ value: 1, label: "已完成" },
+{
+  value: 2,
+  label: "未完成",
+},]
   export default {
     cardType,
     projectType,
@@ -285,5 +291,6 @@ const payMethods=[ { value: 1, label: "POS" },
     writeOff,
     shopList,
     payStatus,
-    payMethods
+    payMethods,
+    orderStatus
   }

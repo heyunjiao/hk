@@ -213,13 +213,17 @@
                 :inactive-color="domain.inactivecolor || '#999'"
               >
               </el-switch>
+             <span style="margin-right: 5px;"  v-if="domain.category == 14&&!domain.unit">{{'$'}}</span>
               <el-input-number
                 v-if="domain.category == 14"
                 v-model="domain.value"
                 :disabled="domain.disabled"
                 @change="realtimeform(domain)"
                 controls-position="right"
-              ></el-input-number>
+                :min="domain.min||0"
+                :max="domain.max||10000000"
+              ></el-input-number> 
+              <span style="margin-left: 5px;"  v-if="domain.category == 14&&domain.unit">{{domain.unit}}</span>
               <el-cascader
                 v-if="domain.category == 11"
                 v-model="domain.value"

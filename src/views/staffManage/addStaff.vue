@@ -8,7 +8,7 @@
         :reset="resetForm"
       >
     
-      <template>
+      <!-- <template>
           <el-form-item label="头像">
             <el-upload
               class="avatar-uploader"
@@ -21,7 +21,7 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-        </template>
+        </template> -->
     </Form>
     </div>
     <div class="mrb_20">
@@ -210,7 +210,7 @@ export default {
             disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -229,7 +229,26 @@ export default {
             disabled: false,
             placeholder: "Please select",
             category: 5,
-            check: false,
+            check: true,
+            format: "yyyy-MM-dd",
+            customParameters: "dateSelection",
+            formStatus: true,
+          },
+          {
+            // 时间选选择器
+            id: "dateSelection",
+            span: 12,
+            assemblyname: "",
+            label: "入职时间",
+            value: "",
+            type: "date",
+            hidelabels: true,
+            classname: "",
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "Please select",
+            category: 5,
+            check: true,
             format: "yyyy-MM-dd",
             customParameters: "dateSelection",
             formStatus: true,

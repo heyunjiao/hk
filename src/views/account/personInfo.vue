@@ -7,7 +7,7 @@
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
       >
-        <template>
+        <!-- <template>
           <el-form-item label="头像">
             <el-upload
               class="avatar-uploader"
@@ -20,7 +20,7 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-        </template>
+        </template> -->
       </Form>
     </div>
 
@@ -93,7 +93,7 @@ export default {
             disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -102,7 +102,7 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "铭牌号码",
+            label: "工号",
             value: "维多利亚" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -111,7 +111,7 @@ export default {
             disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -133,7 +133,7 @@ export default {
             apiUrl: "",
             key: "",
             val: "",
-            check: false,
+            check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
@@ -158,7 +158,7 @@ export default {
             apiUrl: "",
             key: "",
             val: "",
-            check: false,
+            check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
@@ -183,7 +183,7 @@ export default {
             apiUrl: "",
             key: "",
             val: "",
-            check: false,
+            check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
@@ -205,7 +205,7 @@ export default {
             disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },
@@ -223,7 +223,7 @@ export default {
             disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: false /*是否校验*/,
+            check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "input" /*对应api的参数名称*/,
           },

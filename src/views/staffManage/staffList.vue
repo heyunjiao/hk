@@ -88,18 +88,18 @@
           head: [
             /*表头数据*/
             {
-              label: "序号" /*标题*/,
+              label: "工号" /*标题*/,
               prop: "id" /*绑定数据源obj展示字段*/,
               fixed: "left" /*表头固定，参数：left / right / ''*/,
               width: "200" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
-            {
-              label: "头像" /*标题*/,
-              prop: "atvatar" /*绑定数据源obj展示字段*/,
-              width: "200" /*表头宽度*/,
-              slot: true,  /*是否需要插槽*/
-            },
+            // {
+            //   label: "头像" /*标题*/,
+            //   prop: "atvatar" /*绑定数据源obj展示字段*/,
+            //   width: "200" /*表头宽度*/,
+            //   slot: true,  /*是否需要插槽*/
+            // },
             {
               label: "职位" /*标题*/,
               prop: "hexiao" /*绑定数据源obj展示字段*/,
@@ -142,7 +142,7 @@
               label: "状态" /*标题*/,
               prop: "status" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
-              // slot: false,  /*是否需要插槽*/
+              slot: true,  /*是否需要插槽*/
             },
             {
               label: "最后登录时间" /*标题*/,

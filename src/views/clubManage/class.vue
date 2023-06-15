@@ -78,6 +78,13 @@ export default {
         head: [
           /*表头数据*/
           {
+            label: "课包代码编号" /*标题*/,
+            prop: "id" /*绑定数据源obj展示字段*/,
+            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            width: "200" /*表头宽度*/,
+            // slot: false,  /*是否需要插槽*/
+          },
+          {
             label: "项目名称" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
