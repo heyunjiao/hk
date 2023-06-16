@@ -1,6 +1,6 @@
 export default {
   route: {
-    dashboard: 'トップ',
+    demo: 'トップ',
     documentation: 'ドキュメント',
     guide: 'ガイド',
     permission: '権限',

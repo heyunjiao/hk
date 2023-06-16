@@ -59,6 +59,16 @@
         <div style="margin-top: 20px;">
             <Tabel :obj="tableObj1"/>
         </div>
+
+
+        <!-- 区号展示 -->
+        <div>
+            <country-code-selector :countryCode.sync="value">
+    </country-code-selector>
+    <input type="text" v-model="value">
+    <p>这是国际区号{{value}}</p>
+
+        </div>
     </div>
 </template>
 
@@ -66,14 +76,15 @@
 import PageTitle from '@/componentsHK/public/PageTitle';
 import FormCombination from '@/componentsHK/public/FormCombination';
 import Tabel from '@/componentsHK/public/Tabel';
+import countryCodeSelector from '@/componentsHK/countrySelect/index'
 
 export default {
     name: 'demoPage',
-    components: {PageTitle, FormCombination, Tabel},
+    components: {PageTitle, FormCombination, Tabel,countryCodeSelector},
     data() {
         //模糊搜索-未编辑
         return {
-           
+            value: 86,
             title: '模糊搜索-未编辑',
             status: true,
             tabData: [],

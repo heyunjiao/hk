@@ -40,38 +40,29 @@ const  cardType=[
 // 头衔/称谓
 const  nickNameType=[
   {
-    label: "Mrs.",
+    label: "Mr.",
     value: "1",
   },
   {
-    label: "Miss",
+    label: "Mrs.",
     value: "2",
   },
   {
-    label: "Sir",
+    label: "Miss",
     value: "3",
   },
   {
-    label: "Lord",
+    label: "Ms.",
     value: "4",
   },
-  
-  {
-    label: "Mr.",
-    value: "5",
-  },
-  
 ]
 // 证件类型
 const documentType=[  {
-  label: "香港身份证",
+  label: "身份证",
   value: "1",
 },
 {
-  label: "香港永久居民身份证",
-  value: "2",
-},{
-  label: "香港护照",
+  label: "护照",
   value: "3",
 },{
   label: "其他",
@@ -92,10 +83,7 @@ const accountAuth=[
     value: 4,
     label: "运动项目",
   },
-  {
-    value: 5,
-    label: "会籍转让",
-  },
+ 
 ]
 // 项目类型
 const  projectType=[
@@ -236,6 +224,17 @@ const yesOrNo= [
   "label": "否",
   "disabled": false
 }]
+// 会籍
+const membershipyesOrNo= [
+  {"value": 1, 
+  "label": "是",
+   "disabled": true
+  },
+   {
+  "value": 2,
+  "label": "否",
+  "disabled": true
+}]
 // 核销状态
 const writeOff=[
   { value: 1, label: "已核销" },
@@ -297,5 +296,6 @@ const orderStatus=[{ value: 1, label: "已完成" },
     shopList,
     payStatus,
     payMethods,
-    orderStatus
+    orderStatus,
+    membershipyesOrNo
   }

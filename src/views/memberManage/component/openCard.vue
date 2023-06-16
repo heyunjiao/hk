@@ -8,7 +8,9 @@
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
         :realtimeform="realtimeform1"
-      />
+      >
+    
+    </Form>
     </div>
     <div class="mrb_20">
       <Form
@@ -81,6 +83,8 @@ export default {
   },
   data() {
     return {
+
+      imageUrl: "",
       confirmchecked:false,
       submitObj: {},
       obj: {},
@@ -307,11 +311,14 @@ export default {
           const form2 = this.getStoreFormValue(this.formObj2.formData);
           const form3 = this.getStoreFormValue(this.formObj3.formData);
           const form4 = this.getStoreFormValue(this.formObj4.formData);
-
-          console.log(form1, form2, form3, form4, "form");
+// 单独处理手机区号
+const countryCode=this.formObj.formData.find(i=>i.customParameters==='tel')
+          console.log(form1,countryCode, form2, form3, form4, "form");
         })
         .catch((e) => console.log(e));
     },
+
+    
   },
   computed: {
     ...mapState({
@@ -353,5 +360,11 @@ export default {
   background-color: #fff;
   /* display: flex;
     flex-direction: column-reverse; */
+}
+.label-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 10px;
 }
 </style>

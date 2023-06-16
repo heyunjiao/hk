@@ -48,7 +48,7 @@ export default {
             "message": "brandMessage", /*校验提示语*/
             "disabled": false, /*是否禁用 true 禁用 false 启用*/  /*是否禁用*/
             "placeholder": "brandMessage", /*提示语*/
-            "category": 0, /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/
+            "category": 12, /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/
             "check": true, /*是否校验*/
             "iconChekc": false, /*是否展示icon*/
             "customParameters": "input", /*对应api的参数名称*/

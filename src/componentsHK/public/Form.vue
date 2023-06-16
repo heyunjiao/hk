@@ -348,6 +348,36 @@
                 </el-option>
               </el-select>
               
+
+              <!-- 区号+手机号选择 -->
+              <div style="display: flex;" v-if="domain.category == 'countryCode'">
+                <country-code-selector  :countryCode.sync="domain.countryCode"/>
+                <el-input
+                v-model="domain.value"
+                :type="domain.type"
+                :placeholder="$t(domain.placeholder)"
+                :class="domain.classname"
+                @blur="realtimeform(domain)"
+                :disabled="domain.disabled"
+                clearable
+                v-if="domain.category =='countryCode' "
+              ></el-input>
+              </div>
+             
+             <!-- 上传图片 -->
+             <el-upload
+             v-if="domain.category == 'upload'"
+              class="avatar-uploader"
+              :accept="domain.accept"
+              :show-file-list="false"
+              :on-change="(file) => handleChangeImage(file, domain)"
+              :before-upload="beforeAvatarUpload"
+              action=""
+                    :auto-upload="false"
+            >
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
               <!-- <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18&&!formObj.formDisabled">{{$t(domain.label)}}</el-button> -->
             </el-form-item>
           </el-col>
@@ -397,6 +427,7 @@
 import "@/config/ele/elementForm";
 import "@/config/ele/eleLayout";
 import PageTitle from "@/componentsHK/public/PageTitle";
+import countryCodeSelector from '@/componentsHK/countrySelect/index'
 
 export default {
   name: "FormComponents",
@@ -410,9 +441,10 @@ export default {
     "submitText",
     "saveNew",
   ],
-  components: { PageTitle },
+  components: { PageTitle,countryCodeSelector },
   data() {
     return {
+      imageUrl:'',
       formObj: {},
       dynamicValidateForm: {
         domains: [],
@@ -443,13 +475,14 @@ export default {
       }
     },
     trigger(category) {
-      if (category == 0) {
+      if (category == 0||category==='upload') {
         return "blur";
       } else {
         return "change";
       }
     },
     submitForm(formName, status) {
+      
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // alert('submit!');
@@ -496,9 +529,16 @@ export default {
     ClickItem() {
       alert();
     },
+    handleChangeImage(file, row) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+      this.$set(row, "file", file);
+      this.$set(row, "value", file.name);
+      this.realtimeform(row)
+    },
     handleChange(file, row) {
       this.$set(row, "file", file);
       this.$set(row, "value", file.name);
+      console.log(row);
     },
     clear(row) {
       this.$set(row, "file", "");
@@ -527,7 +567,25 @@ export default {
     btnClick(value) {
       value && value.clickFn(value);
     },
+    handleAvatarSuccess(res, file) {
+      console.log(res,file,999);
+      // this.imageUrl=res.id
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
   },
+  
   watch: {
     formObj(New) {
       this.formObj = New;
