@@ -17,7 +17,11 @@
         :tabClose="tabClose"
         :handelSubmit="submit"
       />
-      <FormCombination :formObj="formObj" v-show="!status" :handelSubmit="submit"/>
+      <FormCombination
+        :formObj="formObj"
+        v-show="!status"
+        :handelSubmit="submit"
+      />
     </div>
 
     <div class="table-list">
@@ -32,24 +36,28 @@
         >
           <template slot="status" scope="{row}"
             ><!--switch控件插槽-->
-            <el-switch
-              v-model="row.status"
-             
-            >
-            </el-switch>
+            <el-switch v-model="row.status"> </el-switch>
           </template>
           <!-- c查看订单详情 -->
           <template slot="id" scope="{row}"
             ><!--switch控件插槽-->
-           <p class="a_link" href="#" @click="()=>pushToDetail({id:'view'},row)">
-         {{row.id}}
-           </p>
+            <p
+              class="a_link"
+              href="#"
+              @click="() => pushToDetail({ id: 'view' }, row)"
+            >
+              {{ row.id }}
+            </p>
           </template>
           <template slot="cardType" scope="{row}"
             ><!--switch控件插槽-->
-           <p class="a_link" href="#" @click="pushToDetail({id:'view'},row)">
-         {{row.type}}
-           </p>
+            <p
+              class="a_link"
+              href="#"
+              @click="pushToDetail({ id: 'view' }, row)"
+            >
+              {{ row.type }}
+            </p>
           </template>
         </Table>
       </div>
@@ -62,7 +70,7 @@ import PageTitle from "@/componentsHK/public/PageTitle.vue";
 import FormCombination from "@/componentsHK/public/FormCombination.vue";
 import Table from "@/componentsHK/public/Tabel";
 import userMixin from "./useMixin";
-import {window_open} from '@/utils/index'
+import { window_open } from "@/utils/index";
 
 export default {
   name: "memberList",
@@ -71,7 +79,7 @@ export default {
   data() {
     return {
       status: true,
-      title:'',
+      title: "",
       tabData: [],
       tableObj: {
         son: false /*是否有子级表单*/,
@@ -91,14 +99,14 @@ export default {
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "200" /*表头宽度*/,
-            slot: true,  /*是否需要插槽*/
+            slot: true /*是否需要插槽*/,
           },
           {
             label: "member.cardType" /*标题*/,
             prop: "cardType" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "160" /*表头宽度*/,
-            slot: true,  /*是否需要插槽*/
+            slot: true /*是否需要插槽*/,
           },
           {
             label: "头衔" /*标题*/,
@@ -114,7 +122,7 @@ export default {
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
-         
+
           {
             label: "member.sex" /*标题*/,
             prop: "sex" /*绑定数据源obj展示字段*/,
@@ -154,9 +162,7 @@ export default {
           //   slot: true /*表头宽度*/,
           // },
         ],
-        childrenHead: [
-          /*子表头数组*/
-        ],
+        childrenHead: [],
         operationData: [
           {
             id: "edit" /*按钮ID*/,
@@ -188,12 +194,11 @@ export default {
             size: "mini" /*按钮大小 medium / small / mini*/,
             icon: "el-icon-view" /*按钮icon*/,
           },
-        
         ],
         childrenOperationData: [
           /*字表操作栏*/
         ],
-        tableData: [{}],
+        tableData: [],
       },
       formObj: {
         title: "",
@@ -262,7 +267,7 @@ export default {
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
-         
+
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
@@ -301,82 +306,91 @@ export default {
           },
 
           {
-          "id": 'collape',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-          "label": "",/*todo 修改 控件label*/
-          "value": "collape",
-          "hidelabels": true, /*是否展示label标题*/
-          "disabled": false, /*是否禁用 true 禁用 false 启用*/
-          "placeholder": "Please select", /*todo 修改 placeholder 提示语*/
-          "category": 7, /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-          "type": "Filter-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-          "size": "", /*按钮大小 medium / small / mini*/
-          "icon": "el-icon-arrow-up",/*自定义icon，在 模糊搜索或按钮时候生效*/
-          "classname": '', /*默认为空*/
-          "classnameitem": '' /*默认为空*/
-        }, {
-          "id": 'Search1',/*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-          "label": "",/*todo 修改 控件label*/
-          "value": "Search",
-          "hidelabels": true, /*是否展示label标题*/
-          "disabled": false, /*是否禁用 true 禁用 false 启用*/
-          "placeholder": "Please select", /*todo 修改 placeholder 提示语*/
-          "category": 7, /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-          "activecolor": "",/*switch 开启颜色*/
-          "inactivecolor": "",  /*switch 关闭颜色*/
-          "type": "Search-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-          "size": "", /*按钮大小 medium / small / mini*/
-          "icon": "el-icon-search", /*自定义icon，在 模糊搜索或按钮时候生效*/
-          "classname": '', /*默认为空*/
-          "classnameitem": '' /*默认为空*/
-        },
+            id: "collape" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "" /*todo 修改 控件label*/,
+            value: "collape",
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 7 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            type:
+              "Filter-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
+            size: "" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-arrow-up" /*自定义icon，在 模糊搜索或按钮时候生效*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+          },
+          {
+            id: "Search1" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "" /*todo 修改 控件label*/,
+            value: "Search",
+            hidelabels: true /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
+            category: 7 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            activecolor: "" /*switch 开启颜色*/,
+            inactivecolor: "" /*switch 关闭颜色*/,
+            type:
+              "Search-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
+            size: "" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-search" /*自定义icon，在 模糊搜索或按钮时候生效*/,
+            classname: "" /*默认为空*/,
+            classnameitem: "" /*默认为空*/,
+          },
         ],
       },
-      formObj1: {  /*TODO 组件数据集合*/
-                "formproperties": {
-                    "classname": "form-box",  /*自定义class参数，组合查询模糊搜索必须有 form-box*/
-                },
-                "formData": [/*TODO 控件配置数组*/{
-                    "id": 0,  /*自定义参数建议不重复 没有类型限制 建议用英文字母*/
-                    "label": "demo.page.singleLineTextBox", /*todo 修改 控件label*/
-                    "value": "", /*todo 修改 控件 v-model 参数*/
-                    "hidelabels": false, /*是否展示label标题*/
-                    "disabled": false,  /*是否禁用 true 禁用 false 启用*/
-                    "placeholder": "姓名搜索",  /*todo 修改 placeholder 提示语*/
-                    "category": 0,  /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
-                    "iconChekc": true,  /*是否带icon 模糊搜索 icon搜索框一体时候使用*/
-                    "classname": "", /*自定义class*/
-                }, {
-                    "id": 1,
-                    "label": "",
-                    "value": "展开",
-                    "hidelabels": false,
-                    "classname": "", /*自定义class*/
-                    "message": "brandMessage",
-                    "disabled": false,
-                    "placeholder": "Please select",
-                    "category": 8,
-                    "type": "Filter-btn", /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/
-                }],
-                // "buttom": [{/*右侧展示按钮*/
-                //     "id": 2,
-                //     "value": "Batch Approval",
-                //     "hidelabels": true,
-                //     "message": "brandMessage",
-                //     "category": 7,
-                //     "type": "Filter-btn", /*按钮样式 */
-                //     "icon": 'el-icon-coordinate', /*图标*/
-                //     "customParameters": 3
-                // }, {
-                //     "id": 3,
-                //     "value": "New",
-                //     "hidelabels": true,
-                //     "message": "brandMessage",
-                //     "category": 7,
-                //     "type": "Search-btn",
-                //     "icon": 'el-icon-circle-plus-outline',
-                //     "customParameters": 3
-                // }]
-            },
+      formObj1: {
+        /*TODO 组件数据集合*/
+        formproperties: {
+          classname:
+            "form-box" /*自定义class参数，组合查询模糊搜索必须有 form-box*/,
+        },
+        formData: [
+          /*TODO 控件配置数组*/ {
+            id: 0 /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            label: "demo.page.singleLineTextBox" /*todo 修改 控件label*/,
+            value: "" /*todo 修改 控件 v-model 参数*/,
+            hidelabels: false /*是否展示label标题*/,
+            disabled: false /*是否禁用 true 禁用 false 启用*/,
+            placeholder: "姓名搜索" /*todo 修改 placeholder 提示语*/,
+            category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+            iconChekc: true /*是否带icon 模糊搜索 icon搜索框一体时候使用*/,
+            classname: "" /*自定义class*/,
+          },
+          {
+            id: 1,
+            label: "",
+            value: "展开",
+            hidelabels: false,
+            classname: "" /*自定义class*/,
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "Please select",
+            category: 8,
+            type:
+              "Filter-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
+          },
+        ],
+        // "buttom": [{/*右侧展示按钮*/
+        //     "id": 2,
+        //     "value": "Batch Approval",
+        //     "hidelabels": true,
+        //     "message": "brandMessage",
+        //     "category": 7,
+        //     "type": "Filter-btn", /*按钮样式 */
+        //     "icon": 'el-icon-coordinate', /*图标*/
+        //     "customParameters": 3
+        // }, {
+        //     "id": 3,
+        //     "value": "New",
+        //     "hidelabels": true,
+        //     "message": "brandMessage",
+        //     "category": 7,
+        //     "type": "Search-btn",
+        //     "icon": 'el-icon-circle-plus-outline',
+        //     "customParameters": 3
+        // }]
+      },
     };
   },
   created() {
@@ -501,23 +515,21 @@ export default {
       //   this.$message("审批");
       // }
     },
-  pushToDetail(v,row){
-     this.$router.push({
-          path: "/openCard",
-          query: { type: v.id, data: JSON.stringify(row) },
-        });
-  },
+    pushToDetail(v, row) {
+      this.$router.push({
+        path: "/openCard",
+        query: { type: v.id, data: JSON.stringify(row) },
+      });
+    },
     openCardFn() {
       console.log(111);
       this.$router.push({
         path: "/openCard",
-        query: { type: 'add'},
-
+        query: { type: "add" },
       });
     },
     viewOrderFn(e) {
-        window_open(e,'/orderManage/index',{},this.$router)
-   
+      window_open(e, "/orderManage/index", {}, this.$router);
     },
   },
 };
