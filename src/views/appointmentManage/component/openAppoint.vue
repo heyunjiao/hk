@@ -7,7 +7,8 @@
         :data="formObj"
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
-      />
+      >
+      </Form>
     </div>
 
     <div class="btn-line" v-if="!this.formObj.formDisabled">
@@ -15,6 +16,10 @@
         >{{ $t("page.demo.preservation") }}
       </el-button>
     </div>
+
+    <el-dialog title="日历" :visible.sync="dialogFormVisible">
+      <calendar></calendar>
+    </el-dialog>
   </div>
 </template>
 
@@ -24,36 +29,52 @@ import "@/config/ele/eleLayout";
 import { mapState } from "vuex";
 import Form from "@/componentsHK/public/Form";
 import selectOption from "@/views/global-data/selectOption";
-import {window_open} from '@/utils/index'
+import { window_open } from "@/utils/index";
+import calendar from "@/componentsHK/calendarDetail/index2";
 
 export default {
   name: "openAppoint",
   mixins: [],
   components: {
     Form,
+    calendar,
   },
   data() {
     return {
-      minTime:'08:30',
+      dialogFormVisible: false,
+      minTime: "08:30",
       submitObj: {},
       obj: {},
       query: {},
+      member: {
+        visible: true,
+        text: "查看会员详情",
+        fn: () => {
+          window_open(
+            "",
+            "/openCard",
+            { type: "view", data: JSON.stringify({ a: "1" }) },
+            this.$router
+          );
+
+          // this.$router.push({ path: "/openCard", query: { type: "view" ,data:JSON.stringify({a:'1'})} });
+        },
+      },
+      room: {
+        visible: true,
+        text: "查看房间状态",
+        fn: () => {
+          this.dialogFormVisible = true;
+        },
+      },
       formObj: {
         title: "预约信息" /*表单标题*/,
         // 插槽的按钮信息
-        pageTitleSlot: {
-          visible: true,
-          text: "查看会员详情",
-          fn: () => {
-        window_open('','/openCard', { type: "view" ,data:JSON.stringify({a:'1'})},this.$router)
-
-            // this.$router.push({ path: "/openCard", query: { type: "view" ,data:JSON.stringify({a:'1'})} });
-          },
-        },
+        pageTitleSlot: this.room,
         formDisabled: false,
         formproperties: {
           inline: true,
-          formlabelwidth:'140px'
+          formlabelwidth: "140px",
         },
         formData: [
           {
@@ -67,7 +88,7 @@ export default {
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,
             message: "brandMessage" /*校验提示语*/,
-            disabled:false/*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
             placeholder: "brandMessage" /*提示语*/,
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
@@ -93,7 +114,7 @@ export default {
             customParameters: "input" /*对应api的参数名称*/,
           },
           {
-            span:"12",
+            span: "12",
             id: 6,
             label: "预约日期",
             value: "",
@@ -108,55 +129,55 @@ export default {
             customParameters: "DateSelection",
             classname: "",
             classnameitem: "",
-            check:true,
+            check: true,
             message: "brandMessage" /*校验提示语*/,
           },
-          
+
           {
-            span:"6",
-            id: '',
+            span: "6",
+            id: "",
             label: "开始时间",
             value: "",
             type:
               "timeSel" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
             hidelabels: true,
-            startTime:'',
-            endTime:'',
+            startTime: "",
+            endTime: "",
             message: "date",
             disabled: false,
             placeholder: "Please select",
-            category: '20',
+            category: "20",
             format: "yyyy-MM-dd",
             customParameters: "ww",
             classname: "timeSel",
             classnameitem: "mm",
-            startTime:'',
-            endTime:'',
-            check:true,
+            startTime: "",
+            endTime: "",
+            check: true,
             message: "333" /*校验提示语*/,
           },
           {
-            span:"6",
-            id: '',
+            span: "6",
+            id: "",
             label: "结束时间",
             value: "",
             type:
               "timeSel" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
             hidelabels: true,
-            startTime:'',
-            endTime:'',
+            startTime: "",
+            endTime: "",
             message: "date",
             disabled: false,
             placeholder: "Please select",
-            category: '21',
+            category: "21",
             format: "yyyy-MM-dd",
             customParameters: "DateSelection",
             classname: "timeSel",
             classnameitem: "mm",
-            startTime:'',
-            endTime:'',
-            check:true,
-            minTime:this.minTime,
+            startTime: "",
+            endTime: "",
+            check: true,
+            minTime: this.minTime,
             message: "hhhhhhhhhh" /*校验提示语*/,
           },
           {
@@ -184,9 +205,8 @@ export default {
             options: selectOption.apponitMethod,
             customParameters: "select",
           },
-        {span:12},
-         
-          
+          { span: 12 },
+
           {
             // 单行文本框
             id: "input",
@@ -224,7 +244,6 @@ export default {
             customParameters: "input" /*对应api的参数名称*/,
           },
 
-          
           {
             // 下拉框
             id: "select",
@@ -251,7 +270,7 @@ export default {
             customParameters: "select",
           },
 
-          {span:12},
+          { span: 12 },
           {
             // 多选框组
             id: "Checkbox",
@@ -290,7 +309,7 @@ export default {
             classname: "",
             classnameitem: "",
           },
-         
+
           {
             id: 3,
             label: "房间名称",
@@ -305,7 +324,7 @@ export default {
             key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
             val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
             options: selectOption.coach,
-            check:true,
+            check: true,
             customParameters: "Select",
             classname: "",
             classnameitem: "",
@@ -432,20 +451,22 @@ export default {
     const { type, data } = this.$route.query;
     // this.query = { ...this.query, type, data: JSON.parse(data) };
     this.query = { ...this.query, type };
-    console.log(this.query,'this.query');
+    console.log(this.query, "this.query");
     if (this.query.type === "view") {
+      this.formObj.pageTitleSlot=this.member
+
       this.formObj.formDisabled = true;
-      this.formObj.pageTitleSlot.visible = true;
-  
+      // this.formObj.pageTitleSlot.visible = true;
     }
     if (this.query.type === "add") {
-      this.formObj.pageTitleSlot.visible = false;
-      this.$set(this.formObj, "pageTitleSlot", false);
+      this.formObj.pageTitleSlot=this.room
+      // this.$set(this.formObj, "pageTitleSlot", false);
       console.log(9999);
-    } else if(type==='edit') {
-          //   会员号码不能修改
-    this.formObj.formData[0].disabled=true
-    this.formObj.formData[1].disabled=true
+    } else if (type === "edit") {
+      this.formObj.pageTitleSlot=this.member
+      //   会员号码不能修改
+      this.formObj.formData[0].disabled = true;
+      this.formObj.formData[1].disabled = true;
     }
   },
   methods: {
@@ -473,7 +494,6 @@ export default {
       }
     },
 
-   
     ChangeSubmit(data, obj) {
       // console.debug(data, obj);
       this.obj = obj;
@@ -552,10 +572,8 @@ export default {
 }
 </style>
 
-
 <style lang="scss">
-.timeSel{
+.timeSel {
   // margin-left: -120px;
-
 }
 </style>

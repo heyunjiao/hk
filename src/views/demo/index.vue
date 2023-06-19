@@ -1,5 +1,6 @@
 <template>
     <div class="demo">
+        <calendar></calendar>
         <div style="margin-bottom: 30px;"><!--标题-->
             <PageTitle title="number"/>
         </div>
@@ -77,10 +78,10 @@ import PageTitle from '@/componentsHK/public/PageTitle';
 import FormCombination from '@/componentsHK/public/FormCombination';
 import Tabel from '@/componentsHK/public/Tabel';
 import countryCodeSelector from '@/componentsHK/countrySelect/index'
-
+import calendar from '@/componentsHK/calendarDetail/index2'
 export default {
     name: 'demoPage',
-    components: {PageTitle, FormCombination, Tabel,countryCodeSelector},
+    components: {PageTitle, FormCombination, Tabel,countryCodeSelector,calendar},
     data() {
         //模糊搜索-未编辑
         return {
