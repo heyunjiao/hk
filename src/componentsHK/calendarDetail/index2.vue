@@ -2,13 +2,14 @@
   <div class="dashboard-container">
     <!-- 日历 -->
     <el-calendar v-model="value">
-      <template slot="dateCell" slot-scope="{ data }">
-        <p :class="data.isSelected ? 'is-selected' : ''" @click="remarkFn(data)">
+      <template slot="dateCell" slot-scope="{ data }" >
+        <div  >
+        <p style="padding: 30px;" @click="remarkFn(data)" :class="data.isSelected ? 'is-selected' : ''">
           {{ data.day.split("-").slice(2).join("-") }}
           {{ data.isSelected ? "✔️" : "" }}
         </p>
         <div
-          style="width: 100%;"
+          style="width: 100%; height: 100%;"
           v-for="(item, index) in scheduleData"
           :key="index"
         >
@@ -54,10 +55,10 @@
             </template>
           </ul> -->
         </div>
-      </template>
+    </div></template>
     </el-calendar>
 
-    <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+    <!-- <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item label="活动名称" :label-width="formLabelWidth">
           <el-input v-model="form.name" autocomplete="off"></el-input>
@@ -75,7 +76,16 @@
           >确 定</el-button
         >
       </div>
-    </el-dialog>
+    </el-dialog> -->
+
+    <el-drawer
+   
+  title="我是标题"
+  :visible.sync="dialogFormVisible"
+  direction="rtl"
+  :before-close="handleClose">
+  <span>备注信息!</span>
+</el-drawer>
   </div>
 </template>
 
@@ -92,6 +102,7 @@ export default {
             {
               notice: "LUCY",
               type: "2:00-3:00 瑜伽课",
+              h:'importantSt'
             },
             {
               notice: "HONEY",
@@ -158,6 +169,13 @@ export default {
     };
   },
   methods: {
+    handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      },
     remarkFn(data) {
         this.dialogFormVisible= true,
       console.log(data,999);
@@ -211,7 +229,10 @@ font-size: 10px;}
 
 
   ::v-deep .el-calendar-table {
+    .current,.prev{cursor: pointer;}
+
     .el-calendar-day {
+        padding: 0;
       height: auto;
     }
   }

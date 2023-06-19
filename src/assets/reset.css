@@ -299,6 +299,11 @@
     margin-right: 4px;*/
     display: none;
 }
+/* ------- */
+/* dialog层级 */
+.v-modal{
+z-index: 2000 !important;
+}
 /* el-上传图片 */
 .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
