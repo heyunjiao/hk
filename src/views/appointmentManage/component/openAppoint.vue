@@ -17,7 +17,7 @@
       </el-button>
     </div>
 
-    <el-dialog title="日历" :visible.sync="dialogFormVisible">
+    <el-dialog title="日历" :visible.sync="dialogFormVisible" width="80%">
       <calendar></calendar>
     </el-dialog>
   </div>
@@ -30,7 +30,7 @@ import { mapState } from "vuex";
 import Form from "@/componentsHK/public/Form";
 import selectOption from "@/views/global-data/selectOption";
 import { window_open } from "@/utils/index";
-import calendar from "@/componentsHK/calendarDetail/index2";
+import calendar from "@/views/demo/calc.vue";
 
 export default {
   name: "openAppoint",

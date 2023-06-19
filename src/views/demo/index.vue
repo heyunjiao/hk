@@ -70,10 +70,14 @@
     <p>这是国际区号{{value}}</p>
 
         </div>
+
+
+        <calc></calc>
     </div>
 </template>
 
 <script>
+import calc from './calc.vue'
 import PageTitle from '@/componentsHK/public/PageTitle';
 import FormCombination from '@/componentsHK/public/FormCombination';
 import Tabel from '@/componentsHK/public/Tabel';
@@ -81,7 +85,7 @@ import countryCodeSelector from '@/componentsHK/countrySelect/index'
 import calendar from '@/componentsHK/calendarDetail/index2'
 export default {
     name: 'demoPage',
-    components: {PageTitle, FormCombination, Tabel,countryCodeSelector,calendar},
+    components: {PageTitle,calc, FormCombination, Tabel,countryCodeSelector,calendar},
     data() {
         //模糊搜索-未编辑
         return {
