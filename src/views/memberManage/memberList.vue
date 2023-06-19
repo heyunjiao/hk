@@ -34,6 +34,9 @@
           :handleSelectionChangeCom="handleSelectionChangeCom"
           :HandleCurrentChange="HandleCurrentChange"
         >
+        <template  slot="allNum" scope="{row}">
+          <span>{{row.type.indexOf('主卡')!=-1?row.icon:'-'}}</span>
+        </template>
           <template slot="status" scope="{row}"
             ><!--switch控件插槽-->
             <el-switch v-model="row.status"> </el-switch>
@@ -132,6 +135,12 @@ export default {
             label: "member.tel" /*标题*/,
             prop: "tel" /*绑定数据源obj展示字段*/,
             width: "" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "会员卡总数" /*标题*/,
+            prop: "allNum" /*绑定数据源obj展示字段*/,
+            width: "120px" /*表头固定，参数：left / right / ''*/,
+            slot:true
           },
           // {
           //   label: "是否优先联系秘书" /*标题*/,
