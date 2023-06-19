@@ -53,6 +53,7 @@ export default {
         formDisabled: false,
         formproperties: {
           inline: true,
+          formlabelwidth:'140px'
         },
         formData: [
           {
@@ -251,6 +252,44 @@ export default {
           },
 
           {span:12},
+          {
+            // 多选框组
+            id: "Checkbox",
+            span: 12,
+            assemblyname: "多选框组",
+            label: "是否关联课时包",
+            value: [],
+            type: "",
+            hidelabels: true,
+            classname: "",
+            message: "brandMessage",
+            placeholder: "Please select",
+            category: 2,
+            source: false,
+            check: false,
+            layoutmode: 0,
+            formStatus: true,
+            options: selectOption.yesOrNo,
+            customParameters: "Checkbox",
+          },
+          {
+            id: 3,
+            label: "课时包",
+            value: "",
+            hidelabels: true,
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "Please select",
+            category: 1,
+            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+            apiUrl: "" /*接口api*/,
+            key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
+            val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
+            options: selectOption.coach,
+            customParameters: "Select",
+            classname: "",
+            classnameitem: "",
+          },
          
           {
             id: 3,

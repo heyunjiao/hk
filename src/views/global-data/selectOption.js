@@ -178,7 +178,23 @@ const apponitMethod=[{
   label: "现场",
   disabled: false ,
 }]
-
+const orderType=[
+  { value: 1,
+  label: "预约订单",
+  disabled: false,},
+  { value: 2,
+  label: "课时包订单",
+  disabled: false,},
+  { value: 3,
+  label: "商品订单",
+  disabled: false,},
+  { value: 4,
+  label: "餐饮订单",
+  disabled: false,},
+  { value: 5,
+  label: "罚款订单",
+  disabled: false,}
+]
 const classType=[{
   value: 1,
   label: "单节",
@@ -251,6 +267,14 @@ const shopList=[
     label: "课时包",
   },
   {
+    value: 4,
+    label: "餐饮",
+  },
+  {
+    value: 5,
+    label: "罚款",
+  },
+  {
     value: 3,
     label: "其他商品",
   },
@@ -297,5 +321,6 @@ const orderStatus=[{ value: 1, label: "已完成" },
     payStatus,
     payMethods,
     orderStatus,
-    membershipyesOrNo
+    membershipyesOrNo,
+    orderType
   }

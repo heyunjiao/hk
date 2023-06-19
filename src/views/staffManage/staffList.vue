@@ -142,7 +142,7 @@
               label: "状态" /*标题*/,
               prop: "status" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
-              slot: true,  /*是否需要插槽*/
+              slot: false,  /*是否需要插槽*/
             },
             {
               label: "最后登录时间" /*标题*/,
@@ -178,16 +178,7 @@
               size: "mini" /*按钮大小 medium / small / mini*/,
               icon: "" /*按钮icon*/,
             },
-            {
-              id: "cancel" /*按钮ID*/,
-              value: "删除" /*按钮内容*/,
-              classname: "" /*自定义class*/,
-              disabled: false /*是否被禁用*/,
-              type:
-                "text" /*按钮类型 primary / success / warning / danger / info / text*/,
-              size: "mini" /*按钮大小 medium / small / mini*/,
-             
-            },
+           
             // {
             //   id: "cancel" /*按钮ID*/,
             //   value: "角色授权" /*按钮内容*/,
@@ -214,6 +205,18 @@
               // 文本框
               id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
               label: "姓名" /*todo 修改 控件label*/,
+              value: "",
+              hidelabels: true /*是否展示label标题*/,
+              placeholder: "brandMessage",
+              category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+              customParameters: "Product name" /*对应api的参数名称*/,
+              classname: "" /*默认为空*/,
+              classnameitem: "" /*默认为空*/,
+            },
+            {
+              // 文本框
+              id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+              label: "工号" /*todo 修改 控件label*/,
               value: "",
               hidelabels: true /*是否展示label标题*/,
               placeholder: "brandMessage",

@@ -96,6 +96,12 @@ export default {
         total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
         page: 1,
         head: [
+        {
+            label: "" /*标题*/,
+            prop: "index" /*绑定数据源obj展示字段*/,
+            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            width: "50" /*表头宽度*/,
+          },
           /*表头数据*/
           {
             label: "会员号码" /*标题*/,
@@ -137,7 +143,7 @@ export default {
             width: "" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "会员卡总数" /*标题*/,
+            label: "会员卡总数（主卡 + 附属卡）" /*标题*/,
             prop: "allNum" /*绑定数据源obj展示字段*/,
             width: "120px" /*表头固定，参数：left / right / ''*/,
             slot:true

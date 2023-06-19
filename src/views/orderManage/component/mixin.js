@@ -30,7 +30,7 @@ let userMixin={
                 iconChekc: false /*是否展示icon*/,
                 customParameters: "input" /*对应api的参数名称*/,
               },
-             
+            
              
               {
                 // 下拉框
@@ -57,6 +57,7 @@ let userMixin={
                 options: selectOption.shopList,
                 customParameters: "select",
               },
+             
               {
                 // 下拉框
                 id: "select",

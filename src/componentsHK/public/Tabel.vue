@@ -462,4 +462,11 @@ export default {
 }
 
 /*********************/
+
+
+/deep/ [class*='el-table__row--level-1']{
+  .el-table__cell:nth-child(2){
+  padding-left: 30px;}
+
+}
 </style>

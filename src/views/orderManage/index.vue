@@ -240,7 +240,7 @@ export default {
           // },
           {
             id: "cancel" /*按钮ID*/,
-            value: "预约" /*按钮内容*/,
+            value: "取消" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
