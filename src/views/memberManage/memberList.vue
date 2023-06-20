@@ -143,7 +143,7 @@ export default {
             width: "" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "会员卡总数（主卡 + 附属卡）" /*标题*/,
+            label: "会员卡总数" /*标题*/,
             prop: "allNum" /*绑定数据源obj展示字段*/,
             width: "120px" /*表头固定，参数：left / right / ''*/,
             slot:true

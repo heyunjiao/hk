@@ -52,7 +52,7 @@
           </template>
           <template slot="status" scope="{row}"
             ><!--switch控件插槽-->
-            <el-switch v-model="row.status"> </el-switch>
+            已支付
           </template>
 
           <template slot="appoint" scope="{row}"
@@ -197,6 +197,7 @@ export default {
             label: "订单状态" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
+            slot:true
           },
           // {
           //   label: "备注信息" /*标题*/,
