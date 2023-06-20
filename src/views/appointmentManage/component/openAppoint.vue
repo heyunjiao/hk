@@ -18,7 +18,7 @@
     </div>
 
     <el-dialog title="日历" :visible.sync="dialogFormVisible" width="80%">
-      <calendar></calendar>
+      <FullCalendar></FullCalendar>
     </el-dialog>
   </div>
 </template>
@@ -30,14 +30,13 @@ import { mapState } from "vuex";
 import Form from "@/componentsHK/public/Form";
 import selectOption from "@/views/global-data/selectOption";
 import { window_open } from "@/utils/index";
-import calendar from "@/views/demo/calc.vue";
-
+import FullCalendar from '@/views/demo/FullCalendar'
 export default {
   name: "openAppoint",
   mixins: [],
   components: {
     Form,
-    calendar,
+    FullCalendar
   },
   data() {
     return {
