@@ -107,7 +107,7 @@ export default {
             label: "会员号码" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "200" /*表头宽度*/,
+            width: "100" /*表头宽度*/,
             slot: true /*是否需要插槽*/,
           },
           {
@@ -143,7 +143,7 @@ export default {
             width: "" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "会员卡总数" /*标题*/,
+            label: "会员卡数" /*标题*/,
             prop: "allNum" /*绑定数据源obj展示字段*/,
             width: "120px" /*表头固定，参数：left / right / ''*/,
             slot:true

@@ -79,12 +79,13 @@ export default {
           inline: true,
         },
         formData: [
+          
           {
             // 单行文本框
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "姓名",
+            label: "工号",
             value: "维多利亚" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -102,7 +103,7 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "工号",
+            label: "姓名",
             value: "维多利亚" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,

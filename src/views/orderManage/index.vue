@@ -66,13 +66,23 @@
     </div>
 
     <el-dialog
-      title="提示"
+      title="是否确定取消此订单？"
       :visible.sync="centerDialogVisible"
       width="30%"
-      center
       custom-class="cancel-class"
     >
-      <span><i style="color:red;margin-right: 10px;" class="el-icon-warning-outline"></i>是否确定取消此订单</span>
+    <el-form ref="form" :model="sizeForm" label-width="100px">
+      <el-form-item label="是否产生罚单">
+        <el-radio-group v-model="sizeForm.resource" size="medium">
+      <el-radio border label="1">是</el-radio>
+      <el-radio border label="0">否</el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item label="罚款金额" v-if="sizeForm.resource==='1'">
+  <span style="margin-right:6px">$</span><el-input-number></el-input-number>
+  </el-form-item>
+  </el-form>
+      <!-- <span><i style="color:red;margin-right: 10px;" class="el-icon-warning-outline"></i>是否确定取消此订单</span> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="centerDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="cancelConfirm"
@@ -97,6 +107,16 @@ export default {
   components: { PageTitle, FormCombination, Table },
   data() {
     return {
+      sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '1',
+          desc: ''
+        },
       centerDialogVisible: false,
       status: true,
       title: "",

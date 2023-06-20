@@ -465,6 +465,7 @@ export default {
 
 
 /deep/ [class*='el-table__row--level-1']{
+  background: #F7F7F7;
   .el-table__cell:nth-child(2){
   padding-left: 30px;}
 
