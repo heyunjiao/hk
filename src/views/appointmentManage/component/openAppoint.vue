@@ -7,6 +7,7 @@
         :data="formObj"
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
+        :Change="selectChange"
       >
       </Form>
     </div>
@@ -101,25 +102,31 @@ export default {
               "value": 2,
               "label": "Option 2",
             }],
-            "customParameters": "select"
+            "customParameters": "photo"
           },
           {
-            // 单行文本框
-            id: "input",
-            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "会员姓名",
-            value: "4567890987544455665" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            "id": 'select',
+            "span": 12,
+            "assemblyname": "下拉框",
+            "label": "会员姓名",
+            "value": "",
+            "type": "",
+            "hidelabels": true,
+            "classname": "",
+            "message": "brandMessage",
+            "disabled": false,
+            "placeholder": "Please select",
+            "category": 16,
+            "source": true,
+            "apiUrl": "",
+            "key": "",
+            "val": "",
+            "check": false,
+            "multiplechoice": false,
+            "searchable": false,
+            "formStatus": true,
+            "options": selectOption.nickNameType,
+            "customParameters": "username"
           },
           {
             span: "12",
@@ -231,7 +238,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "concatName" /*对应api的参数名称*/,
           },
           {
             // 单行文本框
@@ -249,7 +256,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "concatPhone" /*对应api的参数名称*/,
           },
 
           {
@@ -538,6 +545,35 @@ export default {
         })
         .catch((e) => console.log(e));
     },
+    selectChange(data){
+      console.log(data,9999);
+      let temp
+      let username
+      let concatName
+      let concatPhone
+      switch (data.customParameters) {
+        case 'photo':
+        username=  this.formObj.formData.find(i=>i.customParameters==='username')
+        username.value='1'
+        concatName=  this.formObj.formData.find(i=>i.customParameters==='concatName')
+        concatName.value='NANCY'
+        concatPhone=  this.formObj.formData.find(i=>i.customParameters==='concatPhone')
+        concatPhone.value='13766768878'
+
+          break;
+        case 'username':
+        temp=  this.formObj.formData.find(i=>i.customParameters==='photo')
+        temp.value=1
+        concatName=  this.formObj.formData.find(i=>i.customParameters==='concatName')
+        concatName.value='HONEY'
+        concatPhone=  this.formObj.formData.find(i=>i.customParameters==='concatPhone')
+        concatPhone.value='18877767787'
+          break;
+      
+        default:
+          break;
+      }
+    }
   },
   computed: {
     ...mapState({
