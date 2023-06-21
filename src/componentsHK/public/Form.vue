@@ -30,7 +30,7 @@
           <el-col
             v-for="(domain, index) in dynamicValidateForm.domains"
             :span="Number(domain.span) || 12"
-            style="height: 60px !important;"
+            style="height: 60px;"
             :key="index"
           >
             <!--            :label="domain.hidelabels ? ($t(domain.label)) : ''"-->

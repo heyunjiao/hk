@@ -1,5 +1,5 @@
 <template>
-  <div class="Form" id="Form">
+  <div class="Form open-card" id="Form">
     <!--表单组件-->
     <div class="mrb_20">
       <Form
@@ -367,4 +367,14 @@ const countryCode=this.formObj.formData.find(i=>i.customParameters==='tel')
   white-space: nowrap;
   margin-right: 10px;
 }
+</style>
+
+<style lang="scss">
+.open-card{
+  .el-col.el-col-24{
+    height: auto !important;
+    min-height: 60px !important;
+  }
+}
+
 </style>

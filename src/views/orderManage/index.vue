@@ -133,11 +133,16 @@ export default {
         total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
         page: 1,
         head: [
+        {
+            label: "" /*标题*/,
+            prop: "index" /*绑定数据源obj展示字段*/,
+            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            width: "50" /*表头宽度*/,
+          },
           /*表头数据*/
           {
             label: "订单编号" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "200" /*表头宽度*/,
             slot: true,  /*是否需要插槽*/
           },
@@ -216,7 +221,6 @@ export default {
           {
             label: "订单状态" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
             slot:true
           },
           // {

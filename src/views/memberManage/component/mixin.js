@@ -14,6 +14,25 @@ let userMixin={
             },
             formData: [
               {
+                // 多行文本框
+                id: "textarea",
+                span: 24,
+                assemblyname: "多行文本框",
+                label: "头像",
+                value: "",
+                type: "textarea",
+                hidelabels: true,
+                classname: "",
+                message: "brandMessage",
+                disabled: false,
+                placeholder: "brandMessage",
+                category: 'upload',
+                check: true,
+                iconChekc: false,
+                accept:'',
+                customParameters: "imageUrl",
+              },
+              {
                 // 单行文本框
                 id: "input",
                 span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
@@ -266,25 +285,7 @@ let userMixin={
                 customParameters: "textarea",
                 formStatus: true,
               },
-              {
-                // 多行文本框
-                id: "textarea",
-                span: 24,
-                assemblyname: "多行文本框",
-                label: "头像",
-                value: "",
-                type: "textarea",
-                hidelabels: true,
-                classname: "",
-                message: "brandMessage",
-                disabled: false,
-                placeholder: "brandMessage",
-                category: 'upload',
-                check: true,
-                iconChekc: false,
-                accept:'',
-                customParameters: "imageUrl",
-              },
+             
              
              
              
