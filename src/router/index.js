@@ -73,18 +73,22 @@ export const constantRoutes = [
       {
         path: 'index',
         component: () => import('@/views/appointmentManage/index'),
-        name: 'PagePermission',
+        name: 'reservationManage',
         meta: {
           icon:'link',
-          title: 'appointeList',
-          roles: ['admin'] // or you can only set roles in sub nav
+          title: 'reservationManage',
+          roles: ['admin'], // or you can only set roles in sub nav
+          affix: true 
         }
       },
       // 创建预约
       {
         path: 'openAppoint',
         component: () => import('@/views/appointmentManage/component/openAppoint'),
-        hidden:true
+        hidden:true,
+        meta:{
+        title:'createreservation'
+        }
       },
       {
         path: 'batchopenAppoint',
@@ -121,7 +125,7 @@ export const constantRoutes = [
         name: 'AddOrder',
         hidden:true,
         meta: {
-          title: 'AddOrder',
+          title: 'createOrder',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -132,7 +136,7 @@ export const constantRoutes = [
     path: '/staff',
     component: Layout,
     meta: {
-      title: 'staff',
+      title: 'staffManagement',
       icon: 'staff',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
@@ -143,7 +147,7 @@ export const constantRoutes = [
         component: () => import('@/views/staffManage/staffList'),
         name: 'setting',
         meta: {
-          title: '员工管理',
+          title: 'staffManagement',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -217,7 +221,7 @@ export const constantRoutes = [
         component: () => import('@/views/clubManage/room'),
         name: 'room',
         meta: {
-          title: 'room',
+          title: 'roomManage',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -236,7 +240,7 @@ export const constantRoutes = [
         component: () => import('@/views/clubManage/class'),
         name: 'class',
         meta: {
-          title: '课时包管理',
+          title: 'packageManage',
           roles: ['admin'] // or you can only set roles in sub nav
         }
 
@@ -259,7 +263,7 @@ export const constantRoutes = [
     component: Layout,
    
     meta: {
-      title: 'account',
+      title: 'personalCenter',
       icon: 'person',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
@@ -270,7 +274,7 @@ export const constantRoutes = [
         component: () => import('@/views/account/personInfo'),
         name: 'personInfo',
         meta: {
-          title: 'accountInfo',
+          title: 'personalInfo',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -297,7 +301,7 @@ export const constantRoutes = [
         name: 'setting',
         meta: {
           icon:'guide',
-          title: 'accountingManage',
+          title: 'financialManage',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },

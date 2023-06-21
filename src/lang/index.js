@@ -7,7 +7,6 @@ import elementEsLocale from 'element-ui/lib/locale/lang/es'// element-ui lang
 import elementJaLocale from 'element-ui/lib/locale/lang/ja'// element-ui lang
 import enLocale from './en'
 import zhLocale from './zh'
-import esLocale from './es'
 import jaLocale from './ja'
 
 let zhCommen = Object.assign(zhLocale.commen);
@@ -18,20 +17,22 @@ const messages = {
   en: {
     ...enLocale,
     ...elementEnLocale,
-    ...enCommen
+    ...enCommen,
+    ...enLocale.useChinese
   },
   zh: {
     ...zhLocale,
     ...elementZhLocale,
-    ...zhCommen
+    ...zhCommen,
+    ...zhLocale.useChinese
+
   },
-  es: {
-    ...esLocale,
-    ...elementEsLocale
-  },
+
   ja: {
     ...jaLocale,
-    ...elementJaLocale
+    ...elementJaLocale,
+    ...jaLocale.useChinese
+
   }
 }
 export function getLanguage() {
