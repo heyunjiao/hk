@@ -1,26 +1,72 @@
 <template>
-   <FullCalendar
+  <div>
+    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+      <el-form-item label="会员姓名">
+        <el-input v-model="formInline.user" placeholder="会员姓名"></el-input>
+      </el-form-item>
+      <el-form-item label="项目">
+        <el-select v-model="formInline.region" placeholder="项目">
+          <el-option
+            v-for="(item, index) in selectOption.projectType"
+            :key="index"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="教练">
+        <el-select v-model="formInline.region" placeholder="教练">
+          <el-option
+            v-for="(item, index) in selectOption.coach"
+            :key="index"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="房间">
+        <el-select v-model="formInline.region" placeholder="房间">
+          <el-option
+            v-for="(item, index) in selectOption.projectType"
+            :key="index"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" size="mini" @click="onSubmit">查询</el-button>
+      </el-form-item>
+    </el-form>
+
+    <FullCalendar
       :options="calendarOptions"
       class="eventDeal-wrap"
       ref="calendar"
     />
+  </div>
 </template>
 
 <script>
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import selectOption from "@/views/global-data/selectOption";
+
 export default {
-    components:{
-        FullCalendar,
-    
-    },
-    data(){
-    return{
-    
-        resData: [
+  components: {
+    FullCalendar,
+  },
+  data() {
+    return {
+      selectOption: selectOption,
+      formInline: {
+        user: "",
+        region: "",
+      },
+      resData: [
         {
           title: "LUCY-高尔夫-教练",
           beginTime: "2023-06-20T10:30:00",
@@ -40,11 +86,13 @@ export default {
           beginTime: "2023-06-21T08:30:00",
           endTime: "2023-06-21T11:30:00",
           status: 1,
-          appointment: {  appHours: 2,
+          appointment: {
+            appHours: 2,
             name: "HONEY",
             type: "羽毛球",
             major: "he教练",
-            room: "room3", },
+            room: "room3",
+          },
           isCurrData: "4534",
         },
         {
@@ -52,11 +100,13 @@ export default {
           beginTime: "2023-06-22T10:30:00",
           endTime: "2023-06-22T11:30:00",
           status: 2,
-          appointment: {  appHours: 20,
+          appointment: {
+            appHours: 20,
             name: "HHH",
             type: "高尔夫",
             major: "张教练",
-            room: "room1", },
+            room: "room1",
+          },
           isCurrData: "4534",
         },
       ],
@@ -65,25 +115,25 @@ export default {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         // 日历头部按钮位置
         headerToolbar: {
-          left: "prev,next today,prevYear,nextYear",
+          left: "today,prevYear,nextYear",
           center: "title",
-          right: "dayGridMonth, timeGridWeek, timeGridDay",
+          right: "prev,timeGridWeek,next",
         },
         // 日历头部按钮中文转换
         buttonText: {
-            prevYear:'上一年',
-            nextYear:'下一年',
+          prevYear: "上一年",
+          nextYear: "下一年",
           today: "今天",
           month: "月",
           week: "周",
           day: "天",
         },
         initialView: "timeGridWeek", // 指定默认显示视图
-        locale: Cookies.get('language')==='zh'?'zh':'es', // 切换语言，当前为中文
+        locale: Cookies.get("language") === "zh" ? "zh" : "es", // 切换语言，当前为中文
         firstDay: "0", // 设置一周中显示的第一天是周几，周日是0，周一是1，以此类推
         weekNumberCalculation: "ISO", // 与firstDay配套使用
         eventColor: "#000", // 全部日历日程背景色
-        eventTextColor:'#000',
+        eventTextColor: "#000",
         timeGridEventMinHeight: "20", // 设置事件的最小高度
         aspectRatio: "1.5", // 设置日历单元格宽高比
         displayEventTime: false, // 是否显示事件时间
@@ -112,9 +162,9 @@ export default {
           //     className: "eventClass",
           //   },
         ], // 日程数组
-        moreLinkClassNames:'more-btns',
-        moreLinkContent  : "查看更多",
-aspectRatio:1.35,
+        moreLinkClassNames: "more-btns",
+        moreLinkContent: "查看更多",
+        aspectRatio: 1.35,
         // 事件
         editable: false, // 是否可以进行（拖动、缩放）修改
         eventStartEditable: false, // Event日程开始时间可以改变，默认为true，若为false,则表示开始结束时间范围不能拉伸，只能拖拽
@@ -133,15 +183,19 @@ aspectRatio:1.35,
         // eventDrop: this.handleEventDrop, // 日程拖动事件
         // eventResize: this.eventResize, // 日程缩放事件
       },
-    }},
-    mounted() {
+    };
+  },
+  mounted() {
     this.$nextTick(() => {
       this.inintBoard(this.resData);
     });
   },
-    methods:{
-     // 日程事件点击
-     handleEvents(info) {
+  methods: {
+    onSubmit() {
+      console.log("submit!");
+    },
+    // 日程事件点击
+    handleEvents(info) {
       console.log("handleEvents.info:", info);
       // this.currentEvents = events
     },
@@ -222,18 +276,22 @@ aspectRatio:1.35,
       });
       console.log(newD);
       this.calendarOptions.events = newD;
-    //   this.$refs.calendar.pushData(newD);
+      //   this.$refs.calendar.pushData(newD);
     },
     getTitle(date1, date2) {
       let start = date1.substring(11, 16);
       let end = date2.substring(11, 16);
       return `${start}~${end}`;
     },
-    }
-
-}
+  },
+};
 </script>
 
-<style>
-
+<style lang="scss">
+.fc .fc-button-primary{
+  background-color: #123A28 !important
+}
+.fc .fc-button-primary:focus{
+box-shadow: none;
+}
 </style>
