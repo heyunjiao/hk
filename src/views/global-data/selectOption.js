@@ -304,6 +304,12 @@ const orderStatus=[{ value: 1, label: "已完成" },
   value: 2,
   label: "未完成",
 },]
+
+const room=[{ value: 1, label: "room1" },
+{
+  value: 2,
+  label: "room2",
+},]
   export default {
     cardType,
     projectType,
@@ -322,5 +328,6 @@ const orderStatus=[{ value: 1, label: "已完成" },
     payMethods,
     orderStatus,
     membershipyesOrNo,
-    orderType
+    orderType,
+    room
   }

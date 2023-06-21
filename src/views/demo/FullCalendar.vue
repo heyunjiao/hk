@@ -15,7 +15,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="教练">
-        <el-select v-model="formInline.region" placeholder="教练">
+        <el-select v-model="formInline.region2" placeholder="教练">
           <el-option
             v-for="(item, index) in selectOption.coach"
             :key="index"
@@ -25,9 +25,9 @@
         </el-select>
       </el-form-item>
       <el-form-item label="房间">
-        <el-select v-model="formInline.region" placeholder="房间">
+        <el-select v-model="formInline.region3" placeholder="房间">
           <el-option
-            v-for="(item, index) in selectOption.projectType"
+            v-for="(item, index) in selectOption.room"
             :key="index"
             :label="item.label"
             :value="item.value"
