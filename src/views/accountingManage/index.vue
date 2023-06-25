@@ -1,7 +1,7 @@
 <template>
   <div class="member-list">
     <div class="page-title">
-      <PageTitle title="route.accountingManage">
+      <PageTitle :title="$t('route.accountingManage')">
         <template slot="btn">
         
           <el-button
@@ -166,7 +166,7 @@ export default {
             label: "useCommonAll.verificationStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
-            slot:true,
+            slot:true
           },
          
         ],
@@ -185,6 +185,7 @@ export default {
             size: "mini" /*按钮大小 medium / small / mini*/,
             icon: "el-icon-view" /*按钮icon*/,
           },
+          
           
         ],
         childrenOperationData: [

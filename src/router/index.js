@@ -75,7 +75,7 @@ export const constantRoutes = [
         component: () => import('@/views/appointmentManage/index'),
         name: 'reservationManage',
         meta: {
-          icon:'link',
+          icon:'el-icon-date',
           title: 'reservationManage',
           roles: ['admin'], // or you can only set roles in sub nav
           affix: true 
@@ -114,7 +114,7 @@ export const constantRoutes = [
         component: () => import('@/views/orderManage/index'),
         name: 'orderManage',
         meta: {
-          icon:'order',
+          icon:'el-icon-document',
           title: 'orderManage',
           roles: ['admin'] // or you can only set roles in sub nav
         }
@@ -137,7 +137,7 @@ export const constantRoutes = [
     component: Layout,
     meta: {
       title: 'staffManagement',
-      icon: 'staff',
+      icon: 'el-icon-s-tools',//staff
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
@@ -211,7 +211,7 @@ export const constantRoutes = [
     
     meta: {
       title: 'clubManage',
-      icon: 'club',
+      icon: 'el-icon-house',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
@@ -300,7 +300,7 @@ export const constantRoutes = [
         component: () => import('@/views/accountingManage/index'),
         name: 'setting',
         meta: {
-          icon:'guide',
+          icon:'moneyMenu',
           title: 'financialManage',
           roles: ['admin'] // or you can only set roles in sub nav
         }

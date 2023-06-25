@@ -1,7 +1,7 @@
 <template>
   <div class="intl-tel-input-container">
     <div class="selected-flag" @click.stop="handleShowAndFlyTo" :title="`${currentData.name}: + ${currentData.dialCode}`">
-      <div :class="['flag', `flag-${currentData.code}`, 'cur-flag']"></div>
+      <!-- <div :class="['flag', `flag-${currentData.code}`, 'cur-flag']"></div> -->
       <span class="area-codeNum" :title="`${currentData.name}: + ${currentData.dialCode}`">+{{currentData.dialCode}}</span>
       <i class="tran"></i>
     </div>
@@ -14,8 +14,8 @@
               :class="['list-item', {'highlight': item.dialCode === currentCode}]"
               @click.stop="handleItemClick(item)"
           >
-            <div :class="['flag', `flag-${item.code}`]"></div>
-            <span class="country-name">{{item.CNName}}-{{ item.name }}</span>
+            <!-- <div :class="['flag', `flag-${item.code}`]"></div> -->
+            <span class="country-name">{{ item.name }}</span>
             <span class="dial-code"> +{{ item.dialCode }}</span>
           </li>
         </ul>

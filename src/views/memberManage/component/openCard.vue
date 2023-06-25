@@ -212,7 +212,7 @@ export default {
       const MembershFipFee = {
         // 单行文本框
         id: "input",
-        span: 6 /*表单占据控件，容器分为 24份，需要整数*/,
+        span: 8 /*表单占据控件，容器分为 24份，需要整数*/,
         assemblyname: "input",
         label: "member.MembershFipFee",
         value: "" /*控件value / 默认值*/,
@@ -231,7 +231,7 @@ export default {
       const MonthlyFees = {
         // 单行文本框
         id: "input",
-        span: 6 /*表单占据控件，容器分为 24份，需要整数*/,
+        span: 8 /*表单占据控件，容器分为 24份，需要整数*/,
         assemblyname: "input",
         label: "member.MonthlyFees",
         value: "" /*控件value / 默认值*/,

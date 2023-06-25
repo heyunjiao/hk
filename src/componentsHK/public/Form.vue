@@ -219,7 +219,7 @@
                 v-model="domain.value"
                 :disabled="domain.disabled"
                 @change="realtimeform(domain)"
-                controls-position="right"
+                :controls='false'
                 :min="domain.min||0"
                 :max="domain.max||10000000"
               ></el-input-number> 

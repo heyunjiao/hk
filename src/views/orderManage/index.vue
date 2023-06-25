@@ -61,6 +61,27 @@
               查看详情
             </a>
           </template>
+          <template slot="workshop" scope="{row}">
+            <a class="a_link" href="#" @click="viewOrderFn">
+              {{row.workshop}}
+            </a>
+         
+          
+          </template>
+          <template slot="home" scope="{row}">
+            <a class="a_link" href="#" @click="viewOrderFn">
+              {{row.home}}
+            </a>
+         
+          
+          </template>
+          <template slot="jiaolian" scope="{row}">
+            <a class="a_link" href="#" @click="viewOrderFn">
+              {{row.jiaolian}}
+            </a>
+         
+          
+          </template>
         </Table>
       </div>
     </div>
@@ -164,22 +185,30 @@ export default {
             prop: "timeLong" /*绑定数据源obj展示字段*/,
             width: "200" /*表头固定，参数：left / right / ''*/,
           },
+          {
+            label: "订单类型" /*标题*/,
+            prop: "timeLong" /*绑定数据源obj展示字段*/,
+            width: "200" /*表头固定，参数：left / right / ''*/,
+          },
           
           {
             label: "useCommonAll.reservationItem" /*标题*/,
             prop: "workshop" /*绑定数据源obj展示字段*/,
             width: "120" /*表头固定，参数：left / right / ''*/,
+            slot:true
           },
           {
             label: "useCommonAll.reservationRoom" /*标题*/,
             prop: "home" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
+            slot:true
           },
          
           {
             label: "useCommonAll.reservationName" /*标题*/,
             prop: "jiaolian" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
+            slot:true
           },
           {
             label: "useCommonAll.amount" /*标题*/,
@@ -592,6 +621,7 @@ export default {
           query: { type: v.id, data: JSON.stringify(row) },
         });
   },
+    
   },
 };
 </script>

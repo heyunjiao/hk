@@ -425,9 +425,9 @@ export default {
 
           break;
         case 4:
-          this.roleKeys = [6, 4, 9, 10];
+          this.roleKeys = [2,6, 4, 9, 10];
           this.roleKeyString = "6,4,9,10";
-          this.$refs.tree.setCheckedKeys([6, 4, 9, 10]);
+          this.$refs.tree.setCheckedKeys([2,6, 4, 9, 10]);
 
           break;
         case 5:
