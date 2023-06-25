@@ -143,38 +143,23 @@ export default {
             width: "" /*表头固定，参数：left / right / ''*/,
           },
           {
+            label: "useCommonAll.email" /*标题*/,
+            prop: "tel" /*绑定数据源obj展示字段*/,
+            width: "" /*表头固定，参数：left / right / ''*/,
+          },
+          {
             label: "会员卡数" /*标题*/,
             prop: "allNum" /*绑定数据源obj展示字段*/,
             width: "120px" /*表头固定，参数：left / right / ''*/,
             slot:true
           },
-          // {
-          //   label: "是否优先联系秘书" /*标题*/,
-          //   prop: "yes" /*绑定数据源obj展示字段*/,
-          //   width: "140" /*表头宽度*/,
-          //   // slot: false,  /*是否需要插槽*/
-          // },
-          // {
-          //   label: "秘书姓名" /*标题*/,
-          //   prop: "name" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头固定，参数：left / right / ''*/,
-          // },
-          // {
-          //   label: "秘书电话" /*标题*/,
-          //   prop: "tel" /*绑定数据源obj展示字段*/,
-          //   width:'120'
-          // },
+         
           {
             label: "useCommonAll.activationStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
             slot: true /*表头宽度*/,
           },
-          // {
-          //   label: "查看订单详情" /*标题*/,
-          //   prop: "orderView" /*绑定数据源obj展示字段*/,
-          //   width: "140" /*表头固定，参数：left / right / ''*/,
-          //   slot: true /*表头宽度*/,
-          // },
+         
         ],
         childrenHead: [],
         operationData: [
