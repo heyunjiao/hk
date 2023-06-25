@@ -3,6 +3,7 @@ export default {
     'brandMessage': '預約shuru',
   },
   route:{
+  memberManage:'會員管理',
     reservationManage:'預約管理',
   orderManage:'訂單管理',
   staffManagement:'員工管理',
@@ -111,7 +112,7 @@ export default {
   dinning:'餐飲',
   orderNumber:'訂單編號',
   consumeTime:'消費時間',
-  order:'訂單金額',
+  // order:'訂單金額',
   checked:'已確定',
   payed:'已支付',
   unpay:'未支付',

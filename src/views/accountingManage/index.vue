@@ -128,7 +128,7 @@ export default {
           //   // slot: false,  /*是否需要插槽*/
           // },
           {
-            label: "会员姓名" /*标题*/,
+            label: "useCommonAll.memberName" /*标题*/,
             prop: "name" /*绑定数据源obj展示字段*/,
             width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/

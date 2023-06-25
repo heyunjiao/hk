@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
-      <el-form-item label="会员姓名">
-        <el-input v-model="formInline.user" placeholder="会员姓名"></el-input>
+      <el-form-item :label="$t('useCommonAll.memberName')">
+        <el-input v-model="formInline.user"  :placeholder="$t('useCommonAll.memberName')"></el-input>
       </el-form-item>
       <el-form-item label="项目">
         <el-select v-model="formInline.region" placeholder="项目">

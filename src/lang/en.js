@@ -377,7 +377,7 @@ useCommonAll:{
   dinning:'Dining',
   orderNumber:'Order Number',
   consumeTime:'Consume Time',
-  order:'Order amount',
+  // order:'Order amount',
   checked:'Checked',
   paid:'Paid',
   unpay:'Unpaid',

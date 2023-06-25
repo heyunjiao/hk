@@ -180,7 +180,7 @@
 
                 <el-time-select
                 v-if="domain.category == 20"
-                placeholder="起始时间"
+                :placeholder="$t('useCommonAll.startTime')"
                 v-model="domain.value"
                 @change="realtimeform(domain)"
                 :picker-options="{
@@ -192,7 +192,7 @@
               </el-time-select>
               <el-time-select
               v-if="domain.category == 21"
-                placeholder="结束时间"
+                :placeholder="$t('useCommonAll.endTime')"
                 v-model="domain.value"
                 @change="realtimeform(domain)"
                 :picker-options="{

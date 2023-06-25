@@ -14,7 +14,7 @@
 
     <div class="btn-line" v-if="!this.formObj.formDisabled">
       <el-button @click="onSubmitFn" class="Search-btn"
-        >{{ $t("page.demo.preservation") }}
+        >{{ $t("useCommonAll.save") }}
       </el-button>
     </div>
 
@@ -81,7 +81,7 @@ export default {
             "id": 'select',
             "span": 12,
             "assemblyname": "下拉框",
-            "label": "会员号码",
+            "label": "useCommonAll.memberNumber",
             "value": "",
             "type": "",
             "hidelabels": true,
@@ -108,7 +108,7 @@ export default {
             "id": 'select',
             "span": 12,
             "assemblyname": "下拉框",
-            "label": "会员姓名",
+            "label": "useCommonAll.memberName",
             "value": "",
             "type": "",
             "hidelabels": true,
@@ -151,7 +151,7 @@ export default {
           {
             span: "6",
             id: "",
-            label: "开始时间",
+            label: "useCommonAll.startTime",
             value: "",
             type:
               "timeSel" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
@@ -174,7 +174,7 @@ export default {
           {
             span: "6",
             id: "",
-            label: "结束时间",
+            label: "useCommonAll.endTime",
             value: "",
             type:
               "timeSel" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
@@ -200,7 +200,7 @@ export default {
             id: "select",
             span: 12,
             assemblyname: "下拉框",
-            label: "预约方式",
+            label: "useCommonAll.reservationM",
             value: 1,
             type: "",
             hidelabels: true,
@@ -227,7 +227,7 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "联系人",
+            label: "useCommonAll.contact",
             value: "19988867888" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -245,7 +245,7 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "联系方式",
+            label: "useCommonAll.contactWay",
             value: "19988867888" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -264,7 +264,7 @@ export default {
             id: "select",
             span: 12,
             assemblyname: "下拉框",
-            label: "预约项目",
+            label: "useCommonAll.reservationItem",
             value: 1,
             type: "",
             hidelabels: true,
@@ -308,7 +308,7 @@ export default {
           },
           {
             id: 3,
-            label: "课时包",
+            label: "useCommonAll.coursePackage",
             value: "",
             hidelabels: true,
             message: "brandMessage",
@@ -327,7 +327,7 @@ export default {
 
           {
             id: 3,
-            label: "房间名称",
+            label: "useCommonAll.roomName",
             value: "",
             hidelabels: true,
             message: "brandMessage",
@@ -366,7 +366,7 @@ export default {
           // },
           {
             id: 3,
-            label: "桌位号",
+            label: "useCommonAll.tableNumber",
             value: "",
             hidelabels: true,
             message: "brandMessage",
@@ -386,8 +386,8 @@ export default {
             // 多选框组
             id: "Checkbox",
             span: 12,
-            assemblyname: "多选框组",
-            label: "是否有教练",
+            assemblyname: "",
+            label: "useCommonAll.needCoach",
             value: [],
             type: "",
             hidelabels: true,
@@ -404,7 +404,7 @@ export default {
           },
           {
             id: 3,
-            label: "教练姓名",
+            label: "useCommonAll.coachName",
             value: "",
             hidelabels: true,
             message: "brandMessage",
@@ -443,8 +443,8 @@ export default {
             // 多行文本框
             id: "textarea",
             span: 24,
-            assemblyname: "多行文本框",
-            label: "备注",
+            assemblyname: "",
+            label: "useCommonAll.reamark",
             value: "上海市杨浦区XXXX",
             type: "textarea",
             hidelabels: true,

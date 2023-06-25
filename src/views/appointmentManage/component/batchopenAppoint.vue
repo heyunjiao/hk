@@ -64,24 +64,24 @@ import Table from "@/componentsHK/public/Tabel";
         head: [
           /*表头数据*/
           {
-            label: "项目名称" /*标题*/,
+            label: "useCommonAll.projectName" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "200" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "房间名称" /*标题*/,
+            label: "useCommonAll.roomName" /*标题*/,
             prop: "name" /*绑定数据源obj展示字段*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "状态" /*标题*/,
+            label: "useCommonAll.status" /*标题*/,
             prop: "hexiao" /*绑定数据源obj展示字段*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "桌位/台位数量" /*标题*/,
+            label: "useCommonAll.tableNumber" /*标题*/,
             prop: "type" /*绑定数据源obj展示字段*/,
             // slot: false,  /*是否需要插槽*/
           },
@@ -139,7 +139,7 @@ import Table from "@/componentsHK/public/Tabel";
               id: "input",
               span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
               assemblyname: "input",
-              label: "会员号码",
+              label: "useCommonAll.memberNumber",
               value: "4567890987544455665" /*控件value / 默认值*/,
               type: "" /*控件类型 支持原生*/,
               hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -157,7 +157,7 @@ import Table from "@/componentsHK/public/Tabel";
               id: "input",
               span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
               assemblyname: "input",
-              label: "会员姓名",
+              label: "useCommonAll.memberName",
               value: "4567890987544455665" /*控件value / 默认值*/,
               type: "" /*控件类型 支持原生*/,
               hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -193,7 +193,7 @@ import Table from "@/componentsHK/public/Tabel";
             {
               span:"6",
               id: '',
-              label: "开始时间",
+              label: "useCommonAll.startTime",
               value: "",
               type:
                 "timeSel" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
@@ -216,7 +216,7 @@ import Table from "@/componentsHK/public/Tabel";
             {
               span:"6",
               id: '',
-              label: "结束时间",
+              label: "useCommonAll.endTime",
               value: "",
               type:
                 "timeSel" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
@@ -242,7 +242,7 @@ import Table from "@/componentsHK/public/Tabel";
               id: "select",
               span: 12,
               assemblyname: "下拉框",
-              label: "预约方式",
+              label: "useCommonAll.reservationM",
               value: 1,
               type: "",
               hidelabels: true,
@@ -270,7 +270,7 @@ import Table from "@/componentsHK/public/Tabel";
               id: "input",
               span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
               assemblyname: "input",
-              label: "联系人",
+              label: "useCommonAll.contact",
               value: "19988867888" /*控件value / 默认值*/,
               type: "" /*控件类型 支持原生*/,
               hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -288,7 +288,7 @@ import Table from "@/componentsHK/public/Tabel";
               id: "input",
               span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
               assemblyname: "input",
-              label: "联系方式",
+              label: "useCommonAll.contactWay",
               value: "19988867888" /*控件value / 默认值*/,
               type: "" /*控件类型 支持原生*/,
               hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -309,8 +309,8 @@ import Table from "@/componentsHK/public/Tabel";
               id: "textarea",
               span: 24,
               assemblyname: "多行文本框",
-              label: "备注",
-              value: "上海市杨浦区XXXX",
+              label: "useCommonAll.reamark",
+              value: "",
               type: "textarea",
               hidelabels: true,
               classname: "",

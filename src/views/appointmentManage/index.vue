@@ -1,13 +1,13 @@
 <template>
   <div class="member-list">
     <div class="page-title">
-      <PageTitle title="route.appointeList">
+      <PageTitle title="useCommonAll.reservationList">
         <template slot="btn">
           <el-button @click="openCardFn" size="large" type="primary">{{
-            $t("appointeManage.openAppoint")
+            $t("useCommonAll.createreservation")
           }}</el-button>
           <el-button @click="batchopenCardFn" size="large" type="primary">
-            批量预约
+           {{ $t("useCommonAll.reservationBatch")}}
           </el-button>
         </template>
       </PageTitle>
@@ -82,26 +82,26 @@ export default {
         head: [
           /*表头数据*/
           {
-            label: "会员号码" /*标题*/,
+            label: "useCommonAll.memberNumber" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "180" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "会员姓名" /*标题*/,
+            label: "useCommonAll.memberName" /*标题*/,
             prop: "name" /*绑定数据源obj展示字段*/,
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "联系方式" /*标题*/,
+            label: "useCommonAll.contactWay" /*标题*/,
             prop: "tel" /*绑定数据源obj展示字段*/,
             width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "预约时间" /*标题*/,
+            label: "useCommonAll.reservationTime" /*标题*/,
             prop: "timeLong" /*绑定数据源obj展示字段*/,
 
             width: "200" /*表头宽度*/,
@@ -116,17 +116,17 @@ export default {
           // },
 
           {
-            label: "房间" /*标题*/,
+            label: "useCommonAll.room" /*标题*/,
             prop: "home" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "教练名称" /*标题*/,
+            label: "useCommonAll.coachName" /*标题*/,
             prop: "name" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "教练电话" /*标题*/,
+            label: "useCommonAll.coachPhone" /*标题*/,
             prop: "tel" /*绑定数据源obj展示字段*/,
             width: "120" /*表头固定，参数：left / right / ''*/,
           },
@@ -163,7 +163,7 @@ export default {
           //   width: "120" /*表头固定，参数：left / right / ''*/,
           // },
           {
-            label: "预约状态" /*标题*/,
+            label: "useCommonAll.reservationStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
             // width: "120",
             slot: true,
@@ -175,7 +175,7 @@ export default {
         operationData: [
           {
             id: "edit" /*按钮ID*/,
-            value: "编辑" /*按钮内容*/,
+            value: "useCommonAll.edit" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -185,7 +185,7 @@ export default {
           },
           {
             id: "delete" /*按钮ID*/,
-            value: "删除" /*按钮内容*/,
+            value: "useCommonAll.delete" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -195,7 +195,7 @@ export default {
           },
           {
             id: "connection" /*按钮ID*/,
-            value: "取消" /*按钮内容*/,
+            value: "useCommonAll.cancel" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -205,7 +205,7 @@ export default {
           },
           {
             id: "view" /*按钮ID*/,
-            value: "查看" /*按钮内容*/,
+            value: "useCommonAll.view" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -215,7 +215,7 @@ export default {
           },
           {
             id: "view" /*按钮ID*/,
-            value: "订单" /*按钮内容*/,
+            value: "useCommonAll.order" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -237,7 +237,7 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "会员号码" /*todo 修改 控件label*/,
+            label: "useCommonAll.memberNumber" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
@@ -249,7 +249,7 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "预约姓名" /*todo 修改 控件label*/,
+            label: "useCommonAll.reservationName" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
@@ -292,7 +292,7 @@ export default {
           {
             // 下拉框本地取值
             id: "localDropDownBox" /*下拉框例子*/,
-            label: "预约项目" /*todo 修改 控件label*/,
+            label: "useCommonAll.reservationItem" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
@@ -307,7 +307,7 @@ export default {
           {
             // 下拉框本地取值
             id: "localDropDownBox" /*下拉框例子*/,
-            label: "预约教练" /*todo 修改 控件label*/,
+            label: "useCommonAll.reservationCoach" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
@@ -322,7 +322,7 @@ export default {
           {
             // 下拉框本地取值
             id: "localDropDownBox" /*下拉框例子*/,
-            label: "预约状态" /*todo 修改 控件label*/,
+            label: "useCommonAll.reservationStatus" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
@@ -337,7 +337,7 @@ export default {
           {
             // 下拉框本地取值
             id: "localDropDownBox" /*下拉框例子*/,
-            label: "操作人" /*todo 修改 控件label*/,
+            label: "useCommonAll.operator" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
@@ -430,7 +430,7 @@ export default {
           {
             id: 1,
             label: "",
-            value: "展开",
+            value: "useCommonAll.expand",
             hidelabels: false,
             classname: "" /*自定义class*/,
             message: "brandMessage",

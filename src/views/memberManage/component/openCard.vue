@@ -61,9 +61,9 @@
     </div>
 
     <div class="btn-line" v-if="!this.formObj.formDisabled">
-      <el-checkbox v-model="confirmchecked"><span class="whrite-red">已核对以上信息，确认无误</span></el-checkbox>
+      <el-checkbox v-model="confirmchecked"><span class="whrite-red">{{$t('useCommonAll.checkInfo')}}</span></el-checkbox>
       <el-button @click="onSubmitFn" type="primary"  :disabled="!confirmchecked"
-        >{{ query.type == "add" ? "创建会籍" : "更新会籍" }}
+        >{{ query.type == "add" ? $t('useCommonAll.createMembership') : $t('useCommonAll.updateMembership') }}
       </el-button>
     </div>
   </div>

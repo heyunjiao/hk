@@ -174,7 +174,7 @@ let userMixin = {
             id: "input",
             span: 18 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "会员号码",
+            label: "useCommonAll.memberNumber",
             value: "4567890987544455665" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,

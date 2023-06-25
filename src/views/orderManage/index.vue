@@ -153,7 +153,7 @@ export default {
           //   // slot: false,  /*是否需要插槽*/
           // },
           {
-            label: "会员姓名" /*标题*/,
+            label: "useCommonAll.memberName" /*标题*/,
             prop: "name" /*绑定数据源obj展示字段*/,
             width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
@@ -182,7 +182,7 @@ export default {
           },
           
           {
-            label: "预约项目" /*标题*/,
+            label: "useCommonAll.reservationItem" /*标题*/,
             prop: "workshop" /*绑定数据源obj展示字段*/,
             width: "120" /*表头固定，参数：left / right / ''*/,
           },

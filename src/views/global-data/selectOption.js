@@ -232,23 +232,23 @@ const sexType=[{
 // 是否 的下拉或者checkbox
 const yesOrNo= [
   {"value": 1, 
-  "label": "是",
+  "label": "useCommonAll.yes",
    "disabled": false
   },
    {
   "value": 2,
-  "label": "否",
+  "label": "useCommonAll.no",
   "disabled": false
 }]
 // 会籍
 const membershipyesOrNo= [
   {"value": 1, 
-  "label": "是",
+  "label": "useCommonAll.yes",
    "disabled": true
   },
    {
   "value": 2,
-  "label": "否",
+  "label": "useCommonAll.no",
   "disabled": true
 }]
 // 核销状态
@@ -261,14 +261,14 @@ const writeOff=[
 ]
 // 商品分类
 const shopList=[
-  { value: 1, label: "纪念品" },
+  { value: 1, label: "useCommonAll.souvenir" },
   {
     value: 2,
-    label: "课时包",
+    label: "useCommonAll.coursePackage",
   },
   {
     value: 4,
-    label: "餐饮",
+    label: "useCommonAll.dinning",
   },
   {
     value: 5,
@@ -276,18 +276,18 @@ const shopList=[
   },
   {
     value: 3,
-    label: "其他商品",
+    label: "useCommonAll.otherCommodity",
   },
 ]
 // 支付状态
-const payStatus=[ { value: 1, label: "已支付" },
+const payStatus=[ { value: 1, label: "useCommonAll.payed" },
 {
   value: 2,
-  label: "未支付",
+  label: "useCommonAll.unpay",
 },
 {
   value: 3,
-  label: "已取消",
+  label: "useCommonAll.canceled",
 },]
 
 // 支付方式
@@ -295,7 +295,7 @@ const payStatus=[ { value: 1, label: "已支付" },
 const payMethods=[ { value: 1, label: "POS" },
 {
   value: 2,
-  label: "线上",
+  label: "useCommonAll.inlineConsume",
 },
 ]
 
