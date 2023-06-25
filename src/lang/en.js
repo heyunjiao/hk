@@ -283,7 +283,7 @@ export default {
     'page.demo.add': 'Add',
     'page.demo.submit': 'submit',
 },
-useEnglish:{
+useCommonAll:{
   memberManage:'Member Management',
   memberNumber:'Member number',
   memberCardType:'Member Card Type',

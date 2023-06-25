@@ -18,20 +18,20 @@ const messages = {
     ...enLocale,
     ...elementEnLocale,
     ...enCommen,
-    ...enLocale.useChinese
+   
   },
   zh: {
     ...zhLocale,
     ...elementZhLocale,
     ...zhCommen,
-    ...zhLocale.useChinese
+   
 
   },
 
   ja: {
     ...jaLocale,
     ...elementJaLocale,
-    ...jaLocale.useChinese
+   
 
   }
 }

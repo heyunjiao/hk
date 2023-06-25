@@ -2,37 +2,37 @@
 const  cardType=[
    {
     value:1 ,
-    label: "家庭卡（全权会籍）",
+    label: "useCommonAll.familyCardAll",
     disabled: false,
   },
   {
     value: 8 ,
-    label: "家庭卡（个人传承会籍）",
+    label: "useCommonAll.familyCardPerson",
     disabled: false ,
   },
   {
     value: 4 ,
-    label: "家庭卡（公司/企业会籍）",
+    label: "useCommonAll.familyCardCompany",
     disabled: false ,
   },
   {
     value: 2 ,
-    label: "家庭卡（附属卡）",
+    label: "useCommonAll.familyCardSub",
     disabled: false ,
   },
   {
     value: 5 ,
-    label: "青少年卡（全会籍）",
+    label: "useCommonAll.youngCardAll",
     disabled: false ,
   },
   {
     value: 6 ,
-    label: "青少年卡（指定单项运动会籍）",
+    label: "useCommonAll.youngCardOne",
     disabled: false ,
   },
   {
     value: 7 ,
-    label: "青少年卡（指定双项运动会籍）",
+    label: "useCommonAll.youngCardTwo",
     disabled: false ,
   },
   
@@ -58,30 +58,30 @@ const  nickNameType=[
 ]
 // 证件类型
 const documentType=[  {
-  label: "身份证",
+  label: "useCommonAll.identityCard",
   value: "1",
 },
 {
-  label: "护照",
+  label: "useCommonAll.passport",
   value: "3",
 },{
-  label: "其他",
+  label: "useCommonAll.other",
   value: "4",
 }]
 // 账户权限
 const accountAuth=[
-  { value: 1, label: "预约课程", disabled: false },
+  { value: 1, label: "useCommonAll.reservationCourse", disabled: false },
   {
     value: 2,
-    label: "店内消费",
+    label: "useCommonAll.instoreConsume",
   },
   {
     value: 3,
-    label: "线上消费",
+    label: "useCommonAll.inlineConsume",
   },
   {
     value: 4,
-    label: "运动项目",
+    label: "useCommonAll.sportProject",
   },
  
 ]
@@ -89,27 +89,27 @@ const accountAuth=[
 const  projectType=[
    {
     value: 1,
-    label: "乒乓球",
+    label: "useCommonAll.tableTennis",
     disabled: false,
   },
   {
     value: 2 ,
-    label: "高尔夫",
+    label: "useCommonAll.golf",
     disabled: false ,
   },
   {
     value: 3 ,
-    label: "餐厅",
+    label: "useCommonAll.dinning",
     disabled: false ,
   },
   {
     value: 4 ,
-    label: "舞蹈",
+    label: "useCommonAll.dance",
     disabled: false ,
   },
   {
     value: 5 ,
-    label: "理疗室",
+    label: "useCommonAll.spa",
     disabled: false ,
   },
 ]

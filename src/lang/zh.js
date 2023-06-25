@@ -287,7 +287,7 @@ financialManage:'财务管理',
 },
 
 
-useChinese:{
+useCommonAll:{
   memberManage:'会员管理',
 memberNumber:'会员号码',
 memberCardType:'会员卡类型',

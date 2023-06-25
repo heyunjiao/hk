@@ -1,4 +1,7 @@
 export default {
+  commen:{
+    'brandMessage': '預約shuru',
+  },
   route:{
     reservationManage:'預約管理',
   orderManage:'訂單管理',
@@ -14,7 +17,7 @@ export default {
 
 
   },
- useTraditional:{
+  useCommonAll:{
   memberManage:'會員管理',
   memberNumber:'會員號碼',
   memberCardType:'會員卡類型',
