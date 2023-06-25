@@ -115,7 +115,7 @@ let userMixin={
                 id: "email",
                 span: 12,
                 assemblyname: "email",
-                label: "member.username",
+                label: "useCommonAll.memberName",
                 value: "",
                 type: "",
                 hidelabels: true,

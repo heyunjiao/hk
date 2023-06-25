@@ -8,7 +8,7 @@
     />
     <div class="btn-line" v-if="!this.formObj.formDisabled">
       <el-button @click="onSubmitFn" class="Search-btn"
-        >保存更新信息
+        >{{$t('useCommonAll.saveUpdate')}}
       </el-button>
     </div>
   </div>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       formObj: {
-        title: "账号管理" /*表单标题*/,
+        title: "route.accountManage" /*表单标题*/,
 
         formDisabled: false,
         formproperties: {
@@ -39,8 +39,8 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "账号",
-            value: "维多利亚" /*控件value / 默认值*/,
+            label: "useCommonAll.account",
+            value: "" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,
@@ -61,8 +61,8 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "旧密码",
-            value: "维多利亚" /*控件value / 默认值*/,
+            label: "useCommonAll.oldPassword",
+            value: "" /*控件value / 默认值*/,
             type: "password" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,
@@ -83,8 +83,8 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "新密码",
-            value: "维多利亚" /*控件value / 默认值*/,
+            label: "useCommonAll.newPassword",
+            value: "" /*控件value / 默认值*/,
             type: "password" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,

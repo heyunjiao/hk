@@ -40,7 +40,7 @@
           <template slot="orderView" scope="{row}"
             ><!--switch控件插槽-->
             <a class="a_link" href="#" @click="viewOrderFn">
-              查看
+              {{ $t('useCommonAll.view')}}
             </a>
           </template>
         </Table>
@@ -72,7 +72,7 @@ export default {
     return {
       imageUrl: "",
       formObj: {
-        title: "个人信息" /*表单标题*/,
+        title: "route.accountInfo" /*表单标题*/,
 
         formDisabled: false,
         formproperties: {
@@ -85,8 +85,8 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "工号",
-            value: "维多利亚" /*控件value / 默认值*/,
+            label: "useCommonAll.jobNumber",
+            value: "" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,
@@ -103,8 +103,8 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "姓名",
-            value: "维多利亚" /*控件value / 默认值*/,
+            label: "useCommonAll.name",
+            value: "" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,
@@ -121,7 +121,7 @@ export default {
             id: "select",
             span: 12,
             assemblyname: "下拉框",
-            label: "性别",
+            label: "useCommonAll.sex",
             value: 1,
             type: "",
             hidelabels: true,
@@ -146,7 +146,7 @@ export default {
             id: "select",
             span: 12,
             assemblyname: "下拉框",
-            label: "在职状态",
+            label: "useCommonAll.entryStatus",
             value: 1,
             type: "",
             hidelabels: true,
@@ -171,7 +171,7 @@ export default {
             id: "select",
             span: 12,
             assemblyname: "下拉框",
-            label: "职位",
+            label: "useCommonAll.position",
             value: 1,
             type: "",
             hidelabels: true,
@@ -197,7 +197,7 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "手机号",
+            label: "useCommonAll.phone",
             value: "" /*控件value / 默认值*/,
             type: "number" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -215,7 +215,7 @@ export default {
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
-            label: "邮箱",
+            label: "useCommonAll.email",
             value: "" /*控件value / 默认值*/,
             type: "email" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
@@ -234,7 +234,7 @@ export default {
             id: "dateSelection",
             span: 12,
             assemblyname: "",
-            label: "member.birthday",
+            label: "useCommonAll.jobNumber",
             value: "",
             type: "date",
             hidelabels: true,
@@ -283,14 +283,14 @@ export default {
         head: [
           /*表头数据*/
           {
-            label: "订单编号" /*标题*/,
+            label: "useCommonAll.orderNumber" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "200" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "是否核销" /*标题*/,
+            label: "useCommonAll.isVerification" /*标题*/,
             prop: "hexiao" /*绑定数据源obj展示字段*/,
             width: "100" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
@@ -303,12 +303,12 @@ export default {
           },
 
           {
-            label: "预约时间" /*标题*/,
+            label: "useCommonAll.reservationTime" /*标题*/,
             prop: "timeLong" /*绑定数据源obj展示字段*/,
             width: "200" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "订单创建时间" /*标题*/,
+            label: "useCommonAll.creatTime" /*标题*/,
             prop: "timeLong" /*绑定数据源obj展示字段*/,
             width: "200" /*表头固定，参数：left / right / ''*/,
           },
@@ -318,29 +318,29 @@ export default {
             width: "120" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "预约房间" /*标题*/,
+            label: "useCommonAll.reservationRoom" /*标题*/,
             prop: "home" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "预约详情" /*标题*/,
+            label: "useCommonAll.reservationDetails" /*标题*/,
             prop: "appoint" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
             slot: true,
           },
           {
-            label: "支付方式" /*标题*/,
+            label: "useCommonAll.payMethod" /*标题*/,
             prop: "pay" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "订单状态" /*标题*/,
+            label: "useCommonAll.orderStatus" /*标题*/,
             prop: "pay" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
 
           {
-            label: "备注信息" /*标题*/,
+            label: "useCommonAll.remarkMessage" /*标题*/,
             prop: "remark" /*绑定数据源obj展示字段*/,
           },
         ],

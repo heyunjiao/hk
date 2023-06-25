@@ -1,7 +1,7 @@
 <template>
     <div class="member-list">
       <div class="page-title">
-        <PageTitle title="成员管理">
+        <PageTitle :title="$t('route.staffManagement')">
           <template slot="btn">
             <el-button @click="openOrderFn" size="large" type="primary">新建成员</el-button>
           </template>
@@ -88,7 +88,7 @@
           head: [
             /*表头数据*/
             {
-              label: "工号" /*标题*/,
+              label: "useCommonAll.jobNumber" /*标题*/,
               prop: "id" /*绑定数据源obj展示字段*/,
               fixed: "left" /*表头固定，参数：left / right / ''*/,
               width: "200" /*表头宽度*/,
@@ -101,12 +101,12 @@
             //   slot: true,  /*是否需要插槽*/
             // },
             {
-              label: "职位" /*标题*/,
+              label: "useCommonAll.position" /*标题*/,
               prop: "hexiao" /*绑定数据源obj展示字段*/,
               width: "100" /*表头宽度*/,
             },
             {
-              label: "姓名" /*标题*/,
+              label: "useCommonAll.name" /*标题*/,
               prop: "name" /*绑定数据源obj展示字段*/,
               fixed: "left" /*表头固定，参数：left / right / ''*/,
               width: "200" /*表头宽度*/,
@@ -114,38 +114,38 @@
             },
             
             {
-              label: "手机号" /*标题*/,
+              label: "useCommonAll.phone" /*标题*/,
               prop: "tel" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
            
             {
-              label: "性别" /*标题*/,
+              label: "useCommonAll.sex" /*标题*/,
               prop: "sex" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
             {
-              label: "邮箱" /*标题*/,
+              label: "useCommonAll.email" /*标题*/,
               prop: "email" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
             {
-              label: "拥有角色" /*标题*/,
+              label: "useCommonAll.position" /*标题*/,
               prop: "role" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
             },
             {
-              label: "状态" /*标题*/,
+              label: "useCommonAll.entryStatus" /*标题*/,
               prop: "status" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               slot: false,  /*是否需要插槽*/
             },
             {
-              label: "最后登录时间" /*标题*/,
+              label: "useCommonAll.lastLoginTime" /*标题*/,
               prop: "time" /*绑定数据源obj展示字段*/,
               width: "140" /*表头宽度*/,
               // slot: false,  /*是否需要插槽*/
@@ -160,7 +160,7 @@
           operationData: [
             {
               id: "edit" /*按钮ID*/,
-              value: "编辑" /*按钮内容*/,
+              value: "useCommonAll.edit" /*按钮内容*/,
               classname: "" /*自定义class*/,
               disabled: false /*是否被禁用*/,
               type:
@@ -170,7 +170,7 @@
             },
             {
               id: "view" /*按钮ID*/,
-              value: "查看" /*按钮内容*/,
+              value: "useCommonAll.view" /*按钮内容*/,
               classname: "" /*自定义class*/,
               disabled: false /*是否被禁用*/,
               type:
@@ -204,7 +204,7 @@
             {
               // 文本框
               id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-              label: "姓名" /*todo 修改 控件label*/,
+              label: "useCommonAll.name" /*todo 修改 控件label*/,
               value: "",
               hidelabels: true /*是否展示label标题*/,
               placeholder: "brandMessage",
@@ -216,7 +216,7 @@
             {
               // 文本框
               id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-              label: "工号" /*todo 修改 控件label*/,
+              label: "useCommonAll.jobNumber" /*todo 修改 控件label*/,
               value: "",
               hidelabels: true /*是否展示label标题*/,
               placeholder: "brandMessage",
@@ -228,7 +228,7 @@
             {
               // 文本框
               id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-              label: "职位" /*todo 修改 控件label*/,
+              label: "useCommonAll.position" /*todo 修改 控件label*/,
               value: "",
               hidelabels: true /*是否展示label标题*/,
               placeholder: "brandMessage",
@@ -240,7 +240,7 @@
             {
               // 文本框
               id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-              label: "手机号" /*todo 修改 控件label*/,
+              label: "useCommonAll.phone" /*todo 修改 控件label*/,
               value: "",
               hidelabels: true /*是否展示label标题*/,
               placeholder: "brandMessage",
@@ -300,7 +300,7 @@
                   }, {
                       "id": 1,
                       "label": "",
-                      "value": "展开",
+                      "value": "useCommonAll.expand",
                       "hidelabels": false,
                       "classname": "", /*自定义class*/
                       "message": "brandMessage",

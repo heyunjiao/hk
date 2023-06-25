@@ -1,7 +1,7 @@
 <template>
   <div class="member-list">
     <div class="page-title">
-      <PageTitle title="财务管理">
+      <PageTitle title="route.accountingManage">
         <template slot="btn">
         
           <el-button
@@ -13,7 +13,7 @@
             "
             size="large"
             type="primary"
-            >批量核销</el-button
+            >{{ $t('useCommonAll.batchVerification')}}</el-button
           >
         </template>
       </PageTitle>
@@ -115,118 +115,69 @@ export default {
         head: [
           /*表头数据*/
           {
-            label: "订单编号" /*标题*/,
+            label: "useCommonAll.orderNumber" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "200" /*表头宽度*/,
             slot: true,  /*是否需要插槽*/
           },
-          // {
-          //   label: "是否核销" /*标题*/,
-          //   prop: "hexiao" /*绑定数据源obj展示字段*/,
-          //   width: "100" /*表头宽度*/,
-          //   // slot: false,  /*是否需要插槽*/
-          // },
+         
           {
             label: "useCommonAll.memberName" /*标题*/,
             prop: "name" /*绑定数据源obj展示字段*/,
             width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
-          // {
-          //   label: "头衔" /*标题*/,
-          //   prop: "nikename" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头宽度*/,
-          //   // slot: false,  /*是否需要插槽*/
-          // },
-          // {
-          //   label: "member.username" /*标题*/,
-          //   prop: "name" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头宽度*/,
-          //   // slot: false,  /*是否需要插槽*/
-          // },
-          // {
-          //   label: "member.sex" /*标题*/,
-          //   prop: "sex" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头固定，参数：left / right / ''*/,
-          // },
+         
           {
-            label: "消费时间" /*标题*/,
+            label: "useCommonAll.consumeTime" /*标题*/,
             prop: "timeLong" /*绑定数据源obj展示字段*/,
             width: "200" /*表头固定，参数：left / right / ''*/,
           },
           
           {
-            label: "预约项目" /*标题*/,
+            label: "useCommonAll.reservationItem" /*标题*/,
             prop: "workshop" /*绑定数据源obj展示字段*/,
             width: "120" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "预约房间" /*标题*/,
+            label: "useCommonAll.reservationRoom" /*标题*/,
             prop: "home" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           
-          // {
-          //   label: "支付方式" /*标题*/,
-          //   prop: "pay" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头固定，参数：left / right / ''*/,
-          // },
          
-          // {
-          //   label: "是否包场" /*标题*/,
-          //   prop: "all" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头固定，参数：left / right / ''*/,
-          // },
-          // {
-          //   label: "是否预约教练" /*标题*/,
-          //   prop: "all" /*绑定数据源obj展示字段*/,
-          //   width: "120" /*表头固定，参数：left / right / ''*/,
-          // },
           {
-            label: "教练姓名" /*标题*/,
+            label: "useCommonAll.reservationName" /*标题*/,
             prop: "jiaolian" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "金额" /*标题*/,
+            label: "useCommonAll.amount" /*标题*/,
             prop: "jiaolian" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "订单状态" /*标题*/,
+            label: "useCommonAll.orderStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "核销状态" /*标题*/,
+            label: "useCommonAll.verificationStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
             slot:true,
           },
-          // {
-          //   label: "备注信息" /*标题*/,
-          //   prop: "remark" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头固定，参数：left / right / ''*/,
-          // },
+         
         ],
         childrenHead: [
           /*子表头数组*/
         ],
         operationData: [
-          // {
-          //   id: "edit" /*按钮ID*/,
-          //   value: "编辑" /*按钮内容*/,
-          //   classname: "" /*自定义class*/,
-          //   disabled: false /*是否被禁用*/,
-          //   type:
-          //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
-          //   size: "mini" /*按钮大小 medium / small / mini*/,
-          //   icon: "el-icon-edit-outline" /*按钮icon*/,
-          // },
+          
           {
             id: "view" /*按钮ID*/,
-            value: "详情" /*按钮内容*/,
+            value: "useCommonAll.view" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -234,26 +185,7 @@ export default {
             size: "mini" /*按钮大小 medium / small / mini*/,
             icon: "el-icon-view" /*按钮icon*/,
           },
-          // {
-          //   id: "cancel" /*按钮ID*/,
-          //   value: "删除" /*按钮内容*/,
-          //   classname: "" /*自定义class*/,
-          //   disabled: false /*是否被禁用*/,
-          //   type:
-          //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
-          //   size: "mini" /*按钮大小 medium / small / mini*/,
-          //   icon: "el-icon-warning-outline" /*按钮icon*/,
-          // },
-          // {
-          //   id: "cancel" /*按钮ID*/,
-          //   value: "预约" /*按钮内容*/,
-          //   classname: "" /*自定义class*/,
-          //   disabled: false /*是否被禁用*/,
-          //   type:
-          //     "text" /*按钮类型 primary / success / warning / danger / info / text*/,
-          //   size: "mini" /*按钮大小 medium / small / mini*/,
-          //   icon: "el-icon-warning-outline" /*按钮icon*/,
-          // },
+          
         ],
         childrenOperationData: [
           /*字表操作栏*/
@@ -268,7 +200,7 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "订单编号" /*todo 修改 控件label*/,
+            label: "useCommonAll.orderNumber" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
@@ -280,7 +212,7 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "member.username" /*todo 修改 控件label*/,
+            label: "useCommonAll.memberName" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
@@ -292,7 +224,7 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "商品内容" /*todo 修改 控件label*/,
+            label: "useCommonAll.commodityContent" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
@@ -306,7 +238,7 @@ export default {
           {
             // 下拉框本地取值
             id: "localDropDownBox" /*下拉框例子*/,
-            label: "卡类型" /*todo 修改 控件label*/,
+            label: "useCommonAll.memberCardType" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
@@ -321,7 +253,7 @@ export default {
           {
             // 下拉框本地取值
             id: "localDropDownBox" /*下拉框例子*/,
-            label: "操作人" /*todo 修改 控件label*/,
+            label: "useCommonAll.operator" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
@@ -336,7 +268,7 @@ export default {
           {
             // 下拉框本地取值
             id: "localDropDownBox" /*下拉框例子*/,
-            label: "状态" /*todo 修改 控件label*/,
+            label: "useCommonAll.status" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
@@ -352,7 +284,7 @@ export default {
             // 日期选择器
             id:
               "dateSelection" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "日期" /*todo 修改 控件label*/,
+            label: "useCommonAll.date" /*todo 修改 控件label*/,
             value: "",
             type:
               "daterange" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
@@ -422,7 +354,7 @@ export default {
           {
             id: 1,
             label: "",
-            value: "展开",
+            value: "useCommonAll.expand",
             hidelabels: false,
             classname: "" /*自定义class*/,
             message: "brandMessage",

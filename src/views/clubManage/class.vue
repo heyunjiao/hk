@@ -1,9 +1,11 @@
 <template>
   <div class="member-list">
     <div class="page-title">
-      <PageTitle title="课程管理">
+      <PageTitle title="route.class">
         <template slot="btn">
-          <el-button @click="openOrderFn" size="large" type="primary">新建课程</el-button>
+          <el-button @click="openOrderFn" size="large" type="primary">
+          {{$t('useCommonAll.createCourse')}}
+          </el-button>
         </template>
       </PageTitle>
     </div>
@@ -39,7 +41,7 @@
           <template slot="appoint" scope="{row}"
             ><!--switch控件插槽-->
            <a class="a_link" href="#" @click="viewOrderFn">
-          查看详情
+         {{ $t('useCommonAll.view')}}
           </a>
           </template>
         </Table>
@@ -78,37 +80,37 @@ export default {
         head: [
           /*表头数据*/
           {
-            label: "课包代码编号" /*标题*/,
+            label: "useCommonAll.codeNumber" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "200" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "项目名称" /*标题*/,
+            label: "useCommonAll.projectName" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "200" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "类型" /*标题*/,
+            label: "useCommonAll.type" /*标题*/,
             prop: "hexiao" /*绑定数据源obj展示字段*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "单价" /*标题*/,
+            label: "useCommonAll.price" /*标题*/,
             prop: "hexiao" /*绑定数据源obj展示字段*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "数量" /*标题*/,
+            label: "useCommonAll.number" /*标题*/,
             prop: "type" /*绑定数据源obj展示字段*/,
             // slot: false,  /*是否需要插槽*/
           },
           
           {
-            label: "折扣" /*标题*/,
+            label: "useCommonAll.discount" /*标题*/,
             prop: "type" /*绑定数据源obj展示字段*/,
             // slot: false,  /*是否需要插槽*/
           },
@@ -121,7 +123,7 @@ export default {
         operationData: [
           {
             id: "edit" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "useCommonAll.edit" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -131,7 +133,7 @@ export default {
           },
           {
             id: "view" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "useCommonAll.view" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -141,7 +143,7 @@ export default {
           },
           {
             id: "cancel" /*按钮ID*/,
-            value: "" /*按钮内容*/,
+            value: "useCommonAll.delete" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
             type:
@@ -164,7 +166,7 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "项目名称" /*todo 修改 控件label*/,
+            label: "useCommonAll.projectName" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
@@ -176,7 +178,7 @@ export default {
           {
             // 文本框
             id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "类型" /*todo 修改 控件label*/,
+            label: "useCommonAll.projectType" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",

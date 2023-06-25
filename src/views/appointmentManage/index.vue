@@ -40,7 +40,7 @@
         >
           <template slot="viewOrderDetail" scope="{row}"
             ><!--switch控件插槽-->
-            <a class="a_link" @click="viewOrderFn">查看</a>
+            <a class="a_link" @click="viewOrderFn">{{ $t('useCommonAll.view')}}</a>
           </template>
           <template slot="status" scope="{row}"
             ><!--switch控件插槽-->
