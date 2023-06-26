@@ -184,7 +184,7 @@ export default {
             icon: "el-icon-view" /*按钮icon*/,
           },
           {
-            id: "view" /*按钮ID*/,
+            id: "order" /*按钮ID*/,
             value: "useCommonAll.order" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
@@ -496,6 +496,12 @@ export default {
         this.$router.push({
           path: "/openCard",
           query: { type: v.id, data: JSON.stringify(row) },
+        });
+      }
+      if (v.id == "order") {
+        this.$router.push({
+          path: "/orderManage/index",
+          query: { name:row.name, },
         });
       }
       // if (v.id == 13) {
