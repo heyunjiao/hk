@@ -9,6 +9,7 @@ export default {
     'Search':'搜索',
 
 
+
   },
   route:{
   memberManage:'會員管理',
@@ -22,7 +23,9 @@ export default {
   personalInfo:'個人信息',
   accountManage:'賬號管理',
   financialManage:'財務核销',
-  class:'課程管理'
+  class:'課程管理',
+  'welcom':'歡迎您'
+
 
   },
   

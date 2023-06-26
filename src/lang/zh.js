@@ -87,6 +87,7 @@ personalCenter:'个人中心',
 personalInfo:'个人信息',
 accountManage:'账号管理',
 financialManage:'订单核销',
+welcom:'欢迎您！'
 
 
 

@@ -39,12 +39,28 @@ import nestedRouter from './modules/nested'
  * all roles can be accessed
  */
 export const constantRoutes = [
- 
-  
   {
     path: '/',
     component: Layout,
-    redirect: '/memberManage',
+    redirect: '/welcom',
+    hidden:true,
+    children: [
+      {
+        path: 'welcom',
+        component: () => import('@/views/welcom/index'),
+        name: 'welcom',
+        meta: { title: 'welcom', icon: 'user', affix: true }
+      },
+      
+      
+      
+    ]
+  },
+ 
+  
+  {
+    path: '/memberManage',
+    component: Layout,
     children: [
       {
         path: 'memberManage',
