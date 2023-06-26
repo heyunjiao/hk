@@ -7,16 +7,16 @@
         labelClassName="welcom-label"
         contentClassName="welcom-content"
       >
-        <el-descriptions-item label="工号">kooriookami</el-descriptions-item>
-        <el-descriptions-item label="姓名">hah</el-descriptions-item>
-        <el-descriptions-item label="性别">女</el-descriptions-item>
-        <el-descriptions-item label="在职状态">是</el-descriptions-item>
-        <el-descriptions-item label="职位">管理员</el-descriptions-item>
-        <el-descriptions-item label="电话">18877767787</el-descriptions-item>
-        <el-descriptions-item label="电子邮箱">666@qq.com</el-descriptions-item>
-        <el-descriptions-item label="出生日期">1998/09/90</el-descriptions-item>
-        <el-descriptions-item label="入职时间">2002/2/2</el-descriptions-item>
-        <el-descriptions-item label="权限">
+        <el-descriptions-item :label="$t('useCommonAll.jobNumber')">kooriookami</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.name')" >hah</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.sex')" >女</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.entryStatus')" >是</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.position')" >管理员</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.phone')" >18877767787</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.email')" >666@qq.com</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.birthday')" >1998/09/90</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.entryTime')" >2002/2/2</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.functions')" >
         会员管理 订单管理
         </el-descriptions-item>
       </el-descriptions>
