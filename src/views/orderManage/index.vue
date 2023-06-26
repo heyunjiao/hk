@@ -2,7 +2,7 @@
   <div class="member-list">
     <div class="page-title">
       <PageTitle :title="$t('route.orderManage')">
-        <template slot="btn">
+        <!-- <template slot="btn">
           <el-button @click="openOrderFn" size="large" type="primary"
             > {{$t('useCommonAll.createOrder')}}</el-button
           >
@@ -16,7 +16,7 @@
             type="primary"
             > {{$t('useCommonAll.batchExport')}}</el-button
           >
-        </template>
+        </template> -->
       </PageTitle>
     </div>
     <div class="search-form">

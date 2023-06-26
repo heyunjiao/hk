@@ -1,11 +1,24 @@
 <template>
   <div>
-    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+    <el-form
+      label-position="left"
+      :inline="true"
+      :model="formInline"
+      class="demo-form-inline"
+    >
       <el-form-item :label="$t('useCommonAll.memberName')">
-        <el-input v-model="formInline.user"  :placeholder="$t('useCommonAll.memberName')"></el-input>
+        <el-input
+          style="width: 150px;"
+          v-model="formInline.user"
+          :placeholder="$t('useCommonAll.memberName')"
+        ></el-input>
       </el-form-item>
       <el-form-item label="项目">
-        <el-select v-model="formInline.region" placeholder="项目">
+        <el-select
+          style="width: 150px;"
+          v-model="formInline.region"
+          placeholder="项目"
+        >
           <el-option
             v-for="(item, index) in selectOption.projectType"
             :key="index"
@@ -15,7 +28,11 @@
         </el-select>
       </el-form-item>
       <el-form-item label="教练">
-        <el-select v-model="formInline.region2" placeholder="教练">
+        <el-select
+          style="width: 150px;"
+          v-model="formInline.region2"
+          placeholder="教练"
+        >
           <el-option
             v-for="(item, index) in selectOption.coach"
             :key="index"
@@ -25,7 +42,11 @@
         </el-select>
       </el-form-item>
       <el-form-item label="房间">
-        <el-select v-model="formInline.region3" placeholder="房间">
+        <el-select
+          style="width: 150px;"
+          v-model="formInline.region3"
+          placeholder="房间"
+        >
           <el-option
             v-for="(item, index) in selectOption.room"
             :key="index"
@@ -38,12 +59,28 @@
         <el-button type="primary" size="mini" @click="onSubmit">查询</el-button>
       </el-form-item>
     </el-form>
+    <div class="status-desc">
+      <ul>
+        <li><a class="bg-pink" href="#"></a>已确定</li>
+        <li><a class="bg-yellow" href="#"></a>未确定</li>
+      </ul>
+    </div>
 
     <FullCalendar
       :options="calendarOptions"
       class="eventDeal-wrap"
       ref="calendar"
-    />
+    >
+      <template v-slot:eventContent="arg">
+        <div class="fu-slot">
+          <p>时间段：{{ arg.event.title }}</p>
+          <p>姓名：{{ arg.event.extendedProps.name }}</p>
+          <p>项目：{{ arg.event.extendedProps.type }}</p>
+          <p>时常：{{ arg.event.extendedProps.appHours }}h</p>
+          <p>房间：{{ arg.event.extendedProps.room }}</p>
+        </div>
+      </template>
+    </FullCalendar>
   </div>
 </template>
 
@@ -54,7 +91,10 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import selectOption from "@/views/global-data/selectOption";
-
+import tippy from "tippy.js"; //引入 tippy.js
+import "tippy.js/dist/tippy.css"; //引入 tippy.js
+import "tippy.js/themes/light.css"; //引入主题
+import "tippy.js/animations/scale.css";
 export default {
   components: {
     FullCalendar,
@@ -164,6 +204,7 @@ export default {
         ], // 日程数组
         moreLinkClassNames: "more-btns",
         moreLinkContent: "查看更多",
+        moreLinkContent: this.moreLinkContent,
         aspectRatio: 1.35,
         // 事件
         editable: false, // 是否可以进行（拖动、缩放）修改
@@ -177,6 +218,7 @@ export default {
         selectHelper: false,
         selectEventOverlap: false, // 相同时间段的多个日程视觉上是否允许重叠，默认为true，允许
         dayMaxEvents: false,
+        eventMouseEnter: this.eventMouseEnter,
         // dateClick: this.handleDateClick, // 日期点击
         // eventsSet: this.handleEvents, // 事件点击
         // eventClick: this.handleEventClick, // 日程点击信息展示
@@ -246,6 +288,7 @@ export default {
           id: index,
           start: item.beginTime,
           end: item.endTime,
+          display: "block",
           className:
             item.isCurrData == true
               ? ""
@@ -267,11 +310,11 @@ export default {
           num: item.appointment.appHours,
           status: item.status,
           isCurrData: item.isCurrData,
-          title: `${this.getTitle(item.beginTime, item.endTime)} 
-          姓名：${item.appointment.name}
-          项目：${item.appointment.type},
-          时常：${item.appointment.appHours}h,
-          房间：${item.appointment.room}`,
+          title: `${this.getTitle(item.beginTime, item.endTime)}`,
+          name: item.appointment.name,
+          type: item.appointment.type,
+          appHours: item.appointment.appHours,
+          room: item.appointment.room,
         };
       });
       console.log(newD);
@@ -283,15 +326,82 @@ export default {
       let end = date2.substring(11, 16);
       return `${start}~${end}`;
     },
+    eventMouseEnter: function (calEvent, jsEvent, view) {
+      //鼠标在日程区块上时触发
+      console.log(111, calEvent, jsEvent, view);
+      let content = ""; //content中可以直接设置悬浮框中内容的样式
+
+      content =
+        content +
+        ` <div class="fu-slot">
+      <p>时间段：${calEvent.event.title}</p>
+     <p>姓名：${calEvent.event._def.extendedProps.name}</p>
+     <p>项目：${calEvent.event._def.extendedProps.type}</p>
+     <p>时常：${calEvent.event._def.extendedProps.appHours}h</p>
+     <p>房间：${calEvent.event._def.extendedProps.room}</p>
+     </div>`;
+      tippy(calEvent.el, {
+        content: content, //悬浮框展示的内容
+        // theme: 'light',  //悬浮框主题，默认主题中的light主题（白底黑字）
+        theme: "tomato", //自定义主题，颜色在style中设置
+        allowHTML: true, //为true的时候，可以识别content中的html
+      });
+    },
   },
 };
 </script>
 
 <style lang="scss">
-.fc .fc-button-primary{
-  background-color: #123A28 !important
+.fc .fc-button-primary {
+  background-color: #123a28 !important;
 }
-.fc .fc-button-primary:focus{
-box-shadow: none;
+.fc .fc-button-primary:focus {
+  box-shadow: none;
+}
+.fc .fc-event-main {
+  overflow: hidden;
+}
+.demo-form-inline {
+  .el-form-item {
+    margin-bottom: 0;
+  }
+}
+
+.fu-slot {
+  p {
+    margin-bottom: 4px;
+  }
+}
+</style>
+<style lang="scss" scoped>
+.status-desc {
+  width: 100%;
+  margin: 10px 0;
+  text-align: right;
+  ul {
+    display: flex;
+    flex-direction: row-reverse;
+
+    li {
+      list-style: none;
+      font-size: 14px;
+      margin-right: 6px;
+      .bg-pink {
+        background-color: rgb(255, 218, 214);
+      }
+      .bg-yellow {
+        background-color: rgb(214, 241, 255);
+      }
+      a {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: red;
+        border-radius: 50%;
+        white-space: nowrap;
+        margin-right: 4px;
+      }
+    }
+  }
 }
 </style>

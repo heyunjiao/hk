@@ -18,7 +18,7 @@
       </el-button>
     </div>
 
-    <el-dialog title="日历" :visible.sync="dialogFormVisible" width="80%">
+    <el-dialog title="日历" :visible.sync="dialogFormVisible" width="85%">
       <FullCalendar></FullCalendar>
     </el-dialog>
   </div>
