@@ -3,14 +3,14 @@ import VueI18n from 'vue-i18n'
 import Cookies from 'js-cookie'
 import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
 import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
-import elementEsLocale from 'element-ui/lib/locale/lang/es'// element-ui lang
-import elementJaLocale from 'element-ui/lib/locale/lang/ja'// element-ui lang
+import elementJaLocale from 'element-ui/lib/locale/lang/zh-TW'// element-ui lang
 import enLocale from './en'
 import zhLocale from './zh'
 import jaLocale from './ja'
 
 let zhCommen = Object.assign(zhLocale.commen);
 let enCommen = Object.assign(enLocale.commen,);
+let jaCommen = Object.assign(jaLocale.commen,);
 Vue.use(VueI18n)
 
 const messages = {
@@ -31,6 +31,7 @@ const messages = {
   ja: {
     ...jaLocale,
     ...elementJaLocale,
+    ...jaCommen
    
 
   }

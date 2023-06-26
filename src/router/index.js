@@ -211,7 +211,7 @@ export const constantRoutes = [
     
     meta: {
       title: 'clubManage',
-      icon: 'el-icon-house',
+      icon: 'el-icon-s-shop',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
@@ -283,7 +283,7 @@ export const constantRoutes = [
         component: () => import('@/views/account/accountNumber'),
         name: 'accountNumber',
         meta: {
-          title: 'accountNumber',
+          title: 'accountManage',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },

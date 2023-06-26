@@ -296,7 +296,7 @@ export default {
           {
             id: "collape" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
             label: "" /*todo 修改 控件label*/,
-            value: "collape",
+            value: "useCommonAll.fold",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
             placeholder: "commen.brandMessage" /*todo 修改 placeholder 提示语*/,

@@ -371,7 +371,7 @@ export default {
           {
             id: "collape",
             label: "",
-            value: "collape",
+            value: "useCommonAll.fold",
             hidelabels: true,
             message: "brandMessage",
             disabled: false,

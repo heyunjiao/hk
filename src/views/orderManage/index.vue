@@ -87,25 +87,25 @@
     </div>
 
     <el-dialog
-      title="是否确定取消此订单？"
+      :title="$t('useCommonAll.isCancel')"
       :visible.sync="centerDialogVisible"
       width="30%"
       custom-class="cancel-class"
     >
     <el-form ref="form" :model="sizeForm" label-width="100px">
-      <el-form-item label="是否产生罚单">
+      <el-form-item :label="$t('useCommonAll.isTicket')">
         <el-radio-group v-model="sizeForm.resource" size="medium">
       <el-radio border label="1">是</el-radio>
       <el-radio border label="0">否</el-radio>
     </el-radio-group>
   </el-form-item>
-  <el-form-item label="罚款金额" v-if="sizeForm.resource==='1'">
+  <el-form-item :label="$t('useCommonAll.ticketAmount')" v-if="sizeForm.resource==='1'">
   <span style="margin-right:6px">$</span><el-input-number></el-input-number>
   </el-form-item>
   </el-form>
       <!-- <span><i style="color:red;margin-right: 10px;" class="el-icon-warning-outline"></i>是否确定取消此订单</span> -->
       <span slot="footer" class="dialog-footer">
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
+        <el-button @click="centerDialogVisible = false"> {{$t('useCommonAll.cancel')}}</el-button>
         <el-button type="primary" @click="cancelConfirm"
           >确 定</el-button
         >
@@ -386,7 +386,7 @@ export default {
           {
             id: "collape" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
             label: "" /*todo 修改 控件label*/,
-            value: "collape",
+            value: "useCommonAll.fold",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
             placeholder: "Please select" /*todo 修改 placeholder 提示语*/,

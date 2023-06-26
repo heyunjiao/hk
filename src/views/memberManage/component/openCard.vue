@@ -94,7 +94,7 @@ export default {
         id: "switch",
         span: 12,
         assemblyname: "",
-        label: "是否激活",
+        label: "useCommonAll.isActivate",
         value: "",
         hidelabels: true,
         classname: "",
@@ -358,6 +358,7 @@ const countryCode=this.formObj.formData.find(i=>i.customParameters==='tel')
   align-items: center;
   padding: 15px;
   background-color: #fff;
+  margin-bottom: 10px;
   /* display: flex;
     flex-direction: column-reverse; */
 }

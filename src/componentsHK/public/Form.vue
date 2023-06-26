@@ -293,7 +293,7 @@
                   <el-select
                     v-model="domain.inputSelectValue"
                     slot="append"
-                    :placeholder="$t('Please select')"
+                    :placeholder="$t(domain.placeholder)"
                     style="width: 130px; display: inline-block;"
                   >
                     <el-option
@@ -316,7 +316,7 @@
                   <el-select
                     v-model="domain.inputSelectValue"
                     slot="prepend"
-                    :placeholder="$t('Please select')"
+                    :placeholder="$t(domain.placeholder)"
                     style="width: 130px; display: inline-block;"
                   >
                     <el-option
@@ -337,7 +337,7 @@
                 :multiple="domain.multiplechoice"
                 @change="selectChange(domain)"
                 default-first-option
-                :placeholder="$t('Please select')"
+                :placeholder="$t(domain.placeholder)"
               >
                 <el-option
                   v-for="item in domain.options"

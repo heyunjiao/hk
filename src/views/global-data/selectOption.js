@@ -161,68 +161,68 @@ const apponitStatus=[{
 // 预约方式
 const apponitMethod=[{
   value: 1,
-  label: "电话",
+  label: "useCommonAll.phone",
   disabled: false,
 },
 {
   value: 2 ,
-  label: "邮件",
+  label: "useCommonAll.mail",
   disabled: false ,
 },
 {
   value: 3 ,
-  label: "微信/WhatsApp",
+  label: "useCommonAll.wechat",
   disabled: false ,
 },{
   value: 3 ,
-  label: "现场",
+  label: "useCommonAll.live",
   disabled: false ,
 }]
 const orderType=[
   { value: 1,
-  label: "预约订单",
+  label: "useCommonAll.reservationOrder",
   disabled: false,},
   { value: 2,
-  label: "课时包订单",
+  label: "useCommonAll.classPackageOrder",
   disabled: false,},
   { value: 3,
-  label: "商品订单",
+  label: "useCommonAll.merchandiseOrder",
   disabled: false,},
   { value: 4,
-  label: "餐饮订单",
+  label: "useCommonAll.cateringOrder",
   disabled: false,},
   { value: 5,
-  label: "罚款订单",
+  label: "useCommonAll.penaltyOrder",
   disabled: false,}
 ]
 const classType=[{
   value: 1,
-  label: "单节",
+  label: "useCommonAll.singleLesson",
   disabled: false,
 },
 {
   value: 2 ,
-  label: "套餐",
+  label: "useCommonAll.package",
   disabled: false ,
 },
 {
   value: 3 ,
-  label: "月费",
+  label: "useCommonAll.monthlyFee",
   disabled: false ,
 }]
 const sexType=[{
   value: 1,
-  label: "男",
+  label: "useCommonAll.male",
   disabled: false,
 },
 {
   value: 2 ,
-  label: "女",
+  label: "useCommonAll.female",
   disabled: false ,
 },
 {
   value: 3 ,
-  label: "其他",
+  label: "useCommonAll.other",
   disabled: false ,
 },
 ]
@@ -253,10 +253,10 @@ const membershipyesOrNo= [
 }]
 // 核销状态
 const writeOff=[
-  { value: 1, label: "已核销" },
+  { value: 1, label: "useCommonAll.checkedOff" },
   {
     value: 2,
-    label: "未核销",
+    label: "useCommonAll.uncheck",
   },
 ]
 // 商品分类
@@ -272,7 +272,7 @@ const shopList=[
   },
   {
     value: 5,
-    label: "罚款",
+    label: "useCommonAll.fine",
   },
   {
     value: 3,
@@ -299,10 +299,10 @@ const payMethods=[ { value: 1, label: "POS" },
 },
 ]
 
-const orderStatus=[{ value: 1, label: "已完成" },
+const orderStatus=[{ value: 1, label: "useCommonAll.completed" },
 {
   value: 2,
-  label: "未完成",
+  label: "useCommonAll.incomplete",
 },]
 
 const room=[{ value: 1, label: "room1" },

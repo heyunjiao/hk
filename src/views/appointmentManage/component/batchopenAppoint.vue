@@ -122,7 +122,7 @@ import Table from "@/componentsHK/public/Tabel";
           // 插槽的按钮信息
           pageTitleSlot: {
             visible: true,
-            text: "查看会员详情",
+            text: "",
             fn: () => {
           window_open('','/openCard', { type: "view" ,data:JSON.stringify({a:'1'})},this.$router)
   
@@ -173,7 +173,7 @@ import Table from "@/componentsHK/public/Tabel";
             {
               span:"12",
               id: 6,
-              label: "预约日期",
+              label: "useCommonAll.reservationdate",
               value: "",
               type:
                 "date" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
@@ -485,6 +485,7 @@ import Table from "@/componentsHK/public/Tabel";
     text-align: right;
     padding: 15px;
     background-color: #fff;
+    margin-bottom: 10px;
     /* display: flex;
         flex-direction: column-reverse; */
   }

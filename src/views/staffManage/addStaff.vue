@@ -142,7 +142,7 @@ export default {
       imageUrl: "",
 
       formObj: {
-        title: "新建成员" /*表单标题*/,
+        title: "useCommonAll.newMember" /*表单标题*/,
 
         formDisabled: false,
         formproperties: {
@@ -487,6 +487,7 @@ export default {
   text-align: right;
   padding: 15px;
   background-color: #fff;
+  margin-bottom: 10px;
   /* display: flex;
     flex-direction: column-reverse; */
 }

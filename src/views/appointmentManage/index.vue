@@ -274,7 +274,7 @@ export default {
             // 日期选择器
             id:
               "dateSelection" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-            label: "预约日期" /*todo 修改 控件label*/,
+            label: "useCommonAll.reservationdate" /*todo 修改 控件label*/,
             value: "",
             type:
               "daterange" /*TODO 控件类型 date 单选日期， daterange 日期区间选择， datetime 日期时间选择*/,
@@ -378,7 +378,7 @@ export default {
           {
             id: "collape" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
             label: "" /*todo 修改 控件label*/,
-            value: "collape",
+            value: "useCommonAll.fold",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
             placeholder: "Please select" /*todo 修改 placeholder 提示语*/,

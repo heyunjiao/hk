@@ -12,7 +12,7 @@
   
       <div class="btn-line" v-if="!this.formObj.formDisabled">
         <el-button @click="onSubmitFn" class="Search-btn"
-          >{{ $t("page.demo.preservation") }}
+          >{{ $t("useCommonAll.save") }}
         </el-button>
       </div>
     </div>
@@ -336,6 +336,7 @@
     text-align: right;
     padding: 15px;
     background-color: #fff;
+     margin-bottom: 10px;
     /* display: flex;
         flex-direction: column-reverse; */
   }

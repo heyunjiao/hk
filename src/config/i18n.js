@@ -7,6 +7,7 @@ import demoEn from "@/config/lang/demo/demoEn";
 
 import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui英文包
 import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui中文包
+import elementTWLocale from 'element-ui/lib/locale/lang/zh-TW'// element-ui中文包
 
 import locale from 'element-ui/lib/locale' // 引入elementuiui语言包模块
 
@@ -14,6 +15,7 @@ import locale from 'element-ui/lib/locale' // 引入elementuiui语言包模块
 Vue.config.lang = 'en';
 let zh = Object.assign(demoZh.commen);
 let en = Object.assign(demoEn.commen,);
+let ja = Object.assign(demoEn.commen,);
 Vue.config.lang = 'en'
 const i18n = new Vuei18n({
     locale: localStorage.getItem('lang') || 'en', // 语言

@@ -220,6 +220,7 @@ if(type==='view'){
   text-align: right;
   padding: 15px;
   background-color: #fff;
+   margin-bottom: 10px;
   /* display: flex;
       flex-direction: column-reverse; */
 }

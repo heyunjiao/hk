@@ -1,7 +1,7 @@
 <template>
   <div class="member-list">
     <div class="page-title">
-      <PageTitle title="route.class">
+      <PageTitle :title="$t('route.class')">
         <template slot="btn">
           <el-button @click="openOrderFn" size="large" type="primary">
           {{$t('useCommonAll.createCourse')}}

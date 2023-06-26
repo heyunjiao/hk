@@ -1,7 +1,7 @@
 <template>
   <div class="member-list">
     <div class="page-title">
-      <PageTitle :title="$t('route.accountingManage')">
+      <PageTitle :title="$t('route.financialManage')">
         <template slot="btn">
         
           <el-button
@@ -9,6 +9,7 @@
             @click="
               () => {
                 this.$message.warning('请选择核销订单');
+                //二次确认
               }
             "
             size="large"
@@ -60,6 +61,29 @@
               查看详情
             </a>
           </template>
+
+
+          <template slot="workshop" scope="{row}">
+            <a class="a_link" href="#" @click="viewOrderFn">
+              {{row.workshop}}
+            </a>
+         
+          
+          </template>
+          <template slot="home" scope="{row}">
+            <a class="a_link" href="#" @click="viewOrderFn">
+              {{row.home}}
+            </a>
+         
+          
+          </template>
+          <template slot="jiaolian" scope="{row}">
+            <a class="a_link" href="#" @click="viewOrderFn">
+              {{row.jiaolian}}
+            </a>
+         
+          
+          </template>
         </Table>
       </div>
     </div>
@@ -71,11 +95,11 @@
       center
       custom-class="cancel-class"
     >
-      <span><i style="color:red;margin-right: 10px;" class="el-icon-warning-outline"></i>是否确定取消此订单</span>
+      <span><i style="color:red;margin-right: 10px;" class="el-icon-warning-outline"></i>{{$t('useCommonAll.isCancel')}}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
+        <el-button @click="centerDialogVisible = false">{{$t('useCommonAll.cancel')}}</el-button>
         <el-button type="primary" @click="cancelConfirm"
-          >确 定</el-button
+          >{{$t('useCommonAll.ok')}}</el-button
         >
       </span>
     </el-dialog>
@@ -113,12 +137,17 @@ export default {
         total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
         page: 1,
         head: [
+        {
+            label: "" /*标题*/,
+            prop: "index" /*绑定数据源obj展示字段*/,
+            fixed: "left" /*表头固定，参数：left / right / ''*/,
+            width: "50" /*表头宽度*/,
+          },
           /*表头数据*/
           {
             label: "useCommonAll.orderNumber" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "200" /*表头宽度*/,
+            width: "100" /*表头宽度*/,
             slot: true,  /*是否需要插槽*/
           },
          
@@ -139,11 +168,15 @@ export default {
             label: "useCommonAll.reservationItem" /*标题*/,
             prop: "workshop" /*绑定数据源obj展示字段*/,
             width: "120" /*表头固定，参数：left / right / ''*/,
+            slot:true
+
           },
           {
             label: "useCommonAll.reservationRoom" /*标题*/,
             prop: "home" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
+            slot:true
+
           },
           
          
@@ -151,6 +184,8 @@ export default {
             label: "useCommonAll.reservationName" /*标题*/,
             prop: "jiaolian" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
+            slot:true
+
           },
           {
             label: "useCommonAll.amount" /*标题*/,
@@ -184,6 +219,16 @@ export default {
               "text" /*按钮类型 primary / success / warning / danger / info / text*/,
             size: "mini" /*按钮大小 medium / small / mini*/,
             icon: "el-icon-view" /*按钮icon*/,
+          },
+          {
+            id: "check" /*按钮ID*/,
+            value: "useCommonAll.check" /*按钮内容*/,
+            classname: "" /*自定义class*/,
+            disabled: false /*是否被禁用*/,
+            type:
+              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+            size: "mini" /*按钮大小 medium / small / mini*/,
+            icon: "" /*按钮icon*/,
           },
           
           
@@ -303,7 +348,7 @@ export default {
           {
             id: "collape" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
             label: "" /*todo 修改 控件label*/,
-            value: "collape",
+            value: "useCommonAll.fold",
             hidelabels: true /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
             placeholder: "Please select" /*todo 修改 placeholder 提示语*/,
@@ -506,9 +551,25 @@ export default {
           query: { type: v.id, data: JSON.stringify(row) },
         });
       }
-      if (v.id == "cancel") {
-        this.centerDialogVisible = true;
+      if (v.id == "check") {
+        // $t('useCommonAll.isCheckOrder')
+        this.$confirm('是否确认核销此订单', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
       }
+    
       // if (v.id == 13) {
       //   console.log("审批");
       //   this.$message("审批");
