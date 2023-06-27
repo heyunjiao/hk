@@ -143,7 +143,7 @@ let userMixin={
                 classname: "",
                 message: "brandMessage",
                 disabled: false,
-                placeholder: "Please select",
+                placeholder: "",
                 category: 0,
                 source: true,
                 apiUrl: "",

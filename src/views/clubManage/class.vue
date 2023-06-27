@@ -83,14 +83,14 @@ export default {
             label: "useCommonAll.codeNumber" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "200" /*表头宽度*/,
+            width: "150" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
             label: "useCommonAll.projectName" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "200" /*表头宽度*/,
+            width: "100" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
@@ -228,7 +228,7 @@ export default {
     list() {
       console.log(this.tableDataMock, "this.tableDataMock");
       let tableObj = this.tableObj;
-      tableObj.tableData = this.tableDataMock;
+      tableObj.tableData = this.tableDataMock1;
     },
     HandleCurrentChange(val) {
       /*当前页*/

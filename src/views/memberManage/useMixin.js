@@ -733,6 +733,81 @@ let userMixin = {
         ],
       },
 
+      tableDataMock1: [
+        {
+        webId:1,
+        name: "LUCY",
+        id: "01",
+        type: "成人会籍卡（主卡）",
+        sex: '男',
+        workshop: "乒乓球",
+        section: "1",
+        status: "1",
+        localDropDownBox: "1",
+        singleLineTextBox: "1",
+        icon: "1",
+        sort: "1",
+        updateTime: "1",
+        email: "1",
+        tel: '17766666666',
+        birthday: "2023/2/3",
+        nikename: "爵士",
+        yes: '是',
+        timeLong: '2023/1/10-2023/2/3',
+        home: 'A1',
+        all: '是',
+        jiaolian: 'HUUU',
+        remark: '靠窗房间',
+        hexiao: '否',
+        pay: '现金',
+        status: "已确定",
+        role: '员工（前台）',
+      
+
+      }, {
+        webId:3,
+        name: "HELLO",
+        id: "02",
+        type: "成人会籍卡（主卡）",
+        sex: '男',
+        birthday: "2023/2/3",
+        timeLong: '2023/1/10-2023/2/3',
+
+        workshop: "1",
+        section: "1",
+        status: "2",
+        localDropDownBox: "1",
+        singleLineTextBox: "1",
+        icon: "1",
+        sort: "1",
+        updateTime: "1",
+        email: "1",
+        tel: '17766666666',
+        role: '财务'
+
+      }, {
+        webId:4,
+        name: "MODY",
+        id: "03",
+        type: "青少年会籍卡",
+        workshop: "1",
+        sex: '女',
+        tel: '17766666666',
+        birthday: "2023/2/3",
+        timeLong: '2023/1/10-2023/2/3',
+
+        section: "1",
+        status: "1",
+        localDropDownBox: "1",
+        singleLineTextBox: "1",
+        icon: "1",
+        sort: "1",
+        updateTime: "1",
+        email: "1",
+        role: '主管'
+
+      },],
+
     }
   }
 }

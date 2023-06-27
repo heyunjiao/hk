@@ -1,5 +1,5 @@
 <template>
-  <div class="Form" id="Form">
+  <div class="Form add-order" id="Form">
     <!--表单组件-->
     <div>
       <Form
@@ -158,5 +158,14 @@ export default {
   margin-bottom: 10px;
   /* display: flex;
     flex-direction: column-reverse; */
+}
+</style>
+
+<style lang="scss">
+.add-order{
+  .el-col{
+    height: auto !important;
+  min-height: 60px;
+  }
 }
 </style>

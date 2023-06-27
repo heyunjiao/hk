@@ -368,7 +368,7 @@ let userMixin={
             ],
           },
           formObj3: {
-            title: "useCommonAll.accountInfo" /*表单标题*/,
+            title: "useCommonAll.otherPreference" /*表单标题*/,
             formDisabled:false,
 
             formproperties: {
@@ -583,4 +583,6 @@ let userMixin={
     }
     }
 }
+
+
 export default userMixin

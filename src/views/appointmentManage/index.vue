@@ -130,38 +130,7 @@ export default {
             prop: "tel" /*绑定数据源obj展示字段*/,
             width: "120" /*表头固定，参数：left / right / ''*/,
           },
-          // {
-          //   label: "是否优先联系秘书" /*标题*/,
-          //   prop: "yes" /*绑定数据源obj展示字段*/,
-          //   width: "140" /*表头宽度*/,
-          //   // slot: false,  /*是否需要插槽*/
-          // },
-          // {
-          //   label: "秘书姓名" /*标题*/,
-          //   prop: "name" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头固定，参数：left / right / ''*/,
-          // },
-          // {
-          //   label: "秘书电话" /*标题*/,
-          //   prop: "tel" /*绑定数据源obj展示字段*/,
-          //   width: "120",
-          // },
-          // {
-          //   label: "查看订单详情" /*标题*/,
-          //   prop: "viewOrderDetail" /*绑定数据源obj展示字段*/,
-          //   width: "120" /*表头固定，参数：left / right / ''*/,
-          //   slot: true /*表头宽度*/,
-          // },
-          // {
-          //   label: "操作人" /*标题*/,
-          //   prop: "name" /*绑定数据源obj展示字段*/,
-          //   width: "80" /*表头固定，参数：left / right / ''*/,
-          // },
-          // {
-          //   label: "操作时间" /*标题*/,
-          //   prop: "birthday" /*绑定数据源obj展示字段*/,
-          //   width: "120" /*表头固定，参数：left / right / ''*/,
-          // },
+          
           {
             label: "useCommonAll.reservationStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
@@ -214,7 +183,7 @@ export default {
             icon: "el-icon-view" /*按钮icon*/,
           },
           {
-            id: "view" /*按钮ID*/,
+            id: "order" /*按钮ID*/,
             value: "useCommonAll.order" /*按钮内容*/,
             classname: "" /*自定义class*/,
             disabled: false /*是否被禁用*/,
@@ -586,6 +555,9 @@ export default {
           query: { type: v.id, data: JSON.stringify(row) },
         });
       }
+      if (v.id == "order") {
+        this.viewOrderFn()
+      }
       // if (v.id == 13) {
       //   console.log("审批");
       //   this.$message("审批");
@@ -605,11 +577,11 @@ export default {
         query: { type: "add" },
       });
     },
-    viewOrderFn(e) {
+    viewOrderFn() {
       window_open(
-        e,
+        null,
         "/orderManage/AddOrder",
-        { query: { type: "view", data: JSON.stringify({ a: "1" }) } },
+        { type: "view", data: JSON.stringify({ a: "1" }) } ,
         this.$router
       );
     },
