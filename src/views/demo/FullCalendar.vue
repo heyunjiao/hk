@@ -13,11 +13,11 @@
           :placeholder="$t('useCommonAll.memberName')"
         ></el-input>
       </el-form-item>
-      <el-form-item label="项目">
+      <el-form-item :label="$t('useCommonAll.reservationItem')">
         <el-select
           style="width: 150px;"
           v-model="formInline.region"
-          placeholder="项目"
+          :placeholder="$t('useCommonAll.reservationItem')"
         >
           <el-option
             v-for="(item, index) in selectOption.projectType"
@@ -27,11 +27,11 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="教练">
+      <el-form-item :label="$t('useCommonAll.coach')">
         <el-select
           style="width: 150px;"
           v-model="formInline.region2"
-          placeholder="教练"
+          :placeholder="$t('useCommonAll.coach')"
         >
           <el-option
             v-for="(item, index) in selectOption.coach"
@@ -41,11 +41,11 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="房间">
+      <el-form-item :label="$t('useCommonAll.room')">
         <el-select
           style="width: 150px;"
           v-model="formInline.region3"
-          placeholder="房间"
+          :placeholder="$t('useCommonAll.room')"
         >
           <el-option
             v-for="(item, index) in selectOption.room"
@@ -56,15 +56,15 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" size="mini" @click="onSubmit">查询</el-button>
+        <el-button type="primary" size="mini" @click="onSubmit">{{$t('Search')}}</el-button>
       </el-form-item>
     </el-form>
-    <div class="status-desc">
+    <!-- <div class="status-desc">
       <ul>
-        <li><a class="bg-pink" href="#"></a>已确定</li>
-        <li><a class="bg-yellow" href="#"></a>未确定</li>
+        <li><a class="bg-pink" href="#"></a>{{$t('useCommonAll.checked')}}</li>
+        <li><a class="bg-yellow" href="#"></a>{{$t('useCommonAll.checked')}}</li>
       </ul>
-    </div>
+    </div> -->
 
     <FullCalendar
       :options="calendarOptions"
@@ -74,10 +74,24 @@
       <template v-slot:eventContent="arg">
         <div class="fu-slot">
           <p>时间段：{{ arg.event.title }}</p>
-          <p>{{$t('useCommonAll.name')}}：{{ arg.event.extendedProps.name }}</p>
-          <p>{{$t('useCommonAll.reservationItem')}}：{{ arg.event.extendedProps.type }}</p>
-          <p>{{$t('useCommonAll.name')}}时常：{{ arg.event.extendedProps.appHours }}h</p>
-          <p>{{$t('useCommonAll.name')}}房间：{{ arg.event.extendedProps.room }}</p>
+          <p>
+           姓名：{{ arg.event.extendedProps.name }}
+          </p>
+          <p>
+            项目：{{
+              arg.event.extendedProps.type
+            }}
+          </p>
+          <p>
+            时常：{{
+              arg.event.extendedProps.appHours
+            }}h
+          </p>
+          <p>
+           房间：{{
+              arg.event.extendedProps.room
+            }}
+          </p>
         </div>
       </template>
     </FullCalendar>
@@ -160,16 +174,26 @@ export default {
           right: "prev,timeGridWeek,next",
         },
         // 日历头部按钮中文转换
-        buttonText: {
-          prevYear: "上一年",
-          nextYear: "下一年",
-          today: "今天",
-          month: "月",
-          week: "周",
-          day: "天",
-        },
+        buttonText:
+          Cookies.get("language") !== "en"
+            ? {
+                prevYear: "上一年",
+                nextYear: "下一年",
+                today: "今天",
+                month: "月",
+                week: "周",
+                day: "天",
+              }
+            : {
+                prevYear: "prevYear",
+                nextYear: "nextYear",
+                today: "today",
+                month: "month",
+                week: "week",
+                day: "day",
+              },
         initialView: "timeGridWeek", // 指定默认显示视图
-        locale: Cookies.get("language") === "zh" ? "zh" : "es", // 切换语言，当前为中文
+        locale: Cookies.get("language") === "en" ? "en" : "zh", // 切换语言，当前为中文
         firstDay: "0", // 设置一周中显示的第一天是周几，周日是0，周一是1，以此类推
         weekNumberCalculation: "ISO", // 与firstDay配套使用
         eventColor: "#000", // 全部日历日程背景色

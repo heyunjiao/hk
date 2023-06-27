@@ -500,7 +500,9 @@ ok:'确定',
 viewDetail:'查看详情',
 check:'核销',
 isCheckOrder:'是否确认核销此订单',
-isBatchCheckOrder:'是否确认批量核销订单',}
+isBatchCheckOrder:'是否确认批量核销订单',
+
+}
 }
 
 
