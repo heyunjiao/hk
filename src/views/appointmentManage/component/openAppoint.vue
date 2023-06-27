@@ -52,12 +52,12 @@ export default {
         fn: () => {
           window_open(
             "",
-            "/openCard",
+            "/memberManage/openCard",
             { type: "view", data: JSON.stringify({ a: "1" }) },
             this.$router
           );
 
-          // this.$router.push({ path: "/openCard", query: { type: "view" ,data:JSON.stringify({a:'1'})} });
+          // this.$router.push({ path: "/memberManage/openCard", query: { type: "view" ,data:JSON.stringify({a:'1'})} });
         },
       },
       room: {

@@ -10,12 +10,13 @@
      
         <el-descriptions-item :label="$t('useCommonAll.jobNumber')">kooriookami</el-descriptions-item>
         <el-descriptions-item :label="$t('useCommonAll.name')" >hah</el-descriptions-item>
-        <el-descriptions-item :label="$t('useCommonAll.sex')" >女</el-descriptions-item>
-        <el-descriptions-item :label="$t('useCommonAll.entryStatus')" >是</el-descriptions-item>
+        <!-- <el-descriptions-item :label="$t('useCommonAll.sex')" >女</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.entryStatus')" >是</el-descriptions-item> -->
         <el-descriptions-item :label="$t('useCommonAll.position')" ><el-tag >管理员</el-tag></el-descriptions-item>
-        <el-descriptions-item :label="$t('useCommonAll.phone')" >18877767787</el-descriptions-item>
+        <!-- <el-descriptions-item :label="$t('useCommonAll.phone')" >18877767787</el-descriptions-item>
         <el-descriptions-item :label="$t('useCommonAll.email')" >666@qq.com</el-descriptions-item>
         <el-descriptions-item :label="$t('useCommonAll.birthday')" >1998/09/90</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.entryTime')" >2002/2/2</el-descriptions-item> -->
         <el-descriptions-item :label="$t('useCommonAll.entryTime')" >2002/2/2</el-descriptions-item>
         <el-descriptions-item :label="$t('useCommonAll.functions')" >
         会员管理 订单管理

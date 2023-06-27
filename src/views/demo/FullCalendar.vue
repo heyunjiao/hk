@@ -74,10 +74,10 @@
       <template v-slot:eventContent="arg">
         <div class="fu-slot">
           <p>时间段：{{ arg.event.title }}</p>
-          <p>姓名：{{ arg.event.extendedProps.name }}</p>
-          <p>项目：{{ arg.event.extendedProps.type }}</p>
-          <p>时常：{{ arg.event.extendedProps.appHours }}h</p>
-          <p>房间：{{ arg.event.extendedProps.room }}</p>
+          <p>{{$t('useCommonAll.name')}}：{{ arg.event.extendedProps.name }}</p>
+          <p>{{$t('useCommonAll.reservationItem')}}：{{ arg.event.extendedProps.type }}</p>
+          <p>{{$t('useCommonAll.name')}}时常：{{ arg.event.extendedProps.appHours }}h</p>
+          <p>{{$t('useCommonAll.name')}}房间：{{ arg.event.extendedProps.room }}</p>
         </div>
       </template>
     </FullCalendar>

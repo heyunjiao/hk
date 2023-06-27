@@ -124,9 +124,9 @@ import Table from "@/componentsHK/public/Tabel";
             visible: true,
             text: "",
             fn: () => {
-          window_open('','/openCard', { type: "view" ,data:JSON.stringify({a:'1'})},this.$router)
+          window_open('','/memberManage/openCard', { type: "view" ,data:JSON.stringify({a:'1'})},this.$router)
   
-              // this.$router.push({ path: "/openCard", query: { type: "view" ,data:JSON.stringify({a:'1'})} });
+              // this.$router.push({ path: "/memberManage/openCard", query: { type: "view" ,data:JSON.stringify({a:'1'})} });
             },
           },
           formDisabled: false,

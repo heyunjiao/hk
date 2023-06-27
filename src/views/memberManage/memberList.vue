@@ -148,9 +148,9 @@ export default {
             width: "" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "会员卡数" /*标题*/,
+            label: "useCommonAll.cardNumber" /*标题*/,
             prop: "allNum" /*绑定数据源obj展示字段*/,
-            width: "120px" /*表头固定，参数：left / right / ''*/,
+            width: "130px" /*表头固定，参数：left / right / ''*/,
             slot:true
           },
          
@@ -488,13 +488,13 @@ export default {
       console.log(v, index, row);
       if (v.id == "edit") {
         this.$router.push({
-          path: "/openCard",
+          path: "/memberManage/openCard",
           query: { type: v.id, data: JSON.stringify(row) },
         });
       }
       if (v.id == "view") {
         this.$router.push({
-          path: "/openCard",
+          path: "/memberManage/openCard",
           query: { type: v.id, data: JSON.stringify(row) },
         });
       }
@@ -511,14 +511,14 @@ export default {
     },
     pushToDetail(v, row) {
       this.$router.push({
-        path: "/openCard",
+        path: "/memberManage/openCard",
         query: { type: v.id, data: JSON.stringify(row) },
       });
     },
     openCardFn() {
       console.log(111);
       this.$router.push({
-        path: "/openCard",
+        path: "/memberManage/openCard",
         query: { type: "add" },
       });
     },
