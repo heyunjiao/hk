@@ -343,7 +343,7 @@ let userMixin={
                 layoutmode: 0,
                 formStatus: true,
                 options: selectOption.accountAuth,
-                customParameters: "tt",
+                customParameters: "t1t",
               },
               {
                 // 多选框组
@@ -363,7 +363,7 @@ let userMixin={
                 layoutmode: 0,
                 formStatus: true,
                 options: selectOption.membershipyesOrNo,
-                customParameters: "tt",
+                customParameters: "tt2",
               },
             ],
           },

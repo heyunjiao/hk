@@ -18,7 +18,12 @@
       </el-button>
     </div>
 
-    <el-dialog title="日历" :visible.sync="dialogFormVisible" width="85%" v-if="dialogFormVisible">
+    <el-dialog
+      title="日历"
+      :visible.sync="dialogFormVisible"
+      width="85%"
+      v-if="dialogFormVisible"
+    >
       <FullCalendar></FullCalendar>
     </el-dialog>
   </div>
@@ -31,13 +36,13 @@ import { mapState } from "vuex";
 import Form from "@/componentsHK/public/Form";
 import selectOption from "@/views/global-data/selectOption";
 import { window_open } from "@/utils/index";
-import FullCalendar from '@/views/demo/FullCalendar'
+import FullCalendar from "@/views/demo/FullCalendar";
 export default {
   name: "openAppoint",
   mixins: [],
   components: {
     Form,
-    FullCalendar
+    FullCalendar,
   },
   data() {
     return {
@@ -77,56 +82,59 @@ export default {
           formlabelwidth: "140px",
         },
         formData: [
-        {
-            "id": 'select',
-            "span": 12,
-            "assemblyname": "下拉框",
-            "label": "useCommonAll.memberNumber",
-            "value": "",
-            "type": "",
-            "hidelabels": true,
-            "classname": "",
-            "message": "brandMessage",
-            "disabled": false,
-            "placeholder": "brandMessage",
-            "category": 16,
-            "source": true,
-            "apiUrl": "",
-            "key": "",
-            "val": "",
-            "check": false,
-            "multiplechoice": false,
-            "searchable": false,
-            "formStatus": true,
-            "options": [{ "value": 1, "label": "Option 1", }, {
-              "value": 2,
-              "label": "Option 2",
-            }],
-            "customParameters": "photo"
+          {
+            id: "select",
+            span: 12,
+            assemblyname: "下拉框",
+            label: "useCommonAll.memberNumber",
+            value: "",
+            type: "",
+            hidelabels: true,
+            classname: "",
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "brandMessage",
+            category: 16,
+            source: true,
+            apiUrl: "",
+            key: "",
+            val: "",
+            check: false,
+            multiplechoice: false,
+            searchable: false,
+            formStatus: true,
+            options: [
+              { value: 1, label: "Option 1" },
+              {
+                value: 2,
+                label: "Option 2",
+              },
+            ],
+            customParameters: "photo",
           },
           {
-            "id": 'select',
-            "span": 12,
-            "assemblyname": "下拉框",
-            "label": "useCommonAll.memberName",
-            "value": "",
-            "type": "",
-            "hidelabels": true,
-            "classname": "",
-            "message": "brandMessage",
-            "disabled": false,
-            "placeholder": "brandMessage",
-            "category": 16,
-            "source": true,
-            "apiUrl": "",
-            "key": "",
-            "val": "",
-            "check": false,
-            "multiplechoice": false,
-            "searchable": false,
-            "formStatus": true,
-            "options": selectOption.nickNameType,
-            "customParameters": "username"
+            id: "select",
+            span: 12,
+            assemblyname: "下拉框",
+            label: "useCommonAll.memberName",
+            value: "",
+            type: "",
+            hidelabels: true,
+            classname: "",
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "brandMessage",
+            category: 16,
+            source: true,
+            apiUrl: "",
+            key: "",
+            val: "",
+            check: false,
+            multiplechoice: false,
+            searchable: false,
+            formStatus: true,
+            options: selectOption.nickNameType,
+            customParameters: "username",
           },
           {
             span: "12",
@@ -292,7 +300,7 @@ export default {
             span: 12,
             assemblyname: "多选框组",
             label: "useCommonAll.isPackage",
-            value: [],
+            value: 1,
             type: "",
             hidelabels: true,
             classname: "",
@@ -304,7 +312,7 @@ export default {
             layoutmode: 0,
             formStatus: true,
             options: selectOption.yesOrNo,
-            customParameters: "Checkbox",
+            customParameters: "isPackage",
           },
           {
             id: 3,
@@ -320,7 +328,7 @@ export default {
             key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
             val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
             options: selectOption.coach,
-            customParameters: "Select",
+            customParameters: "coursePackage",
             classname: "",
             classnameitem: "",
           },
@@ -388,7 +396,7 @@ export default {
             span: 12,
             assemblyname: "",
             label: "useCommonAll.needCoach",
-            value: [],
+            value: 1,
             type: "",
             hidelabels: true,
             classname: "",
@@ -400,7 +408,7 @@ export default {
             layoutmode: 0,
             formStatus: true,
             options: selectOption.yesOrNo,
-            customParameters: "Checkbox",
+            customParameters: "needCoach",
           },
           {
             id: 3,
@@ -416,7 +424,7 @@ export default {
             key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
             val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
             options: selectOption.coach,
-            customParameters: "Select",
+            customParameters: "coachName",
             classname: "",
             classnameitem: "",
           },
@@ -468,17 +476,17 @@ export default {
     this.query = { ...this.query, type };
     console.log(this.query, "this.query");
     if (this.query.type === "view") {
-      this.formObj.pageTitleSlot=this.member
+      this.formObj.pageTitleSlot = this.member;
 
       this.formObj.formDisabled = true;
       // this.formObj.pageTitleSlot.visible = true;
     }
     if (this.query.type === "add") {
-      this.formObj.pageTitleSlot=this.room
+      this.formObj.pageTitleSlot = this.room;
       // this.$set(this.formObj, "pageTitleSlot", false);
       console.log(9999);
     } else if (type === "edit") {
-      this.formObj.pageTitleSlot=this.member
+      this.formObj.pageTitleSlot = this.member;
       //   会员号码不能修改
       this.formObj.formData[0].disabled = true;
       this.formObj.formData[1].disabled = true;
@@ -545,35 +553,103 @@ export default {
         })
         .catch((e) => console.log(e));
     },
-    selectChange(data){
-      console.log(data,9999);
-      let temp
-      let username
-      let concatName
-      let concatPhone
+    updateValue(updateParam,updateData,formObj) {
+      updateParam.forEach((i,index) => {
+       const temp= formObj.formData.find(item=>item.customParameters === i)
+       temp.value=updateData[index]
+      });
+      
+    },
+    selectChange(data) {
+      console.log(data, 9999);
+     
       switch (data.customParameters) {
-        case 'photo':
-        username=  this.formObj.formData.find(i=>i.customParameters==='username')
-        username.value='1'
-        concatName=  this.formObj.formData.find(i=>i.customParameters==='concatName')
-        concatName.value='NANCY'
-        concatPhone=  this.formObj.formData.find(i=>i.customParameters==='concatPhone')
-        concatPhone.value='13766768878'
+        case "photo":
+          
+          this.updateValue(['username','concatName','concatPhone'],[1,'NANCY',13766768878], this.formObj)
 
           break;
-        case 'username':
-        temp=  this.formObj.formData.find(i=>i.customParameters==='photo')
-        temp.value=1
-        concatName=  this.formObj.formData.find(i=>i.customParameters==='concatName')
-        concatName.value='HONEY'
-        concatPhone=  this.formObj.formData.find(i=>i.customParameters==='concatPhone')
-        concatPhone.value='18877767787'
+        case "username":
+         
+          this.updateValue(['photo','concatName','concatPhone'],[1,'87879',18877767787], this.formObj)
+
           break;
-      
+        case "isPackage":
+          if (data.value == 2) {
+            const index = this.formObj.formData.findIndex(
+              (i) => i.customParameters === "coursePackage"
+            );
+            if (~!index) {
+              this.formObj.formData.splice(index, 1);
+            }
+          } else {
+            const coursePackage = {
+              id: 3,
+              label: "useCommonAll.coursePackage",
+              value: "",
+              hidelabels: true,
+              message: "brandMessage",
+              disabled: false,
+              placeholder: "brandMessage",
+              category: 1,
+              source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+              apiUrl: "" /*接口api*/,
+              key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
+              val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
+              options: selectOption.coach,
+              customParameters: "coursePackage",
+              classname: "",
+              classnameitem: "",
+            };
+
+            this.dynamicChangeFn(this.formObj, "isPackage", coursePackage);
+          }
+
+          break;
+          case "needCoach":
+          if (data.value == 2) {
+            const index = this.formObj.formData.findIndex(
+              (i) => i.customParameters === "coachName"
+            );
+            if (~!index) {
+              this.formObj.formData.splice(index, 1);
+            }
+          } else {
+            const coursePackage = {
+            id: 3,
+            label: "useCommonAll.coachName",
+            value: "",
+            hidelabels: true,
+            message: "brandMessage",
+            disabled: false,
+            placeholder: "brandMessage",
+            category: 1,
+            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+            apiUrl: "" /*接口api*/,
+            key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
+            val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
+            options: selectOption.coach,
+            customParameters: "coachName",
+            classname: "",
+            classnameitem: "",
+          }
+
+            this.dynamicChangeFn(this.formObj, "needCoach", coursePackage);
+          }
+
+          break;
+
         default:
           break;
       }
-    }
+    },
+    dynamicChangeFn(formObj, filterParam, addItem) {
+      const index = formObj.formData.findIndex(
+        (i) => i.customParameters === filterParam
+      );
+
+      formObj.formData.splice(index + 1, 0, addItem);
+    },
   },
   computed: {
     ...mapState({

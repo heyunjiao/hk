@@ -387,7 +387,7 @@ export default {
 }
 .demo-form-inline {
   .el-form-item {
-    margin-bottom: 0;
+    // margin-bottom: 0;
   }
 }
 

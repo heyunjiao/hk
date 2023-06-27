@@ -176,33 +176,32 @@
               >
               </el-date-picker>
               <!-- time -->
-              <div style="display: flex" :class="domain.classname">
-
+              <div style="display: flex;" :class="domain.classname">
                 <el-time-select
-                v-if="domain.category == 20"
-                :placeholder="$t('useCommonAll.startTime')"
-                v-model="domain.value"
-                @change="realtimeform(domain)"
-                :picker-options="{
-                  start: '08:30',
-                  step: '00:15',
-                  end: '18:30',
-                }"
-              >
-              </el-time-select>
-              <el-time-select
-              v-if="domain.category == 21"
-                :placeholder="$t('useCommonAll.endTime')"
-                v-model="domain.value"
-                @change="realtimeform(domain)"
-                :picker-options="{
-                  start: '08:30',
-                  step: '00:15',
-                  end: '18:30',
-                  minTime: domain.minTime,
-                }"
-              >
-              </el-time-select>
+                  v-if="domain.category == 20"
+                  :placeholder="$t('useCommonAll.startTime')"
+                  v-model="domain.value"
+                  @change="realtimeform(domain)"
+                  :picker-options="{
+                    start: '08:30',
+                    step: '00:15',
+                    end: '18:30',
+                  }"
+                >
+                </el-time-select>
+                <el-time-select
+                  v-if="domain.category == 21"
+                  :placeholder="$t('useCommonAll.endTime')"
+                  v-model="domain.value"
+                  @change="realtimeform(domain)"
+                  :picker-options="{
+                    start: '08:30',
+                    step: '00:15',
+                    end: '18:30',
+                    minTime: domain.minTime,
+                  }"
+                >
+                </el-time-select>
               </div>
               <el-switch
                 v-if="domain.category == 6"
@@ -213,17 +212,25 @@
                 :inactive-color="domain.inactivecolor || '#999'"
               >
               </el-switch>
-             <span style="margin-right: 5px;"  v-if="domain.category == 14&&!domain.unit">{{'$'}}</span>
+              <span
+                style="margin-right: 5px;"
+                v-if="domain.category == 14 && !domain.unit"
+                >{{ "$" }}</span
+              >
               <el-input-number
                 v-if="domain.category == 14"
                 v-model="domain.value"
                 :disabled="domain.disabled"
                 @change="realtimeform(domain)"
-                :controls='false'
-                :min="domain.min||0"
-                :max="domain.max||10000000"
-              ></el-input-number> 
-              <span style="margin-left: 5px;"  v-if="domain.category == 14&&domain.unit">{{domain.unit}}</span>
+                :controls="false"
+                :min="domain.min || 0"
+                :max="domain.max || 10000000"
+              ></el-input-number>
+              <span
+                style="margin-left: 5px;"
+                v-if="domain.category == 14 && domain.unit"
+                >{{ domain.unit }}</span
+              >
               <el-cascader
                 v-if="domain.category == 11"
                 v-model="domain.value"
@@ -347,37 +354,40 @@
                 >
                 </el-option>
               </el-select>
-              
 
               <!-- 区号+手机号选择 -->
-              <div style="display: flex;" v-if="domain.category == 'countryCode'">
-                <country-code-selector  :countryCode.sync="domain.countryCode"/>
+              <div
+                style="display: flex;"
+                v-if="domain.category == 'countryCode'"
+              >
+                <country-code-selector :countryCode.sync="domain.countryCode" />
                 <el-input
-                v-model="domain.value"
-                :type="domain.type"
-                :placeholder="$t(domain.placeholder)"
-                :class="domain.classname"
-                @blur="realtimeform(domain)"
-                :disabled="domain.disabled"
-                clearable
-                v-if="domain.category =='countryCode' "
-              ></el-input>
+                  v-model="domain.value"
+                  :type="domain.type"
+                  :placeholder="$t(domain.placeholder)"
+                  :class="domain.classname"
+                  @blur="realtimeform(domain)"
+                  :disabled="domain.disabled"
+                  clearable
+                  v-if="domain.category == 'countryCode'"
+                ></el-input>
               </div>
-             
-             <!-- 上传图片 -->
-             <el-upload
-             v-if="domain.category == 'upload'"
-              class="avatar-uploader"
-              :accept="domain.accept"
-              :show-file-list="false"
-              :on-change="(file) => handleChangeImage(file, domain)"
-              :before-upload="beforeAvatarUpload"
-              action=""
-                    :auto-upload="false"
-            >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
+
+              <!-- 上传图片 -->
+              <el-upload
+                v-if="domain.category == 'upload'"
+                class="avatar-uploader"
+                :accept="domain.accept"
+                :show-file-list="false"
+                :on-change="(file) => handleChangeImage(file, domain)"
+                :before-upload="beforeAvatarUpload"
+                action=""
+                :auto-upload="false"
+                :disabled="formObj.formDisabled"
+              >
+                <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
               <!-- <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18&&!formObj.formDisabled">{{$t(domain.label)}}</el-button> -->
             </el-form-item>
           </el-col>
@@ -427,7 +437,7 @@
 import "@/config/ele/elementForm";
 import "@/config/ele/eleLayout";
 import PageTitle from "@/componentsHK/public/PageTitle";
-import countryCodeSelector from '@/componentsHK/countrySelect/index'
+import countryCodeSelector from "@/componentsHK/countrySelect/index";
 
 export default {
   name: "FormComponents",
@@ -441,10 +451,10 @@ export default {
     "submitText",
     "saveNew",
   ],
-  components: { PageTitle,countryCodeSelector },
+  components: { PageTitle, countryCodeSelector },
   data() {
     return {
-      imageUrl:'',
+      imageUrl: "",
       formObj: {},
       dynamicValidateForm: {
         domains: [],
@@ -475,14 +485,13 @@ export default {
       }
     },
     trigger(category) {
-      if (category == 0||category==='upload') {
+      if (category == 0 || category === "upload") {
         return "blur";
       } else {
         return "change";
       }
     },
     submitForm(formName, status) {
-      
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // alert('submit!');
@@ -533,7 +542,7 @@ export default {
       this.imageUrl = URL.createObjectURL(file.raw);
       this.$set(row, "file", file);
       this.$set(row, "value", file.name);
-      this.realtimeform(row)
+      this.realtimeform(row);
     },
     handleChange(file, row) {
       this.$set(row, "file", file);
@@ -568,7 +577,7 @@ export default {
       value && value.clickFn(value);
     },
     handleAvatarSuccess(res, file) {
-      console.log(res,file,999);
+      console.log(res, file, 999);
       // this.imageUrl=res.id
       this.imageUrl = URL.createObjectURL(file.raw);
     },
@@ -585,7 +594,7 @@ export default {
       return isJPG && isLt2M;
     },
   },
-  
+
   watch: {
     formObj(New) {
       this.formObj = New;

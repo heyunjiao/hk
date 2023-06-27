@@ -29,24 +29,8 @@
       />
     </div>
 
-    <div class="mrb_20">
-      <Form
-        ref="family"
-        :data="formObj6"
-        :Change="cardSelectFn"
-        :ChangeSubmit="ChangeSubmit"
-        :reset="resetForm"
-      />
-    </div>
-    <div class="mrb_20">
-      <Form
-        ref="petInfo"
-        :data="formObj7"
-        :Change="cardSelectFn"
-        :ChangeSubmit="ChangeSubmit"
-        :reset="resetForm"
-      />
-    </div>
+   
+   
     <div class="mrb_20">
       <Form
         ref="accountInfo"
@@ -75,6 +59,8 @@ import "@/config/ele/eleLayout";
 import { mapState } from "vuex";
 import Form from "@/componentsHK/public/Form";
 import mixin from "./mixin";
+import selectOption from "@/views/global-data/selectOption";
+
 export default {
   name: "demoForm",
   mixins: [mixin],
@@ -165,6 +151,7 @@ export default {
       console.debug(val);
     },
     delItem(formType, key) {
+      console.log(formType.formData,'formType.formData');
       const tempIndex = formType.formData.findIndex(
         (i) => i.customParameters === key
       );
@@ -174,13 +161,14 @@ export default {
     },
 
     cardSelectFn(item) {
+      console.log(item,'item')
       const openMasteCard = {
         // 下拉框
         id: "select",
         span: 12,
         assemblyname: "下拉框",
         label: "member.chooseMasterCard",
-        value: "",
+        value: "1",
         type: "",
         hidelabels: true,
         classname: "",
@@ -197,17 +185,7 @@ export default {
         searchable: false,
         formStatus: true,
         customParameters: "chooseMasterCard",
-        options: [
-          { value: 4, label: "123456" },
-          {
-            value: 5,
-            label: "99999999",
-          },
-          {
-            value: 6,
-            label: "8988888888",
-          },
-        ],
+        options: selectOption.cardType
       };
       const MembershFipFee = {
         // 单行文本框
@@ -215,14 +193,14 @@ export default {
         span: 8 /*表单占据控件，容器分为 24份，需要整数*/,
         assemblyname: "input",
         label: "member.MembershFipFee",
-        value: "" /*控件value / 默认值*/,
+        value: "2" /*控件value / 默认值*/,
         type: "" /*控件类型 支持原生*/,
         hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
         classname: "" /*自定义class*/,
         message: "brandMessage" /*校验提示语*/,
         disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
         placeholder: "brandMessage" /*提示语*/,
-        category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+        category:14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
         check: true /*是否校验*/,
         iconChekc: false /*是否展示icon*/,
         customParameters: "MembershFipFee" /*对应api的参数名称*/,
@@ -234,14 +212,14 @@ export default {
         span: 8 /*表单占据控件，容器分为 24份，需要整数*/,
         assemblyname: "input",
         label: "member.MonthlyFees",
-        value: "" /*控件value / 默认值*/,
+        value: "3" /*控件value / 默认值*/,
         type: "" /*控件类型 支持原生*/,
         hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
         classname: "" /*自定义class*/,
         message: "brandMessage" /*校验提示语*/,
         disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
         placeholder: "brandMessage" /*提示语*/,
-        category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+        category: 14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
         check: true /*是否校验*/,
         iconChekc: false /*是否展示icon*/,
         customParameters: "MonthlyFees" /*对应api的参数名称*/,
@@ -260,6 +238,9 @@ export default {
         // 选择主卡
         this.formObj2.formData.push(MembershFipFee);
         this.formObj2.formData.push(MonthlyFees);
+        this.delItem(this.formObj2, "chooseMasterCard");
+        
+       
       } else if (
         (item.value === 5 || item.value === 6 || item.value === 7) &&
         item.customParameters === "masterCard"
@@ -321,9 +302,9 @@ const countryCode=this.formObj.formData.find(i=>i.customParameters==='tel')
     
   },
   computed: {
-    ...mapState({
-      formObj: (state) => state.form.formObj,
-    }),
+    // ...mapState({
+    //   formObj: (state) => state.form.formObj,
+    // }),
   },
 };
 </script>

@@ -44,10 +44,44 @@ export default {
     this.query={...this.query,type,data:JSON.parse(data)}
     if(this.query.type==='view'){
     this.formObj.formDisabled=true
-    this.formObj4.formDisabled=true
-    this.formObj2.formDisabled=true
-    this.formObj3.formDisabled=true
-    this.formObj5.formDisabled=true
+    const arr=[{
+                // 单行文本框
+                id: "input",
+                span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
+                assemblyname: "input",
+                label: "useCommonAll.operator",
+                value: "" /*控件value / 默认值*/,
+                type: "" /*控件类型 支持原生*/,
+                hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
+                classname: "" /*自定义class*/,
+                message: "brandMessage" /*校验提示语*/,
+                disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+                placeholder: "brandMessage" /*提示语*/,
+                category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+                check: false /*是否校验*/,
+                iconChekc: false /*是否展示icon*/,
+                customParameters: "input" /*对应api的参数名称*/,
+              },
+              {
+                // 单行文本框
+                id: "input",
+                span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
+                assemblyname: "input",
+                label: "useCommonAll.creatTime",
+                value: "" /*控件value / 默认值*/,
+                type: "" /*控件类型 支持原生*/,
+                hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
+                classname: "" /*自定义class*/,
+                message: "brandMessage" /*校验提示语*/,
+                disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+                placeholder: "brandMessage" /*提示语*/,
+                category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+                check: false /*是否校验*/,
+                iconChekc: false /*是否展示icon*/,
+                customParameters: "input" /*对应api的参数名称*/,
+              }]
+              this.formObj.formData=this.formObj.formData.concat(arr)
+
     } if(this.query.type==='add'){
       delItem(this.formObj,'active')
     }else{
