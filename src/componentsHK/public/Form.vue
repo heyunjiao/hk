@@ -49,7 +49,7 @@
                       message: $t(domain.message),
                       trigger: trigger(domain.category),
                     },{...domain.rule,  message: $t(domain.rule.message), trigger: trigger(domain.category),}]:
-                    domain.check&&domain.rule?{
+                    domain.check&&!domain.rule?{
                       required: true,
                       message: $t(domain.message),
                       trigger: trigger(domain.category),
