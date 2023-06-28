@@ -90,6 +90,7 @@
 
     <el-dialog
       title="提示"
+      v-if="centerDialogVisible"
       :visible.sync="centerDialogVisible"
       width="30%"
       center
@@ -553,9 +554,9 @@ export default {
       }
       if (v.id == "check") {
         // $t('useCommonAll.isCheckOrder')
-        this.$confirm('是否确认核销此订单', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm(this.$t('useCommonAll.isCheckOrder'), '提示', {
+          confirmButtonText: this.$t('useCommonAll.ok'),
+          cancelButtonText:  this.$t('useCommonAll.cancel'),
           type: 'warning'
         }).then(() => {
           this.$message({

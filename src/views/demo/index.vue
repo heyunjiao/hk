@@ -139,7 +139,7 @@ export default {
   name: "demoPage",
   components: {
     PageTitle,
-    calc,
+    // calc,
     FormCombination,
     Tabel,
     countryCodeSelector,
@@ -913,6 +913,8 @@ aspectRatio:1.35,
       console.debug(v.id, index, data, obj);
 
       if (v.id == 0) {
+      console.log(v.id, index, data, obj);
+
         this.$message("搜索");
         console.debug("搜索");
         /* getTableData({
@@ -931,6 +933,8 @@ aspectRatio:1.35,
             this.formObj1 = response.formObj1;
           },
         });
+        console.log(this.formObj.formData);
+
         return "";
       }
       if (v.id == "collape") {

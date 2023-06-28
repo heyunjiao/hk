@@ -30,6 +30,7 @@ let userMixin = {
         pay: '现金',
         status: "已确定",
         role: '员工（前台）',
+        memberstatus:1,
         children: [{
           webId:2,
           name: "LUCY",
@@ -135,7 +136,9 @@ let userMixin = {
         updateTime: "1",
         email: "1",
         tel: '17766666666',
-        role: '财务'
+        role: '财务',
+        memberstatus:0,
+        
 
       }, {
         webId:4,
@@ -156,7 +159,8 @@ let userMixin = {
         sort: "1",
         updateTime: "1",
         email: "1",
-        role: '主管'
+        role: '主管',
+        memberstatus:0,
 
       },],
       formObj: {

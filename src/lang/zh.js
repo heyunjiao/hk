@@ -286,6 +286,7 @@ welcom:'欢迎您！'
     'page.demo.add': '添加',
     'page.demo.submit': '提交',
     'Search':'搜索',
+    'formatNotrue':'格式不正确',
 },
 
 
@@ -501,7 +502,11 @@ viewDetail:'查看详情',
 check:'核销',
 isCheckOrder:'是否确认核销此订单',
 isBatchCheckOrder:'是否确认批量核销订单',
-
+prompt:'提示',
+sureDeleteInfo:'确定删除此条信息吗',
+canceledOperator:'已取消此操作',
+operatorSuciscess:'操作成功',
+isCancelReservation:'是否确认取消此预约',
 }
 }
 

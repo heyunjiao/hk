@@ -125,6 +125,11 @@ let userMixin={
                 check: true /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
                 customParameters: "input" /*对应api的参数名称*/,
+                rule:{
+                  type:'email',
+                  // pattern:'/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/',
+                  message:'formatNotrue'
+                }
               },
               {
                 // 下拉框

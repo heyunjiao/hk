@@ -11,15 +11,15 @@
     </div>
     <div class="search-form">
       <FormCombination
+        :formObj="formObj"
+        v-show="!status"
+        :handelSubmit="submit"
+      />
+      <FormCombination
         :formObj="formObj1"
         v-show="status"
         :tabData="tabData"
         :tabClose="tabClose"
-        :handelSubmit="submit"
-      />
-      <FormCombination
-        :formObj="formObj"
-        v-show="!status"
         :handelSubmit="submit"
       />
     </div>
@@ -31,19 +31,22 @@
           :Obj="tableObj"
           :handelSubmit="operationSubmit"
           :HandleSizeChange="HandleSizeChange"
-          :handleSelectionChangeCom="handleSelectionChangeCom"
           :HandleCurrentChange="HandleCurrentChange"
         >
-        <template  slot="allNum" scope="{row}">
-          <span>{{row.type.indexOf('主卡')!=-1?row.icon:'-'}}</span>
-        </template>
-          <template slot="status" scope="{row}"
-            ><!--switch控件插槽-->
-            <el-switch v-model="row.status"> </el-switch>
+          <template slot="allNum" scope="{row}">
+            <span>{{ row.type.indexOf("主卡") != -1 ? row.icon : "-" }}</span>
           </template>
-          <!-- c查看订单详情 -->
-          <template slot="id" scope="{row}"
-            ><!--switch控件插槽-->
+          <template slot="status" scope="{row}">
+            <p v-if="!row.memberstatus">
+              <el-switch
+              :value="row.memberstatus"
+              @change="memberStatusChange(row)"
+            />
+            </p>
+            <p v-else>已激活</p>
+          </template>
+
+          <template slot="id" scope="{row}">
             <p
               class="a_link"
               href="#"
@@ -52,8 +55,7 @@
               {{ row.id }}
             </p>
           </template>
-          <template slot="cardType" scope="{row}"
-            ><!--switch控件插槽-->
+          <template slot="cardType" scope="{row}">
             <p
               class="a_link"
               href="#"
@@ -97,7 +99,7 @@ export default {
         total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
         page: 1,
         head: [
-        {
+          {
             label: "" /*标题*/,
             prop: "index" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
@@ -113,21 +115,18 @@ export default {
           {
             label: "useCommonAll.memberCardType" /*标题*/,
             prop: "cardType" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "160" /*表头宽度*/,
             slot: true /*是否需要插槽*/,
           },
           {
             label: "useCommonAll.memberTitle" /*标题*/,
             prop: "nikename" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
           {
             label: "useCommonAll.name" /*标题*/,
             prop: "name" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
@@ -151,15 +150,14 @@ export default {
             label: "useCommonAll.cardNumber" /*标题*/,
             prop: "allNum" /*绑定数据源obj展示字段*/,
             width: "130px" /*表头固定，参数：left / right / ''*/,
-            slot:true
+            slot: true,
           },
-         
+
           {
             label: "useCommonAll.activationStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
             slot: true /*表头宽度*/,
           },
-         
         ],
         childrenHead: [],
         operationData: [
@@ -212,7 +210,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "Product name" /*对应api的参数名称*/,
+            customParameters: "memberNumber" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -224,7 +222,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "Product name" /*对应api的参数名称*/,
+            customParameters: "name" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -236,7 +234,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "Tel" /*对应api的参数名称*/,
+            customParameters: "phone" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -250,8 +248,8 @@ export default {
             placeholder: "commen.brandMessage" /*todo 修改 placeholder 提示语*/,
             category: 1 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            options:selectOption.cardType,
-            customParameters: "selectOption.cardType" /*对应api的参数名称*/,
+            options: selectOption.cardType,
+            customParameters: "memberCardType" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -264,7 +262,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "mishuname" /*对应api的参数名称*/,
+            customParameters: "secretaryName" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -276,7 +274,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "mishuTel" /*对应api的参数名称*/,
+            customParameters: "secretaryPhone" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -288,7 +286,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "mishuTel" /*对应api的参数名称*/,
+            customParameters: "conmpanyName" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -309,7 +307,7 @@ export default {
             classnameitem: "" /*默认为空*/,
           },
           {
-            id: "Search1" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            id: "search" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
             label: "" /*todo 修改 控件label*/,
             value: "Search",
             hidelabels: true /*是否展示label标题*/,
@@ -340,7 +338,8 @@ export default {
             value: "" /*todo 修改 控件 v-model 参数*/,
             hidelabels: false /*是否展示label标题*/,
             disabled: false /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "commen.brandMessage" /*todo 修改 placeholder 提示语*/,
+            placeholder:
+              "useCommonAll.memberNumber" /*todo 修改 placeholder 提示语*/,
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             iconChekc: true /*是否带icon 模糊搜索 icon搜索框一体时候使用*/,
             classname: "" /*自定义class*/,
@@ -351,33 +350,14 @@ export default {
             value: "useCommonAll.expand",
             hidelabels: false,
             classname: "" /*自定义class*/,
-            message: "commen.brandMessage",
+            message: "brandMessage",
             disabled: false,
-            placeholder: "commen.brandMessage",
+            placeholder: "Please select",
             category: 8,
             type:
               "Filter-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
           },
         ],
-        // "buttom": [{/*右侧展示按钮*/
-        //     "id": 2,
-        //     "value": "Batch Approval",
-        //     "hidelabels": true,
-        //     "message": "commen.brandMessage",
-        //     "category": 7,
-        //     "type": "Filter-btn", /*按钮样式 */
-        //     "icon": 'el-icon-coordinate', /*图标*/
-        //     "customParameters": 3
-        // }, {
-        //     "id": 3,
-        //     "value": "New",
-        //     "hidelabels": true,
-        //     "message": "commen.brandMessage",
-        //     "category": 7,
-        //     "type": "Search-btn",
-        //     "icon": 'el-icon-circle-plus-outline',
-        //     "customParameters": 3
-        // }]
       },
     };
   },
@@ -415,18 +395,8 @@ export default {
       this.tableObj.pageSize = val;
       this.list();
     },
-    handleSelectionChangeCom(val) {
-      /*复选框选中事件*/
-      console.debug(val);
-    },
+
     submit(v, index, data, obj) {
-      /*
-       * TODO 参数：
-       * TODO v：当前点击按钮本身参数
-       * TODO index：当前点击按钮在集合的中的顺序
-       * TODO data：获取当前集合所有参数（包含input框输入值value等）;
-       * TODO obj key-value形式处理后数据 配合 customParameters
-       *  */
       console.log(v, index, data, obj);
 
       if (v.id == 0) {
@@ -440,44 +410,30 @@ export default {
       if (v.id == 1) {
         this.title = "高级搜索展开样式";
         this.status = false;
-
         this.$store.commit("functionAmbiguity", {
           data: data,
-          formObj1: this.formObj1,
+          formObj1: this.formObj,
           Callback: (response) => {
-            this.formObj1 = response.formObj1;
+            this.formObj = response.formObj1;
           },
         });
         return "";
       }
       if (v.id == "collape") {
-        this.title = this.$t("page.demo.fuzzySearch");
         this.status = true;
         this.tabData = [];
         this.$store.commit("functionTabData", {
           data: data,
-          formObj: this.formObj,
+          formObj: this.formObj1,
           tabData: this.tabData,
           Callback: (response) => {
-            this.formObj = response.formObj;
+            // console.log(response,'response');
+            this.formObj1 = response.formObj;
             this.tabData = response.tabData;
           },
         });
         return "";
       }
-      // if (v.id == 2 || v.id == 10) {
-      //   console.debug("批处理");
-      //   this.$message(this.$t("page.demo.batchProcessing"));
-      //   return "";
-      // }
-      // if (v.id == 3 || v.id == 11) {
-      //   console.debug("新增");
-      //   /* this.$router.push({
-      //              path: '/Form'
-      //            })*/
-      //   window.open("/Form");
-      //   return "";
-      // }
     },
     // tablecao'z操作按钮设置
     operationSubmit(v, index, row) {
@@ -501,7 +457,7 @@ export default {
       if (v.id == "order") {
         this.$router.push({
           path: "/orderManage/index",
-          query: { name:row.name, },
+          query: { name: row.name },
         });
       }
       // if (v.id == 13) {
@@ -524,6 +480,24 @@ export default {
     },
     viewOrderFn(e) {
       window_open(e, "/orderManage/index", {}, this.$router);
+    },
+    memberStatusChange(v) {
+      this.$confirm(this.$t('useCommonAll.isActivate'), this.$t('useCommonAll.prompt'), {
+          confirmButtonText: this.$t('useCommonAll.ok'),
+          cancelButtonText:  this.$t('useCommonAll.cancel'),
+          type: 'warning'
+        }).then(() => {
+          // v.memberstatus=1
+          this.$message({
+            type: 'success',
+            message:this.$t('useCommonAll.operatorSuciscess') 
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: this.$t('useCommonAll.canceledOperator') 
+          });          
+        });
     },
   },
 };

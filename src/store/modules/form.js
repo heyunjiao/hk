@@ -56,7 +56,7 @@ export default {
             let data = params.data;
             let formObj = params.formObj;
             let tabData = params.tabData;
-
+console.log(formObj,'formObj');
             data.forEach((f, index) => {
                 if (index == 0) {
                     formObj.formData[0].value = f.value

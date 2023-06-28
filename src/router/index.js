@@ -42,7 +42,7 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/welcom',
+    redirect: '/memberManage',
     hidden:true,
     children: [
       {

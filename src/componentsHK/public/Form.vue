@@ -43,13 +43,17 @@
                   : 'domains.' + index + '.value'
               "
               :rules="
-                domain.check
-                  ? {
+                domain.check&&domain.rule
+                  ? [{
                       required: true,
                       message: $t(domain.message),
                       trigger: trigger(domain.category),
-                    }
-                  : null
+                    },{...domain.rule,  message: $t(domain.rule.message), trigger: trigger(domain.category),}]:
+                    domain.check&&domain.rule?{
+                      required: true,
+                      message: $t(domain.message),
+                      trigger: trigger(domain.category),
+                    } :null
               "
             >
               <div slot="label" class="d-flex w-100">
@@ -361,7 +365,8 @@
                 v-if="domain.category == 'countryCode'"
               >
                 <country-code-selector :countryCode.sync="domain.countryCode" />
-                <el-input
+                <el-input-number
+                :controls="false"
                   v-model="domain.value"
                   :type="domain.type"
                   :placeholder="$t(domain.placeholder)"
@@ -370,7 +375,7 @@
                   :disabled="domain.disabled"
                   clearable
                   v-if="domain.category == 'countryCode'"
-                ></el-input>
+                ></el-input-number>
               </div>
 
               <!-- 上传图片 -->

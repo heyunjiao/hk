@@ -284,6 +284,7 @@ export default {
     'page.demo.add': 'Add',
     'page.demo.submit': 'submit',
     'Search':'Search',
+    'formatNotrue':'The format is incorrect',
 
 },
 useCommonAll:{
@@ -499,5 +500,10 @@ useCommonAll:{
   check:'Check',
   isCheckOrder:'Confirm the cancellation of this order',
   isBatchCheckOrder:'Whether to confirm batch cancellation orders',
+  prompt:'prompt',
+sureDeleteInfo:'Are you sure to delete this message',
+canceledOperator:'This operation has been cancelled',
+operatorSuciscess:'Operation successful',
+isCancelReservation:'Confirm to cancel this appointment',
 }
 }

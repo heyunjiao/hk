@@ -7,6 +7,7 @@ export default {
     'end-placeholder': '結束時間',
     'range-separator':'至',
     'Search':'搜索',
+    'formatNotrue':'格式不正確',
 
 
 
@@ -242,5 +243,11 @@ export default {
     viewDetail:'查看詳情',
     check:'核銷',
     isCheckOrder:'是否確認核銷此訂單',
-    isBatchCheckOrder:'是否確認批量核銷訂單',}
+    isBatchCheckOrder:'是否確認批量核銷訂單',
+    prompt:'提示',
+sureDeleteInfo:'確定刪除此條信息嗎',
+canceledOperator:'已取消此操作',
+operatorSuciscess:'操作成功',
+isCancelReservation:'是否確認取消此預約',
+  }
 }

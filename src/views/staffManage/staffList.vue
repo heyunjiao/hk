@@ -438,13 +438,13 @@
         console.log(v, index, row);
         if (v.id == "edit") {
           this.$router.push({
-            path: "/orderManage/AddOrder",
+            path: "/staff/addStaff",
             query: { type: v.id, data: JSON.stringify(row) },
           });
         }
         if (v.id == "view") {
           this.$router.push({
-            path: "/orderManage/AddOrder",
+            path:"/staff/addStaff",
             query: { type: v.id, data: JSON.stringify(row) },
           });
         }

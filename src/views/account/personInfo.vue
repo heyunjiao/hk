@@ -234,7 +234,7 @@ export default {
             id: "dateSelection",
             span: 12,
             assemblyname: "",
-            label: "useCommonAll.jobNumber",
+            label: "useCommonAll.birthday",
             value: "",
             type: "date",
             hidelabels: true,
