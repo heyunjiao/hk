@@ -24,7 +24,8 @@ export default {
   accountManage:'賬號管理',
   financialManage:'財務核销',
   class:'課程管理',
-  'welcom':'歡迎您'
+  'welcom':'歡迎您',
+  appointeList:'預約管理'
 
 
   },

@@ -42,6 +42,7 @@
               :default-checked-keys="roleKeys"
               :current-node-key="roleKeyString"
               ref="tree"
+             :props="treeProps"
             >
             </el-tree>
           </el-form-item>
@@ -51,7 +52,7 @@
 
     <div class="btn-line" v-if="!this.formObj.formDisabled">
       <el-button @click="onSubmitFn" class="Search-btn"
-        >{{ $t("page.demo.preservation") }}
+        >{{ $t("useCommonAll.save") }}
       </el-button>
     </div>
   </div>
@@ -391,6 +392,9 @@ export default {
           },
         ],
       },
+      treeProps:{
+      label:(data,node)=>this.customLabel(data,node)
+    },
     };
   },
   methods: {
@@ -478,6 +482,9 @@ export default {
       // }
       // return isJPG && isLt2M;
     },
+    customLabel(data){
+      return this.$t(data.label)
+    }
   },
 };
 </script>

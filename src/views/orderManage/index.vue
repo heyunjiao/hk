@@ -89,21 +89,20 @@
     <el-dialog
       :title="$t('useCommonAll.isCancel')"
       :visible.sync="centerDialogVisible"
-      width="30%"
+      width="500px"
       custom-class="cancel-class"
     >
-    <el-form ref="form" :model="sizeForm" label-width="100px">
+    <el-form ref="form" :model="sizeForm" label-width="166px" label-position="right">
       <el-form-item :label="$t('useCommonAll.isTicket')">
         <el-radio-group v-model="sizeForm.resource" size="medium">
-      <el-radio border label="1">是</el-radio>
-      <el-radio border label="0">否</el-radio>
+      <el-radio border label="1">{{$t('useCommonAll.yes')}}</el-radio>
+      <el-radio border label="0">{{$t('useCommonAll.no')}}</el-radio>
     </el-radio-group>
   </el-form-item>
   <el-form-item :label="$t('useCommonAll.ticketAmount')" v-if="sizeForm.resource==='1'">
-  <span style="margin-right:6px">$</span><el-input-number></el-input-number>
+  <span style="margin-right:6px">$</span><el-input-number :controls="false"></el-input-number>
   </el-form-item>
   </el-form>
-      <!-- <span><i style="color:red;margin-right: 10px;" class="el-icon-warning-outline"></i>是否确定取消此订单</span> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="centerDialogVisible = false"> {{$t('useCommonAll.cancel')}}</el-button>
         <el-button type="primary" @click="cancelConfirm"
