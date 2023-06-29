@@ -252,6 +252,7 @@ isCancelReservation:'是否確認取消此預約',
 formatNotrue:'格式不正確',
 billMode:'賬單發送模式',
 paperMode:'紙質寄送(每月收取20$)',
-paperModeFee:'每月收取20$'
+paperModeFee:'每月收取20$',
+confirme:'待確認'
   }
 }

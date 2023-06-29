@@ -145,17 +145,17 @@ const coach = [
 // 预约订单状态
 const apponitStatus = [{
   value: 1,
-  label: "待确认",
+  label: "useCommonAll.confirme",
   disabled: false,
 },
 {
   value: 2,
-  label: "已确认",
+  label: "useCommonAll.checked",
   disabled: false,
 },
 {
   value: 3,
-  label: "已取消",
+  label: "useCommonAll.canceled",
   disabled: false,
 },]
 // 预约方式

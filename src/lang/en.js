@@ -508,6 +508,8 @@ isCancelReservation:'Confirm to cancel this appointment',
 formatNotrue:'The format is incorrect',
 billMode:'Billing delivery mode',
 papperMode:'paper delivery(20$ per month)',
-paperModeFee:'20$ per month'
+paperModeFee:'20$ per month',
+confirme:'To be confirmed'
+
 }
 }
