@@ -60,7 +60,7 @@ export default {
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "operator" /*对应api的参数名称*/,
               },
               {
                 // 单行文本框
@@ -78,7 +78,7 @@ export default {
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "creatTime" /*对应api的参数名称*/,
               }]
               this.formObj.formData=this.formObj.formData.concat(arr)
 
@@ -142,13 +142,11 @@ export default {
     },
     onSubmitFn() {
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
-      let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
-      Promise.all([p1, p2])
+      Promise.all([p1])
         .then((result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
-          const form2 = this.getStoreFormValue(this.formObj2.formData);
 
-          console.log(form1, form2, "form");
+          console.log(form1, "form");
         })
         .catch((e) => console.log(e));
     },

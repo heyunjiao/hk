@@ -18,7 +18,7 @@ let userMixin={
                 span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
                 assemblyname: "input",
                 label: "useCommonAll.orderNumber",
-                value: "" /*控件value / 默认值*/,
+                value: "34545" /*控件value / 默认值*/,
                 type: "" /*控件类型 支持原生*/,
                 hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
                 classname: "" /*自定义class*/,
@@ -28,7 +28,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: true /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "orderNumber" /*对应api的参数名称*/,
               },
             
              
@@ -55,7 +55,7 @@ let userMixin={
                 searchable: false,
                 formStatus: true,
                 options: selectOption.shopList,
-                customParameters: "select",
+                customParameters: "commodityType",
               },
              
              
@@ -75,7 +75,7 @@ let userMixin={
                 category: 14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: true /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "orderAmount" /*对应api的参数名称*/,
               },
               {
                 // 下拉框
@@ -100,7 +100,7 @@ let userMixin={
                 searchable: false,
                 formStatus: true,
                 options:selectOption.payMethods,
-                customParameters: "select",
+                customParameters: "payMethod",
               },
              
              
@@ -127,7 +127,7 @@ let userMixin={
                 searchable: false,
                 formStatus: true,
                 options:selectOption.payStatus,
-                customParameters: "select",
+                customParameters: "payStatus",
               },
              
               
@@ -153,7 +153,7 @@ let userMixin={
                 multiplechoice: false,
                 searchable: false,
                 formStatus: true,
-                customParameters: "select",
+                customParameters: "commodityContent",
               },
               {
                 // 多行文本框
@@ -171,7 +171,7 @@ let userMixin={
                 category: 0,
                 check: false,
                 iconChekc: false,
-                customParameters: "textarea",
+                customParameters: "reamark",
                 formStatus: true,
               },
 

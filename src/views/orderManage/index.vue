@@ -87,6 +87,7 @@
     </div>
 
     <el-dialog
+    v-if="centerDialogVisible"
       :title="$t('useCommonAll.isCancel')"
       :visible.sync="centerDialogVisible"
       width="500px"
@@ -105,7 +106,7 @@
   </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="centerDialogVisible = false"> {{$t('useCommonAll.cancel')}}</el-button>
-        <el-button type="primary" @click="cancelConfirm"
+        <el-button type="primary" @click="confirmFn"
           >{{$t('useCommonAll.ok')}}</el-button
         >
       </span>
@@ -571,9 +572,9 @@ export default {
         this.$router
       );
     },
-    cancelConfirm(){
+    confirmFn(){
       this.centerDialogVisible = false
-      this.$message.success('订单取消成功')
+      message:this.$t('useCommonAll.operatorSuciscess') 
     },
      pushToDetail(v,row){
      this.$router.push({
