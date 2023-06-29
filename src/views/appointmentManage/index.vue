@@ -7,7 +7,7 @@
             $t("useCommonAll.createreservation")
           }}</el-button>
           <el-button @click="batchopenCardFn" size="large" type="primary">
-           {{ $t("useCommonAll.reservationBatch")}}
+            {{ $t("useCommonAll.reservationBatch") }}
           </el-button>
         </template>
       </PageTitle>
@@ -25,7 +25,6 @@
         v-show="!status"
         :handelSubmit="submit"
       />
-      
     </div>
 
     <div class="table-list">
@@ -41,7 +40,9 @@
         >
           <template slot="viewOrderDetail" scope="{row}"
             ><!--switch控件插槽-->
-            <a class="a_link" @click="viewOrderFn">{{ $t('useCommonAll.view')}}</a>
+            <a class="a_link" @click="viewOrderFn">{{
+              $t("useCommonAll.view")
+            }}</a>
           </template>
           <template slot="status" scope="{row}"
             ><!--switch控件插槽-->
@@ -106,7 +107,6 @@ export default {
 
             width: "200" /*表头宽度*/,
           },
-         
 
           {
             label: "useCommonAll.room" /*标题*/,
@@ -123,7 +123,7 @@ export default {
             prop: "tel" /*绑定数据源obj展示字段*/,
             width: "120" /*表头固定，参数：left / right / ''*/,
           },
-          
+
           {
             label: "useCommonAll.reservationStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
@@ -219,7 +219,7 @@ export default {
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
-          
+
           {
             // 日期选择器
             id:
@@ -300,7 +300,6 @@ export default {
             classnameitem: "" /*默认为空*/,
           },
 
-
           {
             id: "collape" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
             label: "" /*todo 修改 控件label*/,
@@ -367,7 +366,6 @@ export default {
               "Filter-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
           },
         ],
-       
       },
     };
   },
@@ -462,10 +460,10 @@ export default {
         });
       }
       if (v.id == "delete") {
-        this.$message.success("成功删除此条预约！");
+        this.memberStatusChange(v, "useCommonAll.sureDeleteInfo");
       }
       if (v.id == "connection") {
-        this.$message.success("成功取消预约！");
+        this.memberStatusChange(v, "useCommonAll.isCancelReservation");
       }
       if (v.id == "view") {
         this.$router.push({
@@ -474,9 +472,8 @@ export default {
         });
       }
       if (v.id == "order") {
-        this.viewOrderFn()
+        this.viewOrderFn();
       }
-     
     },
     openCardFn() {
       console.log(111);
@@ -496,9 +493,29 @@ export default {
       window_open(
         null,
         "/orderManage/AddOrder",
-        { type: "view", data: JSON.stringify({ a: "1" }) } ,
+        { type: "view", data: JSON.stringify({ a: "1" }) },
         this.$router
       );
+    },
+    memberStatusChange(v, info) {
+      this.$confirm(this.$t(info), this.$t("useCommonAll.prompt"), {
+        confirmButtonText: this.$t("useCommonAll.ok"),
+        cancelButtonText: this.$t("useCommonAll.cancel"),
+        type: "warning",
+      })
+        .then(() => {
+          // v.memberstatus=1
+          this.$message({
+            type: "success",
+            message: this.$t("useCommonAll.operatorSuciscess"),
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: this.$t("useCommonAll.canceledOperator"),
+          });
+        });
     },
   },
 };
