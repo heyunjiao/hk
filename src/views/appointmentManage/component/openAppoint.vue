@@ -110,7 +110,7 @@ export default {
                 label: "Option 2",
               },
             ],
-            customParameters: "photo",
+            customParameters: "memberNumber",
           },
           {
             id: "select",
@@ -134,7 +134,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.nickNameType,
-            customParameters: "username",
+            customParameters: "memberName",
           },
           {
             span: "12",
@@ -149,7 +149,7 @@ export default {
             placeholder: "brandMessage",
             category: 5,
             format: "yyyy-MM-dd",
-            customParameters: "DateSelection",
+            customParameters: "reservationdate",
             classname: "",
             classnameitem: "",
             check: true,
@@ -171,13 +171,13 @@ export default {
             placeholder: "brandMessage",
             category: "20",
             format: "yyyy-MM-dd",
-            customParameters: "ww",
+            customParameters: "startTime",
             classname: "timeSel",
             classnameitem: "mm",
             startTime: "",
             endTime: "",
             check: true,
-            message: "333" /*校验提示语*/,
+            message: "brandMessage" /*校验提示语*/,
           },
           {
             span: "6",
@@ -194,14 +194,14 @@ export default {
             placeholder: "brandMessage",
             category: "21",
             format: "yyyy-MM-dd",
-            customParameters: "DateSelection",
+            customParameters: "endTime",
             classname: "timeSel",
             classnameitem: "mm",
             startTime: "",
             endTime: "",
             check: true,
             minTime: this.minTime,
-            message: "hhhhhhhhhh" /*校验提示语*/,
+            message: "brandMessage" /*校验提示语*/,
           },
           {
             // 下拉框
@@ -226,7 +226,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.apponitMethod,
-            customParameters: "select",
+            customParameters: "reservationM",
           },
           { span: 12 },
 
@@ -352,26 +352,7 @@ export default {
             classname: "",
             classnameitem: "",
           },
-          // {
-          //   // 多选框组
-          //   id: "Checkbox",
-          //   span: 12,
-          //   assemblyname: "多选框组",
-          //   label: "是否包场",
-          //   value: [],
-          //   type: "",
-          //   hidelabels: true,
-          //   classname: "",
-          //   message: "brandMessage",
-          //   placeholder: "brandMessage",
-          //   category: 2,
-          //   source: false,
-          //   check: false,
-          //   layoutmode: 0,
-          //   formStatus: true,
-          //   options: selectOption.yesOrNo,
-          //   customParameters: "Checkbox",
-          // },
+          
           {
             id: 3,
             label: "useCommonAll.tableNumber",
@@ -428,24 +409,7 @@ export default {
             classname: "",
             classnameitem: "",
           },
-          // {
-          //   id: 3,
-          //   label: "消费金额",
-          //   value: "￥2984973",
-          //   hidelabels: true,
-          //   message: "brandMessage",
-          //   disabled: true,
-          //   placeholder: "brandMessage",
-          //   category: 1,
-          //   source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-          //   apiUrl: "" /*接口api*/,
-          //   key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
-          //   val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
-          //   options: selectOption.coach,
-          //   customParameters: "Select",
-          //   classname: "",
-          //   classnameitem: "",
-          // },
+          
 
           {
             // 多行文本框
@@ -564,14 +528,14 @@ export default {
       console.log(data, 9999);
      
       switch (data.customParameters) {
-        case "photo":
+        case "memberNumber":
           
-          this.updateValue(['username','concatName','concatPhone'],[1,'NANCY',13766768878], this.formObj)
+          this.updateValue(['memberName','concatName','concatPhone'],[1,'NANCY',13766768878], this.formObj)
 
           break;
-        case "username":
+        case "memberName":
          
-          this.updateValue(['photo','concatName','concatPhone'],[1,'87879',18877767787], this.formObj)
+          this.updateValue(['memberNumber','concatName','concatPhone'],[1,'87879',18877767787], this.formObj)
 
           break;
         case "isPackage":

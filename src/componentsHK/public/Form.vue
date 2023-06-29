@@ -202,7 +202,7 @@
                     start: '08:30',
                     step: '00:15',
                     end: '18:30',
-                    minTime: domain.minTime,
+                    minTime:minTime,
                   }"
                 >
                 </el-time-select>
@@ -459,6 +459,7 @@ export default {
   components: { PageTitle, countryCodeSelector },
   data() {
     return {
+      minTime:'',
       imageUrl: "",
       formObj: {},
       dynamicValidateForm: {
@@ -539,6 +540,9 @@ export default {
     realtimeform(v) {
       this.Change && this.Change(v);
       this.realTimeForm && this.realTimeForm(this.dynamicValidateForm.domains);
+      if(v.category==20){
+        this.minTime=v.value
+      }
     },
     ClickItem() {
       alert();
