@@ -216,12 +216,19 @@
                 :inactive-color="domain.inactivecolor || '#999'"
               >
               </el-switch>
+             <div style="display: flex;flex-wrap: nowrap">
               <span
                 style="margin-right: 5px;"
                 v-if="domain.category == 14 && !domain.unit"
                 >{{ "$" }}</span
               >
+              <span
+                style="margin-right: 5px;"
+                v-if="domain.category == 14 && domain.customParameters=='discount'"
+                > - </span
+              >
               <el-input-number
+              style="width:90%"
                 v-if="domain.category == 14"
                 v-model="domain.value"
                 :disabled="domain.disabled"
@@ -235,6 +242,7 @@
                 v-if="domain.category == 14 && domain.unit"
                 >{{ domain.unit }}</span
               >
+             </div>
               <el-cascader
                 v-if="domain.category == 11"
                 v-model="domain.value"

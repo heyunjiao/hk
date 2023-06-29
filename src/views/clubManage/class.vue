@@ -29,8 +29,8 @@
           :handleSelectionChangeCom="handleSelectionChangeCom"
           :HandleCurrentChange="HandleCurrentChange"
         >
-          <template slot="status" scope="{row}"
-            ><!--switch控件插槽-->
+          <!-- <template slot="status" scope="{row}"
+            >
             <el-switch
               v-model="row.status"
              
@@ -39,11 +39,11 @@
           </template>
          
           <template slot="appoint" scope="{row}"
-            ><!--switch控件插槽-->
+            >
            <a class="a_link" href="#" @click="viewOrderFn">
          {{ $t('useCommonAll.view')}}
           </a>
-          </template>
+          </template> -->
         </Table>
       </div>
     </div>
@@ -84,14 +84,12 @@ export default {
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "150" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
           },
           {
             label: "useCommonAll.projectName" /*标题*/,
             prop: "id" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             width: "100" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
           },
           {
             label: "useCommonAll.type" /*标题*/,
@@ -101,18 +99,15 @@ export default {
           {
             label: "useCommonAll.price" /*标题*/,
             prop: "hexiao" /*绑定数据源obj展示字段*/,
-            // slot: false,  /*是否需要插槽*/
           },
           {
             label: "useCommonAll.number" /*标题*/,
             prop: "type" /*绑定数据源obj展示字段*/,
-            // slot: false,  /*是否需要插槽*/
           },
           
           {
             label: "useCommonAll.discount" /*标题*/,
             prop: "type" /*绑定数据源obj展示字段*/,
-            // slot: false,  /*是否需要插槽*/
           },
           
          
@@ -171,7 +166,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "Product name" /*对应api的参数名称*/,
+            customParameters: "projectName" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -183,7 +178,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "Product name" /*对应api的参数名称*/,
+            customParameters: "projectType" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -247,14 +242,8 @@ export default {
       /*复选框选中事件*/
       console.debug(val);
     },
+   
     submit(v, index, data, obj) {
-      /*
-       * TODO 参数：
-       * TODO v：当前点击按钮本身参数
-       * TODO index：当前点击按钮在集合的中的顺序
-       * TODO data：获取当前集合所有参数（包含input框输入值value等）;
-       * TODO obj key-value形式处理后数据 配合 customParameters
-       *  */
       console.log(v, index, data, obj);
 
       if (v.id == 0) {
@@ -268,44 +257,50 @@ export default {
       if (v.id == 1) {
         this.title = "高级搜索展开样式";
         this.status = false;
-
         this.$store.commit("functionAmbiguity", {
           data: data,
-          formObj1: this.formObj1,
+          formObj1: this.formObj,
           Callback: (response) => {
-            this.formObj1 = response.formObj1;
+            this.formObj = response.formObj1;
           },
         });
         return "";
       }
       if (v.id == "collape") {
-        this.title = this.$t("page.demo.fuzzySearch");
         this.status = true;
         this.tabData = [];
         this.$store.commit("functionTabData", {
           data: data,
-          formObj: this.formObj,
+          formObj: this.formObj1,
           tabData: this.tabData,
           Callback: (response) => {
-            this.formObj = response.formObj;
+            // console.log(response,'response');
+            this.formObj1 = response.formObj;
             this.tabData = response.tabData;
           },
         });
         return "";
       }
-      // if (v.id == 2 || v.id == 10) {
-      //   console.debug("批处理");
-      //   this.$message(this.$t("page.demo.batchProcessing"));
-      //   return "";
-      // }
-      // if (v.id == 3 || v.id == 11) {
-      //   console.debug("新增");
-      //   /* this.$router.push({
-      //              path: '/Form'
-      //            })*/
-      //   window.open("/Form");
-      //   return "";
-      // }
+    },
+    memberStatusChange(v, info) {
+      this.$confirm(this.$t(info), this.$t("useCommonAll.prompt"), {
+        confirmButtonText: this.$t("useCommonAll.ok"),
+        cancelButtonText: this.$t("useCommonAll.cancel"),
+        type: "warning",
+      })
+        .then(() => {
+          // v.memberstatus=1
+          this.$message({
+            type: "success",
+            message: this.$t("useCommonAll.operatorSuciscess"),
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: this.$t("useCommonAll.canceledOperator"),
+          });
+        });
     },
     // tablecao'z操作按钮设置
     operationSubmit(v, index, row) {
@@ -328,12 +323,10 @@ export default {
       }
       if (v.id == "cancel") {
        
-        this.$message.error('删除')
+        this.memberStatusChange(v, "useCommonAll.sureDeleteInfo");
+
       }
-      // if (v.id == 13) {
-      //   console.log("审批");
-      //   this.$message("审批");
-      // }
+      
     },
     openOrderFn() {
       console.log(111);
