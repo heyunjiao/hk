@@ -505,5 +505,9 @@ sureDeleteInfo:'Are you sure to delete this message',
 canceledOperator:'This operation has been cancelled',
 operatorSuciscess:'Operation successful',
 isCancelReservation:'Confirm to cancel this appointment',
+formatNotrue:'The format is incorrect',
+billMode:'Billing delivery mode',
+papperMode:'paper delivery(20$ per month)',
+paperModeFee:'20$ per month'
 }
 }

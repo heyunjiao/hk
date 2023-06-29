@@ -9,8 +9,7 @@
         :reset="resetForm"
         :realtimeform="realtimeform1"
       >
-    
-    </Form>
+      </Form>
     </div>
     <div class="mrb_20">
       <Form
@@ -29,8 +28,6 @@
       />
     </div>
 
-   
-   
     <div class="mrb_20">
       <Form
         ref="accountInfo"
@@ -45,9 +42,17 @@
     </div>
 
     <div class="btn-line" v-if="!this.formObj.formDisabled">
-      <el-checkbox v-model="confirmchecked"><span class="whrite-red">{{$t('useCommonAll.checkInfo')}}</span></el-checkbox>
-      <el-button @click="onSubmitFn" type="primary"  :disabled="!confirmchecked"
-        >{{ query.type == "add" ? $t('useCommonAll.createMembership') : $t('useCommonAll.updateMembership') }}
+      <el-checkbox v-model="confirmchecked"
+        ><span class="whrite-red">{{
+          $t("useCommonAll.checkInfo")
+        }}</span></el-checkbox
+      >
+      <el-button @click="onSubmitFn" type="primary" :disabled="!confirmchecked"
+        >{{
+          query.type == "add"
+            ? $t("useCommonAll.createMembership")
+            : $t("useCommonAll.updateMembership")
+        }}
       </el-button>
     </div>
   </div>
@@ -69,32 +74,12 @@ export default {
   },
   data() {
     return {
-
       imageUrl: "",
-      confirmchecked:false,
+      confirmchecked: false,
       submitObj: {},
       obj: {},
       query: {},
-      activeBtnCfg: {
-        // switch开关
-        id: "switch",
-        span: 12,
-        assemblyname: "",
-        label: "useCommonAll.isActivate",
-        value: "",
-        hidelabels: true,
-        classname: "",
-        message: "brandMessage",
-        disabled: false,
-        placeholder: "Please select",
-        category: 6,
-        check: false,
-        activecolor: "",
-        inactivecolor: "",
-        customParameters: "active",
-        formStatus: true,
-        activecolor: "",
-      },
+     
     };
   },
   watch: {
@@ -116,7 +101,6 @@ export default {
     }
 
     if (this.query.type === "view") {
-     
       this.formObj.formDisabled = true;
       this.formObj4.formDisabled = true;
       this.formObj2.formDisabled = true;
@@ -128,9 +112,16 @@ export default {
     if (this.query.type === "add") {
       this.delItem(this.formObj, "active");
     } else {
-      this.formObj.formData[0].disabled=true
-      this.formObj2.formData[0].disabled=true
-      this.formObj.formData.push(this.activeBtnCfg)
+      this.formObj.formData[0].disabled = true;
+      this.formObj2.formData[0].disabled = true;
+      if (!this.query.data.memberstatus) {
+        this.formObj.pageTitleSlot = {
+          visible: true,
+          text: "useCommonAll.isActivate",
+          fn: this.activeFn,
+        };
+      }
+
     }
     console.log(this.query);
   },
@@ -151,7 +142,7 @@ export default {
       console.debug(val);
     },
     delItem(formType, key) {
-      console.log(formType.formData,'formType.formData');
+      console.log(formType.formData, "formType.formData");
       const tempIndex = formType.formData.findIndex(
         (i) => i.customParameters === key
       );
@@ -161,7 +152,7 @@ export default {
     },
 
     cardSelectFn(item) {
-      console.log(item,'item')
+      console.log(item, "item");
       const openMasteCard = {
         // 下拉框
         id: "select",
@@ -185,7 +176,7 @@ export default {
         searchable: false,
         formStatus: true,
         customParameters: "chooseMasterCard",
-        options: selectOption.cardType
+        options: selectOption.cardType,
       };
       const MembershFipFee = {
         // 单行文本框
@@ -200,7 +191,7 @@ export default {
         message: "brandMessage" /*校验提示语*/,
         disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
         placeholder: "brandMessage" /*提示语*/,
-        category:14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+        category: 14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
         check: true /*是否校验*/,
         iconChekc: false /*是否展示icon*/,
         customParameters: "MembershFipFee" /*对应api的参数名称*/,
@@ -239,8 +230,6 @@ export default {
         this.formObj2.formData.push(MembershFipFee);
         this.formObj2.formData.push(MonthlyFees);
         this.delItem(this.formObj2, "chooseMasterCard");
-        
-       
       } else if (
         (item.value === 5 || item.value === 6 || item.value === 7) &&
         item.customParameters === "masterCard"
@@ -292,14 +281,32 @@ export default {
           const form2 = this.getStoreFormValue(this.formObj2.formData);
           const form3 = this.getStoreFormValue(this.formObj3.formData);
           const form4 = this.getStoreFormValue(this.formObj4.formData);
-// 单独处理手机区号
-const countryCode=this.formObj.formData.find(i=>i.customParameters==='tel')
-          console.log(form1,countryCode, form2, form3, form4, "form");
+          // 单独处理手机区号
+          const countryCode = this.formObj.formData.find(
+            (i) => i.customParameters === "tel"
+          );
+          console.log(form1, countryCode, form2, form3, form4, "form");
         })
         .catch((e) => console.log(e));
     },
-
-    
+    activeFn(){
+      this.$confirm(this.$t('useCommonAll.isActivate'), this.$t('useCommonAll.prompt'), {
+          confirmButtonText: this.$t('useCommonAll.ok'),
+          cancelButtonText:  this.$t('useCommonAll.cancel'),
+          type: 'warning'
+        }).then(() => {
+          // v.memberstatus=1
+          this.$message({
+            type: 'success',
+            message:this.$t('useCommonAll.operatorSuciscess') 
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: this.$t('useCommonAll.canceledOperator') 
+          });          
+        });
+    }
   },
   computed: {
     // ...mapState({
@@ -352,11 +359,10 @@ const countryCode=this.formObj.formData.find(i=>i.customParameters==='tel')
 </style>
 
 <style lang="scss">
-.open-card{
-  .el-col.el-col-24{
+.open-card {
+  .el-col.el-col-24 {
     height: auto !important;
     min-height: 60px !important;
   }
 }
-
 </style>

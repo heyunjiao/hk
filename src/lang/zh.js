@@ -507,6 +507,9 @@ sureDeleteInfo:'确定删除此条信息吗',
 canceledOperator:'已取消此操作',
 operatorSuciscess:'操作成功',
 isCancelReservation:'是否确认取消此预约',
+billMode:'账单发送模式',
+paperMode:'纸质寄送(每月收取20$)',
+paperModeFee:'每月收取20$'
 }
 }
 

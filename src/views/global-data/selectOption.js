@@ -1,44 +1,44 @@
 // 项目类型
-const  cardType=[
-   {
-    value:1 ,
+const cardType = [
+  {
+    value: 1,
     label: "useCommonAll.familyCardAll",
     disabled: false,
   },
   {
-    value: 8 ,
+    value: 8,
     label: "useCommonAll.familyCardPerson",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 4 ,
+    value: 4,
     label: "useCommonAll.familyCardCompany",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 2 ,
+    value: 2,
     label: "useCommonAll.familyCardSub",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 5 ,
+    value: 5,
     label: "useCommonAll.youngCardAll",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 6 ,
+    value: 6,
     label: "useCommonAll.youngCardOne",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 7 ,
+    value: 7,
     label: "useCommonAll.youngCardTwo",
-    disabled: false ,
+    disabled: false,
   },
-  
+
 ]
 // 头衔/称谓
-const  nickNameType=[
+const nickNameType = [
   {
     label: "Mr.",
     value: "1",
@@ -57,19 +57,19 @@ const  nickNameType=[
   },
 ]
 // 证件类型
-const documentType=[  {
+const documentType = [{
   label: "useCommonAll.identityCard",
   value: "1",
 },
 {
   label: "useCommonAll.passport",
   value: "3",
-},{
+}, {
   label: "useCommonAll.other",
   value: "4",
 }]
 // 账户权限
-const accountAuth=[
+const accountAuth = [
   { value: 1, label: "useCommonAll.reservationCourse", disabled: false },
   {
     value: 2,
@@ -83,176 +83,188 @@ const accountAuth=[
     value: 4,
     label: "useCommonAll.sportProject",
   },
- 
+
 ]
 // 项目类型
-const  projectType=[
-   {
+const projectType = [
+  {
     value: 1,
     label: "useCommonAll.tableTennis",
     disabled: false,
   },
   {
-    value: 2 ,
+    value: 2,
     label: "useCommonAll.golf",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 3 ,
+    value: 3,
     label: "useCommonAll.dinning",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 4 ,
+    value: 4,
     label: "useCommonAll.dance",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 5 ,
+    value: 5,
     label: "useCommonAll.spa",
-    disabled: false ,
+    disabled: false,
   },
 ]
 
 // 教练
-const coach=[
+const coach = [
   {
     value: 1,
     label: "Carry",
     disabled: false,
   },
   {
-    value: 2 ,
+    value: 2,
     label: "Honey",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 3 ,
+    value: 3,
     label: "Emali",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 4 ,
+    value: 4,
     label: "HELLY",
-    disabled: false ,
+    disabled: false,
   },
   {
-    value: 5 ,
+    value: 5,
     label: "GOLD",
-    disabled: false ,
+    disabled: false,
   },
 ]
 // 预约订单状态
-const apponitStatus=[{
+const apponitStatus = [{
   value: 1,
   label: "待确认",
   disabled: false,
 },
 {
-  value: 2 ,
+  value: 2,
   label: "已确认",
-  disabled: false ,
+  disabled: false,
 },
 {
-  value: 3 ,
+  value: 3,
   label: "已取消",
-  disabled: false ,
+  disabled: false,
 },]
 // 预约方式
-const apponitMethod=[{
+const apponitMethod = [{
   value: 1,
   label: "useCommonAll.phone",
   disabled: false,
 },
 {
-  value: 2 ,
+  value: 2,
   label: "useCommonAll.mail",
-  disabled: false ,
+  disabled: false,
 },
 {
-  value: 3 ,
+  value: 3,
   label: "useCommonAll.wechat",
-  disabled: false ,
-},{
-  value: 3 ,
+  disabled: false,
+}, {
+  value: 3,
   label: "useCommonAll.live",
-  disabled: false ,
+  disabled: false,
 }]
-const orderType=[
-  { value: 1,
-  label: "useCommonAll.reservationOrder",
-  disabled: false,},
-  { value: 2,
-  label: "useCommonAll.classPackageOrder",
-  disabled: false,},
-  { value: 3,
-  label: "useCommonAll.merchandiseOrder",
-  disabled: false,},
-  { value: 4,
-  label: "useCommonAll.cateringOrder",
-  disabled: false,},
-  { value: 5,
-  label: "useCommonAll.penaltyOrder",
-  disabled: false,}
+const orderType = [
+  {
+    value: 1,
+    label: "useCommonAll.reservationOrder",
+    disabled: false,
+  },
+  {
+    value: 2,
+    label: "useCommonAll.classPackageOrder",
+    disabled: false,
+  },
+  {
+    value: 3,
+    label: "useCommonAll.merchandiseOrder",
+    disabled: false,
+  },
+  {
+    value: 4,
+    label: "useCommonAll.cateringOrder",
+    disabled: false,
+  },
+  {
+    value: 5,
+    label: "useCommonAll.penaltyOrder",
+    disabled: false,
+  }
 ]
-const classType=[{
+const classType = [{
   value: 1,
   label: "useCommonAll.singleLesson",
   disabled: false,
 },
 {
-  value: 2 ,
+  value: 2,
   label: "useCommonAll.package",
-  disabled: false ,
+  disabled: false,
 },
 {
-  value: 3 ,
+  value: 3,
   label: "useCommonAll.monthlyFee",
-  disabled: false ,
+  disabled: false,
 }]
-const sexType=[{
+const sexType = [{
   value: 1,
   label: "useCommonAll.male",
   disabled: false,
 },
 {
-  value: 2 ,
+  value: 2,
   label: "useCommonAll.female",
-  disabled: false ,
+  disabled: false,
 },
 {
-  value: 3 ,
+  value: 3,
   label: "useCommonAll.other",
-  disabled: false ,
+  disabled: false,
 },
 ]
 
 
 
 // 是否 的下拉或者checkbox
-const yesOrNo= [
-  {"value": 1, 
-  "label": "useCommonAll.yes",
-   "disabled": false
+const yesOrNo = [
+  {
+    "value": 1,
+    "label": "useCommonAll.yes",
+    "disabled": false
   },
-   {
-  "value": 2,
-  "label": "useCommonAll.no",
-  "disabled": false
-}]
+  {
+    "value": 2,
+    "label": "useCommonAll.no",
+    "disabled": false
+  }]
 // 会籍
-const membershipyesOrNo= [
-  {"value": 1, 
-  "label": "useCommonAll.yes",
-   "disabled": true
+const membershipyesOrNo = [
+  {
+    "value": 1,
+    "label": "useCommonAll.yes",
+    "disabled": true
   },
-   {
-  "value": 2,
-  "label": "useCommonAll.no",
-  "disabled": true
-}]
+  {
+    "value": 2,
+    "label": "useCommonAll.no",
+    "disabled": true
+  }]
 // 核销状态
-const writeOff=[
+const writeOff = [
   { value: 1, label: "useCommonAll.checkedOff" },
   {
     value: 2,
@@ -260,7 +272,7 @@ const writeOff=[
   },
 ]
 // 商品分类
-const shopList=[
+const shopList = [
   { value: 1, label: "useCommonAll.souvenir" },
   {
     value: 2,
@@ -280,7 +292,7 @@ const shopList=[
   },
 ]
 // 支付状态
-const payStatus=[ { value: 1, label: "useCommonAll.payed" },
+const payStatus = [{ value: 1, label: "useCommonAll.payed" },
 {
   value: 2,
   label: "useCommonAll.unpay",
@@ -292,42 +304,48 @@ const payStatus=[ { value: 1, label: "useCommonAll.payed" },
 
 // 支付方式
 
-const payMethods=[ { value: 1, label: "POS" },
+const payMethods = [{ value: 1, label: "POS" },
 {
   value: 2,
   label: "useCommonAll.inlineConsume",
 },
 ]
 
-const orderStatus=[{ value: 1, label: "useCommonAll.completed" },
+const orderStatus = [{ value: 1, label: "useCommonAll.completed" },
 {
   value: 2,
   label: "useCommonAll.incomplete",
 },]
 
-const room=[{ value: 1, label: "room1" },
+const room = [{ value: 1, label: "room1" },
 {
   value: 2,
   label: "room2",
 },]
-  export default {
-    cardType,
-    projectType,
-    coach,
-    apponitStatus,
-    apponitMethod,
-    yesOrNo,
-    classType,
-    sexType,
-    nickNameType,
-    documentType,
-    accountAuth,
-    writeOff,
-    shopList,
-    payStatus,
-    payMethods,
-    orderStatus,
-    membershipyesOrNo,
-    orderType,
-    room
-  }
+// 邮寄方式
+const billMode = [
+  { value: 1, label: "useCommonAll.email" },
+ { value: 2, label: "useCommonAll.paperMode" },
+]
+export default {
+  cardType,
+  projectType,
+  coach,
+  apponitStatus,
+  apponitMethod,
+  yesOrNo,
+  classType,
+  sexType,
+  nickNameType,
+  documentType,
+  accountAuth,
+  writeOff,
+  shopList,
+  payStatus,
+  payMethods,
+  orderStatus,
+  membershipyesOrNo,
+  orderType,
+  room,
+  billMode
+}

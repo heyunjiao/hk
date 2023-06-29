@@ -302,7 +302,7 @@ let userMixin={
 
             formproperties: {
               inline: true,
-          
+              formlabelwidth:'130px'
             },
             formData: [
               {
@@ -369,6 +369,25 @@ let userMixin={
                 formStatus: true,
                 options: selectOption.membershipyesOrNo,
                 customParameters: "tt2",
+              },
+              {
+                // 多选框组
+                id: "Checkbox",
+                span: 24,
+                assemblyname: "",
+                label: "useCommonAll.billMode",
+                value: [1],
+                type: "",
+                hidelabels: true,
+                classname: "",
+                message: "brandMessage",
+                placeholder: "Please select",
+                category: 3,
+                source: false,
+                check: true,
+                layoutmode: 0,
+                options: selectOption.billMode,
+                customParameters: "tt324322",
               },
             ],
           },
@@ -585,7 +604,25 @@ let userMixin={
     },
     realtimeform1(val){
       console.log(val,9999);
-    }
+    },
+    memberStatusChange(v) {
+      this.$confirm(this.$t('useCommonAll.isActivate'), this.$t('useCommonAll.prompt'), {
+          confirmButtonText: this.$t('useCommonAll.ok'),
+          cancelButtonText:  this.$t('useCommonAll.cancel'),
+          type: 'warning'
+        }).then(() => {
+          // v.memberstatus=1
+          this.$message({
+            type: 'success',
+            message:this.$t('useCommonAll.operatorSuciscess') 
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: this.$t('useCommonAll.canceledOperator') 
+          });          
+        });
+    },
     }
 }
 
