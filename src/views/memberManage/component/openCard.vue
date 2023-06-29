@@ -216,16 +216,19 @@ export default {
         customParameters: "MonthlyFees" /*对应api的参数名称*/,
       };
 
-      this.delItem(this.formObj2, "MembershFipFee");
-      this.delItem(this.formObj2, "MonthlyFees");
+   
 
       // 选择附属卡 要求选择主卡
       if (item.value === 2 && item.customParameters === "masterCard") {
+        this.delItem(this.formObj2, "MembershFipFee");
+      this.delItem(this.formObj2, "MonthlyFees");
         this.formObj2.formData.splice(1, 0, openMasteCard);
       } else if (
         (item.value === 1 || item.value === 4 || item.value === 8) &&
         item.customParameters === "masterCard"
       ) {
+        this.delItem(this.formObj2, "MembershFipFee");
+      this.delItem(this.formObj2, "MonthlyFees");
         // 选择主卡
         this.formObj2.formData.push(MembershFipFee);
         this.formObj2.formData.push(MonthlyFees);
@@ -234,11 +237,15 @@ export default {
         (item.value === 5 || item.value === 6 || item.value === 7) &&
         item.customParameters === "masterCard"
       ) {
+        this.delItem(this.formObj2, "MembershFipFee");
+      this.delItem(this.formObj2, "MonthlyFees");
         // 选择青少年卡
         this.formObj2.formData.push(MembershFipFee);
         this.delItem(this.formObj2, "MonthlyFees");
         this.delItem(this.formObj2, "chooseMasterCard");
       } else if (item.customParameters === "masterCard") {
+        this.delItem(this.formObj2, "MembershFipFee");
+      this.delItem(this.formObj2, "MonthlyFees");
         this.delItem(this.formObj2, "chooseMasterCard");
       }
     },
@@ -281,11 +288,12 @@ export default {
           const form2 = this.getStoreFormValue(this.formObj2.formData);
           const form3 = this.getStoreFormValue(this.formObj3.formData);
           const form4 = this.getStoreFormValue(this.formObj4.formData);
+          const form5 = this.getStoreFormValue(this.formObj5.formData);
           // 单独处理手机区号
           const countryCode = this.formObj.formData.find(
             (i) => i.customParameters === "tel"
           );
-          console.log(form1, countryCode, form2, form3, form4, "form");
+          console.log(form1, countryCode, form2, form3, form4,form5, "form");
         })
         .catch((e) => console.log(e));
     },
