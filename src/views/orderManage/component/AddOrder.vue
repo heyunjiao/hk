@@ -9,9 +9,8 @@
         :reset="resetForm"
       />
     </div>
-  
 
-    <div class="btn-line" v-if=" !this.formObj.formDisabled">
+    <div class="btn-line" v-if="!this.formObj.formDisabled">
       <el-button @click="onSubmitFn" class="Search-btn"
         >{{ $t("useCommonAll.save") }}
       </el-button>
@@ -35,58 +34,59 @@ export default {
     return {
       submitObj: {},
       obj: {},
-      query:{},
-    
+      query: {},
     };
   },
   created() {
-    const {type,data}=this.$route.query
-    this.query={...this.query,type,data:JSON.parse(data)}
-    if(this.query.type==='view'){
-    this.formObj.formDisabled=true
-    const arr=[{
-                // 单行文本框
-                id: "input",
-                span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-                assemblyname: "input",
-                label: "useCommonAll.operator",
-                value: "" /*控件value / 默认值*/,
-                type: "" /*控件类型 支持原生*/,
-                hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-                classname: "" /*自定义class*/,
-                message: "brandMessage" /*校验提示语*/,
-                disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-                placeholder: "brandMessage" /*提示语*/,
-                category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-                check: false /*是否校验*/,
-                iconChekc: false /*是否展示icon*/,
-                customParameters: "operator" /*对应api的参数名称*/,
-              },
-              {
-                // 单行文本框
-                id: "input",
-                span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-                assemblyname: "input",
-                label: "useCommonAll.creatTime",
-                value: "" /*控件value / 默认值*/,
-                type: "" /*控件类型 支持原生*/,
-                hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-                classname: "" /*自定义class*/,
-                message: "brandMessage" /*校验提示语*/,
-                disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-                placeholder: "brandMessage" /*提示语*/,
-                category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-                check: false /*是否校验*/,
-                iconChekc: false /*是否展示icon*/,
-                customParameters: "creatTime" /*对应api的参数名称*/,
-              }]
-              this.formObj.formData=this.formObj.formData.concat(arr)
-
-    } if(this.query.type==='add'){
-      delItem(this.formObj,'active')
-    }else{
+    const { type, data } = this.$route.query;
+    this.query = { ...this.query, type, data: JSON.parse(data) };
+    if (this.query.type === "view") {
+      this.formObj.formDisabled = true;
+      const arr = [
+        {
+          // 单行文本框
+          id: "input",
+          span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
+          assemblyname: "input",
+          label: "useCommonAll.operator",
+          value: "" /*控件value / 默认值*/,
+          type: "" /*控件类型 支持原生*/,
+          hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
+          classname: "" /*自定义class*/,
+          message: "brandMessage" /*校验提示语*/,
+          disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+          placeholder: "brandMessage" /*提示语*/,
+          category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+          check: false /*是否校验*/,
+          iconChekc: false /*是否展示icon*/,
+          customParameters: "operator" /*对应api的参数名称*/,
+        },
+        {
+          // 单行文本框
+          id: "input",
+          span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
+          assemblyname: "input",
+          label: "useCommonAll.creatTime",
+          value: "" /*控件value / 默认值*/,
+          type: "" /*控件类型 支持原生*/,
+          hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
+          classname: "" /*自定义class*/,
+          message: "brandMessage" /*校验提示语*/,
+          disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+          placeholder: "brandMessage" /*提示语*/,
+          category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+          check: false /*是否校验*/,
+          iconChekc: false /*是否展示icon*/,
+          customParameters: "creatTime" /*对应api的参数名称*/,
+        },
+      ];
+      this.formObj.formData = this.formObj.formData.concat(arr);
     }
-  console.log(this.query);
+    if (this.query.type === "add") {
+      delItem(this.formObj, "active");
+    } else {
+    }
+    console.log(this.query);
   },
   methods: {
     saveAndAdd() {
@@ -104,7 +104,7 @@ export default {
     HandleCurrentChange(val) {
       console.debug(val);
     },
-    delItem(formType,key) {
+    delItem(formType, key) {
       const tempIndex = formType.formData.findIndex(
         (i) => i.customParameters === key
       );
@@ -113,7 +113,6 @@ export default {
       }
     },
 
-   
     ChangeSubmit(data, obj) {
       // console.debug(data, obj);
       this.obj = obj;
@@ -145,7 +144,11 @@ export default {
       Promise.all([p1])
         .then((result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
-
+          this.$message({
+            type: 'success',
+            message:this.$t('useCommonAll.operatorSuciscess') 
+          });
+          this.$router.push({ path: "/orderManage/index" });
           console.log(form1, "form");
         })
         .catch((e) => console.log(e));
@@ -194,10 +197,10 @@ export default {
 </style>
 
 <style lang="scss">
-.add-order{
-  .el-col{
+.add-order {
+  .el-col {
     height: auto !important;
-  min-height: 60px;
+    min-height: 60px;
   }
 }
 </style>

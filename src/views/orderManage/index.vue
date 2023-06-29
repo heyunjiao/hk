@@ -9,7 +9,7 @@
           <el-button
             @click="
               () => {
-                this.$message.warning('上传文件');
+                this.$message.warning(this.$t('useCommonAll.uploadFile'));
               }
             "
             size="large"

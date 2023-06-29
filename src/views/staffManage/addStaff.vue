@@ -25,7 +25,7 @@
     </div>
     <div class="mrb_20">
       <Form
-        ref="basicInfo"
+        ref="positioinInfo"
         :data="formObj1"
         :ChangeSubmit="ChangeSubmit1"
         :reset="resetForm"
@@ -166,7 +166,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "jobNumber" /*对应api的参数名称*/,
           },
           {
             // 单行文本框
@@ -184,7 +184,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "name" /*对应api的参数名称*/,
           },
           
           {
@@ -210,7 +210,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.sexType,
-            customParameters: "select",
+            customParameters: "sex",
           },
           {
             // 下拉框
@@ -235,7 +235,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.yesOrNo,
-            customParameters: "select",
+            customParameters: "entryStatus",
           },
           {
             // 下拉框
@@ -260,7 +260,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.projectType,
-            customParameters: "select",
+            customParameters: "position",
           },
 
           {
@@ -279,7 +279,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "phone" /*对应api的参数名称*/,
           },
           {
             // 单行文本框
@@ -297,7 +297,12 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "email" /*对应api的参数名称*/,
+            rule:{
+                  type:'email',
+                  // pattern:'/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/',
+                  message:'formatNotrue'
+                }
           },
 
           {
@@ -316,7 +321,7 @@ export default {
             category: 5,
             check: true,
             format: "yyyy-MM-dd",
-            customParameters: "dateSelection",
+            customParameters: "birthday",
             formStatus: true,
           },
           {
@@ -335,7 +340,7 @@ export default {
             category: 5,
             check: true,
             format: "yyyy-MM-dd",
-            customParameters: "dateSelection",
+            customParameters: "entryTime",
             formStatus: true,
           },
         ],
@@ -397,7 +402,30 @@ export default {
     },
     };
   },
+  created() {
+    const { type, data } = this.$route.query;
+    this.query = { ...this.query, type, data: JSON.parse(data) };
+    if (this.query.type === "view") {
+      this.formObj.formDisabled = true;
+      this.formObj1.formDisabled = true;
+     
+    }
+    if (this.query.type === "add") {
+      
+    }
+  },
   methods: {
+    getStoreFormValue(key) {
+      let tempdata;
+      this.$store.commit("keyValue", {
+        data: key,
+        Callback: (response) => {
+          tempdata = response;
+        },
+      });
+
+      return tempdata;
+    },
     ChangeSubmit(data, obj) {
       // console.debug(data, obj);
       this.obj = obj;
@@ -456,13 +484,15 @@ export default {
     },
     onSubmitFn() {
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
-      let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
-      Promise.all([p1, p2])
+      Promise.all([p1])
         .then((result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
-          const form2 = this.getStoreFormValue(this.formObj2.formData);
-
-          console.log(form1, form2, "form");
+          this.$message({
+            type: 'success',
+            message:this.$t('useCommonAll.operatorSuciscess') 
+          });
+          this.$router.push({ path: "/staff/staffList" });
+          console.log(form1, this.formObj1.formData[0].value, "form");
         })
         .catch((e) => console.log(e));
     },

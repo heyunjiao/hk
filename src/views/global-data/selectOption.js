@@ -327,6 +327,8 @@ const billMode = [
   { value: 1, label: "useCommonAll.email" },
  { value: 2, label: "useCommonAll.paperMode" },
 ]
+
+const roomStatus=[ { value: 1, label: "useCommonAll.roomNormal" }, { value: 2, label: "useCommonAll.roomMaintenance" }, { value: 3, label: "useCommonAll.roomDisable" }]
 export default {
   cardType,
   projectType,
@@ -347,5 +349,6 @@ export default {
   membershipyesOrNo,
   orderType,
   room,
-  billMode
+  billMode,
+  roomStatus
 }

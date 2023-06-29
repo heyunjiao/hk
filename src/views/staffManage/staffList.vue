@@ -201,18 +201,7 @@
           formproperties: {},
           formData: [
             /*TODO 控件配置数组*/
-            {
-              // 文本框
-              id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
-              label: "useCommonAll.name" /*todo 修改 控件label*/,
-              value: "",
-              hidelabels: true /*是否展示label标题*/,
-              placeholder: "brandMessage",
-              category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-              customParameters: "Product name" /*对应api的参数名称*/,
-              classname: "" /*默认为空*/,
-              classnameitem: "" /*默认为空*/,
-            },
+            
             {
               // 文本框
               id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
@@ -221,7 +210,19 @@
               hidelabels: true /*是否展示label标题*/,
               placeholder: "brandMessage",
               category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-              customParameters: "Product name" /*对应api的参数名称*/,
+              customParameters: "jobNumber" /*对应api的参数名称*/,
+              classname: "" /*默认为空*/,
+              classnameitem: "" /*默认为空*/,
+            },
+            {
+              // 文本框
+              id: "input" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+              label: "useCommonAll.name" /*todo 修改 控件label*/,
+              value: "",
+              hidelabels: true /*是否展示label标题*/,
+              placeholder: "brandMessage",
+              category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
+              customParameters: "name" /*对应api的参数名称*/,
               classname: "" /*默认为空*/,
               classnameitem: "" /*默认为空*/,
             },
@@ -233,7 +234,7 @@
               hidelabels: true /*是否展示label标题*/,
               placeholder: "brandMessage",
               category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-              customParameters: "Product name" /*对应api的参数名称*/,
+              customParameters: "position" /*对应api的参数名称*/,
               classname: "" /*默认为空*/,
               classnameitem: "" /*默认为空*/,
             },
@@ -245,7 +246,7 @@
               hidelabels: true /*是否展示label标题*/,
               placeholder: "brandMessage",
               category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-              customParameters: "Product name" /*对应api的参数名称*/,
+              customParameters: "phone" /*对应api的参数名称*/,
               classname: "" /*默认为空*/,
               classnameitem: "" /*默认为空*/,
             },
@@ -293,7 +294,7 @@
                       "value": "", /*todo 修改 控件 v-model 参数*/
                       "hidelabels": false, /*是否展示label标题*/
                       "disabled": false,  /*是否禁用 true 禁用 false 启用*/
-                      "placeholder": "模糊搜索",  /*todo 修改 placeholder 提示语*/
+                      "placeholder": "brandMessage",  /*todo 修改 placeholder 提示语*/
                       "category": 0,  /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/
                       "iconChekc": true,  /*是否带icon 模糊搜索 icon搜索框一体时候使用*/
                       "classname": "", /*自定义class*/
@@ -370,65 +371,44 @@
         console.debug(val);
       },
       submit(v, index, data, obj) {
-        /*
-         * TODO 参数：
-         * TODO v：当前点击按钮本身参数
-         * TODO index：当前点击按钮在集合的中的顺序
-         * TODO data：获取当前集合所有参数（包含input框输入值value等）;
-         * TODO obj key-value形式处理后数据 配合 customParameters
-         *  */
-        console.log(v, index, data, obj);
-  
-        if (v.id == 0) {
-          this.$message("搜索");
-          console.debug("搜索");
-          /* getTableData({
-                     value: v.value
-                   })*/
-        }
-  
-        if (v.id == 1) {
-          this.title = "高级搜索展开样式";
-          this.status = false;
-  
-          this.$store.commit("functionAmbiguity", {
-            data: data,
-            formObj1: this.formObj1,
-            Callback: (response) => {
-              this.formObj1 = response.formObj1;
-            },
-          });
-          return "";
-        }
-        if (v.id == "collape") {
-          this.title = this.$t("page.demo.fuzzySearch");
-          this.status = true;
-          this.tabData = [];
-          this.$store.commit("functionTabData", {
-            data: data,
-            formObj: this.formObj,
-            tabData: this.tabData,
-            Callback: (response) => {
-              this.formObj = response.formObj;
-              this.tabData = response.tabData;
-            },
-          });
-          return "";
-        }
-        // if (v.id == 2 || v.id == 10) {
-        //   console.debug("批处理");
-        //   this.$message(this.$t("page.demo.batchProcessing"));
-        //   return "";
-        // }
-        // if (v.id == 3 || v.id == 11) {
-        //   console.debug("新增");
-        //   /* this.$router.push({
-        //              path: '/Form'
-        //            })*/
-        //   window.open("/Form");
-        //   return "";
-        // }
-      },
+      console.log(v, index, data, obj);
+
+      if (v.id == 0) {
+        this.$message("搜索");
+        console.debug("搜索");
+        /* getTableData({
+                   value: v.value
+                 })*/
+      }
+
+      if (v.id == 1) {
+        this.title = "高级搜索展开样式";
+        this.status = false;
+        this.$store.commit("functionAmbiguity", {
+          data: data,
+          formObj1: this.formObj,
+          Callback: (response) => {
+            this.formObj = response.formObj1;
+          },
+        });
+        return "";
+      }
+      if (v.id == "collape") {
+        this.status = true;
+        this.tabData = [];
+        this.$store.commit("functionTabData", {
+          data: data,
+          formObj: this.formObj1,
+          tabData: this.tabData,
+          Callback: (response) => {
+            // console.log(response,'response');
+            this.formObj1 = response.formObj;
+            this.tabData = response.tabData;
+          },
+        });
+        return "";
+      }
+    },
       // tablecao'z操作按钮设置
       operationSubmit(v, index, row) {
         /*

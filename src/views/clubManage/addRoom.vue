@@ -68,7 +68,7 @@
               searchable: false,
               formStatus: true,
               options: selectOption.projectType,
-              customParameters: "select",
+              customParameters: "projectType",
             },
           {
               // 下拉框
@@ -92,8 +92,8 @@
               multiplechoice: false,
               searchable: false,
               formStatus: true,
-              options: selectOption.projectType,
-              customParameters: "select",
+              options: selectOption.roomStatus,
+              customParameters: "status",
             },
             {
               // 单行文本框
@@ -111,7 +111,7 @@
               category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
               check: true /*是否校验*/,
               iconChekc: false /*是否展示icon*/,
-              customParameters: "input" /*对应api的参数名称*/,
+              customParameters: "roomName" /*对应api的参数名称*/,
             },
             {
               // 单行文本框
@@ -129,7 +129,7 @@
               category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
               check: true /*是否校验*/,
               iconChekc: false /*是否展示icon*/,
-              customParameters: "input" /*对应api的参数名称*/,
+              customParameters: "capacity" /*对应api的参数名称*/,
             },
             {
               // 单行文本框
@@ -147,7 +147,7 @@
               category: 14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
               check: true /*是否校验*/,
               iconChekc: false /*是否展示icon*/,
-              customParameters: "input" /*对应api的参数名称*/,
+              customParameters: "roomPrice" /*对应api的参数名称*/,
             },
             {
             // 多行文本框
@@ -165,7 +165,7 @@
             category: 0,
             check: false,
             iconChekc: false,
-            customParameters: "textarea",
+            customParameters: "reamark",
             formStatus: true,
           },
        
@@ -247,13 +247,15 @@
       },
       onSubmitFn() {
         let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
-        let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
-        Promise.all([p1, p2])
+        Promise.all([p1])
           .then((result) => {
             const form1 = this.getStoreFormValue(this.formObj.formData);
-            const form2 = this.getStoreFormValue(this.formObj2.formData);
-  
-            console.log(form1, form2, "form");
+            this.$message({
+            type: 'success',
+            message:this.$t('useCommonAll.operatorSuciscess') 
+          });
+          this.$router.push({ path: "/clubManage/room" });
+            console.log(form1, "form");
           })
           .catch((e) => console.log(e));
       },

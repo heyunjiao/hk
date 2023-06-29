@@ -290,7 +290,9 @@ welcom:'欢迎您！'
 },
 
 
-useCommonAll:{memberManage:'会员管理',
+useCommonAll:{
+
+  memberManage:'会员管理',
 memberNumber:'会员号码',
 memberCardType:'会员卡类型',
 memberTitle:'称谓',
@@ -507,6 +509,7 @@ sureDeleteInfo:'确定删除此条信息吗',
 canceledOperator:'已取消此操作',
 operatorSuciscess:'操作成功',
 isCancelReservation:'是否确认取消此预约',
+formatNotrue:'格式不正确',
 billMode:'账单发送模式',
 paperMode:'纸质寄送(每月收取20$)',
 paperModeFee:'每月收取20$',
@@ -514,6 +517,10 @@ confirme:'待确认',
 orderConfirmHint:'此操作请务必对单个订单再做调整!!!',
 selectRoom:'请选择预约的房间！',
 batchBooking:'批量预定',
+uploadFile:'上传文件',
+roomNormal:'正常使用',
+roomMaintenance:'维护中',
+roomDisable:'停用'
 }
 }
 

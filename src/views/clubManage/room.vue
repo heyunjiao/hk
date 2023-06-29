@@ -156,7 +156,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "Product name" /*对应api的参数名称*/,
+            customParameters: "projectName" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -168,7 +168,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "Product name" /*对应api的参数名称*/,
+            customParameters: "roomName" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -278,26 +278,11 @@ export default {
         });
         return "";
       }
-      // if (v.id == 2 || v.id == 10) {
-      //   console.debug("批处理");
-      //   this.$message(this.$t("page.demo.batchProcessing"));
-      //   return "";
-      // }
-      // if (v.id == 3 || v.id == 11) {
-      //   console.debug("新增");
-      //   /* this.$router.push({
-      //              path: '/Form'
-      //            })*/
-      //   window.open("/Form");
-      //   return "";
-      // }
+      
     },
     // tablecao'z操作按钮设置
     operationSubmit(v, index, row) {
-      /*
-       * v：当前点击按钮内容
-       * index：当前点击行数索引
-       * row：当前点击行数对象*/
+     
       console.log(v, index, row);
       if (v.id == "edit") {
         this.$router.push({
@@ -312,13 +297,29 @@ export default {
         });
       }
       if (v.id == "cancel") {
-       
-        this.$message.error('取消订单')
+        this.memberStatusChange(v, "useCommonAll.sureDeleteInfo");
       }
-      // if (v.id == 13) {
-      //   console.log("审批");
-      //   this.$message("审批");
-      // }
+     
+    },
+    memberStatusChange(v, info) {
+      this.$confirm(this.$t(info), this.$t("useCommonAll.prompt"), {
+        confirmButtonText: this.$t("useCommonAll.ok"),
+        cancelButtonText: this.$t("useCommonAll.cancel"),
+        type: "warning",
+      })
+        .then(() => {
+          // v.memberstatus=1
+          this.$message({
+            type: "success",
+            message: this.$t("useCommonAll.operatorSuciscess"),
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: this.$t("useCommonAll.canceledOperator"),
+          });
+        });
     },
     openOrderFn() {
       console.log(111);
