@@ -509,7 +509,10 @@ formatNotrue:'The format is incorrect',
 billMode:'Billing delivery mode',
 papperMode:'paper delivery(20$ per month)',
 paperModeFee:'20$ per month',
-confirme:'To be confirmed'
+confirme:'To be confirmed',
+orderConfirmHint:'This operation must be adjusted for a single order!!!',
+selectRoom:'Please select the room you want to book!',
+batchBooking:'Batch Booking'
 
 }
 }

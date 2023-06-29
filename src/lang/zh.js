@@ -510,7 +510,10 @@ isCancelReservation:'是否确认取消此预约',
 billMode:'账单发送模式',
 paperMode:'纸质寄送(每月收取20$)',
 paperModeFee:'每月收取20$',
-confirme:'待确认'
+confirme:'待确认',
+orderConfirmHint:'此操作请务必对单个订单再做调整!!!',
+selectRoom:'请选择预约的房间！',
+batchBooking:'批量预定',
 }
 }
 

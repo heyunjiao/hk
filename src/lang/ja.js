@@ -253,6 +253,9 @@ formatNotrue:'格式不正確',
 billMode:'賬單發送模式',
 paperMode:'紙質寄送(每月收取20$)',
 paperModeFee:'每月收取20$',
-confirme:'待確認'
+confirme:'待確認',
+orderConfirmHint:'此操作請務必對單個訂單再做調整!!!',
+selectRoom:'請選擇預約的房間！',
+batchBooking:'批量預定',
   }
 }

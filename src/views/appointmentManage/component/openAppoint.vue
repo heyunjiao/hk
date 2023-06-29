@@ -99,7 +99,7 @@ export default {
             apiUrl: "",
             key: "",
             val: "",
-            check: false,
+            check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
@@ -129,7 +129,7 @@ export default {
             apiUrl: "",
             key: "",
             val: "",
-            check: false,
+            check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
@@ -352,7 +352,7 @@ export default {
             classname: "",
             classnameitem: "",
           },
-          
+
           {
             id: 3,
             label: "useCommonAll.tableNumber",
@@ -409,7 +409,6 @@ export default {
             classname: "",
             classnameitem: "",
           },
-          
 
           {
             // 多行文本框
@@ -512,30 +511,38 @@ export default {
       Promise.all([p1])
         .then((result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
-
+          this.$router.push({ path: "/appointmentManage/index" });
           console.log(form1, "form");
+          this.$message.success(this.$t('useCommonAll.operatorSuciscess'))
         })
         .catch((e) => console.log(e));
     },
-    updateValue(updateParam,updateData,formObj) {
-      updateParam.forEach((i,index) => {
-       const temp= formObj.formData.find(item=>item.customParameters === i)
-       temp.value=updateData[index]
+    updateValue(updateParam, updateData, formObj) {
+      updateParam.forEach((i, index) => {
+        const temp = formObj.formData.find(
+          (item) => item.customParameters === i
+        );
+        temp.value = updateData[index];
       });
-      
     },
     selectChange(data) {
-      console.log(data, 9999);
-     
+      // console.log(data, 9999);
+
       switch (data.customParameters) {
         case "memberNumber":
-          
-          this.updateValue(['memberName','concatName','concatPhone'],[1,'NANCY',13766768878], this.formObj)
+          this.updateValue(
+            ["memberName", "concatName", "concatPhone"],
+            [1, "NANCY", 13766768878],
+            this.formObj
+          );
 
           break;
         case "memberName":
-         
-          this.updateValue(['memberNumber','concatName','concatPhone'],[1,'87879',18877767787], this.formObj)
+          this.updateValue(
+            ["memberNumber", "concatName", "concatPhone"],
+            [1, "87879", 18877767787],
+            this.formObj
+          );
 
           break;
         case "isPackage":
@@ -570,7 +577,7 @@ export default {
           }
 
           break;
-          case "needCoach":
+        case "needCoach":
           if (data.value == 2) {
             const index = this.formObj.formData.findIndex(
               (i) => i.customParameters === "coachName"
@@ -580,23 +587,23 @@ export default {
             }
           } else {
             const coursePackage = {
-            id: 3,
-            label: "useCommonAll.coachName",
-            value: "",
-            hidelabels: true,
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "brandMessage",
-            category: 1,
-            source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            apiUrl: "" /*接口api*/,
-            key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
-            val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
-            options: selectOption.coach,
-            customParameters: "coachName",
-            classname: "",
-            classnameitem: "",
-          }
+              id: 3,
+              label: "useCommonAll.coachName",
+              value: "",
+              hidelabels: true,
+              message: "brandMessage",
+              disabled: false,
+              placeholder: "brandMessage",
+              category: 1,
+              source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
+              apiUrl: "" /*接口api*/,
+              key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
+              val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
+              options: selectOption.coach,
+              customParameters: "coachName",
+              classname: "",
+              classnameitem: "",
+            };
 
             this.dynamicChangeFn(this.formObj, "needCoach", coursePackage);
           }
