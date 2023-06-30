@@ -110,8 +110,7 @@ export default {
     resetForm() {
       console.debug("重置");
     },
-    upDataChange(v,data,i){
-      console.log(v,data,i);
+    upDataChange(v){
        const oldPasswordvalue= this.formObj.formData.find(i=>i.customParameters=='oldPassword').value.trim()
        const newPasswordvalue= this.formObj.formData.find(i=>i.customParameters=='newPassword').value.trim()
        console.log(oldPasswordvalue,newPasswordvalue,999);
