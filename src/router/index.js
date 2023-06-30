@@ -306,10 +306,12 @@ export const constantRoutes = [
       
     ]
   },
-  // 财务管理
+  // 核销管理
   {
     path: '/accountingManage ',
     component: Layout,
+
+    meta: { roles: ['admin',] },
     children: [
       {
         path: 'setting',

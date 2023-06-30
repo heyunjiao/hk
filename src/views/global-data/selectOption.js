@@ -324,8 +324,8 @@ const room = [{ value: 1, label: "room1" },
 },]
 // 邮寄方式
 const billMode = [
-  { value: 1, label: "useCommonAll.email" },
- { value: 2, label: "useCommonAll.paperMode" },
+  { value: 1, label: "useCommonAll.email", "disabled": true },
+//  { value: 2, label: "useCommonAll.paperMode" },
 ]
 
 const roomStatus=[ { value: 1, label: "useCommonAll.roomNormal" }, { value: 2, label: "useCommonAll.roomMaintenance" }, { value: 3, label: "useCommonAll.roomDisable" }]

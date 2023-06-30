@@ -24,7 +24,7 @@
       </Form>
     </div>
 
-    <div class="table-list mrb_20">
+    <div class="table-list mrb_20" v-if="position==='admin-token'">
       <div>
         <!--table表格-->
         <Table
@@ -49,7 +49,7 @@
 
     <div class="btn-line" v-if="!this.formObj.formDisabled">
       <el-button @click="onSubmitFn" class="Search-btn"
-        >{{ $t("page.demo.preservation") }}
+        >{{ $t("useCommonAll.save") }}
       </el-button>
     </div>
   </div>
@@ -60,6 +60,7 @@ import "@/config/ele/elementForm";
 import "@/config/ele/eleLayout";
 import { mapState } from "vuex";
 import Table from "@/componentsHK/public/Tabel";
+import Cookies from 'js-cookie'
 
 import Form from "@/componentsHK/public/Form";
 import selectOption from "@/views/global-data/selectOption";
@@ -70,6 +71,7 @@ export default {
   },
   data() {
     return {
+      position:Cookies.get('Admin-Token'),
       imageUrl: "",
       formObj: {
         title: "route.personalInfo" /*表单标题*/,
@@ -86,7 +88,7 @@ export default {
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
             label: "useCommonAll.jobNumber",
-            value: "" /*控件value / 默认值*/,
+            value: "1" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,
@@ -96,7 +98,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "jobNumber" /*对应api的参数名称*/,
           },
           {
             // 单行文本框
@@ -104,7 +106,7 @@ export default {
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: "input",
             label: "useCommonAll.name",
-            value: "" /*控件value / 默认值*/,
+            value: "1" /*控件value / 默认值*/,
             type: "" /*控件类型 支持原生*/,
             hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
             classname: "" /*自定义class*/,
@@ -114,7 +116,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "name" /*对应api的参数名称*/,
           },
           {
             // 下拉框
@@ -139,7 +141,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.sexType,
-            customParameters: "select",
+            customParameters: "sex",
           },
           {
             // 下拉框
@@ -164,7 +166,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.yesOrNo,
-            customParameters: "select",
+            customParameters: "entryStatus",
           },
           {
             // 下拉框
@@ -189,7 +191,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.projectType,
-            customParameters: "select",
+            customParameters: "position",
           },
 
           {
@@ -208,7 +210,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "phone" /*对应api的参数名称*/,
           },
           {
             // 单行文本框
@@ -226,7 +228,11 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "email" /*对应api的参数名称*/,
+            rule:{
+                  type:'email',
+                  message:'formatNotrue'
+                }
           },
 
           {
@@ -245,28 +251,10 @@ export default {
             category: 5,
             check: false,
             format: "yyyy-MM-dd",
-            customParameters: "dateSelection",
+            customParameters: "birthday",
             formStatus: true,
           },
-          // {
-          //   // 时间选选择器
-          //   id: "dateSelection",
-          //   span: 12,
-          //   assemblyname: "",
-          //   label: "头像",
-          //   value: "",
-          //   type: "date",
-          //   hidelabels: true,
-          //   classname: "",
-          //   message: "brandMessage",
-          //   disabled: false,
-          //   placeholder: "Please select",
-          //   category: 12,
-          //   check: false,
-          //   format: "yyyy-MM-dd",
-          //   customParameters: "dateSelection",
-          //   formStatus: true,
-          // },
+          
         ],
       },
       tableObj: {
@@ -355,6 +343,9 @@ export default {
       },
     };
   },
+  created(){
+    console.log(position,'position');
+  },
   methods: {
     ChangeSubmit(data, obj) {
       // console.debug(data, obj);
@@ -363,15 +354,25 @@ export default {
     resetForm() {
       console.debug("重置");
     },
+    getStoreFormValue(key) {
+      let tempdata;
+      this.$store.commit("keyValue", {
+        data: key,
+        Callback: (response) => {
+          tempdata = response;
+        },
+      });
+
+      return tempdata;
+    },
     onSubmitFn() {
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
-      let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
-      Promise.all([p1, p2])
+      Promise.all([p1])
         .then((result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
-          const form2 = this.getStoreFormValue(this.formObj2.formData);
+          this.$message.success(this.$t('useCommonAll.operatorSuciscess'))
 
-          console.log(form1, form2, "form");
+          console.log(form1, "form");
         })
         .catch((e) => console.log(e));
     },
