@@ -5,9 +5,10 @@
       :data="formObj"
       :ChangeSubmit="ChangeSubmit"
       :reset="resetForm"
+      :Change="upDataChange"
     />
     <div class="btn-line" v-if="!this.formObj.formDisabled">
-      <el-button @click="onSubmitFn" class="Search-btn"
+      <el-button @click="onSubmitFn" primary :disabled="disabled"
         >{{$t('useCommonAll.saveUpdate')}}
       </el-button>
     </div>
@@ -26,6 +27,7 @@ export default {
   },
   data() {
     return {
+      disabled:true,
       formObj: {
         title: "route.accountManage" /*表单标题*/,
 
@@ -72,7 +74,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "oldPassword" /*对应api的参数名称*/,
           },
           {
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
@@ -94,7 +96,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "input" /*对应api的参数名称*/,
+            customParameters: "newPassword" /*对应api的参数名称*/,
           },
         ],
       },
@@ -107,6 +109,25 @@ export default {
     },
     resetForm() {
       console.debug("重置");
+    },
+    upDataChange(v,data,i){
+      console.log(v,data,i);
+       const oldPasswordvalue= this.formObj.formData.find(i=>i.customParameters=='oldPassword').value.trim()
+       const newPasswordvalue= this.formObj.formData.find(i=>i.customParameters=='newPassword').value.trim()
+       console.log(oldPasswordvalue,newPasswordvalue,999);
+       if(oldPasswordvalue&&newPasswordvalue){
+      
+        if((v.customParameters==='newPassword'&&oldPasswordvalue)||(v.customParameters==='oldPassword'&&newPasswordvalue)){
+       if(oldPasswordvalue!==newPasswordvalue){
+        this.disabled=true
+        this.$message.error('两次输入密码不一致!')
+      }else{
+        this.disabled=false
+
+      }
+      }
+      
+      }
     },
     onSubmitFn() {
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");

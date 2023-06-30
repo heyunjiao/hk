@@ -203,12 +203,10 @@ export default {
           {
             label: "useCommonAll.orderStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
             label: "useCommonAll.verificationStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
             slot:true
           },
          
