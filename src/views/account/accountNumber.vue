@@ -119,7 +119,7 @@ export default {
         if((v.customParameters==='newPassword'&&oldPasswordvalue)||(v.customParameters==='oldPassword'&&newPasswordvalue)){
        if(oldPasswordvalue!==newPasswordvalue){
         this.disabled=true
-        this.$message.error('两次输入密码不一致!')
+        this.$message.error(this.$t('useCommonAll.passwordIncorrect'))
       }else{
         this.disabled=false
 

@@ -517,6 +517,7 @@ uploadFile:'Upload file',
 roomNormal:'Normal',
 roomMaintenance:'Maintenance',
 roomDisable:'Disable',
+passwordIncorrect:'The two passwords entered do not match!'
 
 }
 }

@@ -520,7 +520,8 @@ batchBooking:'批量预定',
 uploadFile:'上传文件',
 roomNormal:'正常使用',
 roomMaintenance:'维护中',
-roomDisable:'停用'
+roomDisable:'停用',
+passwordIncorrect:'两次输入密码不一致!'
 }
 }
 

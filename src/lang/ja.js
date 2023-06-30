@@ -261,5 +261,7 @@ export default {
     roomNormal:'正常使用',
 roomMaintenance:'維護中',
 roomDisable:'停用',
+passwordIncorrect:'兩次輸入密碼不一致!'
+
   }
 }
