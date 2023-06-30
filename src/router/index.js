@@ -50,7 +50,7 @@ export const constantRoutes = [
         path: 'welcom',
         component: () => import('@/views/welcom/index'),
         name: 'welcom',
-        meta: { title: 'welcom', icon: 'user', affix: true }
+        meta: { title: 'welcom', icon: 'user'}
       },
       
       
