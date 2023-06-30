@@ -8,7 +8,7 @@
       :Change="upDataChange"
     />
     <div class="btn-line" v-if="!this.formObj.formDisabled">
-      <el-button @click="onSubmitFn" primary :disabled="disabled"
+      <el-button @click="onSubmitFn" type='primary' :disabled="disabled"
         >{{$t('useCommonAll.saveUpdate')}}
       </el-button>
     </div>
@@ -126,6 +126,8 @@ export default {
       }
       }
       
+      }else{
+        this.disabled=false
       }
     },
     onSubmitFn() {
