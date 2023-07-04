@@ -262,7 +262,7 @@ export default {
 roomMaintenance:'維護中',
 roomDisable:'停用',
 passwordIncorrect:'兩次輸入密碼不一致!',
-roomUint:'房間單位',
+roomUint:'計價單位',
 roomUnitHour:'小時',
 roomUnitMin:'45分鐘',
 roomUintDay:'天',
