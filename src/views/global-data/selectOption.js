@@ -327,6 +327,14 @@ const billMode = [
   { value: 1, label: "useCommonAll.email", "disabled": true },
 //  { value: 2, label: "useCommonAll.paperMode" },
 ]
+// 房间单位
+const roomUint=[
+  { value: 1, label: "useCommonAll.roomUnitMin"},
+  { value: 2, label: "useCommonAll.roomUnitHour"},
+  { value: 3, label: "useCommonAll.roomUintDay"},
+  { value: 4, label: "useCommonAll.roomUnitWeek"},
+  { value: 5, label: "useCommonAll.roomUnitMonth"},
+]
 
 const roomStatus=[ { value: 1, label: "useCommonAll.roomNormal" }, { value: 2, label: "useCommonAll.roomMaintenance" }, { value: 3, label: "useCommonAll.roomDisable" }]
 export default {
@@ -350,5 +358,6 @@ export default {
   orderType,
   room,
   billMode,
-  roomStatus
+  roomStatus,
+  roomUint
 }

@@ -521,7 +521,13 @@ uploadFile:'上传文件',
 roomNormal:'正常使用',
 roomMaintenance:'维护中',
 roomDisable:'停用',
-passwordIncorrect:'两次输入密码不一致!'
+passwordIncorrect:'两次输入密码不一致!',
+roomUint:'房间单位',
+roomUnitHour:'小时',
+roomUnitMin:'45分钟',
+roomUintDay:'天',
+roomUnitWeek:'周',
+roomUnitMonth:'月',
 }
 }
 

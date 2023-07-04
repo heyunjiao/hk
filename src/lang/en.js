@@ -517,7 +517,12 @@ uploadFile:'Upload file',
 roomNormal:'Normal',
 roomMaintenance:'Maintenance',
 roomDisable:'Disable',
-passwordIncorrect:'The two passwords entered do not match!'
-
+passwordIncorrect:'The two passwords entered do not match!',
+roomUint:'Room Unit',
+roomUnitHour:'Hour',
+roomUnitMin:'45 minutes',
+roomUintDay:'Day',
+roomUnitWeek:'Week',
+roomUnitMonth:'Month',
 }
 }
