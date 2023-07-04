@@ -95,7 +95,7 @@ export default {
         selectionStatus: false /*是否需要复选框*/,
         childrenOperationText: "operation" /*子表操作栏标题*/,
         paginationStatus: true /*是否启用分页组件*/,
-        operationWidth: "300",
+        operationWidth: "200",
         total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
         page: 1,
         head: [
