@@ -98,6 +98,7 @@ export default {
         operationWidth: "200",
         total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
         page: 1,
+        pageSize:10,
         head: [
           {
             label: "" /*标题*/,
@@ -362,6 +363,7 @@ export default {
     };
   },
   created() {
+    console.log(this.tableObj,'this.tableObj');
     this.list(this.tableObj.page, this.tableObj.pageSize, "");
   },
   methods: {
