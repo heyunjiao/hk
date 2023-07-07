@@ -69,7 +69,7 @@ export default {
     return {
       // 在职状态
       entryStatus: ["", "在职", "离职", "已删除"],
-      genderStatus:[,'男','女','其他'],
+      genderStatus: [, "男", "女", "其他"],
       status: true,
       title: "",
       tabData: [],
@@ -119,7 +119,7 @@ export default {
             label: "useCommonAll.sex" /*标题*/,
             prop: "gender" /*绑定数据源obj展示字段*/,
             width: "140" /*表头宽度*/,
-            slot: true,  /*是否需要插槽*/
+            slot: true /*是否需要插槽*/,
           },
           {
             label: "useCommonAll.email" /*标题*/,
@@ -127,7 +127,7 @@ export default {
             width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
-          
+
           {
             label: "useCommonAll.entryStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
@@ -222,7 +222,8 @@ export default {
           },
           {
             // 文本框
-            id: "mobilePhone" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            id:
+              "mobilePhone" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
             label: "useCommonAll.phone" /*todo 修改 控件label*/,
             value: "",
             hidelabels: true /*是否展示label标题*/,
@@ -247,7 +248,6 @@ export default {
             icon: "el-icon-arrow-up" /*自定义icon，在 模糊搜索或按钮时候生效*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
-            
           },
           {
             id: "Search" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
@@ -266,7 +266,6 @@ export default {
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
-          
         ],
       },
       formObj1: {
@@ -287,8 +286,6 @@ export default {
             iconChekc: true /*是否带icon 模糊搜索 icon搜索框一体时候使用*/,
             classname: "" /*自定义class*/,
             customParameters: "workNum" /*对应api的参数名称*/,
-
-            
           },
           {
             id: 1,
@@ -304,7 +301,6 @@ export default {
               "Filter-btn" /*todo 修改 按钮类型 Filter-btn / Search-btn 对应目前两种样式*/,
           },
         ],
-        
       },
       url: {
         getListUrl: GetEmployeeList,
@@ -316,7 +312,7 @@ export default {
   },
   methods: {
     tabClose(data, v) {
-      console.log(data,v,999);
+      console.log(data, v, 999);
       this.$store.commit("functionTabClose", {
         v: v,
         formObj1: this.formObj,
@@ -342,6 +338,29 @@ export default {
         { type: "view", data: JSON.stringify({ a: "1" }) },
         this.$router
       );
+    },
+    // tablecao'z操作按钮设置
+    operationSubmit(v, index, row) {
+      /*
+       * v：当前点击按钮内容
+       * index：当前点击行数索引
+       * row：当前点击行数对象*/
+      console.log(v, index, row);
+      if (v.id == "edit") {
+        this.$router.push({
+          path: "/staff/addStaff",
+          query: { type: v.id, id: row.id },
+        });
+      }
+      if (v.id == "view") {
+        this.$router.push({
+          path: "/staff/addStaff",
+          query: { type: v.id, id: row.id },
+        });
+      }
+      if (v.id == "cancel") {
+        this.dialogFormVisible = true;
+      }
     },
   },
 };

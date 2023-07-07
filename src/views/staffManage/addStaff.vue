@@ -7,20 +7,6 @@
         :ChangeSubmit="ChangeSubmit"
         :reset="resetForm"
       >
-        <!-- <template>
-          <el-form-item label="头像">
-            <el-upload
-              class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
-            >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
-        </template> -->
       </Form>
     </div>
     <div class="mrb_20">
@@ -42,7 +28,7 @@
               :default-checked-keys="roleKeys"
               :current-node-key="roleKeyString"
               ref="tree"
-             :props="treeProps"
+              :props="treeProps"
             >
             </el-tree>
           </el-form-item>
@@ -66,6 +52,8 @@ import Table from "@/componentsHK/public/Tabel";
 
 import Form from "@/componentsHK/public/Form";
 import selectOption from "@/views/global-data/selectOption";
+import { AddEmployee,GetEmployee ,UpdateEmployee } from "@/api/staff";
+
 export default {
   components: {
     Form,
@@ -73,6 +61,7 @@ export default {
   },
   data() {
     return {
+      id: "",
       roleKeys: [1, 2, 3, 4, 9, 10],
       roleKeyString: "1,2,3,4,9,10",
       data: [
@@ -150,7 +139,7 @@ export default {
           inline: true,
         },
         formData: [
-        {
+          {
             // 单行文本框
             id: "input",
             span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
@@ -166,7 +155,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "jobNumber" /*对应api的参数名称*/,
+            customParameters: "workNum" /*对应api的参数名称*/,
           },
           {
             // 单行文本框
@@ -186,7 +175,7 @@ export default {
             iconChekc: false /*是否展示icon*/,
             customParameters: "name" /*对应api的参数名称*/,
           },
-          
+
           {
             // 下拉框
             id: "select",
@@ -210,7 +199,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.sexType,
-            customParameters: "sex",
+            customParameters: "gender",
           },
           {
             // 下拉框
@@ -235,7 +224,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.yesOrNo,
-            customParameters: "entryStatus",
+            customParameters: "status",
           },
           {
             // 下拉框
@@ -260,7 +249,7 @@ export default {
             searchable: false,
             formStatus: true,
             options: selectOption.projectType,
-            customParameters: "position",
+            customParameters: "roleId",
           },
 
           {
@@ -279,7 +268,7 @@ export default {
             category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
-            customParameters: "phone" /*对应api的参数名称*/,
+            customParameters: "mobilePhone" /*对应api的参数名称*/,
           },
           {
             // 单行文本框
@@ -298,11 +287,11 @@ export default {
             check: true /*是否校验*/,
             iconChekc: false /*是否展示icon*/,
             customParameters: "email" /*对应api的参数名称*/,
-            rule:{
-                  type:'email',
-                  // pattern:'/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/',
-                  message:'formatNotrue'
-                }
+            rule: {
+              type: "email",
+              // pattern:'/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/',
+              message: "formatNotrue",
+            },
           },
 
           {
@@ -340,13 +329,13 @@ export default {
             category: 5,
             check: true,
             format: "yyyy-MM-dd",
-            customParameters: "entryTime",
+            customParameters: "hiredate",
             formStatus: true,
           },
         ],
       },
       formObj1: {
-        title: 'useCommonAll.position'/*表单标题*/,
+        title: "useCommonAll.position" /*表单标题*/,
 
         formDisabled: false,
         formproperties: {
@@ -371,7 +360,11 @@ export default {
             layoutmode: 0,
             formStatus: true,
             options: [
-              { value: 1, label: "useCommonAll.receptionStaff", disabled: false },
+              {
+                value: 1,
+                label: "useCommonAll.receptionStaff",
+                disabled: false,
+              },
               {
                 value: 2,
                 label: "useCommonAll.restaurantStaff",
@@ -397,24 +390,42 @@ export default {
           },
         ],
       },
-      treeProps:{
-      label:(data,node)=>this.customLabel(data,node)
-    },
+      treeProps: {
+        label: (data, node) => this.customLabel(data, node),
+      },
+    
     };
   },
   created() {
-    const { type, data } = this.$route.query;
-    this.query = { ...this.query, type, data: JSON.parse(data) };
-    if (this.query.type === "view") {
-      this.formObj.formDisabled = true;
-      this.formObj1.formDisabled = true;
-     
-    }
-    if (this.query.type === "add") {
-      
+    this.query={type:this.$route.query.type,id:this.$route.query.id}
+    
+ 
+
+    if (this.query.id) {
+      this.getDetail(this.query.id);
+      if (this.query.type === "view") {
+        this.formObj.formDisabled = true;
+        this.formObj1.formDisabled = true;
+      }else if (this.query.type === "edit") {
+        this.formObj.formData[0].disabled = true;
+      }
+    } else {
     }
   },
   methods: {
+    echoFn(res){
+    this.formObj.formData.forEach(i=>{
+      if(res[i.customParameters]){
+        i.value=res[i.customParameters]
+      }else{
+      i.value=''
+      }
+    })
+    },
+    async getDetail(id) {
+      const res = await GetEmployee(id);
+    this.echoFn(res.result)
+    },
     getStoreFormValue(key) {
       let tempdata;
       this.$store.commit("keyValue", {
@@ -457,19 +468,19 @@ export default {
 
           break;
         case 4:
-          this.roleKeys = [2,6, 4, 9, 10];
+          this.roleKeys = [2, 6, 4, 9, 10];
           this.roleKeyString = "6,4,9,10";
-          this.$refs.tree.setCheckedKeys([2,6, 4, 9, 10]);
+          this.$refs.tree.setCheckedKeys([2, 6, 4, 9, 10]);
 
           break;
         case 5:
           this.roleKeys = [1, 3, 4, 5, 7, 8, 9, 10];
           this.roleKeyString = "1,3,4,5,7,8,9,10";
-          this.$refs.tree.setCheckedKeys([1, 3, 4, 5, 7, 8, 9, 10,11]);
+          this.$refs.tree.setCheckedKeys([1, 3, 4, 5, 7, 8, 9, 10, 11]);
 
           break;
         case 6:
-          this.roleKeys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11];
+          this.roleKeys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
           this.roleKeyString = "1,2,3,4,5,6,7,8,9,10";
           this.$refs.tree.setCheckedKeys([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
@@ -485,14 +496,20 @@ export default {
     onSubmitFn() {
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
       Promise.all([p1])
-        .then((result) => {
+        .then(async (result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
+          if (this.query.id) {
+
+            const res = await UpdateEmployee({...form1,id:this.query.id});
+          } else {
+            const res = await AddEmployee(form1);
+          }
+
           this.$message({
-            type: 'success',
-            message:this.$t('useCommonAll.operatorSuciscess') 
+            type: "success",
+            message: this.$t("useCommonAll.operatorSuciscess"),
           });
           this.$router.push({ path: "/staff/staffList" });
-          console.log(form1, this.formObj1.formData[0].value, "form");
         })
         .catch((e) => console.log(e));
     },
@@ -512,9 +529,9 @@ export default {
       // }
       // return isJPG && isLt2M;
     },
-    customLabel(data){
-      return this.$t(data.label)
-    }
+    customLabel(data) {
+      return this.$t(data.label);
+    },
   },
 };
 </script>

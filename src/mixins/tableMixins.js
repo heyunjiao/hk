@@ -106,34 +106,7 @@ export default {
                 return "";
             }
         },
-        // tablecao'z操作按钮设置
-        operationSubmit(v, index, row) {
-            /*
-             * v：当前点击按钮内容
-             * index：当前点击行数索引
-             * row：当前点击行数对象*/
-            console.log(v, index, row);
-            if (v.id == "edit") {
-                this.$router.push({
-                    path: "/staff/addStaff",
-                    query: { type: v.id, data: JSON.stringify(row) },
-                });
-            }
-            if (v.id == "view") {
-                this.$router.push({
-                    path: "/staff/addStaff",
-                    query: { type: v.id, data: JSON.stringify(row) },
-                });
-            }
-            if (v.id == "cancel") {
-                this.dialogFormVisible = true;
-                //   this.$message.error('取消订单')
-            }
-            // if (v.id == 13) {
-            //   console.log("审批");
-            //   this.$message("审批");
-            // }
-        },
+       
         // // 搜索
         // handleSearch() {
         //   let { order, prop } = this.sortParams;
