@@ -528,6 +528,13 @@ roomUnitMin:'45分钟',
 roomUintDay:'天',
 roomUnitWeek:'周',
 roomUnitMonth:'月',
+confirm:'确认',
+commodityType:'商品类型收纳',
+isPrimaryCard:'是否能为主卡',
+ensureMember:'是否确认会员已到场！',
+ensureReservation:'预约已确认，不可再次确认！',
+ensureConfirmReservation:'预约已确认，不可修改状态！',
+cancaleReservation:'预约已取消，不可修改状态！',
 }
 }
 

@@ -48,6 +48,9 @@
             ><!--switch控件插槽-->
             <span>{{ row.status === "1" ? "待确认" : "已确认" }}</span>
           </template>
+
+         
+        
         </Table>
       </div>
     </div>
@@ -129,6 +132,7 @@ export default {
             prop: "status" /*绑定数据源obj展示字段*/,
             slot: true,
           },
+          
         ],
         childrenHead: [
           /*子表头数组*/
@@ -154,16 +158,7 @@ export default {
             size: "mini" /*按钮大小 medium / small / mini*/,
             icon: "el-icon-delete" /*按钮icon*/,
           },
-          {
-            id: "connection" /*按钮ID*/,
-            value: "useCommonAll.cancel" /*按钮内容*/,
-            classname: "" /*自定义class*/,
-            disabled: false /*是否被禁用*/,
-            type:
-              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
-            size: "mini" /*按钮大小 medium / small / mini*/,
-            icon: "el-icon-connection" /*按钮icon*/,
-          },
+          
           {
             id: "view" /*按钮ID*/,
             value: "useCommonAll.view" /*按钮内容*/,
@@ -183,6 +178,26 @@ export default {
               "text" /*按钮类型 primary / success / warning / danger / info / text*/,
             size: "mini" /*按钮大小 medium / small / mini*/,
             icon: "el-icon-view" /*按钮icon*/,
+          },
+          {
+            id: "connection" /*按钮ID*/,
+            value: "useCommonAll.cancel" /*按钮内容*/,
+            classname: "" /*自定义class*/,
+            disabled: false /*是否被禁用*/,
+            type:
+              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+            size: "mini" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-remove" /*按钮icon*/,
+          },
+          {
+            id: "ok" /*按钮ID*/,
+            value: "useCommonAll.confirm" /*按钮内容*/,
+            classname: "" /*自定义class*/,
+            disabled: false /*是否被禁用*/,
+            type:
+              "text" /*按钮类型 primary / success / warning / danger / info / text*/,
+            size: "mini" /*按钮大小 medium / small / mini*/,
+            icon: "el-icon-thumb" /*按钮icon*/,
           },
         ],
         childrenOperationData: [
@@ -463,13 +478,30 @@ export default {
         this.memberStatusChange(v, "useCommonAll.sureDeleteInfo");
       }
       if (v.id == "connection") {
-        this.memberStatusChange(v, "useCommonAll.isCancelReservation");
+        if(row.status==='1'){
+          this.memberStatusChange(v, "useCommonAll.isCancelReservation");
+        }else if(row.status==='2'){
+        this.$message.warning(this.$t('useCommonAll.ensureConfirmReservation'))
+        }else if(row.status==='3'){
+        this.$message.warning(this.$t('useCommonAll.cancaleReservation'))
+        }
       }
       if (v.id == "view") {
         this.$router.push({
           path: "/appointmentManage/openAppoint",
           query: { type: v.id, data: JSON.stringify(row) },
         });
+      }
+      if (v.id == "ok") {
+        if(row.status==='1'){
+          this.memberStatusChange(v, "useCommonAll.ensureMember");
+        }else if(row.status==='2'){
+        this.$message.warning(this.$t('useCommonAll.ensureReservation'))
+        }else if(row.status==='3'){
+        this.$message.warning(this.$t('useCommonAll.cancaleReservation'))
+        }
+       
+        
       }
       if (v.id == "order") {
         this.viewOrderFn();

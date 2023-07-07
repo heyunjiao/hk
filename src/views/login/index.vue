@@ -177,16 +177,17 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
+          this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm)
-            .then(() => {
-              // 默认登陆就跳转会员列表页面
-              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-              this.loading = false
-            })
-            .catch(() => {
-              this.loading = false
-            })
+          // this.$store.dispatch('user/login', this.loginForm)
+          //   .then(() => {
+          //     // 默认登陆就跳转会员列表页面
+          //     this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+          //     this.loading = false
+          //   })
+          //   .catch(() => {
+          //     this.loading = false
+          //   })
         } else {
           console.log('error submit!!')
           return false

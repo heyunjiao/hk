@@ -203,7 +203,8 @@ const orderType = [
     value: 5,
     label: "useCommonAll.penaltyOrder",
     disabled: false,
-  }
+  },
+  
 ]
 const classType = [{
   value: 1,
@@ -287,6 +288,10 @@ const shopList = [
     label: "useCommonAll.fine",
   },
   {
+    value: 6,
+    label: "useCommonAll.commodityType",
+  },
+  {
     value: 3,
     label: "useCommonAll.otherCommodity",
   },
@@ -336,7 +341,14 @@ const roomUint=[
   { value: 5, label: "useCommonAll.roomUnitMonth"},
 ]
 
+
+
 const roomStatus=[ { value: 1, label: "useCommonAll.roomNormal" }, { value: 2, label: "useCommonAll.roomMaintenance" }, { value: 3, label: "useCommonAll.roomDisable" }]
+
+
+
+
+
 export default {
   cardType,
   projectType,
@@ -359,5 +371,6 @@ export default {
   room,
   billMode,
   roomStatus,
-  roomUint
+  roomUint,
+  
 }

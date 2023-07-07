@@ -379,11 +379,11 @@ export default {
         },
       });
     },
-    list() {
-      console.log(this.tableDataMock, "this.tableDataMock");
-      let tableObj = this.tableObj;
-      tableObj.tableData = this.tableDataMock;
-    },
+    // list() {
+    //   console.log(this.tableDataMock, "this.tableDataMock");
+    //   let tableObj = this.tableObj;
+    //   tableObj.tableData = this.tableDataMock;
+    // },
     HandleCurrentChange(val) {
       /*当前页*/
       console.debug(val);

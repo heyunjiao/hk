@@ -524,5 +524,11 @@ roomUnitMin:'45 minutes',
 roomUintDay:'Day',
 roomUnitWeek:'Week',
 roomUnitMonth:'Month',
+commodityType:'Commodity type storage',
+isPrimaryCard:'If or not the member can be the primary card',
+ensureMember:'If the member is confirmed to be present',
+ensureReservation:'Reservation is confirmed and cannot be reconfirmed',
+ensureConfirmReservation:'The appointment has been confirmed and cannot be modified!',
+cancaleReservation:'The reservation has been cancelled and the status cannot be modified',
 }
 }

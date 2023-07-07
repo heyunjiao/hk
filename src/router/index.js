@@ -58,7 +58,79 @@ export const constantRoutes = [
     ]
   },
 
+ // 员工管理
+ {
+  path: '/staff',
+  component: Layout,
+  meta: {
+    title: 'staffManagement',
+    icon: 'el-icon-s-tools',//staff
+    // roles: ['admin'] // you can set roles in root nav
+  },
+  children: [
 
+    {
+      path: 'staffList',
+      component: () => import('@/views/staffManage/staffList'),
+      name: 'setting',
+      meta: {
+        title: 'staffManagement',
+        // roles: ['admin'] // or you can only set roles in sub nav
+      }
+    },
+    {
+      path: 'addStaff',
+      component: () => import('@/views/staffManage/addStaff'),
+      name: 'setting',
+      hidden: true,
+      meta: {
+        title: '新建成员',
+        // roles: ['admin'] // or you can only set roles in sub nav
+      }
+    },
+    // {
+    //   path: 'nameplate',
+    //   component: () => import('@/views/staffManage/nameplate'),
+    //   name: 'setting',
+    //   meta: {
+    //     title: '铭牌管理',
+    //     roles: ['admin'] // or you can only set roles in sub nav
+    //   }
+    // },
+    // {
+    //   path: 'roleManage',
+    //   component: () => import('@/views/staffManage/roleManage'),
+    //   name: 'setting',
+    //   meta: {
+    //     title: '角色管理',
+    //     roles: ['admin'] // or you can only set roles in sub nav
+    //   }
+    // },
+    // {
+    //   path: 'addRole',
+    //   component: () => import('@/views/staffManage/addRole'),
+    //   name: 'setting',
+    //   hidden:true,
+    //   meta: {
+    //     title: '新建角色',
+    //     roles: ['admin'] // or you can only set roles in sub nav
+    //   }
+    // },
+    // {
+    //   path: 'use',
+    //   component: () => import('@/views/staffManage/useManage'),
+    //   name: 'useManage',
+    //   meta: {
+    //     title: '功能管理',
+    //     roles: ['admin'] // or you can only set roles in sub nav
+    //   }
+    // },
+
+
+
+
+  ]
+},
 
 
 

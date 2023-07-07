@@ -357,6 +357,7 @@
                 @change="selectChange(domain)"
                 default-first-option
                 :placeholder="$t(domain.placeholder)"
+                :disabled="domain.disabled"
               >
                 <el-option
                   v-for="item in domain.options"

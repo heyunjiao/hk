@@ -268,6 +268,12 @@ roomUnitMin:'45分鐘',
 roomUintDay:'天',
 roomUnitWeek:'周',
 roomUnitMonth:'月',
+commodityType:'商品類型收納',
+isPrimaryCard:'是否能為主卡',
+ensureMember:'是否確認會員已到場',
+ensureReservation:'預約已確認，不可再次確認',
+ensureConfirmReservation:'預約已確認，不可修改狀態！',
+cancaleReservation:'預約已取消，不可修改狀態',
 
   }
 }

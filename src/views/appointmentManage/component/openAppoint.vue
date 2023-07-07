@@ -348,7 +348,7 @@ export default {
             val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
             options: selectOption.coach,
             check: true,
-            customParameters: "Select",
+            customParameters: "roomName",
             classname: "",
             classnameitem: "",
           },
@@ -357,17 +357,17 @@ export default {
             id: 3,
             label: "useCommonAll.tableNumber",
             value: "",
+            type:"number",
             hidelabels: true,
             message: "brandMessage",
             disabled: false,
             placeholder: "brandMessage",
-            category: 1,
+            category: 0,
             source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
             apiUrl: "" /*接口api*/,
             key: "" /*TODO 筛选框  给用户展示的字段根据接口定义 label*/,
             val: "" /*TODO 筛选框  服务端所需字段根据接口定义 接口参数key*/,
-            options: selectOption.coach,
-            customParameters: "Select",
+            customParameters: "tableNumber",
             classname: "",
             classnameitem: "",
           },
@@ -453,6 +453,8 @@ export default {
       //   会员号码不能修改
       this.formObj.formData[0].disabled = true;
       this.formObj.formData[1].disabled = true;
+
+      console.log(this.formObj.formData[0],this.formObj.formData[1]);
     }
   },
   methods: {

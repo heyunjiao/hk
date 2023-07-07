@@ -186,7 +186,12 @@ export default {
             width: "200" /*表头固定，参数：left / right / ''*/,
           },
           {
-            label: "订单类型" /*标题*/,
+            label: "useCommonAll.orderType" /*标题*/,
+            prop: "timeLong" /*绑定数据源obj展示字段*/,
+            width: "200" /*表头固定，参数：left / right / ''*/,
+          },
+          {
+            label: "是否为主卡" /*标题*/,
             prop: "timeLong" /*绑定数据源obj展示字段*/,
             width: "200" /*表头固定，参数：left / right / ''*/,
           },

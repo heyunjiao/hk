@@ -36,7 +36,15 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+    proxy: {
+      "/Employee": {
+        target: "https://spinclub-api-test.gimind.com/",
+        ws: false,
+        changeOrigin: true,
+        
+      },
+     
+    },
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
