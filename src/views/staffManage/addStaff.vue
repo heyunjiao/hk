@@ -222,34 +222,34 @@ export default {
             multiplechoice: false,
             searchable: false,
             formStatus: true,
-            options: selectOption.yesOrNo,
+            options: selectOption.entryStatusList,
             customParameters: "status",
           },
-          {
-            // 下拉框
-            id: "select",
-            span: 12,
-            assemblyname: "下拉框",
-            label: "useCommonAll.position",
-            value: null,
-            type: "",
-            hidelabels: true,
-            classname: "",
-            message: "brandMessage",
-            disabled: false,
-            placeholder: "Please select",
-            category: 1,
-            source: true,
-            apiUrl: "",
-            key: "",
-            val: "",
-            check: true,
-            multiplechoice: false,
-            searchable: false,
-            formStatus: true,
-            options: selectOption.projectType,
-            customParameters: "roleId",
-          },
+          // {
+          //   // 下拉框
+          //   id: "select",
+          //   span: 12,
+          //   assemblyname: "下拉框",
+          //   label: "useCommonAll.position",
+          //   value: null,
+          //   type: "",
+          //   hidelabels: true,
+          //   classname: "",
+          //   message: "brandMessage",
+          //   disabled: false,
+          //   placeholder: "Please select",
+          //   category: 1,
+          //   source: true,
+          //   apiUrl: "",
+          //   key: "",
+          //   val: "",
+          //   check: true,
+          //   multiplechoice: false,
+          //   searchable: false,
+          //   formStatus: true,
+          //   options: selectOption.positionList,
+          //   customParameters: "roleId",
+          // },
 
           {
             // 单行文本框
@@ -358,33 +358,7 @@ export default {
             check: true,
             layoutmode: 0,
             formStatus: true,
-            options: [
-              {
-                value: 1,
-                label: "useCommonAll.receptionStaff",
-                disabled: false,
-              },
-              {
-                value: 2,
-                label: "useCommonAll.restaurantStaff",
-              },
-              {
-                value: 3,
-                label: "useCommonAll.coach",
-              },
-              {
-                value: 4,
-                label: "useCommonAll.finance",
-              },
-              {
-                value: 5,
-                label: "useCommonAll.supervisor",
-              },
-              {
-                value: 6,
-                label: "useCommonAll.administrator",
-              },
-            ],
+            options:selectOption.positionList,
             customParameters: "roleId",
           },
         ],
@@ -463,7 +437,7 @@ export default {
           this.$refs.tree.setCheckedKeys([1, 2, 3, 4, 9, 10]);
           break;
         case 2:
-          this.$refs.tree.setCheckedKeys([2, 4, 9]);
+          this.$refs.tree.setCheckedKeys([2, 4, 9,10]);
 
           break;
         case 3:

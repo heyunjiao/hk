@@ -346,8 +346,34 @@ const roomUint=[
 const roomStatus=[ { value: 1, label: "useCommonAll.roomNormal" }, { value: 2, label: "useCommonAll.roomMaintenance" }, { value: 3, label: "useCommonAll.roomDisable" }]
 
 
-
-
+// 在职状态
+const entryStatusList=[{ value: 1, label: "在职" },{ value: 2, label: "离职" }]
+// 角色
+const positionList=[ {
+  value: 1,
+  label: "useCommonAll.receptionStaff",
+  disabled: false,
+},
+{
+  value: 2,
+  label: "useCommonAll.restaurantStaff",
+},
+{
+  value: 3,
+  label: "useCommonAll.coach",
+},
+{
+  value: 4,
+  label: "useCommonAll.finance",
+},
+{
+  value: 5,
+  label: "useCommonAll.supervisor",
+},
+{
+  value: 6,
+  label: "useCommonAll.administrator",
+},]
 
 export default {
   cardType,
@@ -372,5 +398,7 @@ export default {
   billMode,
   roomStatus,
   roomUint,
+  entryStatusList,
+  positionList
   
 }

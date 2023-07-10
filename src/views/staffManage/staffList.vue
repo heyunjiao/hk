@@ -91,27 +91,27 @@ export default {
             label: "useCommonAll.jobNumber" /*标题*/,
             prop: "workNum" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "100" /*表头宽度*/,
+            // width: "100" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
 
           {
             label: "useCommonAll.position" /*标题*/,
             prop: "roleName" /*绑定数据源obj展示字段*/,
-            width: "100" /*表头宽度*/,
+            // width: "100" /*表头宽度*/,
           },
           {
             label: "useCommonAll.name" /*标题*/,
             prop: "name" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "200" /*表头宽度*/,
+            // width: "200" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
 
           {
             label: "useCommonAll.phone" /*标题*/,
             prop: "mobilePhone" /*绑定数据源obj展示字段*/,
-            width: "140" /*表头宽度*/,
+            // width: "140" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
 
@@ -131,14 +131,13 @@ export default {
           {
             label: "useCommonAll.entryStatus" /*标题*/,
             prop: "status" /*绑定数据源obj展示字段*/,
-            width: "140" /*表头宽度*/,
+            // width: "140" /*表头宽度*/,
             slot: true /*是否需要插槽*/,
           },
           {
             label: "useCommonAll.lastLoginTime" /*标题*/,
             prop: "LoginTime" /*绑定数据源obj展示字段*/,
-            width: "140" /*表头宽度*/,
-            // slot: false,  /*是否需要插槽*/
+            
           },
         ],
         childrenHead: [],
