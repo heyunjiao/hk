@@ -348,13 +348,13 @@ export default {
       console.log(v, index, row);
       if (v.id == "edit") {
         this.$router.push({
-          path: "/staff/addStaff",
+          path: "/staff/editStaff",
           query: { type: v.id, id: row.id },
         });
       }
       if (v.id == "view") {
         this.$router.push({
-          path: "/staff/addStaff",
+          path: "/staff/detailStaff",
           query: { type: v.id, id: row.id },
         });
       }

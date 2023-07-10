@@ -84,7 +84,27 @@ export const constantRoutes = [
       name: 'setting',
       hidden: true,
       meta: {
-        title: '新建成员',
+        title: 'newMember',
+        // roles: ['admin'] // or you can only set roles in sub nav
+      }
+    },
+    {
+      path: 'editStaff',
+      component: () => import('@/views/staffManage/addStaff'),
+      name: 'setting',
+      hidden: true,
+      meta: {
+        title: 'editStaff',
+        // roles: ['admin'] // or you can only set roles in sub nav
+      }
+    },
+    {
+      path: 'detailStaff',
+      component: () => import('@/views/staffManage/addStaff'),
+      name: 'setting',
+      hidden: true,
+      meta: {
+        title: 'staffDetail',
         // roles: ['admin'] // or you can only set roles in sub nav
       }
     },

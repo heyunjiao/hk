@@ -52,7 +52,7 @@ import Table from "@/componentsHK/public/Tabel";
 
 import Form from "@/componentsHK/public/Form";
 import selectOption from "@/views/global-data/selectOption";
-import { AddEmployee,GetEmployee ,UpdateEmployee } from "@/api/staff";
+import { AddEmployee, GetEmployee, UpdateEmployee } from "@/api/staff";
 
 export default {
   components: {
@@ -133,7 +133,6 @@ export default {
 
       formObj: {
         title: "useCommonAll.newMember" /*表单标题*/,
-
         formDisabled: false,
         formproperties: {
           inline: true,
@@ -182,7 +181,7 @@ export default {
             span: 12,
             assemblyname: "下拉框",
             label: "useCommonAll.sex",
-            value: 1,
+            value: null,
             type: "",
             hidelabels: true,
             classname: "",
@@ -207,7 +206,7 @@ export default {
             span: 12,
             assemblyname: "下拉框",
             label: "useCommonAll.entryStatus",
-            value: 1,
+            value: null,
             type: "",
             hidelabels: true,
             classname: "",
@@ -232,7 +231,7 @@ export default {
             span: 12,
             assemblyname: "下拉框",
             label: "useCommonAll.position",
-            value: 1,
+            value: null,
             type: "",
             hidelabels: true,
             classname: "",
@@ -386,45 +385,55 @@ export default {
                 label: "useCommonAll.administrator",
               },
             ],
-            customParameters: "Checkbox",
+            customParameters: "roleId",
           },
         ],
       },
       treeProps: {
         label: (data, node) => this.customLabel(data, node),
       },
-    
     };
   },
   created() {
-    this.query={type:this.$route.query.type,id:this.$route.query.id}
-    
- 
+    this.query = { type: this.$route.query.type, id: this.$route.query.id };
+    this.updateTitle();
 
     if (this.query.id) {
       this.getDetail(this.query.id);
       if (this.query.type === "view") {
         this.formObj.formDisabled = true;
         this.formObj1.formDisabled = true;
-      }else if (this.query.type === "edit") {
+      } else if (this.query.type === "edit") {
         this.formObj.formData[0].disabled = true;
       }
     } else {
     }
   },
   methods: {
-    echoFn(res){
-    this.formObj.formData.forEach(i=>{
-      if(res[i.customParameters]){
-        i.value=res[i.customParameters]
-      }else{
-      i.value=''
+    updateTitle() {
+      if (this.query.type === "view") {
+        this.formObj.title = "route.staffDetail";
+      } else if (this.query.type === "edit") {
+        this.formObj.title = "route.editStaff";
+      } else {
+        this.formObj.title = "useCommonAll.newMember";
       }
-    })
+    },
+    echoFn(res) {
+      this.formObj.formData.forEach((i) => {
+        if (res[i.customParameters]) {
+          i.value = res[i.customParameters];
+        } else {
+          i.value = "";
+        }
+      });
+
+      this.formObj1.formData[0].value = +res.roleId;
+      this.ChangeSel({ value: +res.roleId });
     },
     async getDetail(id) {
       const res = await GetEmployee(id);
-    this.echoFn(res.result)
+      this.echoFn(res.result);
     },
     getStoreFormValue(key) {
       let tempdata;
@@ -451,38 +460,26 @@ export default {
       console.log(data);
       switch (data.value) {
         case 1:
-          this.roleKeys = [1, 2, 3, 4, 9, 10];
-          this.roleKeyString = "1,2,3,4,9,10";
           this.$refs.tree.setCheckedKeys([1, 2, 3, 4, 9, 10]);
           break;
         case 2:
-          this.roleKeys = [];
-          this.roleKeyString = "";
-          this.$refs.tree.setCheckedKeys([]);
+          this.$refs.tree.setCheckedKeys([2, 4, 9]);
 
           break;
         case 3:
-          this.roleKeys = [4, 9, 10];
-          this.roleKeyString = "4,9,10";
-          this.$refs.tree.setCheckedKeys([4, 9, 10]);
+          this.$refs.tree.setCheckedKeys([2, 4, 9, 10]);
 
           break;
         case 4:
-          this.roleKeys = [2, 6, 4, 9, 10];
-          this.roleKeyString = "6,4,9,10";
           this.$refs.tree.setCheckedKeys([2, 6, 4, 9, 10]);
 
           break;
         case 5:
-          this.roleKeys = [1, 3, 4, 5, 7, 8, 9, 10];
-          this.roleKeyString = "1,3,4,5,7,8,9,10";
-          this.$refs.tree.setCheckedKeys([1, 3, 4, 5, 7, 8, 9, 10, 11]);
+          this.$refs.tree.setCheckedKeys([1, 2, 3, 4, 5, 7, 8, 9, 10]);
 
           break;
         case 6:
-          this.roleKeys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-          this.roleKeyString = "1,2,3,4,5,6,7,8,9,10";
-          this.$refs.tree.setCheckedKeys([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+          this.$refs.tree.setCheckedKeys([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 
           break;
 
@@ -495,14 +492,21 @@ export default {
     },
     onSubmitFn() {
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
+      let p2 = this.$refs.positioinInfo.validateFormPromis(
+        "dynamicValidateForm"
+      );
       Promise.all([p1])
         .then(async (result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData);
+          const form2 = this.getStoreFormValue(this.formObj1.formData);
           if (this.query.id) {
-
-            const res = await UpdateEmployee({...form1,id:this.query.id});
+            const res = await UpdateEmployee({
+              ...form1,
+              ...form2,
+              id: this.query.id,
+            });
           } else {
-            const res = await AddEmployee(form1);
+            const res = await AddEmployee({ ...form1, ...form2 });
           }
 
           this.$message({

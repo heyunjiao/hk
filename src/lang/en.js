@@ -87,8 +87,9 @@ export default {
   personalInfo:'Personal information',
   accountManage:'Account Management',
   financialManage:'Financial Management',
-  welcom:'Welcome'
-
+  welcom:'Welcome',
+  editStaff:'Edit Staff',
+  staffDetail:'Staff details',
 
 
   },

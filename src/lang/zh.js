@@ -87,7 +87,11 @@ personalCenter:'个人中心',
 personalInfo:'个人信息',
 accountManage:'账号管理',
 financialManage:'订单核销',
-welcom:'欢迎您！'
+welcom:'欢迎您！',
+editStaff:'编辑成员',
+staffDetail:'成员详情',
+newMember:'新建成员',
+
 
 
 
@@ -535,6 +539,7 @@ ensureMember:'是否确认会员已到场！',
 ensureReservation:'预约已确认，不可再次确认！',
 ensureConfirmReservation:'预约已确认，不可修改状态！',
 cancaleReservation:'预约已取消，不可修改状态！',
+
 }
 }
 

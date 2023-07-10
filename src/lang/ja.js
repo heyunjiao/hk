@@ -26,7 +26,9 @@ export default {
   financialManage:'財務核销',
   class:'課程管理',
   'welcom':'歡迎您',
-  appointeList:'預約管理'
+  appointeList:'預約管理',
+  editStaff:'編輯成員',
+staffDetail:'成員詳情',
 
 
   },
