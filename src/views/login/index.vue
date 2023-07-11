@@ -114,7 +114,7 @@ export default {
       },
       loginRules: {
         account: [{ required: true, trigger: 'blur' }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        password: [{ required: true, trigger: 'blur' }] //, validator: validatePassword
       },
       passwordType: 'password',
       capsTooltip: false,

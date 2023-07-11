@@ -12,7 +12,7 @@
         type="primary"
         :disabled="disabled"
         @click="onSubmitFn"
-      >{{ $t('useCommonAll.saveUpdate') }}
+      >{{ $t("useCommonAll.saveUpdate") }}
       </el-button>
     </div>
   </div>
@@ -24,6 +24,9 @@ import '@/config/ele/eleLayout'
 import { mapState } from 'vuex'
 import Form from '@/componentsHK/public/Form'
 import selectOption from '@/views/global-data/selectOption'
+import { SetPassword } from '@/api/staff'
+import store from '@/store'
+
 export default {
   components: {
     Form
@@ -46,7 +49,8 @@ export default {
             span: 12 /* 表单占据控件，容器分为 24份，需要整数*/,
             assemblyname: 'input',
             label: 'useCommonAll.account',
-            value: '' /* 控件value / 默认值*/,
+            value: JSON.parse(localStorage.getItem('userInfo'))
+              .workNum /* 控件value / 默认值*/,
             type: '' /* 控件类型 支持原生*/,
             hidelabels: true /* 是否展示label*/ /* 是否展示label标题*/,
             classname: '' /* 自定义class*/,
@@ -78,7 +82,7 @@ export default {
             category: 0 /* (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /* 是否校验*/,
             iconChekc: false /* 是否展示icon*/,
-            customParameters: 'oldPassword' /* 对应api的参数名称*/
+            customParameters: 'password' /* 对应api的参数名称*/
           },
           {
             span: 12 /* 表单占据控件，容器分为 24份，需要整数*/
@@ -101,6 +105,27 @@ export default {
             check: true /* 是否校验*/,
             iconChekc: false /* 是否展示icon*/,
             customParameters: 'newPassword' /* 对应api的参数名称*/
+          },
+          {
+            span: 12 /* 表单占据控件，容器分为 24份，需要整数*/
+          },
+          {
+            // 单行文本框
+            id: 'input',
+            span: 12 /* 表单占据控件，容器分为 24份，需要整数*/,
+            assemblyname: 'input',
+            label: '确认新密码',
+            value: '' /* 控件value / 默认值*/,
+            type: 'password' /* 控件类型 支持原生*/,
+            hidelabels: true /* 是否展示label*/ /* 是否展示label标题*/,
+            classname: '' /* 自定义class*/,
+            message: 'brandMessage' /* 校验提示语*/,
+            disabled: false /* 是否禁用*/ /* 是否禁用 true 禁用 false 启用*/,
+            placeholder: 'brandMessage' /* 提示语*/,
+            category: 0 /* (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+            check: true /* 是否校验*/,
+            iconChekc: false /* 是否展示icon*/,
+            customParameters: 'confirmnewPassword' /* 对应api的参数名称*/
           }
         ]
       }
@@ -115,12 +140,19 @@ export default {
       console.debug('重置')
     },
     upDataChange(v) {
-      const oldPasswordvalue = this.formObj.formData.find(i => i.customParameters == 'oldPassword').value.trim()
-      const newPasswordvalue = this.formObj.formData.find(i => i.customParameters == 'newPassword').value.trim()
-      console.log(oldPasswordvalue, newPasswordvalue, 999)
-      if (oldPasswordvalue && newPasswordvalue) {
-        if ((v.customParameters === 'newPassword' && oldPasswordvalue) || (v.customParameters === 'oldPassword' && newPasswordvalue)) {
-          if (oldPasswordvalue !== newPasswordvalue) {
+      const passwordvalue = this.formObj.formData
+        .find((i) => i.customParameters == 'confirmnewPassword')
+        .value.trim()
+      const newPasswordvalue = this.formObj.formData
+        .find((i) => i.customParameters == 'newPassword')
+        .value.trim()
+      console.log(passwordvalue, newPasswordvalue, 999)
+      if (passwordvalue && newPasswordvalue) {
+        if (
+          (v.customParameters === 'newPassword' && passwordvalue) ||
+          (v.customParameters === 'confirmnewPassword' && newPasswordvalue)
+        ) {
+          if (passwordvalue !== newPasswordvalue) {
             this.disabled = true
             this.$message.error(this.$t('useCommonAll.passwordIncorrect'))
           } else {
@@ -128,18 +160,39 @@ export default {
           }
         }
       } else {
-        this.disabled = false
+        this.disabled = true
       }
+    },
+    getStoreFormValue(key) {
+      let tempdata
+      this.$store.commit('keyValue', {
+        data: key,
+        Callback: (response) => {
+          tempdata = response
+        }
+      })
+
+      return tempdata
     },
     onSubmitFn() {
       const p1 = this.$refs.basicInfo.validateFormPromis('dynamicValidateForm')
-      const p2 = this.$refs.accountInfo.validateFormPromis('dynamicValidateForm')
-      Promise.all([p1, p2])
-        .then((result) => {
+      Promise.all([p1])
+        .then(async(result) => {
           const form1 = this.getStoreFormValue(this.formObj.formData)
-          const form2 = this.getStoreFormValue(this.formObj2.formData)
-
-          console.log(form1, form2, 'form')
+          const param = { ...form1 }
+          delete param.confirmnewPassword
+          const res = await SetPassword({
+            employeeId: JSON.parse(localStorage.getItem('userInfo')).id,
+            ...param
+          })
+          this.$message({
+            type: 'success',
+            message: this.$t('useCommonAll.operatorSuciscess')
+          })
+          store.dispatch('user/resetToken').then(() => {
+            location.reload()
+          })
+          console.log(form1, res, 'form')
         })
         .catch((e) => console.log(e))
     }
@@ -149,7 +202,7 @@ export default {
 
 <style lang="scss" scoped>
 .btn-line {
-    margin-top: 20px;
+  margin-top: 20px;
   text-align: right;
   padding: 15px;
   background-color: #fff;

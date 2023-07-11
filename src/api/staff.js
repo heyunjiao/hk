@@ -36,4 +36,11 @@ export function GetEmployeeOrderList(data) {
     data
   })
 }
+export function SetPassword(data) {
+  return request({
+    url: '/Employee/SetPassword',
+    method: 'post',
+    data
+  })
+}
 
