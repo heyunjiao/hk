@@ -33,35 +33,35 @@
           :HandleSizeChange="HandleSizeChange"
           :HandleCurrentChange="HandleCurrentChange"
         >
-          <template slot="allNum" scope="{row}">
-            <span>{{ row.type.indexOf("主卡") != -1 ? row.icon : "-" }}</span>
+          <template slot="cardCount" scope="{row}">
+            <span>{{ row.cardCount ? row.cardCount : "-" }}</span>
           </template>
           <template slot="status" scope="{row}">
-            <p v-if="!row.memberstatus">
+            <p v-if="!row.status">
               <el-switch
-              :value="row.memberstatus"
-              @change="memberStatusChange(row)"
-            />
+                :value="row.status"
+                @change="memberStatusChange(row)"
+              />
             </p>
             <p v-else>已激活</p>
           </template>
 
-          <template slot="id" scope="{row}">
+          <template slot="number" scope="{row}">
             <p
               class="a_link"
               href="#"
               @click="() => pushToDetail({ id: 'view' }, row)"
             >
-              {{ row.id }}
+              {{ row.number }}
             </p>
           </template>
-          <template slot="cardType" scope="{row}">
+          <template slot="memberCardInfo" scope="{row}">
             <p
               class="a_link"
               href="#"
               @click="pushToDetail({ id: 'view' }, row)"
             >
-              {{ row.type }}
+              {{ row.memberCardInfo.type |formatCardType}}
             </p>
           </template>
         </Table>
@@ -74,20 +74,27 @@
 import PageTitle from "@/componentsHK/public/PageTitle.vue";
 import FormCombination from "@/componentsHK/public/FormCombination.vue";
 import Table from "@/componentsHK/public/Tabel";
-import userMixin from "./useMixin";
+import tableMixins from "@/mixins/tableMixins";
+import { GetCustomerList, ActivateCustomer } from "@/api/member";
 import { window_open } from "@/utils/index";
 import selectOption from "@/views/global-data/selectOption";
 
 export default {
   name: "memberList",
-  mixins: [userMixin],
+  mixins: [tableMixins],
   components: { PageTitle, FormCombination, Table },
   data() {
     return {
       status: true,
       title: "",
       tabData: [],
+      url: {
+        getListUrl: GetCustomerList,
+      },
       tableObj: {
+        treeProps: {
+          children: "customerSubList",
+        },
         son: false /*是否有子级表单*/,
         operation: true /*是否展示操作按钮功能*/,
         childrenOperation: true /*是否展示子表操作按钮功能*/,
@@ -98,7 +105,7 @@ export default {
         operationWidth: "200",
         total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
         page: 1,
-        pageSize:10,
+        pageSize: 10,
         head: [
           {
             label: "" /*标题*/,
@@ -109,19 +116,19 @@ export default {
           /*表头数据*/
           {
             label: "useCommonAll.memberNumber" /*标题*/,
-            prop: "id" /*绑定数据源obj展示字段*/,
+            prop: "number" /*绑定数据源obj展示字段*/,
             fixed: "left" /*表头固定，参数：left / right / ''*/,
             slot: true /*是否需要插槽*/,
           },
           {
             label: "useCommonAll.memberCardType" /*标题*/,
-            prop: "cardType" /*绑定数据源obj展示字段*/,
+            prop: "memberCardInfo" /*绑定数据源obj展示字段*/,
             width: "160" /*表头宽度*/,
             slot: true /*是否需要插槽*/,
           },
           {
             label: "useCommonAll.memberTitle" /*标题*/,
-            prop: "nikename" /*绑定数据源obj展示字段*/,
+            prop: "title" /*绑定数据源obj展示字段*/,
             width: "80" /*表头宽度*/,
             // slot: false,  /*是否需要插槽*/
           },
@@ -134,22 +141,22 @@ export default {
 
           {
             label: "useCommonAll.sex" /*标题*/,
-            prop: "sex" /*绑定数据源obj展示字段*/,
+            prop: "gender" /*绑定数据源obj展示字段*/,
             width: "80" /*表头固定，参数：left / right / ''*/,
           },
           {
             label: "useCommonAll.phone" /*标题*/,
-            prop: "tel" /*绑定数据源obj展示字段*/,
+            prop: "contactPhone" /*绑定数据源obj展示字段*/,
             width: "" /*表头固定，参数：left / right / ''*/,
           },
           {
             label: "useCommonAll.email" /*标题*/,
-            prop: "tel" /*绑定数据源obj展示字段*/,
+            prop: "email" /*绑定数据源obj展示字段*/,
             width: "" /*表头固定，参数：left / right / ''*/,
           },
           {
             label: "useCommonAll.cardNumber" /*标题*/,
-            prop: "allNum" /*绑定数据源obj展示字段*/,
+            prop: "cardCount" /*绑定数据源obj展示字段*/,
             width: "130px" /*表头固定，参数：left / right / ''*/,
             slot: true,
           },
@@ -211,7 +218,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "memberNumber" /*对应api的参数名称*/,
+            customParameters: "number" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -235,7 +242,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "phone" /*对应api的参数名称*/,
+            customParameters: "contactPhone" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -250,7 +257,7 @@ export default {
             category: 1 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             source: true /*todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
             options: selectOption.cardType,
-            customParameters: "memberCardType" /*对应api的参数名称*/,
+            customParameters: "memberCardID" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -263,7 +270,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "secretaryName" /*对应api的参数名称*/,
+            customParameters: "secName" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -275,7 +282,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "secretaryPhone" /*对应api的参数名称*/,
+            customParameters: "secPhone" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -287,7 +294,7 @@ export default {
             hidelabels: true /*是否展示label标题*/,
             placeholder: "commen.brandMessage",
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
-            customParameters: "conmpanyName" /*对应api的参数名称*/,
+            customParameters: "companyName" /*对应api的参数名称*/,
             classname: "" /*默认为空*/,
             classnameitem: "" /*默认为空*/,
           },
@@ -308,7 +315,7 @@ export default {
             classnameitem: "" /*默认为空*/,
           },
           {
-            id: "search" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
+            id: "Search" /*自定义参数建议不重复 没有类型限制 建议用英文字母*/,
             label: "" /*todo 修改 控件label*/,
             value: "Search",
             hidelabels: true /*是否展示label标题*/,
@@ -344,6 +351,7 @@ export default {
             category: 0 /*todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             iconChekc: true /*是否带icon 模糊搜索 icon搜索框一体时候使用*/,
             classname: "" /*自定义class*/,
+            customParameters: "number" /* 对应api的参数名称*/,
           },
           {
             id: 1,
@@ -362,81 +370,27 @@ export default {
       },
     };
   },
+  filters:{
+  formatCardType:(value)=>{
+    switch (value) {
+      case 1:
+        return '家庭卡'
+        break;
+    
+      case 2:
+        return '青少年卡'
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+},
   created() {
-    console.log(this.tableObj,'this.tableObj');
     this.list(this.tableObj.page, this.tableObj.pageSize, "");
   },
   methods: {
-    tabClose(data, v) {
-      this.$store.commit("functionTabClose", {
-        v: v,
-        formObj1: this.formObj1,
-        data: data,
-        Callback: (response) => {
-          v = response.v;
-          this.formObj1 = response.formObj1;
-          this.tabData = response.data;
-        },
-      });
-    },
-    // list() {
-    //   console.log(this.tableDataMock, "this.tableDataMock");
-    //   let tableObj = this.tableObj;
-    //   tableObj.tableData = this.tableDataMock;
-    // },
-    HandleCurrentChange(val) {
-      /*当前页*/
-      console.debug(val);
-      this.tableObj.page = val;
-      this.list();
-    },
-    HandleSizeChange(val) {
-      /*每页多少条*/
-      console.debug(val);
-      this.tableObj.page = 1;
-      this.tableObj.pageSize = val;
-      this.list();
-    },
-
-    submit(v, index, data, obj) {
-      console.log(v, index, data, obj);
-
-      if (v.id == 0) {
-        this.$message("搜索");
-        console.debug("搜索");
-        /* getTableData({
-                   value: v.value
-                 })*/
-      }
-
-      if (v.id == 1) {
-        this.title = "高级搜索展开样式";
-        this.status = false;
-        this.$store.commit("functionAmbiguity", {
-          data: data,
-          formObj1: this.formObj,
-          Callback: (response) => {
-            this.formObj = response.formObj1;
-          },
-        });
-        return "";
-      }
-      if (v.id == "collape") {
-        this.status = true;
-        this.tabData = [];
-        this.$store.commit("functionTabData", {
-          data: data,
-          formObj: this.formObj1,
-          tabData: this.tabData,
-          Callback: (response) => {
-            // console.log(response,'response');
-            this.formObj1 = response.formObj;
-            this.tabData = response.tabData;
-          },
-        });
-        return "";
-      }
-    },
     // tablecao'z操作按钮设置
     operationSubmit(v, index, row) {
       /*
@@ -480,28 +434,35 @@ export default {
         query: { type: "add" },
       });
     },
+
     viewOrderFn(e) {
       window_open(e, "/orderManage/index", {}, this.$router);
     },
     memberStatusChange(v) {
-      this.$confirm(this.$t('useCommonAll.isActivate'), this.$t('useCommonAll.prompt'), {
-          confirmButtonText: this.$t('useCommonAll.ok'),
-          cancelButtonText:  this.$t('useCommonAll.cancel'),
-          type: 'warning'
-        }).then(() => {
-          // v.memberstatus=1
+      this.$confirm(
+        this.$t("useCommonAll.isActivate"),
+        this.$t("useCommonAll.prompt"),
+        {
+          confirmButtonText: this.$t("useCommonAll.ok"),
+          cancelButtonText: this.$t("useCommonAll.cancel"),
+          type: "warning",
+        }
+      )
+        .then(async () => {
+          const res = await ActivateCustomer({ customerId: v.id });
           this.$message({
-            type: 'success',
-            message:this.$t('useCommonAll.operatorSuciscess') 
+            type: "success",
+            message: this.$t("useCommonAll.operatorSuciscess"),
           });
-        }).catch(() => {
+          this.list();
+        })
+        .catch(() => {
           this.$message({
-            type: 'info',
-            message: this.$t('useCommonAll.canceledOperator') 
-          });          
+            type: "info",
+            message: this.$t("useCommonAll.canceledOperator"),
+          });
         });
     },
-   
   },
 };
 </script>

@@ -2,9 +2,9 @@
   <div class="tabel" style="">
     <div class="table" style="overflow:hidden;">
       <el-table
-          row-key="webId"
+          row-key="id"
           :border="false"
-          :tree-props="tableObj.treeProps == 0 ? {} : {children: 'children', hasChildren: 'hasChildren'}"
+          :tree-props="tableObj.treeProps ? tableObj.treeProps: {children: 'children', hasChildren: 'hasChildren'}"
           v-loading="loading"
           ref="multipleTable"
           :data="tableObj.tableData"

@@ -55,6 +55,12 @@ module.exports = {
         changeOrigin: true,
         
       },
+      "/Customer": {
+        target: "https://spinclub-api-test.gimind.com/",
+        ws: false,
+        changeOrigin: true,
+        
+      },
      
     },
   },
