@@ -4,7 +4,7 @@
       <Form
         ref="basicInfo"
         :data="formObj"
-        :ChangeSubmit="ChangeSubmit"
+        :change-submit="ChangeSubmit"
         :reset="resetForm"
       >
         <!-- <template>
@@ -24,389 +24,419 @@
       </Form>
     </div>
 
-    <div class="table-list mrb_20" v-if="position==='admin-token'">
+    <div v-if="position === 'admin-token'" class="table-list mrb_20">
       <div>
         <!--table表格-->
         <Table
-          :Obj="tableObj"
-          :HandleSizeChange="HandleSizeChange"
-          :HandleCurrentChange="HandleCurrentChange"
+          :obj="tableObj"
+          :handle-size-change="HandleSizeChange"
+          :handle-current-change="HandleCurrentChange"
         >
-          <template slot="status" scope="{row}"
-            ><!--switch控件插槽-->
-            <el-switch v-model="row.status"> </el-switch>
+          <template
+            slot="status"
+            scope="{row}"
+          ><!--switch控件插槽-->
+            <el-switch v-model="row.status" />
           </template>
           <!-- c查看订单详情 -->
-          <template slot="orderView" scope="{row}"
-            ><!--switch控件插槽-->
+          <template
+            slot="orderView"
+            scope="{row}"
+          ><!--switch控件插槽-->
             <a class="a_link" href="#" @click="viewOrderFn">
-              {{ $t('useCommonAll.view')}}
+              {{ $t("useCommonAll.view") }}
             </a>
           </template>
         </Table>
       </div>
     </div>
 
-    <div class="btn-line" v-if="!this.formObj.formDisabled">
-      <el-button @click="onSubmitFn" class="Search-btn"
-        >{{ $t("useCommonAll.save") }}
+    <div v-if="!this.formObj.formDisabled" class="btn-line">
+      <el-button
+        class="Search-btn"
+        @click="onSubmitFn"
+      >{{ $t("useCommonAll.save") }}
       </el-button>
     </div>
   </div>
 </template>
 
 <script>
-import "@/config/ele/elementForm";
-import "@/config/ele/eleLayout";
-import { mapState } from "vuex";
-import Table from "@/componentsHK/public/Tabel";
+import '@/config/ele/elementForm'
+import '@/config/ele/eleLayout'
+import { mapState } from 'vuex'
+import Table from '@/componentsHK/public/Tabel'
 import Cookies from 'js-cookie'
+import { AddEmployee, GetEmployee, UpdateEmployee } from '@/api/staff'
 
-import Form from "@/componentsHK/public/Form";
-import selectOption from "@/views/global-data/selectOption";
+import Form from '@/componentsHK/public/Form'
+import selectOption from '@/views/global-data/selectOption'
 export default {
   components: {
     Form,
-    Table,
+    Table
   },
   data() {
     return {
-      position:Cookies.get('Admin-Token'),
-      imageUrl: "",
+      id: JSON.parse(localStorage.getItem('userInfo')).id,
+      position: Cookies.get('Admin-Token'),
+      imageUrl: '',
       formObj: {
-        title: "route.personalInfo" /*表单标题*/,
+        title: 'route.personalInfo' /* 表单标题*/,
 
         formDisabled: false,
         formproperties: {
-          inline: true,
+          inline: true
         },
         formData: [
-          
           {
             // 单行文本框
-            id: "input",
-            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "useCommonAll.jobNumber",
-            value: "1" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "jobNumber" /*对应api的参数名称*/,
+            id: 'input',
+            span: 12 /* 表单占据控件，容器分为 24份，需要整数*/,
+            assemblyname: 'input',
+            label: 'useCommonAll.jobNumber',
+            value: '1' /* 控件value / 默认值*/,
+            type: '' /* 控件类型 支持原生*/,
+            hidelabels: true /* 是否展示label*/ /* 是否展示label标题*/,
+            classname: '' /* 自定义class*/,
+            message: 'brandMessage' /* 校验提示语*/,
+            disabled: true /* 是否禁用*/ /* 是否禁用 true 禁用 false 启用*/,
+            placeholder: 'brandMessage' /* 提示语*/,
+            category: 0 /* (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+            check: true /* 是否校验*/,
+            iconChekc: false /* 是否展示icon*/,
+            customParameters: 'workNum' /* 对应api的参数名称*/
           },
           {
             // 单行文本框
-            id: "input",
-            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "useCommonAll.name",
-            value: "1" /*控件value / 默认值*/,
-            type: "" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "name" /*对应api的参数名称*/,
+            id: 'input',
+            span: 12 /* 表单占据控件，容器分为 24份，需要整数*/,
+            assemblyname: 'input',
+            label: 'useCommonAll.name',
+            value: '1' /* 控件value / 默认值*/,
+            type: '' /* 控件类型 支持原生*/,
+            hidelabels: true /* 是否展示label*/ /* 是否展示label标题*/,
+            classname: '' /* 自定义class*/,
+            message: 'brandMessage' /* 校验提示语*/,
+            disabled: true /* 是否禁用*/ /* 是否禁用 true 禁用 false 启用*/,
+            placeholder: 'brandMessage' /* 提示语*/,
+            category: 0 /* (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+            check: true /* 是否校验*/,
+            iconChekc: false /* 是否展示icon*/,
+            customParameters: 'name' /* 对应api的参数名称*/
           },
           {
             // 下拉框
-            id: "select",
+            id: 'select',
             span: 12,
-            assemblyname: "下拉框",
-            label: "useCommonAll.sex",
+            assemblyname: '下拉框',
+            label: 'useCommonAll.sex',
             value: 1,
-            type: "",
+            type: '',
             hidelabels: true,
-            classname: "",
-            message: "brandMessage",
+            classname: '',
+            message: 'brandMessage',
             disabled: false,
-            placeholder: "Please select",
+            placeholder: 'Please select',
             category: 1,
             source: true,
-            apiUrl: "",
-            key: "",
-            val: "",
+            apiUrl: '',
+            key: '',
+            val: '',
             check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
             options: selectOption.sexType,
-            customParameters: "sex",
+            customParameters: 'gender'
           },
           {
             // 下拉框
-            id: "select",
+            id: 'select',
             span: 12,
-            assemblyname: "下拉框",
-            label: "useCommonAll.entryStatus",
+            assemblyname: '下拉框',
+            label: 'useCommonAll.entryStatus',
             value: 1,
-            type: "",
+            type: '',
             hidelabels: true,
-            classname: "",
-            message: "brandMessage",
+            classname: '',
+            message: 'brandMessage',
             disabled: false,
-            placeholder: "Please select",
+            placeholder: 'Please select',
             category: 1,
             source: true,
-            apiUrl: "",
-            key: "",
-            val: "",
+            apiUrl: '',
+            key: '',
+            val: '',
             check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
-            options: selectOption.yesOrNo,
-            customParameters: "entryStatus",
+            options: selectOption.entryStatusList,
+            customParameters: 'status'
           },
           {
             // 下拉框
-            id: "select",
+            id: 'select',
             span: 12,
-            assemblyname: "下拉框",
-            label: "useCommonAll.position",
+            assemblyname: '下拉框',
+            label: 'useCommonAll.position',
             value: 1,
-            type: "",
+            type: '',
             hidelabels: true,
-            classname: "",
-            message: "brandMessage",
+            classname: '',
+            message: 'brandMessage',
             disabled: false,
-            placeholder: "Please select",
+            placeholder: 'Please select',
             category: 1,
             source: true,
-            apiUrl: "",
-            key: "",
-            val: "",
+            apiUrl: '',
+            key: '',
+            val: '',
             check: true,
             multiplechoice: false,
             searchable: false,
             formStatus: true,
-            options: selectOption.projectType,
-            customParameters: "position",
+            options: selectOption.positionList,
+            customParameters: 'roleId'
           },
 
           {
             // 单行文本框
-            id: "input",
-            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "useCommonAll.phone",
-            value: "" /*控件value / 默认值*/,
-            type: "number" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "brandMessage" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "phone" /*对应api的参数名称*/,
+            id: 'input',
+            span: 12 /* 表单占据控件，容器分为 24份，需要整数*/,
+            assemblyname: 'input',
+            label: 'useCommonAll.phone',
+            value: '' /* 控件value / 默认值*/,
+            type: 'number' /* 控件类型 支持原生*/,
+            hidelabels: true /* 是否展示label*/ /* 是否展示label标题*/,
+            classname: '' /* 自定义class*/,
+            message: 'brandMessage' /* 校验提示语*/,
+            disabled: false /* 是否禁用*/ /* 是否禁用 true 禁用 false 启用*/,
+            placeholder: 'brandMessage' /* 提示语*/,
+            category: 0 /* (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+            check: true /* 是否校验*/,
+            iconChekc: false /* 是否展示icon*/,
+            customParameters: 'mobilePhone' /* 对应api的参数名称*/
           },
           {
             // 单行文本框
-            id: "input",
-            span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
-            assemblyname: "input",
-            label: "useCommonAll.email",
-            value: "" /*控件value / 默认值*/,
-            type: "email" /*控件类型 支持原生*/,
-            hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
-            classname: "" /*自定义class*/,
-            message: "brandMessage" /*校验提示语*/,
-            disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
-            placeholder: "" /*提示语*/,
-            category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
-            check: true /*是否校验*/,
-            iconChekc: false /*是否展示icon*/,
-            customParameters: "email" /*对应api的参数名称*/,
-            rule:{
-                  type:'email',
-                  message:'formatNotrue'
-                }
+            id: 'input',
+            span: 12 /* 表单占据控件，容器分为 24份，需要整数*/,
+            assemblyname: 'input',
+            label: 'useCommonAll.email',
+            value: '' /* 控件value / 默认值*/,
+            type: 'email' /* 控件类型 支持原生*/,
+            hidelabels: true /* 是否展示label*/ /* 是否展示label标题*/,
+            classname: '' /* 自定义class*/,
+            message: 'brandMessage' /* 校验提示语*/,
+            disabled: false /* 是否禁用*/ /* 是否禁用 true 禁用 false 启用*/,
+            placeholder: '' /* 提示语*/,
+            category: 0 /* (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
+            check: true /* 是否校验*/,
+            iconChekc: false /* 是否展示icon*/,
+            customParameters: 'email' /* 对应api的参数名称*/,
+            rule: {
+              type: 'email',
+              message: 'formatNotrue'
+            }
           },
 
           {
             // 时间选选择器
-            id: "dateSelection",
+            id: 'dateSelection',
             span: 12,
-            assemblyname: "",
-            label: "useCommonAll.birthday",
-            value: "",
-            type: "date",
+            assemblyname: '',
+            label: 'useCommonAll.birthday',
+            value: '',
+            type: 'date',
             hidelabels: true,
-            classname: "",
-            message: "brandMessage",
+            classname: '',
+            message: 'brandMessage',
             disabled: false,
-            placeholder: "Please select",
+            placeholder: 'Please select',
             category: 5,
             check: false,
-            format: "yyyy-MM-dd",
-            customParameters: "birthday",
-            formStatus: true,
-          },
-          
-        ],
+            format: 'yyyy-MM-dd',
+            customParameters: 'birthday',
+            formStatus: true
+          }
+        ]
       },
       tableObj: {
-        son: false /*是否有子级表单*/,
-        operation: false /*是否展示操作按钮功能*/,
-        childrenOperation: true /*是否展示子表操作按钮功能*/,
-        operationText: "operation" /*操作栏标题*/,
-        selectionStatus: false /*是否需要复选框*/,
-        childrenOperationText: "operation" /*子表操作栏标题*/,
-        paginationStatus: true /*是否启用分页组件*/,
-        operationWidth: "200",
-        total: 0 /*总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
+        son: false /* 是否有子级表单*/,
+        operation: false /* 是否展示操作按钮功能*/,
+        childrenOperation: true /* 是否展示子表操作按钮功能*/,
+        operationText: 'operation' /* 操作栏标题*/,
+        selectionStatus: false /* 是否需要复选框*/,
+        childrenOperationText: 'operation' /* 子表操作栏标题*/,
+        paginationStatus: true /* 是否启用分页组件*/,
+        operationWidth: '200',
+        total: 0 /* 总条数 通过 this.tableObj.total = 接口返回的总条数字段 api 请求*/,
         page: 1,
         head: [
-          /*表头数据*/
+          /* 表头数据*/
           {
-            label: "useCommonAll.orderNumber" /*标题*/,
-            prop: "id" /*绑定数据源obj展示字段*/,
-            fixed: "left" /*表头固定，参数：left / right / ''*/,
-            width: "200" /*表头宽度*/,
+            label: 'useCommonAll.orderNumber' /* 标题*/,
+            prop: 'id' /* 绑定数据源obj展示字段*/,
+            fixed: 'left' /* 表头固定，参数：left / right / ''*/,
+            width: '200' /* 表头宽度*/
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "useCommonAll.isVerification" /*标题*/,
-            prop: "hexiao" /*绑定数据源obj展示字段*/,
-            width: "100" /*表头宽度*/,
+            label: 'useCommonAll.isVerification' /* 标题*/,
+            prop: 'hexiao' /* 绑定数据源obj展示字段*/,
+            width: '100' /* 表头宽度*/
             // slot: false,  /*是否需要插槽*/
           },
           {
-            label: "useCommonAll.memberName" /*标题*/,
-            prop: "type" /*绑定数据源obj展示字段*/,
-            width: "140" /*表头宽度*/,
+            label: 'useCommonAll.memberName' /* 标题*/,
+            prop: 'type' /* 绑定数据源obj展示字段*/,
+            width: '140' /* 表头宽度*/
             // slot: false,  /*是否需要插槽*/
           },
 
           {
-            label: "useCommonAll.reservationTime" /*标题*/,
-            prop: "timeLong" /*绑定数据源obj展示字段*/,
-            width: "200" /*表头固定，参数：left / right / ''*/,
+            label: 'useCommonAll.reservationTime' /* 标题*/,
+            prop: 'timeLong' /* 绑定数据源obj展示字段*/,
+            width: '200' /* 表头固定，参数：left / right / ''*/
           },
           {
-            label: "useCommonAll.creatTime" /*标题*/,
-            prop: "timeLong" /*绑定数据源obj展示字段*/,
-            width: "200" /*表头固定，参数：left / right / ''*/,
+            label: 'useCommonAll.creatTime' /* 标题*/,
+            prop: 'timeLong' /* 绑定数据源obj展示字段*/,
+            width: '200' /* 表头固定，参数：left / right / ''*/
           },
           {
-            label: "useCommonAll.reservationItem" /*标题*/,
-            prop: "type" /*绑定数据源obj展示字段*/,
-            width: "120" /*表头固定，参数：left / right / ''*/,
+            label: 'useCommonAll.reservationItem' /* 标题*/,
+            prop: 'type' /* 绑定数据源obj展示字段*/,
+            width: '120' /* 表头固定，参数：left / right / ''*/
           },
           {
-            label: "useCommonAll.reservationRoom" /*标题*/,
-            prop: "home" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
+            label: 'useCommonAll.reservationRoom' /* 标题*/,
+            prop: 'home' /* 绑定数据源obj展示字段*/,
+            width: '80' /* 表头固定，参数：left / right / ''*/
           },
           {
-            label: "useCommonAll.reservationDetails" /*标题*/,
-            prop: "appoint" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
-            slot: true,
+            label: 'useCommonAll.reservationDetails' /* 标题*/,
+            prop: 'appoint' /* 绑定数据源obj展示字段*/,
+            width: '80' /* 表头固定，参数：left / right / ''*/,
+            slot: true
           },
           {
-            label: "useCommonAll.payMethod" /*标题*/,
-            prop: "pay" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
+            label: 'useCommonAll.payMethod' /* 标题*/,
+            prop: 'pay' /* 绑定数据源obj展示字段*/,
+            width: '80' /* 表头固定，参数：left / right / ''*/
           },
           {
-            label: "useCommonAll.orderStatus" /*标题*/,
-            prop: "pay" /*绑定数据源obj展示字段*/,
-            width: "80" /*表头固定，参数：left / right / ''*/,
+            label: 'useCommonAll.orderStatus' /* 标题*/,
+            prop: 'pay' /* 绑定数据源obj展示字段*/,
+            width: '80' /* 表头固定，参数：left / right / ''*/
           },
 
           {
-            label: "useCommonAll.remarkMessage" /*标题*/,
-            prop: "remark" /*绑定数据源obj展示字段*/,
-          },
+            label: 'useCommonAll.remarkMessage' /* 标题*/,
+            prop: 'remark' /* 绑定数据源obj展示字段*/
+          }
         ],
         childrenHead: [
-          /*子表头数组*/
+          /* 子表头数组*/
         ],
         operationData: [],
         childrenOperationData: [
-          /*字表操作栏*/
+          /* 字表操作栏*/
         ],
-        tableData: [{}],
-      },
-    };
+        tableData: [{}]
+      }
+    }
   },
-  created(){
-    console.log(position,'position');
+  created() {
+    this.getDetail(this.id)
   },
   methods: {
+    echoFn(res) {
+      this.formObj.formData.forEach((i) => {
+        if (res[i.customParameters]) {
+          i.value = res[i.customParameters]
+        } else {
+          i.value = ''
+        }
+      })
+      this.formObj.formData[4].value = +res.roleId
+      this.id = res.id
+    },
     ChangeSubmit(data, obj) {
       // console.debug(data, obj);
-      this.obj = obj;
+      this.obj = obj
     },
     resetForm() {
-      console.debug("重置");
+      console.debug('重置')
     },
     getStoreFormValue(key) {
-      let tempdata;
-      this.$store.commit("keyValue", {
+      let tempdata
+      this.$store.commit('keyValue', {
         data: key,
         Callback: (response) => {
-          tempdata = response;
-        },
-      });
+          tempdata = response
+        }
+      })
 
-      return tempdata;
+      return tempdata
+    },
+    async getDetail(id, setLocalStorage) {
+      const { result } = await GetEmployee(id)
+      if (setLocalStorage) {
+        localStorage.setItem('userInfo', JSON.stringify(result))
+      }
+      this.echoFn(result)
     },
     onSubmitFn() {
-      let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
+      const p1 = this.$refs.basicInfo.validateFormPromis('dynamicValidateForm')
       Promise.all([p1])
-        .then((result) => {
-          const form1 = this.getStoreFormValue(this.formObj.formData);
-          this.$message.success(this.$t('useCommonAll.operatorSuciscess'))
-
-          console.log(form1, "form");
+        .then(async(result) => {
+          const form1 = this.getStoreFormValue(this.formObj.formData)
+          const res = await UpdateEmployee({
+            ...form1,
+            id: this.id
+          })
+          this.$message({
+            type: 'success',
+            message: this.$t('useCommonAll.operatorSuciscess')
+          })
+          this.getDetail(this.id, 'setLocalStorage')
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.log(e))
     },
     HandleSizeChange(val) {
-      /*每页多少条*/
-      console.debug(val);
-      this.tableObj.page = 1;
-      this.tableObj.pageSize = val;
-      this.list();
+      /* 每页多少条*/
+      console.debug(val)
+      this.tableObj.page = 1
+      this.tableObj.pageSize = val
+      this.list()
     },
     HandleCurrentChange(val) {
-      /*当前页*/
-      console.debug(val);
-      this.tableObj.page = val;
-      this.list();
+      /* 当前页*/
+      console.debug(val)
+      this.tableObj.page = val
+      this.list()
     },
 
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+      this.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
+        this.$message.error('上传头像图片只能是 JPG 格式!')
       }
       if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
+        this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      return isJPG && isLt2M;
-    },
-  },
-};
+      return isJPG && isLt2M
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -414,9 +444,8 @@ export default {
   text-align: right;
   padding: 15px;
   background-color: #fff;
-   margin-bottom: 10px;
+  margin-bottom: 10px;
   /* display: flex;
     flex-direction: column-reverse; */
 }
-
 </style>

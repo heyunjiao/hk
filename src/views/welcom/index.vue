@@ -4,23 +4,23 @@
       <el-descriptions
         title="hah 您好！"
         column="4"
-        labelClassName="welcom-label"
-        contentClassName="welcom-content"
+        label-class-name="welcom-label"
+        content-class-name="welcom-content"
       >
-        <el-descriptions-item :label="$t('useCommonAll.jobNumber')"
-          >kooriookami</el-descriptions-item
-        >
-        <el-descriptions-item :label="$t('useCommonAll.name')"
-          >hah</el-descriptions-item
-        >
+        <el-descriptions-item :label="$t('useCommonAll.jobNumber')">{{
+          userInfo.workNum
+        }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('useCommonAll.name')">{{
+          userInfo.name
+        }}</el-descriptions-item>
 
-        <el-descriptions-item :label="$t('useCommonAll.position')"
-          ><el-tag>管理员</el-tag></el-descriptions-item
-        >
+        <el-descriptions-item
+          :label="$t('useCommonAll.position')"
+        ><el-tag>管理员</el-tag></el-descriptions-item>
 
-        <el-descriptions-item :label="$t('useCommonAll.entryTime')"
-          >2002/2/2</el-descriptions-item
-        >
+        <el-descriptions-item :label="$t('useCommonAll.entryTime')">{{
+          userInfo.hiredate | dateForm
+        }}</el-descriptions-item>
         <el-descriptions-item :label="$t('useCommonAll.functions')">
           会员管理 订单管理
         </el-descriptions-item>
@@ -40,33 +40,29 @@
         "
       >
         <el-image
-          style="width: 240px; height: 200px;"
+          style="width: 24%; height: 200px;"
           :src="require('../../assets/daotu/微信图片_20230626161033.jpg')"
           fit="fill"
           :preview-src-list="srcList"
-        >
-        </el-image>
+        />
         <el-image
-          style="width: 240px; height: 200px;"
+          style="width: 24%; height: 200px;"
           :src="require('../../assets/daotu/微信图片_20230626161033.png')"
           fit="fill"
           :preview-src-list="srcList"
-        >
-        </el-image>
+        />
         <el-image
-          style="width: 240px; height: 200px;"
+          style="width: 24%; height: 200px;"
           :src="require('../../assets/daotu/微信图片_202306261610331.jpg')"
           fit="fill"
           :preview-src-list="srcList"
-        >
-        </el-image>
+        />
         <el-image
-          style="width: 240px; height: 200px;"
+          style="width: 24%; height: 200px;"
           :src="require('../../assets/daotu/微信图片_202306261610331.png')"
           fit="fill"
           :preview-src-list="srcList"
-        >
-        </el-image>
+        />
       </div>
     </div>
   </div>
@@ -74,17 +70,23 @@
 
 <script>
 export default {
+  filters: {
+    dateForm: function(el) {
+      return el.split('T').join(' ')
+    }
+  },
   data() {
     return {
+      userInfo: JSON.parse(localStorage.getItem('userInfo')),
       srcList: [
-        require("../../assets/daotu/微信图片_20230626161033.jpg"),
-        require("../../assets/daotu/微信图片_20230626161033.png"),
-        require("../../assets/daotu/微信图片_202306261610331.jpg"),
-        require("../../assets/daotu/微信图片_202306261610331.png"),
-      ],
-    };
-  },
-};
+        require('../../assets/daotu/微信图片_20230626161033.jpg'),
+        require('../../assets/daotu/微信图片_20230626161033.png'),
+        require('../../assets/daotu/微信图片_202306261610331.jpg'),
+        require('../../assets/daotu/微信图片_202306261610331.png')
+      ]
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -101,6 +103,7 @@ export default {
 .welcom {
   padding: 20px;
   background: url("../../assets/daotu/welcomBgc.png");
+  background-size: cover;
   .welcom-label {
     color: #666;
   }

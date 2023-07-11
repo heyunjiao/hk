@@ -11,7 +11,7 @@ export function GetEmployee(data) {
   return request({
     url: '/Employee/GetEmployee',
     method: 'get',
-   params:{employeeId: data} 
+    params: { employeeId: data }
   })
 }
 export function AddEmployee(data) {
@@ -28,3 +28,12 @@ export function UpdateEmployee(data) {
     data
   })
 }
+
+export function GetEmployeeOrderList(data) {
+  return request({
+    url: '/Order/GetEmployeeOrderList',
+    method: 'post',
+    data
+  })
+}
+

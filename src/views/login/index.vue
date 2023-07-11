@@ -7,70 +7,70 @@
     <div class="login-right">
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
 
-<div class="title-container">
-  <!-- <h3 class="title">
+        <div class="title-container">
+          <!-- <h3 class="title">
     {{ $t('login.title') }}
   </h3>
   <lang-select class="set-language" /> -->
-  <el-image
-      class="login-logo"
-      :src="require('../../assets/login_img/logo.png')"    
-        fit="fill"></el-image>
-      <div class="title">Golf Club <div class="lang-icon"> <lang-select class="set-language" :fill="'#fff'" /></div></div>
-</div>
+          <el-image
+            class="login-logo"
+            :src="require('../../assets/login_img/logo.png')"
+            fit="fill"
+          />
+          <div class="title">Golf Club <div class="lang-icon"> <lang-select class="set-language" :fill="'#fff'" /></div></div>
+        </div>
 
+        <el-form-item prop="account">
+          <span class="svg-container">
+            <svg-icon icon-class="user" />
+          </span>
+          <el-input
+            ref="account"
+            v-model="loginForm.account"
+            :placeholder="$t('login.account')"
+            name="account"
+            type="text"
+            tabindex="1"
+            autocomplete="on"
+          />
+        </el-form-item>
 
-<el-form-item prop="username">
-  <span class="svg-container">
-    <svg-icon icon-class="user" />
-  </span>
-  <el-input
-    ref="username"
-    v-model="loginForm.username"
-    :placeholder="$t('login.username')"
-    name="username"
-    type="text"
-    tabindex="1"
-    autocomplete="on"
-  />
-</el-form-item>
+        <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
+          <el-form-item prop="password">
+            <span class="svg-container">
+              <svg-icon icon-class="password" />
+            </span>
+            <el-input
+              :key="passwordType"
+              ref="password"
+              v-model="loginForm.password"
+              :type="passwordType"
+              :placeholder="$t('login.password')"
+              name="password"
+              tabindex="2"
+              autocomplete="on"
+              @keyup.native="checkCapslock"
+              @blur="capsTooltip = false"
+              @keyup.enter.native="handleLogin"
+            />
+            <span class="show-pwd" @click="showPwd">
+              <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+            </span>
+          </el-form-item>
+        </el-tooltip>
 
-<el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
-  <el-form-item prop="password">
-    <span class="svg-container">
-      <svg-icon icon-class="password" />
-    </span>
-    <el-input
-      :key="passwordType"
-      ref="password"
-      v-model="loginForm.password"
-      :type="passwordType"
-      :placeholder="$t('login.password')"
-      name="password"
-      tabindex="2"
-      autocomplete="on"
-      @keyup.native="checkCapslock"
-      @blur="capsTooltip = false"
-      @keyup.enter.native="handleLogin"
-    />
-    <span class="show-pwd" @click="showPwd">
-      <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-    </span>
-  </el-form-item>
-</el-tooltip>
+        <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
+          {{ $t('login.logIn') }}
+        </el-button>
 
-<el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
-  {{ $t('login.logIn') }}
-</el-button>
-
-<!-- <div style="position:relative">
+        <!-- <div style="position:relative">
   <div class="tips">
-    <span>{{ $t('login.username') }} : admin</span>
+    <span>{{ $t('login.account') }} : admin</span>
     <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
   </div>
   <div class="tips">
     <span style="margin-right:18px;">
-      {{ $t('login.username') }} : editor
+      {{ $t('login.account') }} : editor
     </span>
     <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
   </div>
@@ -79,9 +79,8 @@
     {{ $t('login.thirdparty') }}
   </el-button>
 </div> -->
-</el-form>
+      </el-form>
     </div>
-   
 
     <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog">
       {{ $t('login.thirdpartyTips') }}
@@ -94,7 +93,6 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect'
 import SocialSign from './components/SocialSignin'
 
@@ -102,13 +100,6 @@ export default {
   name: 'Login',
   components: { LangSelect, SocialSign },
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
-    }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
         callback(new Error('The password can not be less than 6 digits'))
@@ -118,11 +109,11 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        account: '20230706888 ',
+        password: '123456'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        account: [{ required: true, trigger: 'blur' }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
@@ -141,7 +132,6 @@ export default {
           this.redirect = query.redirect
           this.otherQuery = this.getOtherQuery(query)
         }
-       
       },
       immediate: true
     }
@@ -150,8 +140,8 @@ export default {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === '') {
-      this.$refs.username.focus()
+    if (this.loginForm.account === '') {
+      this.$refs.account.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }
@@ -177,17 +167,16 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
           this.loading = true
-          // this.$store.dispatch('user/login', this.loginForm)
-          //   .then(() => {
-          //     // 默认登陆就跳转会员列表页面
-          //     this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-          //     this.loading = false
-          //   })
-          //   .catch(() => {
-          //     this.loading = false
-          //   })
+          this.$store.dispatch('user/login', this.loginForm)
+            .then(() => {
+              // 默认登陆就跳转会员列表页面
+              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+              this.loading = false
+            })
+            .catch(() => {
+              this.loading = false
+            })
         } else {
           console.log('error submit!!')
           return false

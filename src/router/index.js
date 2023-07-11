@@ -51,109 +51,10 @@ export const constantRoutes = [
         component: () => import('@/views/welcom/index'),
         name: 'welcom',
         meta: { title: 'welcom', icon: 'user' }
-      },
-
-
+      }
 
     ]
   },
-
- // 员工管理
- {
-  path: '/staff',
-  component: Layout,
-  meta: {
-    title: 'staffManagement',
-    icon: 'el-icon-s-tools',//staff
-    // roles: ['admin'] // you can set roles in root nav
-  },
-  children: [
-
-    {
-      path: 'staffList',
-      component: () => import('@/views/staffManage/staffList'),
-      name: 'setting',
-      meta: {
-        title: 'staffManagement',
-        // roles: ['admin'] // or you can only set roles in sub nav
-      }
-    },
-    {
-      path: 'addStaff',
-      component: () => import('@/views/staffManage/addStaff'),
-      name: 'setting',
-      hidden: true,
-      meta: {
-        title: 'newMember',
-        // roles: ['admin'] // or you can only set roles in sub nav
-      }
-    },
-    {
-      path: 'editStaff',
-      component: () => import('@/views/staffManage/addStaff'),
-      name: 'setting',
-      hidden: true,
-      meta: {
-        title: 'editStaff',
-        // roles: ['admin'] // or you can only set roles in sub nav
-      }
-    },
-    {
-      path: 'detailStaff',
-      component: () => import('@/views/staffManage/addStaff'),
-      name: 'setting',
-      hidden: true,
-      meta: {
-        title: 'staffDetail',
-        // roles: ['admin'] // or you can only set roles in sub nav
-      }
-    },
-    // {
-    //   path: 'nameplate',
-    //   component: () => import('@/views/staffManage/nameplate'),
-    //   name: 'setting',
-    //   meta: {
-    //     title: '铭牌管理',
-    //     roles: ['admin'] // or you can only set roles in sub nav
-    //   }
-    // },
-    // {
-    //   path: 'roleManage',
-    //   component: () => import('@/views/staffManage/roleManage'),
-    //   name: 'setting',
-    //   meta: {
-    //     title: '角色管理',
-    //     roles: ['admin'] // or you can only set roles in sub nav
-    //   }
-    // },
-    // {
-    //   path: 'addRole',
-    //   component: () => import('@/views/staffManage/addRole'),
-    //   name: 'setting',
-    //   hidden:true,
-    //   meta: {
-    //     title: '新建角色',
-    //     roles: ['admin'] // or you can only set roles in sub nav
-    //   }
-    // },
-    // {
-    //   path: 'use',
-    //   component: () => import('@/views/staffManage/useManage'),
-    //   name: 'useManage',
-    //   meta: {
-    //     title: '功能管理',
-    //     roles: ['admin'] // or you can only set roles in sub nav
-    //   }
-    // },
-
-
-
-
-  ]
-},
-
-
-
 
   {
     path: '/demo',
@@ -185,11 +86,10 @@ export const constantRoutes = [
           title: 'demo',
           roles: ['admin'] // or you can only set roles in sub nav
         }
-      },
+      }
 
     ]
   },
-
 
   {
     path: '/redirect',
@@ -222,7 +122,7 @@ export const constantRoutes = [
     path: '/401',
     component: () => import('@/views/error-page/401'),
     hidden: true
-  },
+  }
 ]
 
 /**
@@ -253,8 +153,7 @@ export const asyncRoutes = [
         meta: {
           roles: ['admin']
         }
-      },
-
+      }
 
     ]
   },
@@ -275,7 +174,7 @@ export const asyncRoutes = [
         meta: {
           icon: 'el-icon-date',
           title: 'reservationManage',
-          roles: ['admin', 'editor'], // or you can only set roles in sub nav
+          roles: ['admin', 'editor'] // or you can only set roles in sub nav
         }
       },
       // 创建预约
@@ -285,17 +184,15 @@ export const asyncRoutes = [
         hidden: true,
         meta: {
           title: 'createreservation',
-          roles: ['admin', 'editor'],
+          roles: ['admin', 'editor']
         }
       },
       {
         path: 'batchopenAppoint',
         component: () => import('@/views/appointmentManage/component/batchopenAppoint'),
         hidden: true,
-        roles: ['admin', 'editor'],
-      },
-
-
+        roles: ['admin', 'editor']
+      }
 
     ]
   },
@@ -328,16 +225,17 @@ export const asyncRoutes = [
           title: 'createOrder',
           roles: ['admin'] // or you can only set roles in sub nav
         }
-      },
+      }
     ]
   },
+  // 员工管理
   // 员工管理
   {
     path: '/staff',
     component: Layout,
     meta: {
       title: 'staffManagement',
-      icon: 'el-icon-s-tools',//staff
+      icon: 'el-icon-s-tools', // staff
       roles: ['admin'] // you can set roles in root nav
     },
     children: [
@@ -357,10 +255,30 @@ export const asyncRoutes = [
         name: 'setting',
         hidden: true,
         meta: {
-          title: '新建成员',
+          title: 'newMember',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
+      {
+        path: 'editStaff',
+        component: () => import('@/views/staffManage/addStaff'),
+        name: 'setting',
+        hidden: true,
+        meta: {
+          title: 'editStaff',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'detailStaff',
+        component: () => import('@/views/staffManage/addStaff'),
+        name: 'setting',
+        hidden: true,
+        meta: {
+          title: 'staffDetail',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
       // {
       //   path: 'nameplate',
       //   component: () => import('@/views/staffManage/nameplate'),
@@ -398,9 +316,6 @@ export const asyncRoutes = [
       //     roles: ['admin'] // or you can only set roles in sub nav
       //   }
       // },
-
-
-
 
     ]
   },
@@ -454,7 +369,7 @@ export const asyncRoutes = [
           title: 'addClass',
           roles: ['admin'] // or you can only set roles in sub nav
         }
-      },
+      }
     ]
   },
   // 个人中心
@@ -486,7 +401,7 @@ export const asyncRoutes = [
           title: 'accountManage',
           roles: ['admin', 'editor'] // or you can only set roles in sub nav
         }
-      },
+      }
 
     ]
   },
@@ -506,7 +421,7 @@ export const asyncRoutes = [
           title: 'financialManage',
           roles: ['admin', 'editor'] // or you can only set roles in sub nav
         }
-      },
+      }
 
     ]
   },

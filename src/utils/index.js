@@ -356,18 +356,26 @@ export function removeClass(ele, cls) {
   }
 }
 
-
 // 新开页签的路由跳转发放
-export function window_open(e=null,path,query={}, $router) {
-if(e){
-  e.preventDefault();}
-  let routeData = $router.resolve({
+export function window_open(e = null, path, query = {}, $router) {
+  if (e) {
+    e.preventDefault()
+  }
+  const routeData = $router.resolve({
     path: path,
-    query: query,
-  });
+    query: query
+  })
 
-  window.open(routeData.href, "_blank");
-
+  window.open(routeData.href, '_blank')
 }
 
-
+// 更新组件创建编辑还是详情title
+export function updateTitle(obj, addtitle, editTitle, viewTitle, query) {
+  if (query.type === 'view') {
+    obj.title = viewTitle
+  } else if (query.type === 'edit') {
+    obj.title = editTitle
+  } else {
+    obj.title = addtitle
+  }
+}

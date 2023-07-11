@@ -43,6 +43,18 @@ module.exports = {
         changeOrigin: true,
         
       },
+      "/System": {
+        target: "https://spinclub-api-test.gimind.com/",
+        ws: false,
+        changeOrigin: true,
+        
+      },
+      "/Order": {
+        target: "https://spinclub-api-test.gimind.com/",
+        ws: false,
+        changeOrigin: true,
+        
+      },
      
     },
   },
