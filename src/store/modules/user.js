@@ -9,8 +9,8 @@ const state = {
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
-
+  roles: [],
+  userinfo:{}
 }
 
 const mutations = {
@@ -28,7 +28,13 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_USERINFO: (state, userinfo) => {
+    state.userinfo = userinfo
+    localStorage.setItem('userInfo', JSON.stringify(userinfo))
+
   }
+ 
 }
 
 const actions = {
@@ -37,10 +43,11 @@ const actions = {
     const { account, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ account: account.trim(), password: password }).then(response => {
-        const { result } = response
-        localStorage.setItem('userInfo', JSON.stringify(result))
-        commit('SET_TOKEN', result.token)
-        setToken(result.token)
+        const {result} = response
+        commit('SET_USERINFO',result.userInfo)
+        debugger
+        commit('SET_TOKEN', 'Bearer'+' '+result.accessToken)
+        setToken('Bearer'+' '+result.accessToken)
         resolve()
       }).catch(error => {
         reject(error)
@@ -79,20 +86,21 @@ const actions = {
   // user logout
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
+      // logout(state.token).then(() => {
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         removeToken()
         resetRouter()
+        localStorage.clear()
 
         // reset visited views and cached views
         // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
         dispatch('tagsView/delAllViews', null, { root: true })
 
         resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      // }).catch(error => {
+      //   reject(error)
+      // })
     })
   },
 
@@ -101,6 +109,7 @@ const actions = {
     return new Promise(resolve => {
       commit('SET_TOKEN', '')
       commit('SET_ROLES', [])
+      localStorage.clear()
       removeToken()
       resolve()
     })

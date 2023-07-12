@@ -75,7 +75,7 @@ import PageTitle from '@/componentsHK/public/PageTitle.vue'
 import FormCombination from '@/componentsHK/public/FormCombination.vue'
 import Table from '@/componentsHK/public/Tabel'
 import tableMixins from '@/mixins/tableMixins'
-import { GetCustomerList, ActivateCustomer } from '@/api/member'
+import { GetCustomerList, ActivateCustomer,GetMemberCardList } from '@/api/member'
 import { window_open } from '@/utils/index'
 import selectOption from '@/views/global-data/selectOption'
 
@@ -389,8 +389,14 @@ export default {
   },
   created() {
     this.list(this.tableObj.page, this.tableObj.pageSize, '')
+    this.getCradList()
   },
   methods: {
+  async  getCradList(){
+    const res=await GetMemberCardList()
+    console.log(res);
+    
+    },
     // tablecao'z操作按钮设置
     operationSubmit(v, index, row) {
       /*

@@ -53,7 +53,7 @@
                       required: true,
                       message: $t(domain.message),
                       trigger: trigger(domain.category),
-                    } :null
+                    }: !domain.check&&domain.rule?[{...domain.rule,  message: $t(domain.rule.message), trigger: trigger(domain.category),}]:null
               "
             >
               <div slot="label" class="d-flex w-100">

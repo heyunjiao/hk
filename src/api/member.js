@@ -13,3 +13,10 @@ export function ActivateCustomer(data) {
     data
   })
 }
+export function GetMemberCardList(data) {
+  return request({
+    url: '/Customer/GetMemberCardList',
+    method: 'get',
+    data
+  })
+}

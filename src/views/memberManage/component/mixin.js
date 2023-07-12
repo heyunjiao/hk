@@ -5,7 +5,7 @@ let userMixin={
     data(){
     return{
           formObj: {
-            imageUrl: "",
+            profilePictureUrl: "",
             title: "useCommonAll.foundationInfo" /*表单标题*/,
             formDisabled:false,
             formproperties: {
@@ -30,7 +30,7 @@ let userMixin={
                 check: true,
                 iconChekc: false,
                 accept:'',
-                customParameters: "imageUrl",
+                customParameters: "profilePictureUrl",
               },
               {
                 // 单行文本框
@@ -48,14 +48,14 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: true /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "number" /*对应api的参数名称*/,
               },
               {
                 id: "",
                 span: 12,
                 assemblyname: "",
                 label: "useCommonAll.memberName",
-                value: '',
+                value: '45435',
                 type: "",
                 hidelabels: true,
                 classname: "",
@@ -65,7 +65,7 @@ let userMixin={
                 category: 17,
                 check: true,
                 iconChekc: false,
-                customParameters: "nickname",
+                customParameters: "name",
                 inputSelectValue: "",
                 inputSelectOptions: selectOption.nickNameType,
               },
@@ -86,7 +86,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: true /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "nation" /*对应api的参数名称*/,
               },
     
               {
@@ -104,7 +104,7 @@ let userMixin={
                 category: 17,
                 check: true,
                 iconChekc: false,
-                customParameters: "email",
+                customParameters: "credentialsNum",
                 inputSelectValue: "1",
                 inputSelectOptions:selectOption.documentType,
               },
@@ -124,7 +124,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: true /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "email" /*对应api的参数名称*/,
                 rule:{
                   type:'email',
                   // pattern:'/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/',
@@ -154,7 +154,7 @@ let userMixin={
                 searchable: false,
                 formStatus: true,
                 options:  selectOption.sexType,
-                customParameters: "select",
+                customParameters: "gender",
               },
               {
                 // 单行文本框
@@ -162,7 +162,7 @@ let userMixin={
                 span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
                 assemblyname: "input",
                 label: "useCommonAll.phone",
-                value: "" /*控件value / 默认值*/,
+                value: "643636" /*控件value / 默认值*/,
                 type: "" /*控件类型 支持原生*/,
                 hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
                 classname: "" /*自定义class*/,
@@ -173,7 +173,7 @@ let userMixin={
                 countryCode:86,
                 check: true /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "tel" /*对应api的参数名称*/,
+                customParameters: "contactPhone" /*对应api的参数名称*/,
               },
              
               {
@@ -192,7 +192,7 @@ let userMixin={
                 category: 5,
                 check: false,
                 format: "yyyy-MM-dd",
-                customParameters: "dateSelection",
+                customParameters: "birthday",
                 formStatus: true,
               },
               
@@ -202,7 +202,7 @@ let userMixin={
                 span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
                 assemblyname: "input",
                 label: "useCommonAll.conmpanyName",
-                value: "" /*控件value / 默认值*/,
+                value: "gggg" /*控件value / 默认值*/,
                 type: "" /*控件类型 支持原生*/,
                 hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
                 classname: "" /*自定义class*/,
@@ -212,7 +212,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "company" /*对应api的参数名称*/,
               },
               {
                 // 单行文本框
@@ -220,7 +220,7 @@ let userMixin={
                 span: 12 /*表单占据控件，容器分为 24份，需要整数*/,
                 assemblyname: "input",
                 label: "useCommonAll.companyPosition",
-                value: "" /*控件value / 默认值*/,
+                value: "hhh" /*控件value / 默认值*/,
                 type: "" /*控件类型 支持原生*/,
                 hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
                 classname: "" /*自定义class*/,
@@ -230,7 +230,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "position" /*对应api的参数名称*/,
               },
               {
                 // 多行文本框
@@ -238,7 +238,7 @@ let userMixin={
                 span: 24,
                 assemblyname: "多行文本框",
                 label: "useCommonAll.emailAddress",
-                value: "",
+                value: "54646",
                 type: "textarea",
                 hidelabels: true,
                 classname: "",
@@ -248,7 +248,7 @@ let userMixin={
                 category: 0,
                 check: true,
                 iconChekc: false,
-                customParameters: "textarea",
+                customParameters: "mailingAddress",
                 formStatus: true,
               },
              
@@ -268,7 +268,7 @@ let userMixin={
                 category: 0,
                 check: false,
                 iconChekc: false,
-                customParameters: "textarea",
+                customParameters: "companyAddress",
                 formStatus: true,
               },
               {
@@ -287,7 +287,7 @@ let userMixin={
                 category: 0,
                 check: false,
                 iconChekc: false,
-                customParameters: "textarea",
+                customParameters: "homeAddress",
                 formStatus: true,
               },
              
@@ -327,7 +327,7 @@ let userMixin={
                 multiplechoice: false,
                 searchable: false,
                 formStatus: true,
-                customParameters: "masterCard",
+                customParameters: "memberCardID",
                 options:selectOption.cardType
               },
               {
@@ -348,7 +348,7 @@ let userMixin={
                 layoutmode: 0,
                 formStatus: true,
                 options: selectOption.accountAuth,
-                customParameters: "t1t",
+                customParameters: "",
               },
               {
                 // 多选框组
@@ -368,7 +368,7 @@ let userMixin={
                 layoutmode: 0,
                 formStatus: true,
                 options: selectOption.membershipyesOrNo,
-                customParameters: "tt2",
+                customParameters: "",
               },
               {
                 // 多选框组
@@ -419,7 +419,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "allergy" /*对应api的参数名称*/,
               },
               {
                 // 单行文本框
@@ -437,7 +437,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "preference" /*对应api的参数名称*/,
               },
     
               {
@@ -456,7 +456,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "+hobby" /*对应api的参数名称*/,
               },
             ],
           },
@@ -485,7 +485,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "segretname" /*对应api的参数名称*/,
+                customParameters: "secName" /*对应api的参数名称*/,
               },
               {
                 // 单行文本框
@@ -503,7 +503,12 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "secEmail" /*对应api的参数名称*/,
+                rule:{
+                  type:'email',
+                  // pattern:'/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/',
+                  message:'formatNotrue'
+                }
               },
               {
                 // 单行文本框
@@ -512,7 +517,7 @@ let userMixin={
                 assemblyname: "input",
                 label: "useCommonAll.phone",
                 value: "" /*控件value / 默认值*/,
-                type: "" /*控件类型 支持原生*/,
+                type: "number" /*控件类型 支持原生*/,
                 hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
                 classname: "" /*自定义class*/,
                 message: "brandMessage" /*校验提示语*/,
@@ -521,7 +526,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "input" /*对应api的参数名称*/,
+                customParameters: "secContactPhone" /*对应api的参数名称*/,
               },
               { // 多选框组
                 "id": 'Checkbox',
@@ -540,7 +545,7 @@ let userMixin={
                 "layoutmode": 0,
                 "formStatus": true,
                 "options": selectOption.yesOrNo,
-                "customParameters": "Checkbox"
+                "customParameters": "isFirst"
               },
     
               {
@@ -559,7 +564,7 @@ let userMixin={
                 category: 0,
                 check: false,
                 iconChekc: false,
-                customParameters: "textarea",
+                customParameters: "secMailingAddress",
                 formStatus: true,
               },
             ],

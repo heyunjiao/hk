@@ -79,7 +79,6 @@ export default {
       submitObj: {},
       obj: {},
       query: {},
-     
     };
   },
   watch: {
@@ -121,7 +120,6 @@ export default {
           fn: this.activeFn,
         };
       }
-
     }
     console.log(this.query);
   },
@@ -216,36 +214,34 @@ export default {
         customParameters: "MonthlyFees" /*对应api的参数名称*/,
       };
 
-   
-
       // 选择附属卡 要求选择主卡
-      if (item.value === 2 && item.customParameters === "masterCard") {
+      if (item.value === 2 && item.customParameters === "memberCardID") {
         this.delItem(this.formObj2, "MembershFipFee");
-      this.delItem(this.formObj2, "MonthlyFees");
+        this.delItem(this.formObj2, "MonthlyFees");
         this.formObj2.formData.splice(1, 0, openMasteCard);
       } else if (
         (item.value === 1 || item.value === 4 || item.value === 8) &&
-        item.customParameters === "masterCard"
+        item.customParameters === "memberCardID"
       ) {
         this.delItem(this.formObj2, "MembershFipFee");
-      this.delItem(this.formObj2, "MonthlyFees");
+        this.delItem(this.formObj2, "MonthlyFees");
         // 选择主卡
         this.formObj2.formData.push(MembershFipFee);
         this.formObj2.formData.push(MonthlyFees);
         this.delItem(this.formObj2, "chooseMasterCard");
       } else if (
         (item.value === 5 || item.value === 6 || item.value === 7) &&
-        item.customParameters === "masterCard"
+        item.customParameters === "memberCardID"
       ) {
         this.delItem(this.formObj2, "MembershFipFee");
-      this.delItem(this.formObj2, "MonthlyFees");
+        this.delItem(this.formObj2, "MonthlyFees");
         // 选择青少年卡
         this.formObj2.formData.push(MembershFipFee);
         this.delItem(this.formObj2, "MonthlyFees");
         this.delItem(this.formObj2, "chooseMasterCard");
-      } else if (item.customParameters === "masterCard") {
+      } else if (item.customParameters === "memberCardID") {
         this.delItem(this.formObj2, "MembershFipFee");
-      this.delItem(this.formObj2, "MonthlyFees");
+        this.delItem(this.formObj2, "MonthlyFees");
         this.delItem(this.formObj2, "chooseMasterCard");
       }
     },
@@ -276,45 +272,70 @@ export default {
       return tempdata;
     },
     onSubmitFn() {
+      const form2 = this.getStoreFormValue(this.formObj2.formData);
+      console.log(form2,888);
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
       let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
       let p3 = this.$refs.personInfo.validateFormPromis("dynamicValidateForm");
       let p4 = this.$refs.secretaryInfo.validateFormPromis(
         "dynamicValidateForm"
       );
+
+
+
       Promise.all([p1, p2, p3, p4])
         .then((result) => {
-          const form1 = this.getStoreFormValue(this.formObj.formData);
+          const form1=this.formMatForm1()
           const form2 = this.getStoreFormValue(this.formObj2.formData);
           const form3 = this.getStoreFormValue(this.formObj3.formData);
           const form4 = this.getStoreFormValue(this.formObj4.formData);
           const form5 = this.getStoreFormValue(this.formObj5.formData);
-          // 单独处理手机区号
-          const countryCode = this.formObj.formData.find(
-            (i) => i.customParameters === "tel"
-          );
-          console.log(form1, countryCode, form2, form3, form4,form5, "form");
+          
+          console.log( form2, form3, form4, form5, "form");
         })
         .catch((e) => console.log(e));
     },
-    activeFn(){
-      this.$confirm(this.$t('useCommonAll.isActivate'), this.$t('useCommonAll.prompt'), {
-          confirmButtonText: this.$t('useCommonAll.ok'),
-          cancelButtonText:  this.$t('useCommonAll.cancel'),
-          type: 'warning'
-        }).then(() => {
+    formMatForm1(){
+      let form1 = this.getStoreFormValue(this.formObj.formData); // 称谓
+          const title = this.formObj.formData.find(
+            (i) => i.customParameters == "name"
+          ).inputSelectValue; // 身份证类型
+          const credentialsType = this.formObj.formData.find(
+            (i) => i.customParameters == "credentialsNum"
+          ).inputSelectValue;
+
+          const areaCode = this.formObj.formData.find(
+            (i) => i.customParameters == "contactPhone"
+          ).countryCode;
+          form1 = { ...form1, title, credentialsType, areaCode };
+
+          return form1
+    },
+    
+    activeFn() {
+      this.$confirm(
+        this.$t("useCommonAll.isActivate"),
+        this.$t("useCommonAll.prompt"),
+        {
+          confirmButtonText: this.$t("useCommonAll.ok"),
+          cancelButtonText: this.$t("useCommonAll.cancel"),
+          type: "warning",
+        }
+      )
+        .then(() => {
           // v.memberstatus=1
           this.$message({
-            type: 'success',
-            message:this.$t('useCommonAll.operatorSuciscess') 
+            type: "success",
+            message: this.$t("useCommonAll.operatorSuciscess"),
           });
-        }).catch(() => {
+        })
+        .catch(() => {
           this.$message({
-            type: 'info',
-            message: this.$t('useCommonAll.canceledOperator') 
-          });          
+            type: "info",
+            message: this.$t("useCommonAll.canceledOperator"),
+          });
         });
-    }
+    },
   },
   computed: {
     // ...mapState({
