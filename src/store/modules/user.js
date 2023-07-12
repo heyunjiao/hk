@@ -3,6 +3,7 @@ import { login, logout, getInfo } from '@/api/login'
 
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
+import { GetMemberCardList } from '@/api/member'
 
 const state = {
   token: getToken(),
@@ -10,7 +11,8 @@ const state = {
   avatar: '',
   introduction: '',
   roles: [],
-  userinfo:{}
+  userinfo:{},
+  cardTypeList:[]
 }
 
 const mutations = {
@@ -29,6 +31,10 @@ const mutations = {
   SET_ROLES: (state, roles) => {
     state.roles = roles
   },
+  SET_CARDLIST: (state, cardTypeList) => {
+    state.cardTypeList = cardTypeList
+    localStorage.setItem('cardTypeList',JSON.stringify(cardTypeList))
+  },
   SET_USERINFO: (state, userinfo) => {
     state.userinfo = userinfo
     localStorage.setItem('userInfo', JSON.stringify(userinfo))
@@ -39,15 +45,17 @@ const mutations = {
 
 const actions = {
   // user login
-  login({ commit }, userInfo) {
+  login({ commit,dispatch }, userInfo) {
     const { account, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ account: account.trim(), password: password }).then(response => {
         const {result} = response
         commit('SET_USERINFO',result.userInfo)
-        debugger
+        
         commit('SET_TOKEN', 'Bearer'+' '+result.accessToken)
         setToken('Bearer'+' '+result.accessToken)
+
+       dispatch ('getCradList')
         resolve()
       }).catch(error => {
         reject(error)
@@ -55,6 +63,18 @@ const actions = {
     })
   },
 
+    getCradList({commit}){
+    GetMemberCardList().then(res=>{
+      res.result.forEach(i => {
+        i['label']=i.title
+        i['value']=i.id
+        i['disabled']='false'
+      });
+      commit('SET_CARDLIST',res.result)
+    })
+    
+    
+    },
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {

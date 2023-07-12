@@ -70,18 +70,21 @@ const documentType = [{
 }]
 // 账户权限
 const accountAuth = [
-  { value: 1, label: "useCommonAll.reservationCourse", disabled: false },
+  { value: '1', label: "useCommonAll.reservationCourse", disabled: true},
   {
-    value: 2,
+    value: '2',
     label: "useCommonAll.instoreConsume",
+    disabled: true
   },
   {
-    value: 3,
+    value: '3',
     label: "useCommonAll.inlineConsume",
+    disabled: true
   },
   {
-    value: 4,
+    value: '4',
     label: "useCommonAll.sportProject",
+    disabled: true
   },
 
 ]
@@ -243,24 +246,24 @@ const sexType = [{
 // 是否 的下拉或者checkbox
 const yesOrNo = [
   {
-    "value": 1,
+    "value": true,
     "label": "useCommonAll.yes",
     "disabled": false
   },
   {
-    "value": 2,
+    "value": false,
     "label": "useCommonAll.no",
     "disabled": false
   }]
 // 会籍
 const membershipyesOrNo = [
   {
-    "value": 1,
+    "value": true,
     "label": "useCommonAll.yes",
     "disabled": true
   },
   {
-    "value": 2,
+    "value": false,
     "label": "useCommonAll.no",
     "disabled": true
   }]

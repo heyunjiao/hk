@@ -64,6 +64,13 @@ import "@/config/ele/eleLayout";
 import { mapState } from "vuex";
 import Form from "@/componentsHK/public/Form";
 import mixin from "./mixin";
+import {
+  AddCustomer,
+  GetCustomer,
+  UpdateCustomer,
+  GetMemberCardList,
+  ActivateCustomer
+} from "@/api/member";
 import selectOption from "@/views/global-data/selectOption";
 
 export default {
@@ -74,11 +81,13 @@ export default {
   },
   data() {
     return {
+      status: "",
       imageUrl: "",
       confirmchecked: false,
       submitObj: {},
       obj: {},
       query: {},
+      cardTypeList: [],
     };
   },
   watch: {
@@ -91,13 +100,8 @@ export default {
     // },
   },
   created() {
-    const { type, data } = this.$route.query;
-    if (data) {
-      this.query = { ...this.query, type, data: JSON.parse(data) };
-    } else {
-      this.query = { ...this.query, type };
-      console.log(this.query, "created");
-    }
+    this.query = this.$route.query;
+    this.getCradList();
 
     if (this.query.type === "view") {
       this.formObj.formDisabled = true;
@@ -111,36 +115,65 @@ export default {
     if (this.query.type === "add") {
       this.delItem(this.formObj, "active");
     } else {
-      this.formObj.formData[0].disabled = true;
+      this.formObj.formData[1].disabled = true;
       this.formObj2.formData[0].disabled = true;
-      if (!this.query.data.memberstatus) {
+     
+    }
+    console.log(this.query);
+  },
+  methods: {
+    getCradList() {
+      GetMemberCardList().then((res) => {
+        res.result.forEach((i) => {
+          i["label"] = i.title;
+          i["value"] = i.id;
+          i["disabled"] = false;
+        });
+        this.cardTypeList = res.result;
+        if (this.query.id) {
+          this.getDetailInfo();
+        }
+      });
+    },
+    async getDetailInfo() {
+      const res = await GetCustomer(this.query.id);
+      this.status = res.result.status;
+      if (!this.status) {
         this.formObj.pageTitleSlot = {
           visible: true,
           text: "useCommonAll.isActivate",
           fn: this.activeFn,
         };
       }
-    }
-    console.log(this.query);
-  },
-  methods: {
-    saveAndAdd() {
-      console.debug(this.tableObj.tableData, this.obj);
+      this.echoFn(this.formObj, res.result);
+      // 称谓
+      this.formObj.formData.find(
+        (i) => i.customParameters == "name"
+      ).inputSelectValue = res.result.title;
+      this.formObj.formData.find(
+        (i) => i.customParameters == "credentialsNum"
+      ).inputSelectValue = res.result.credentialsType + "";
+      this.formObj.formData.find(
+        (i) => i.customParameters == "contactPhone"
+      ).countryCode = res.result.areaCode;
+      this.echoFn(this.formObj2, {
+        ...res.result.memberCardInfo,
+        memberCardID: res.result.memberCardID,
+        sendType: [res.result.memberCardInfo.sendType],
+      });
+      this.cardSelectFn({
+        value: res.result.memberCardID,
+        options: this.cardTypeList,
+        customParameters: "memberCardID",
+      });
+
+      this.echoFn(this.formObj3, res.result);
+      this.echoFn(this.formObj4, res.result);
+      this.echoFn(this.formObj5, res.result);
     },
-    operationSubmit(v, index) {
-      this.tableObj.tableData.splice(index, 1);
-    },
-    HandleSizeChange(val) {
-      console.debug(val);
-    },
-    handleSelectionChangeCom(val) {
-      console.debug(val);
-    },
-    HandleCurrentChange(val) {
-      console.debug(val);
-    },
+
     delItem(formType, key) {
-      console.log(formType.formData, "formType.formData");
+      // console.log(formType.formData, "formType.formData");
       const tempIndex = formType.formData.findIndex(
         (i) => i.customParameters === key
       );
@@ -149,8 +182,15 @@ export default {
       }
     },
 
-    cardSelectFn(item) {
-      console.log(item, "item");
+    cardSelectFn(val) {
+      console.log(val, "val11222");
+      const item = val.options.find((i) => i.id === val.value);
+      // 设置权限类型值
+      const authvalue = this.formObj2.formData.find(
+        (i) => i.customParameters == "auth"
+      );
+      console.log(authvalue, "authvalue");
+      authvalue.value = item.auth ? item.auth.split(",") : [];
       const openMasteCard = {
         // 下拉框
         id: "select",
@@ -173,7 +213,7 @@ export default {
         multiplechoice: false,
         searchable: false,
         formStatus: true,
-        customParameters: "chooseMasterCard",
+        customParameters: "mainCardID",
         options: selectOption.cardType,
       };
       const MembershFipFee = {
@@ -182,17 +222,17 @@ export default {
         span: 8 /*表单占据控件，容器分为 24份，需要整数*/,
         assemblyname: "input",
         label: "member.MembershFipFee",
-        value: "2" /*控件value / 默认值*/,
+        value: item.entranceFee /*控件value / 默认值*/,
         type: "" /*控件类型 支持原生*/,
         hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
         classname: "" /*自定义class*/,
         message: "brandMessage" /*校验提示语*/,
-        disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+        disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
         placeholder: "brandMessage" /*提示语*/,
         category: 14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
         check: true /*是否校验*/,
         iconChekc: false /*是否展示icon*/,
-        customParameters: "MembershFipFee" /*对应api的参数名称*/,
+        customParameters: "entranceFee" /*对应api的参数名称*/,
       };
 
       const MonthlyFees = {
@@ -201,48 +241,56 @@ export default {
         span: 8 /*表单占据控件，容器分为 24份，需要整数*/,
         assemblyname: "input",
         label: "member.MonthlyFees",
-        value: "3" /*控件value / 默认值*/,
+        value: item.monthlyFee /*控件value / 默认值*/,
         type: "" /*控件类型 支持原生*/,
         hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
         classname: "" /*自定义class*/,
         message: "brandMessage" /*校验提示语*/,
-        disabled: false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+        disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
         placeholder: "brandMessage" /*提示语*/,
         category: 14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
         check: true /*是否校验*/,
         iconChekc: false /*是否展示icon*/,
-        customParameters: "MonthlyFees" /*对应api的参数名称*/,
+        customParameters: "monthlyFee" /*对应api的参数名称*/,
       };
 
       // 选择附属卡 要求选择主卡
-      if (item.value === 2 && item.customParameters === "memberCardID") {
+      if (
+        item.label == "家庭卡（附属卡）" &&
+        val.customParameters === "memberCardID"
+      ) {
         this.delItem(this.formObj2, "MembershFipFee");
         this.delItem(this.formObj2, "MonthlyFees");
         this.formObj2.formData.splice(1, 0, openMasteCard);
       } else if (
-        (item.value === 1 || item.value === 4 || item.value === 8) &&
-        item.customParameters === "memberCardID"
+        (item.label == "家庭卡（全权会籍）" ||
+          item.label == "家庭卡（公司/企业会籍）" ||
+          item.label == "家庭卡（个人传承会籍）") &&
+        val.customParameters === "memberCardID"
       ) {
         this.delItem(this.formObj2, "MembershFipFee");
         this.delItem(this.formObj2, "MonthlyFees");
         // 选择主卡
+
         this.formObj2.formData.push(MembershFipFee);
         this.formObj2.formData.push(MonthlyFees);
-        this.delItem(this.formObj2, "chooseMasterCard");
+        this.delItem(this.formObj2, "mainCardID");
       } else if (
-        (item.value === 5 || item.value === 6 || item.value === 7) &&
-        item.customParameters === "memberCardID"
+        (item.label == "青少年卡（全会籍）" ||
+          item.label == "青少年卡（指定单项运动会籍）" ||
+          item.label == "青少年卡（指定双项运动会籍）") &&
+        val.customParameters === "memberCardID"
       ) {
         this.delItem(this.formObj2, "MembershFipFee");
         this.delItem(this.formObj2, "MonthlyFees");
         // 选择青少年卡
         this.formObj2.formData.push(MembershFipFee);
         this.delItem(this.formObj2, "MonthlyFees");
-        this.delItem(this.formObj2, "chooseMasterCard");
-      } else if (item.customParameters === "memberCardID") {
+        this.delItem(this.formObj2, "mainCardID");
+      } else if (val.customParameters === "memberCardID") {
         this.delItem(this.formObj2, "MembershFipFee");
         this.delItem(this.formObj2, "MonthlyFees");
-        this.delItem(this.formObj2, "chooseMasterCard");
+        this.delItem(this.formObj2, "mainCardID");
       }
     },
     ChangeSubmit(data, obj) {
@@ -250,13 +298,6 @@ export default {
       this.obj = obj;
     },
 
-    // submitFormBasic(data, status, obj) {
-    //   this.submitObj={...obj,...this.submitObj}
-    // },
-    // submitFormAccount(data, status, obj) {
-    //   this.submitObj={...obj,...this.submitObj}
-
-    // },
     resetForm() {
       console.debug("重置");
     },
@@ -272,8 +313,6 @@ export default {
       return tempdata;
     },
     onSubmitFn() {
-      const form2 = this.getStoreFormValue(this.formObj2.formData);
-      console.log(form2,888);
       let p1 = this.$refs.basicInfo.validateFormPromis("dynamicValidateForm");
       let p2 = this.$refs.accountInfo.validateFormPromis("dynamicValidateForm");
       let p3 = this.$refs.personInfo.validateFormPromis("dynamicValidateForm");
@@ -281,37 +320,64 @@ export default {
         "dynamicValidateForm"
       );
 
-
-
       Promise.all([p1, p2, p3, p4])
-        .then((result) => {
-          const form1=this.formMatForm1()
-          const form2 = this.getStoreFormValue(this.formObj2.formData);
+        .then(async (result) => {
+          const form1 = this.formMatForm1();
+          const form2 = this.formMatForm2();
           const form3 = this.getStoreFormValue(this.formObj3.formData);
           const form4 = this.getStoreFormValue(this.formObj4.formData);
           const form5 = this.getStoreFormValue(this.formObj5.formData);
-          
-          console.log( form2, form3, form4, form5, "form");
+          const param = { ...form1, ...form2, ...form3, ...form4, ...form5 };
+          if (this.query.id) {
+            const res = await UpdateCustomer({...param,id:this.query.id});
+            if (res.code == 200) {
+              this.$message({
+                type: "success",
+                message: this.$t("useCommonAll.operatorSuciscess"),
+              });
+              this.$router.push({ path: "/memberManage/memberManage" });
+            }
+          } else {
+            const res = await AddCustomer(param);
+            if (res.code == 200) {
+              this.$message({
+                type: "success",
+                message: this.$t("useCommonAll.operatorSuciscess"),
+              });
+              this.$router.push({ path: "/memberManage/memberManage" });
+            }
+          }
         })
         .catch((e) => console.log(e));
     },
-    formMatForm1(){
+    formMatForm1() {
       let form1 = this.getStoreFormValue(this.formObj.formData); // 称谓
-          const title = this.formObj.formData.find(
-            (i) => i.customParameters == "name"
-          ).inputSelectValue; // 身份证类型
-          const credentialsType = this.formObj.formData.find(
-            (i) => i.customParameters == "credentialsNum"
-          ).inputSelectValue;
+      const title = this.formObj.formData.find(
+        (i) => i.customParameters == "name"
+      ).inputSelectValue; // 身份证类型
+      const credentialsType = this.formObj.formData.find(
+        (i) => i.customParameters == "credentialsNum"
+      ).inputSelectValue;
 
-          const areaCode = this.formObj.formData.find(
-            (i) => i.customParameters == "contactPhone"
-          ).countryCode;
-          form1 = { ...form1, title, credentialsType, areaCode };
+      const areaCode = this.formObj.formData.find(
+        (i) => i.customParameters == "contactPhone"
+      ).countryCode;
+      form1 = { ...form1, title, credentialsType, areaCode };
 
-          return form1
+      return form1;
     },
-    
+
+    formMatForm2() {
+      let form2 = this.getStoreFormValue(this.formObj2.formData);
+      form2 = {
+        ...form2,
+        auth: form2.auth ? form2.auth.join(",") : "",
+        sendType: form2.sendType ? form2.sendType.join(",") : "",
+      };
+
+      return form2;
+    },
+
     activeFn() {
       this.$confirm(
         this.$t("useCommonAll.isActivate"),
@@ -322,12 +388,13 @@ export default {
           type: "warning",
         }
       )
-        .then(() => {
-          // v.memberstatus=1
+        .then(async() => {
+          const res = await ActivateCustomer({ customerId:this.query.id})
           this.$message({
-            type: "success",
-            message: this.$t("useCommonAll.operatorSuciscess"),
-          });
+            type: 'success',
+            message: this.$t('useCommonAll.operatorSuciscess')
+          })
+          location.reload()
         })
         .catch(() => {
           this.$message({
@@ -335,6 +402,16 @@ export default {
             message: this.$t("useCommonAll.canceledOperator"),
           });
         });
+    },
+
+    echoFn(form, res) {
+      form.formData.forEach((i) => {
+        if (res[i.customParameters]) {
+          i.value = res[i.customParameters];
+        } else {
+          i.value = "";
+        }
+      });
     },
   },
   computed: {

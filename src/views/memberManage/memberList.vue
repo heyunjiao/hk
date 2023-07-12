@@ -75,10 +75,11 @@ import PageTitle from '@/componentsHK/public/PageTitle.vue'
 import FormCombination from '@/componentsHK/public/FormCombination.vue'
 import Table from '@/componentsHK/public/Tabel'
 import tableMixins from '@/mixins/tableMixins'
-import { GetCustomerList, ActivateCustomer,GetMemberCardList } from '@/api/member'
+import { GetCustomerList, ActivateCustomer } from '@/api/member'
 import { window_open } from '@/utils/index'
 import selectOption from '@/views/global-data/selectOption'
-
+const cardTypeList=JSON.parse(localStorage.getItem('cardTypeList'))
+console.log(cardTypeList,'cardTypeList');
 export default {
   name: 'MemberList',
   components: { PageTitle, FormCombination, Table },
@@ -160,6 +161,7 @@ export default {
             label: 'useCommonAll.sex' /* 标题*/,
             prop: 'gender' /* 绑定数据源obj展示字段*/,
             width: '80' /* 表头固定，参数：left / right / ''*/
+
           },
           {
             label: 'useCommonAll.phone' /* 标题*/,
@@ -273,7 +275,7 @@ export default {
             placeholder: 'commen.brandMessage' /* todo 修改 placeholder 提示语*/,
             category: 1 /* todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             source: true /* todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            options: selectOption.cardType,
+            options:cardTypeList ,
             customParameters: 'memberCardID' /* 对应api的参数名称*/,
             classname: '' /* 默认为空*/,
             classnameitem: '' /* 默认为空*/
@@ -389,14 +391,9 @@ export default {
   },
   created() {
     this.list(this.tableObj.page, this.tableObj.pageSize, '')
-    this.getCradList()
   },
   methods: {
-  async  getCradList(){
-    const res=await GetMemberCardList()
-    console.log(res);
-    
-    },
+  
     // tablecao'z操作按钮设置
     operationSubmit(v, index, row) {
       /*
@@ -407,7 +404,7 @@ export default {
       if (v.id == 'edit') {
         this.$router.push({
           path: '/memberManage/openCard',
-          query: { type: v.id, data: JSON.stringify(row) }
+          query: { type: v.id, id:row.id }
         })
       }
       if (v.id == 'view') {

@@ -1,9 +1,11 @@
 
 import selectOption from "@/views/global-data/selectOption";
+const cardTypeList=JSON.parse(localStorage.getItem('cardTypeList'))
 
 let userMixin={
     data(){
     return{
+      
           formObj: {
             profilePictureUrl: "",
             title: "useCommonAll.foundationInfo" /*表单标题*/,
@@ -328,7 +330,7 @@ let userMixin={
                 searchable: false,
                 formStatus: true,
                 customParameters: "memberCardID",
-                options:selectOption.cardType
+                options:cardTypeList
               },
               {
                 // 多选框组
@@ -337,6 +339,7 @@ let userMixin={
                 assemblyname: "多选框组",
                 label: "useCommonAll.permissionTtem",
                 value: [],
+                disabled: true,
                 type: "",
                 hidelabels: true,
                 classname: "",
@@ -348,7 +351,7 @@ let userMixin={
                 layoutmode: 0,
                 formStatus: true,
                 options: selectOption.accountAuth,
-                customParameters: "",
+                customParameters: "auth",
               },
               {
                 // 多选框组
@@ -368,7 +371,7 @@ let userMixin={
                 layoutmode: 0,
                 formStatus: true,
                 options: selectOption.membershipyesOrNo,
-                customParameters: "",
+                customParameters: "isTransfer",
               },
               {
                 // 多选框组
@@ -387,7 +390,7 @@ let userMixin={
                 check: true,
                 layoutmode: 0,
                 options: selectOption.billMode,
-                customParameters: "tt324322",
+                customParameters: "sendType",
               },
             ],
           },
@@ -456,7 +459,7 @@ let userMixin={
                 category: 0 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
                 check: false /*是否校验*/,
                 iconChekc: false /*是否展示icon*/,
-                customParameters: "+hobby" /*对应api的参数名称*/,
+                customParameters: "hobby" /*对应api的参数名称*/,
               },
             ],
           },
@@ -596,6 +599,7 @@ let userMixin={
                 iconChekc: false,
                 customParameters: "textarea",
                 formStatus: true,
+                customParameters: "remark" /*对应api的参数名称*/,
               },
             ],
           },
