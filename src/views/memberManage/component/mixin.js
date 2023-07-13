@@ -31,7 +31,7 @@ let userMixin={
                 category: 'upload',
                 check: true,
                 iconChekc: false,
-                accept:'',
+                accept:'.png,.jpeg',
                 customParameters: "profilePictureUrl",
               },
               {

@@ -43,17 +43,34 @@
                   : 'domains.' + index + '.value'
               "
               :rules="
-                domain.check&&domain.rule
-                  ? [{
+                domain.check && domain.rule
+                  ? [
+                      {
+                        required: true,
+                        message: $t(domain.message),
+                        trigger: trigger(domain.category),
+                      },
+                      {
+                        ...domain.rule,
+                        message: $t(domain.rule.message),
+                        trigger: trigger(domain.category),
+                      },
+                    ]
+                  : domain.check && !domain.rule
+                  ? {
                       required: true,
                       message: $t(domain.message),
                       trigger: trigger(domain.category),
-                    },{...domain.rule,  message: $t(domain.rule.message), trigger: trigger(domain.category),}]:
-                    domain.check&&!domain.rule?{
-                      required: true,
-                      message: $t(domain.message),
-                      trigger: trigger(domain.category),
-                    }: !domain.check&&domain.rule?[{...domain.rule,  message: $t(domain.rule.message), trigger: trigger(domain.category),}]:null
+                    }
+                  : !domain.check && domain.rule
+                  ? [
+                      {
+                        ...domain.rule,
+                        message: $t(domain.rule.message),
+                        trigger: trigger(domain.category),
+                      },
+                    ]
+                  : null
               "
             >
               <div slot="label" class="d-flex w-100">
@@ -202,7 +219,7 @@
                     start: '08:30',
                     step: '00:15',
                     end: '18:30',
-                    minTime:minTime,
+                    minTime: minTime,
                   }"
                 >
                 </el-time-select>
@@ -216,33 +233,37 @@
                 :inactive-color="domain.inactivecolor || '#999'"
               >
               </el-switch>
-             <div style="display: flex;flex-wrap: nowrap">
-              <span
-                style="margin-right: 5px;"
-                v-if="domain.category == 14 && !domain.unit"
-                >{{ "$" }}</span
-              >
-              <span
-                style="margin-right: 5px;"
-                v-if="domain.category == 14 && domain.customParameters=='discount'"
-                > - </span
-              >
-              <el-input-number
-              style="width:90%"
-                v-if="domain.category == 14"
-                v-model="domain.value"
-                :disabled="domain.disabled"
-                @change="realtimeform(domain)"
-                :controls="false"
-                :min="domain.min || 0"
-                :max="domain.max || 10000000"
-              ></el-input-number>
-              <span
-                style="margin-left: 5px;"
-                v-if="domain.category == 14 && domain.unit"
-                >{{ domain.unit }}</span
-              >
-             </div>
+              <div style="display: flex; flex-wrap: nowrap;">
+                <span
+                  style="margin-right: 5px;"
+                  v-if="domain.category == 14 && !domain.unit"
+                  >{{ "$" }}</span
+                >
+                <span
+                  style="margin-right: 5px;"
+                  v-if="
+                    domain.category == 14 &&
+                    domain.customParameters == 'discount'
+                  "
+                >
+                  -
+                </span>
+                <el-input-number
+                  style="width: 90%;"
+                  v-if="domain.category == 14"
+                  v-model="domain.value"
+                  :disabled="domain.disabled"
+                  @change="realtimeform(domain)"
+                  :controls="false"
+                  :min="domain.min || 0"
+                  :max="domain.max || 10000000"
+                ></el-input-number>
+                <span
+                  style="margin-left: 5px;"
+                  v-if="domain.category == 14 && domain.unit"
+                  >{{ domain.unit }}</span
+                >
+              </div>
               <el-cascader
                 v-if="domain.category == 11"
                 v-model="domain.value"
@@ -375,7 +396,7 @@
               >
                 <country-code-selector :countryCode.sync="domain.countryCode" />
                 <el-input-number
-                :controls="false"
+                  :controls="false"
                   v-model="domain.value"
                   :type="domain.type"
                   :placeholder="$t(domain.placeholder)"
@@ -391,15 +412,16 @@
               <el-upload
                 v-if="domain.category == 'upload'"
                 class="avatar-uploader"
-                :accept="domain.accept"
+                :accept="domain.accept || '.png,.jpeg'"
                 :show-file-list="false"
-                :on-change="(file) => handleChangeImage(file, domain)"
                 :before-upload="beforeAvatarUpload"
-                action=""
-                :auto-upload="false"
+                :auto-upload="true"
+                action="#"
                 :disabled="formObj.formDisabled"
+                :http-request="uploadHttpRequest"
+                
               >
-                <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                <img v-if="atavimageUrl" :src="atavimageUrl" class="avatar" />
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
               <!-- <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18&&!formObj.formDisabled">{{$t(domain.label)}}</el-button> -->
@@ -452,7 +474,7 @@ import "@/config/ele/elementForm";
 import "@/config/ele/eleLayout";
 import PageTitle from "@/componentsHK/public/PageTitle";
 import countryCodeSelector from "@/componentsHK/countrySelect/index";
-
+import request from "@/utils/request";
 export default {
   name: "FormComponents",
   props: [
@@ -468,12 +490,15 @@ export default {
   components: { PageTitle, countryCodeSelector },
   data() {
     return {
-      minTime:'',
+      baseApi: process.env.VUE_APP_BASE_API,
+      uploadHeader: { Authorization: "" },
+      minTime: "",
       imageUrl: "",
       formObj: {},
       dynamicValidateForm: {
         domains: [],
       },
+      atavimageUrl:''
     };
   },
   created() {
@@ -483,6 +508,27 @@ export default {
     this.getData();
   },
   methods: {
+    async uploadHttpRequest(param) {
+      console.log(param.file); //查看是否选取到文件
+      let formData = new FormData(); //FormData对象，添加参数只能通过append('key', value)的形式添加
+      formData.append("file", param.file); //添加文件对象
+      formData.append("type", 1); //添加文件对象
+      const res = await request({
+        url: "/System/UploadPicture",
+        method: "POST",
+        transformRequest: [
+          function (data, headers) {
+            // 去除post请求默认的Content-Type
+            delete headers.post["Content-Type"];
+            return data;
+          },
+        ],
+        data: formData,
+      });
+
+      this.atavimageUrl=res.result.url
+    },
+
     getData() {
       // this.dynamicValidateForm.domains
       let dynamicValidateForm = this.dynamicValidateForm;
@@ -549,8 +595,8 @@ export default {
     realtimeform(v) {
       this.Change && this.Change(v);
       this.realTimeForm && this.realTimeForm(this.dynamicValidateForm.domains);
-      if(v.category==20){
-        this.minTime=v.value
+      if (v.category == 20) {
+        this.minTime = v.value;
       }
     },
     ClickItem() {
@@ -599,17 +645,14 @@ export default {
       // this.imageUrl=res.id
       this.imageUrl = URL.createObjectURL(file.raw);
     },
+   
     beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
+      console.log(file, 9999);
       const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
-      return isJPG && isLt2M;
+      return isLt2M;
     },
   },
 
