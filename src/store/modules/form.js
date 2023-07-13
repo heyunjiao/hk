@@ -1,4 +1,4 @@
-// import {getselectData} from '@/api/form'
+import {getselectData} from '@/api/form'
 
 export default {
     state: {
@@ -144,7 +144,7 @@ console.log(formObj,'formObj');
         async getData({ commit }, params) {
             try {
                 const response = await getselectData({}, params.url);
-                let newresponse = response.data || response;
+                let newresponse = response.result ||[]
 
                 if (params.returnType) {
                     if (params.returnType === 0) {
