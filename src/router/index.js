@@ -406,25 +406,25 @@ export const asyncRoutes = [
     ]
   },
   // 核销管理
-  {
-    path: '/accountingManage ',
-    component: Layout,
+  // {
+  //   path: '/accountingManage ',
+  //   component: Layout,
 
-    meta: { roles: ['admin', 'editor'] },
-    children: [
-      {
-        path: 'setting',
-        component: () => import('@/views/accountingManage/index'),
-        name: 'setting',
-        meta: {
-          icon: 'moneyMenu',
-          title: 'financialManage',
-          roles: ['admin', 'editor'] // or you can only set roles in sub nav
-        }
-      }
+  //   meta: { roles: ['admin', 'editor'] },
+  //   children: [
+  //     {
+  //       path: 'setting',
+  //       component: () => import('@/views/accountingManage/index'),
+  //       name: 'setting',
+  //       meta: {
+  //         icon: 'moneyMenu',
+  //         title: 'financialManage',
+  //         roles: ['admin', 'editor'] // or you can only set roles in sub nav
+  //       }
+  //     }
 
-    ]
-  },
+  //   ]
+  // },
 
   // {
   //   path: '/permission',

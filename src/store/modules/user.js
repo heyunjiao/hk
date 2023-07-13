@@ -51,10 +51,8 @@ const actions = {
       login({ account: account.trim(), password: password }).then(response => {
         const {result} = response
         commit('SET_USERINFO',result.userInfo)
-        
         commit('SET_TOKEN', 'Bearer'+' '+result.accessToken)
         setToken('Bearer'+' '+result.accessToken)
-
        dispatch ('getCradList')
         resolve()
       }).catch(error => {

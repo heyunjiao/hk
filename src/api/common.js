@@ -7,3 +7,17 @@ export function UploadPicture(data) {
       data
     })
   }
+  export function GetRoleList(data) {
+    return request({
+      url: '/Employee/GetRoleList',
+      method: 'get',
+      data
+    })
+  }
+  export function GetPermissionsList(data) {
+    return request({
+      url: '/Employee/GetPermissionsList',
+      method: 'get',
+      data
+    })
+  }
