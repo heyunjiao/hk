@@ -50,7 +50,7 @@
             scope="{row}"
           ><!--switch控件插槽-->
             <p class="a_link" href="#" @click="()=>pushToDetail({id:'view'},row)">
-              {{ row.id }}
+              {{ row.number }}
             </p>
           </template>
           <template
@@ -126,7 +126,7 @@ import Table from '@/componentsHK/public/Tabel'
 import { window_open } from '@/utils/index'
 import selectOption from '@/views/global-data/selectOption'
 import tableMixins from '@/mixins/tableMixins'
-import { GetEmployeeOrderList } from '@/api/order'
+import { GetCustomerOrderList } from '@/api/order'
 
 export default {
   name: 'MemberList',
@@ -135,7 +135,10 @@ export default {
   data() {
     return {
       url: {
-        getListUrl: GetEmployeeOrderList
+        getListUrl: GetCustomerOrderList,
+        otherParam:{
+          customerId:'022'
+        }
       },
       sizeForm: {
         name: '',
@@ -172,7 +175,7 @@ export default {
           /* 表头数据*/
           {
             label: 'useCommonAll.orderNumber' /* 标题*/,
-            prop: 'id' /* 绑定数据源obj展示字段*/,
+            prop: 'number' /* 绑定数据源obj展示字段*/,
             width: '100' /* 表头宽度*/,
             slot: true /* 是否需要插槽*/
           },

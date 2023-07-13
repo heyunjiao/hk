@@ -141,60 +141,55 @@ console.log(formObj,'formObj');
                 return item[`prop`] === prop
             })
         },
-        getData(commit, params) {
-            let data = [];
-            let newData = [];
-            let labelData = [];
-            const getselectData=new Promise((resolve,reject)=>{})
-            getselectData({}, params.url).then((response) => {
-                console.log(params,'strore');
-                /*
-                * 1，response
-                * 2，response.data*/
+        async getData({ commit }, params) {
+            try {
+                const response = await getselectData({}, params.url);
+                let newresponse = response.data || response;
 
-                let newresponse = [];
-                newresponse = response.data || response;
                 if (params.returnType) {
-                    if (params.returnType == 0) {
-                        newresponse = response
-                    } else if (params.returnType == 1) {
-                        newresponse = response.data[params.returnParameterKey]
+                    if (params.returnType === 0) {
+                        newresponse = response;
+                    } else if (params.returnType === 1) {
+                        newresponse = response.data[params.returnParameterKey];
                     }
                 }
 
-                newresponse.forEach((f, findex) => {
+                const newData = newresponse.map((f, findex) => {
+                    let label = '';
+                    let value = '';
+
                     Object.keys(f).forEach((z, index) => {
-                        if (z == params.item.val) {
-                            data.push({
-                                label: '',
-                                value: Object.values(f)[index],
-                                index: findex
-                            })
+                        if (z === params.item.val) {
+                            value = Object.values(f)[index];
                         }
-                    })
-                    Object.keys(f).forEach((z, index) => {
-                        if (z == params.item.key) {
-                            data.push({
-                                label: Object.values(f)[index],
-                                value: '',
-                                index: findex
-                            })
+                        if (z === params.item.key) {
+                            label = Object.values(f)[index];
                         }
-                    })
+                    });
+
+                    return {
+                        label,
+                        value,
+                        index: findex
+                    };
                 });
-                data.forEach((f) => {
-                    if (f.value) {
-                        newData.push(f)
+
+                const labelData = newData
+                    .filter(f => f.label)
+                    .map(f => ({ index: f.index, label: f.label }));
+
+                newData.forEach(f => {
+                    const labelItem = labelData.find(item => item.index === f.index);
+                    if (labelItem) {
+                        f.label = labelItem.label;
                     }
-                    if (f.label) {
-                        labelData.push(f)
-                    }
-                })
-                newData.forEach((f) => {
-                    f.label = labelData[f.index].label
-                })
-                params.res(newData)
-            })
+                });
+
+                params.res(newData);
+            } catch (error) {
+                // 处理错误
+                console.error('Error:', error);
+            }
         }
     },
     modules: {}

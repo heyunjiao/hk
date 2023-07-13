@@ -46,7 +46,8 @@ export default {
       const params = {
         ...this.searchParams,
         ...this.pageFilters,
-        ...data
+        ...data,
+        ...this.url?.otherParam
       }
       //   if (this.paramsIdName) {
       //     // 详情列表
@@ -148,7 +149,7 @@ export default {
     // 删除
     handleDel(ids, method, param) {
       if (method === 'post') {
-        asyncConfirm({ con: '是否确定删除？' }, async(done, instance) => {
+        asyncConfirm({ con: '是否确定删除？' }, async (done, instance) => {
           await this.$api.post(this.pageApi.delApi, param).catch(e => { })
           instance.confirmButtonLoading = false
           done()
@@ -156,7 +157,7 @@ export default {
           this.getList()
         })
       } else {
-        asyncConfirm({ con: '是否确定删除？' }, async(done, instance) => {
+        asyncConfirm({ con: '是否确定删除？' }, async (done, instance) => {
           await this.$api.delete(`${this.pageApi.delApi}?id=${ids}`).catch(e => { })
           instance.confirmButtonLoading = false
           done()

@@ -280,6 +280,8 @@ export default {
             classnameitem: '' /* 默认为空*/,
             "apiUrl": "/Customer/GetMemberCardList",
             "source": false,
+            key:'label',
+            value:'value'
           },
 
           {
