@@ -79,7 +79,6 @@ import { GetCustomerList, ActivateCustomer } from '@/api/member'
 import { window_open } from '@/utils/index'
 import selectOption from '@/views/global-data/selectOption'
 const cardTypeList=JSON.parse(localStorage.getItem('cardTypeList'))
-console.log(cardTypeList,'cardTypeList');
 export default {
   name: 'MemberList',
   components: { PageTitle, FormCombination, Table },
@@ -410,7 +409,7 @@ export default {
       if (v.id == 'view') {
         this.$router.push({
           path: '/memberManage/openCard',
-          query: { type: v.id, data: JSON.stringify(row) }
+          query: { type: v.id,id:row.id}
         })
       }
       if (v.id == 'order') {
@@ -427,7 +426,7 @@ export default {
     pushToDetail(v, row) {
       this.$router.push({
         path: '/memberManage/openCard',
-        query: { type: v.id, data: JSON.stringify(row) }
+        query: { type: v.id,id:row.id}
       })
     },
     openCardFn() {

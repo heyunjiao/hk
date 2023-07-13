@@ -411,6 +411,7 @@
               <!-- 上传图片 -->
               <el-upload
                 v-if="domain.category == 'upload'"
+                v-model="domain.value"
                 class="avatar-uploader"
                 :accept="domain.accept || '.png,.jpeg'"
                 :show-file-list="false"
@@ -418,10 +419,10 @@
                 :auto-upload="true"
                 action="#"
                 :disabled="formObj.formDisabled"
-                :http-request="uploadHttpRequest"
-                
+                :http-request="(file)=>uploadHttpRequest(file,domain)"
+
               >
-                <img v-if="atavimageUrl" :src="atavimageUrl" class="avatar" />
+                <img v-if="domain.value||atavimageUrl" :src="domain.value||atavimageUrl" class="avatar" />
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
               <!-- <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18&&!formObj.formDisabled">{{$t(domain.label)}}</el-button> -->
@@ -475,6 +476,8 @@ import "@/config/ele/eleLayout";
 import PageTitle from "@/componentsHK/public/PageTitle";
 import countryCodeSelector from "@/componentsHK/countrySelect/index";
 import request from "@/utils/request";
+
+console.log(process.env);
 export default {
   name: "FormComponents",
   props: [
@@ -490,7 +493,7 @@ export default {
   components: { PageTitle, countryCodeSelector },
   data() {
     return {
-      baseApi: process.env.VUE_APP_BASE_API,
+    
       uploadHeader: { Authorization: "" },
       minTime: "",
       imageUrl: "",
@@ -498,7 +501,7 @@ export default {
       dynamicValidateForm: {
         domains: [],
       },
-      atavimageUrl:''
+      atavimageUrl: "",
     };
   },
   created() {
@@ -508,14 +511,14 @@ export default {
     this.getData();
   },
   methods: {
-    async uploadHttpRequest(param) {
+    async uploadHttpRequest(param,row) {
       console.log(param.file); //查看是否选取到文件
       let formData = new FormData(); //FormData对象，添加参数只能通过append('key', value)的形式添加
-      formData.append("file", param.file); //添加文件对象
-      formData.append("type", 1); //添加文件对象
+      formData.append("request", param.file); //添加文件对象
       const res = await request({
-        url: "/System/UploadPicture",
+        url: "/System/UploadPicture?type=1",
         method: "POST",
+
         transformRequest: [
           function (data, headers) {
             // 去除post请求默认的Content-Type
@@ -523,10 +526,14 @@ export default {
             return data;
           },
         ],
+
         data: formData,
       });
+      console.log(row);
+      this.atavimageUrl = process.env.VUE_APP_IMAGE_BASE_API + res.result[0];
+      this.$set(row, "value", process.env.VUE_APP_IMAGE_BASE_API + res.result[0]);
+      this.realtimeform(row);
 
-      this.atavimageUrl=res.result.url
     },
 
     getData() {
@@ -645,7 +652,7 @@ export default {
       // this.imageUrl=res.id
       this.imageUrl = URL.createObjectURL(file.raw);
     },
-   
+
     beforeAvatarUpload(file) {
       console.log(file, 9999);
       const isLt2M = file.size / 1024 / 1024 < 2;
