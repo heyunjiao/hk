@@ -68,7 +68,7 @@ const actions = {
       res.result.forEach(i => {
         i['label']=i.title
         i['value']=i.id
-        i['disabled']='false'
+        i['disabled']=false
       });
       commit('SET_CARDLIST',res.result)
     })

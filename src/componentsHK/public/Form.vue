@@ -126,6 +126,32 @@
                 >
                 </el-option>
               </el-select>
+
+              <el-select
+                v-model="domain.value"
+                clearable
+                remote
+                filterable
+                reserve-keyword
+                :placeholder="$t(domain.placeholder)"
+                @change="selectChange(domain)"
+                :class="domain.classname"
+                :disabled="domain.disabled"
+                :multiple="domain.multiplechoice"
+                v-if="domain.category == 'searchSelect'"
+                :remote-method="domain.remoteMethod"
+                :loading="domain.loading"
+                class="w-100"
+              >
+                <el-option
+                  v-for="(v, index) in domain.options"
+                  :key="index"
+                  :disabled="v.disabled"
+                  :label="$t(v.label)"
+                  :value="v.value"
+                >
+                </el-option>
+              </el-select>
               <div
                 v-if="domain.category == 2"
                 :class="
@@ -394,7 +420,10 @@
                 style="display: flex;"
                 v-if="domain.category == 'countryCode'"
               >
-                <country-code-selector :countryCode.sync="domain.countryCode" />
+                <country-code-selector
+                  :countryCode.sync="domain.countryCode"
+                  :key="Math.random()"
+                />
                 <el-input-number
                   :controls="false"
                   v-model="domain.value"
@@ -419,10 +448,13 @@
                 :auto-upload="true"
                 action="#"
                 :disabled="formObj.formDisabled"
-                :http-request="(file)=>uploadHttpRequest(file,domain)"
-
+                :http-request="(file) => uploadHttpRequest(file, domain)"
               >
-                <img v-if="domain.value||atavimageUrl" :src="domain.value||atavimageUrl" class="avatar" />
+                <img
+                  v-if="domain.value || atavimageUrl"
+                  :src="domain.value || atavimageUrl"
+                  class="avatar"
+                />
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
               <!-- <el-button :disabled="domain.disabled" :type="domain.type " @click="btnClick(domain)" v-if="domain.category == 18&&!formObj.formDisabled">{{$t(domain.label)}}</el-button> -->
@@ -493,7 +525,6 @@ export default {
   components: { PageTitle, countryCodeSelector },
   data() {
     return {
-    
       uploadHeader: { Authorization: "" },
       minTime: "",
       imageUrl: "",
@@ -511,7 +542,7 @@ export default {
     this.getData();
   },
   methods: {
-    async uploadHttpRequest(param,row) {
+    async uploadHttpRequest(param, row) {
       console.log(param.file); //查看是否选取到文件
       let formData = new FormData(); //FormData对象，添加参数只能通过append('key', value)的形式添加
       formData.append("request", param.file); //添加文件对象
@@ -531,9 +562,12 @@ export default {
       });
       console.log(row);
       this.atavimageUrl = process.env.VUE_APP_IMAGE_BASE_API + res.result[0];
-      this.$set(row, "value", process.env.VUE_APP_IMAGE_BASE_API + res.result[0]);
+      this.$set(
+        row,
+        "value",
+        process.env.VUE_APP_IMAGE_BASE_API + res.result[0]
+      );
       this.realtimeform(row);
-
     },
 
     getData() {

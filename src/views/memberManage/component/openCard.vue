@@ -69,7 +69,8 @@ import {
   GetCustomer,
   UpdateCustomer,
   GetMemberCardList,
-  ActivateCustomer
+  ActivateCustomer,
+  GetMainMemberList,
 } from "@/api/member";
 import selectOption from "@/views/global-data/selectOption";
 
@@ -88,21 +89,47 @@ export default {
       obj: {},
       query: {},
       cardTypeList: [],
+      mainCardList: [],
+      mainParam: {
+        pageNum: 1,
+        pageSize: 1000,
+        keywords: "88",
+      },
+      openMasteCard: {
+        // 下拉框
+        id: "select",
+        span: 12,
+        assemblyname: "下拉框",
+        label: "member.chooseMasterCard",
+        value: "",
+        type: "",
+        hidelabels: true,
+        classname: "",
+        message: "brandMessage",
+        disabled: this.$route.query.id?true:false,
+        placeholder: "Please select",
+        category: "searchSelect",
+        source: true,
+        apiUrl: "",
+        key: "",
+        val: "",
+        check: true,
+        multiplechoice: false,
+        searchable: false,
+        formStatus: true,
+        customParameters: "mainCardID",
+        options: this.mainCardList,
+        remoteMethod: this.getMainCardList,
+        loading: false,
+      },
     };
   },
-  watch: {
-    // query: {
-    //   handler(newVal, oldVal) {
-    //     console.log(`新的值: ${newVal}`);
-    //     console.log(`旧的值: ${oldVal}`);
-    //   },
-    //   immediate: true,
-    // },
-  },
+  watch: {},
   created() {
+    this.getMainCardList();
+
     this.query = this.$route.query;
     this.getCradList();
-
     if (this.query.type === "view") {
       this.formObj.formDisabled = true;
       this.formObj4.formDisabled = true;
@@ -114,14 +141,30 @@ export default {
     }
     if (this.query.type === "add") {
       this.delItem(this.formObj, "active");
+      this.formObj.formData[1].disabled = false;
+      this.formObj2.formData[0].disabled = false;
     } else {
       this.formObj.formData[1].disabled = true;
       this.formObj2.formData[0].disabled = true;
-     
+
+      
     }
     console.log(this.query);
   },
   methods: {
+    async getMainCardList(val) {
+      console.log(val, 8888);
+      if (val) {
+        this.mainParam.keywords = val;
+        const res = await GetMainMemberList(this.mainParam);
+        res.result.dataList.forEach((i) => {
+          i["label"] = i.title + i.name + i.number;
+          i["value"] = i.number;
+        });
+        this.$set(this.openMasteCard, "options", res.result.dataList);
+        this.mainCardList = res.result.dataList;
+      }
+    },
     getCradList() {
       GetMemberCardList().then((res) => {
         res.result.forEach((i) => {
@@ -155,7 +198,7 @@ export default {
       ).inputSelectValue = res.result.credentialsType + "";
       this.formObj.formData.find(
         (i) => i.customParameters == "contactPhone"
-      ).countryCode = res.result.areaCode;
+      ).countryCode = Number(res.result.areaCode);
       this.echoFn(this.formObj2, {
         ...res.result.memberCardInfo,
         memberCardID: res.result.memberCardID,
@@ -166,6 +209,12 @@ export default {
         options: this.cardTypeList,
         customParameters: "memberCardID",
       });
+      if (res.result.mainCardID) {
+        this.getMainCardList(res.result.mainCardID);
+        this.formObj2.formData.find(
+          (i) => i.customParameters == "mainCardID"
+        ).value = res.result.mainCardID;
+      }
 
       this.echoFn(this.formObj3, res.result);
       this.echoFn(this.formObj4, res.result);
@@ -191,32 +240,9 @@ export default {
       );
       console.log(authvalue, "authvalue");
       authvalue.value = item.auth ? item.auth.split(",") : [];
-      const openMasteCard = {
-        // 下拉框
-        id: "select",
-        span: 12,
-        assemblyname: "下拉框",
-        label: "member.chooseMasterCard",
-        value: "1",
-        type: "",
-        hidelabels: true,
-        classname: "",
-        message: "brandMessage",
-        disabled: false,
-        placeholder: "Please select",
-        category: 1,
-        source: true,
-        apiUrl: "",
-        key: "",
-        val: "",
-        check: true,
-        multiplechoice: false,
-        searchable: false,
-        formStatus: true,
-        customParameters: "mainCardID",
-        options: selectOption.cardType,
-      };
-      const MembershFipFee = {
+      const openMasteCard = this.openMasteCard;
+
+      const entranceFee = {
         // 单行文本框
         id: "input",
         span: 8 /*表单占据控件，容器分为 24份，需要整数*/,
@@ -235,7 +261,7 @@ export default {
         customParameters: "entranceFee" /*对应api的参数名称*/,
       };
 
-      const MonthlyFees = {
+      const monthlyFee = {
         // 单行文本框
         id: "input",
         span: 8 /*表单占据控件，容器分为 24份，需要整数*/,
@@ -259,8 +285,8 @@ export default {
         item.label == "家庭卡（附属卡）" &&
         val.customParameters === "memberCardID"
       ) {
-        this.delItem(this.formObj2, "MembershFipFee");
-        this.delItem(this.formObj2, "MonthlyFees");
+        this.delItem(this.formObj2, "entranceFee");
+        this.delItem(this.formObj2, "monthlyFee");
         this.formObj2.formData.splice(1, 0, openMasteCard);
       } else if (
         (item.label == "家庭卡（全权会籍）" ||
@@ -268,12 +294,12 @@ export default {
           item.label == "家庭卡（个人传承会籍）") &&
         val.customParameters === "memberCardID"
       ) {
-        this.delItem(this.formObj2, "MembershFipFee");
-        this.delItem(this.formObj2, "MonthlyFees");
+        this.delItem(this.formObj2, "entranceFee");
+        this.delItem(this.formObj2, "monthlyFee");
         // 选择主卡
 
-        this.formObj2.formData.push(MembershFipFee);
-        this.formObj2.formData.push(MonthlyFees);
+        this.formObj2.formData.push(entranceFee);
+        this.formObj2.formData.push(monthlyFee);
         this.delItem(this.formObj2, "mainCardID");
       } else if (
         (item.label == "青少年卡（全会籍）" ||
@@ -281,16 +307,18 @@ export default {
           item.label == "青少年卡（指定双项运动会籍）") &&
         val.customParameters === "memberCardID"
       ) {
-        this.delItem(this.formObj2, "MembershFipFee");
-        this.delItem(this.formObj2, "MonthlyFees");
+        this.delItem(this.formObj2, "entranceFee");
+        this.delItem(this.formObj2, "monthlyFee");
         // 选择青少年卡
-        this.formObj2.formData.push(MembershFipFee);
-        this.delItem(this.formObj2, "MonthlyFees");
+        this.formObj2.formData.push(entranceFee);
+        this.delItem(this.formObj2, "monthlyFee");
         this.delItem(this.formObj2, "mainCardID");
       } else if (val.customParameters === "memberCardID") {
-        this.delItem(this.formObj2, "MembershFipFee");
-        this.delItem(this.formObj2, "MonthlyFees");
+        this.delItem(this.formObj2, "entranceFee");
+        this.delItem(this.formObj2, "monthlyFee");
         this.delItem(this.formObj2, "mainCardID");
+      } else if (val.customParameters === "mainCardID") {
+        console.log(111);
       }
     },
     ChangeSubmit(data, obj) {
@@ -329,7 +357,7 @@ export default {
           const form5 = this.getStoreFormValue(this.formObj5.formData);
           const param = { ...form1, ...form2, ...form3, ...form4, ...form5 };
           if (this.query.id) {
-            const res = await UpdateCustomer({...param,id:this.query.id});
+            const res = await UpdateCustomer({ ...param, id: this.query.id });
             if (res.code == 200) {
               this.$message({
                 type: "success",
@@ -388,13 +416,13 @@ export default {
           type: "warning",
         }
       )
-        .then(async() => {
-          const res = await ActivateCustomer({ customerId:this.query.id})
+        .then(async () => {
+          const res = await ActivateCustomer({ customerId: this.query.id });
           this.$message({
-            type: 'success',
-            message: this.$t('useCommonAll.operatorSuciscess')
-          })
-          location.reload()
+            type: "success",
+            message: this.$t("useCommonAll.operatorSuciscess"),
+          });
+          location.reload();
         })
         .catch(() => {
           this.$message({
@@ -406,7 +434,7 @@ export default {
 
     echoFn(form, res) {
       form.formData.forEach((i) => {
-        if (res[i.customParameters]) {
+        if (res[i.customParameters] + "") {
           i.value = res[i.customParameters];
         } else {
           i.value = "";

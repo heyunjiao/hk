@@ -75,10 +75,9 @@ import PageTitle from '@/componentsHK/public/PageTitle.vue'
 import FormCombination from '@/componentsHK/public/FormCombination.vue'
 import Table from '@/componentsHK/public/Tabel'
 import tableMixins from '@/mixins/tableMixins'
-import { GetCustomerList, ActivateCustomer } from '@/api/member'
+import { GetCustomerList, ActivateCustomer,GetMemberCardList } from '@/api/member'
 import { window_open } from '@/utils/index'
 import selectOption from '@/views/global-data/selectOption'
-const cardTypeList=JSON.parse(localStorage.getItem('cardTypeList'))
 export default {
   name: 'MemberList',
   components: { PageTitle, FormCombination, Table },
@@ -102,6 +101,7 @@ export default {
   mixins: [tableMixins],
   data() {
     return {
+      cardTypeList:[],
       status: true,
       title: '',
       tabData: [],
@@ -265,7 +265,7 @@ export default {
             classnameitem: '' /* 默认为空*/
           },
           {
-            // 下拉框本地取值
+            
             id: 'localDropDownBox' /* 下拉框例子*/,
             label: 'useCommonAll.memberCardType' /* todo 修改 控件label*/,
             value: '',
@@ -274,10 +274,12 @@ export default {
             placeholder: 'commen.brandMessage' /* todo 修改 placeholder 提示语*/,
             category: 1 /* todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             source: true /* todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            options:cardTypeList ,
+            options:this.cardTypeList ,
             customParameters: 'memberCardID' /* 对应api的参数名称*/,
             classname: '' /* 默认为空*/,
-            classnameitem: '' /* 默认为空*/
+            classnameitem: '' /* 默认为空*/,
+            "apiUrl": "/Customer/GetMemberCardList",
+            "source": false,
           },
 
           {
@@ -390,8 +392,20 @@ export default {
   },
   created() {
     this.list(this.tableObj.page, this.tableObj.pageSize, '')
+    // this.getCradList()
   },
   methods: {
+      getCradList() {
+      GetMemberCardList().then((res) => {
+        res.result.forEach((i) => {
+          i["label"] = i.title;
+          i["value"] = i.id;
+          i["disabled"] = false;
+        });
+        this.cardTypeList = res.result;
+        
+      });
+    },
   
     // tablecao'z操作按钮设置
     operationSubmit(v, index, row) {

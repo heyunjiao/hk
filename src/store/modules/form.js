@@ -147,6 +147,7 @@ console.log(formObj,'formObj');
             let labelData = [];
             const getselectData=new Promise((resolve,reject)=>{})
             getselectData({}, params.url).then((response) => {
+                console.log(params,'strore');
                 /*
                 * 1，response
                 * 2，response.data*/

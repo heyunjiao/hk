@@ -239,7 +239,7 @@ export default {
       let dynamicValidateForm = this.dynamicValidateForm;
       dynamicValidateForm.domains.forEach((f) => {
         if (f.source == false) {
-          /*this.$store.dispatch('getData', {
+      this.$store.dispatch('getData', {
             data: {},
             url: f.apiUrl,
             item: f,
@@ -249,7 +249,7 @@ export default {
               f.options = response;
               f.options = response;
             })
-          })*/
+          })
         }
       })
     },

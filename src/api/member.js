@@ -13,6 +13,13 @@ export function AddCustomer(data) {
     data
   })
 }
+export function GetMainMemberList(data) {
+  return request({
+    url: '/Customer/GetMainMemberList',
+    method: 'post',
+    data
+  })
+}
 export function UpdateCustomer(data) {
   return request({
     url: '/Customer/UpdateCustomer',

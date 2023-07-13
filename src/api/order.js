@@ -7,3 +7,10 @@ export function GetEmployeeOrderList(data) {
     data
   })
 }
+export function GetCustomerOrderList(data) {
+  return request({
+    url: '/Order/GetCustomerOrderList',
+    method: 'post',
+    data
+  })
+}
