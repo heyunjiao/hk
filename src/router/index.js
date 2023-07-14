@@ -7,44 +7,18 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import componentsRouter from './modules/components'
-import chartsRouter from './modules/charts'
-import tableRouter from './modules/table'
-import nestedRouter from './modules/nested'
+// import componentsRouter from './modules/components'
+// import chartsRouter from './modules/charts'
+// import tableRouter from './modules/table'
+// import nestedRouter from './modules/nested'
 
-/**
- * Note: sub-menu only appear when route children.length >= 1
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
- *                                if not set alwaysShow, when item has more than one children route,
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
- * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
-    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
-    icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
-    noCache: true                if set true, the page will no be cached(default is false)
-    affix: true                  if set true, the tag will affix in the tags-view
-    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
-  }
- */
-
-/**
- * constantRoutes
- * a base page that does not have permission requirements
- * all roles can be accessed
- */
 export const constantRoutes = [
   {
     path: '/',
     component: Layout,
     redirect: '/welcom',
     hidden: true,
-    meta: { roles: ['admin'] },
+    meta: {},
     children: [
       {
         path: 'welcom',
@@ -56,40 +30,40 @@ export const constantRoutes = [
     ]
   },
 
-  {
-    path: '/demo',
-    component: Layout,
-    redirect: '/demo/index',
-    alwaysShow: true, // will always show the root menu
-    name: 'demo',
-    hidden: true,
-    meta: {
-      title: 'demo',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'demo',
-        component: () => import('@/views/demo/index'),
-        name: 'PagePermission',
-        meta: {
-          title: 'demo',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'demoForm',
-        component: () => import('@/views/demo/demoForm'),
-        name: 'PagePermission',
-        meta: {
-          title: 'demo',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      }
+  // {
+  //   path: '/demo',
+  //   component: Layout,
+  //   redirect: '/demo/index',
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'demo',
+  //   hidden: true,
+  //   meta: {
+  //     title: 'demo',
+  //     icon: 'lock',
+  //     roles: ['admin', 'editor'] // you can set roles in root nav
+  //   },
+  //   children: [
+  //     {
+  //       path: 'demo',
+  //       component: () => import('@/views/demo/index'),
+  //       name: 'PagePermission',
+  //       meta: {
+  //         title: 'demo',
+  //         roles: ['admin'] // or you can only set roles in sub nav
+  //       }
+  //     },
+  //     {
+  //       path: 'demoForm',
+  //       component: () => import('@/views/demo/demoForm'),
+  //       name: 'PagePermission',
+  //       meta: {
+  //         title: 'demo',
+  //         roles: ['admin'] // or you can only set roles in sub nav
+  //       }
+  //     }
 
-    ]
-  },
+  //   ]
+  // },
 
   {
     path: '/redirect',
@@ -125,33 +99,34 @@ export const constantRoutes = [
   }
 ]
 
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
 export const asyncRoutes = [
   {
     path: '/memberManage',
     component: Layout,
+    name:'memberManage',
     meta: {
 
       icon: 'user',
-      roles: ['admin'] // you can set roles in root nav
+      roles: 'sc_customer' // you can set roles in root nav
     },
     children: [
       {
         path: 'memberManage',
         component: () => import('@/views/memberManage/memberList'),
-        name: 'memberManage',
-        meta: { title: 'memberManage', roles: ['admin'] }
+        name: 'memberList',
+        meta: {
+          title: 'memberManage',
+          roles: 'sc_customer'
+        }
       },
       // 创建会员卡
       {
         path: 'openCard',
         component: () => import('@/views/memberManage/component/openCard'),
         hidden: true,
+        name:'openCard',
         meta: {
-          roles: ['admin']
+          roles: 'sc_customer'
         }
       }
 
@@ -161,10 +136,11 @@ export const asyncRoutes = [
   {
     path: '/appointmentManage',
     component: Layout,
+    name:"appointmentManage",
     meta: {
       icon: 'el-icon-date',
       title: 'reservationManage',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      roles: 'sc_booking',
     },
     children: [
       {
@@ -174,7 +150,7 @@ export const asyncRoutes = [
         meta: {
           icon: 'el-icon-date',
           title: 'reservationManage',
-          roles: ['admin', 'editor'] // or you can only set roles in sub nav
+          roles: 'sc_booking',
         }
       },
       // 创建预约
@@ -182,16 +158,22 @@ export const asyncRoutes = [
         path: 'openAppoint',
         component: () => import('@/views/appointmentManage/component/openAppoint'),
         hidden: true,
+        name:'openAppoint',
         meta: {
           title: 'createreservation',
-          roles: ['admin', 'editor']
+          roles: 'sc_booking',
         }
       },
       {
         path: 'batchopenAppoint',
         component: () => import('@/views/appointmentManage/component/batchopenAppoint'),
         hidden: true,
-        roles: ['admin', 'editor']
+        name:"batchopenAppoint",
+        meta: {
+          title: 'createreservation',
+          roles: 'sc_booking',
+        }
+
       }
 
     ]
@@ -199,21 +181,20 @@ export const asyncRoutes = [
   {
     path: '/orderManage',
     component: Layout,
-
+name:'orderManage',
     meta: {
       icon: 'el-icon-document',
       title: 'orderManage',
-      roles: ['admin'] // you can set roles in root nav
+      roles: 'sc_order' // you can set roles in root nav
     },
     children: [
       {
         path: 'index',
         component: () => import('@/views/orderManage/index'),
-        name: 'orderManage',
+        name: 'orderManage1',
         meta: {
-
+          roles: 'sc_order',
           title: 'orderManage',
-          roles: ['admin'] // or you can only set roles in sub nav
         }
       },
       {
@@ -222,61 +203,61 @@ export const asyncRoutes = [
         name: 'AddOrder',
         hidden: true,
         meta: {
+          roles: 'sc_order',
           title: 'createOrder',
-          roles: ['admin'] // or you can only set roles in sub nav
         }
       }
     ]
   },
   // 员工管理
-  // 员工管理
   {
     path: '/staff',
     component: Layout,
+    name:"staff",
     meta: {
       title: 'staffManagement',
       icon: 'el-icon-s-tools', // staff
-      roles: ['admin'] // you can set roles in root nav
+      roles: 'sc_employee' // you can set roles in root nav
     },
     children: [
 
       {
         path: 'staffList',
         component: () => import('@/views/staffManage/staffList'),
-        name: 'setting',
+        name: 'staffList',
         meta: {
           title: 'staffManagement',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: 'sc_employee' // or you can only set roles in sub nav
         }
       },
       {
         path: 'addStaff',
         component: () => import('@/views/staffManage/addStaff'),
-        name: 'setting',
+        name: 'addStaff',
         hidden: true,
         meta: {
           title: 'newMember',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: 'sc_employee' // or you can only set roles in sub nav
         }
       },
       {
         path: 'editStaff',
         component: () => import('@/views/staffManage/addStaff'),
-        name: 'setting',
+        name: 'editStaff',
         hidden: true,
         meta: {
           title: 'editStaff',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: 'sc_employee' // or you can only set roles in sub nav
         }
       },
       {
         path: 'detailStaff',
         component: () => import('@/views/staffManage/addStaff'),
-        name: 'setting',
+        name: 'detailStaff',
         hidden: true,
         meta: {
           title: 'staffDetail',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: 'sc_employee' // or you can only set roles in sub nav
         }
       }
       // {
@@ -323,11 +304,11 @@ export const asyncRoutes = [
   {
     path: '/clubManage',
     component: Layout,
-
+name:'clubManage',
     meta: {
       title: 'clubManage',
       icon: 'el-icon-s-shop',
-      roles: ['admin'] // you can set roles in root nav
+      roles: 'sc_club'// you can set roles in root nav
     },
     children: [
 
@@ -337,7 +318,7 @@ export const asyncRoutes = [
         name: 'room',
         meta: {
           title: 'roomManage',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: 'sc_club_room sc_club' // or you can only set roles in sub nav
         }
       },
       {
@@ -347,7 +328,7 @@ export const asyncRoutes = [
         hidden: true,
         meta: {
           title: 'addRoom',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: 'sc_club_room sc_club' // or you can only set roles in sub nav
         }
       },
       {
@@ -356,7 +337,7 @@ export const asyncRoutes = [
         name: 'class',
         meta: {
           title: 'packageManage',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: 'sc_club_class sc_club' // or you can only set roles in sub nav
         }
 
       },
@@ -367,20 +348,21 @@ export const asyncRoutes = [
         hidden: true,
         meta: {
           title: 'addClass',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: 'sc_club_class sc_club' // or you can only set roles in sub nav
         }
       }
     ]
   },
+  
   // 个人中心
   {
     path: '/account',
     component: Layout,
-
+name:'account',
     meta: {
       title: 'personalCenter',
       icon: 'person',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      roles: 'sc_personal' // you can set roles in root nav
     },
     children: [
 
@@ -390,7 +372,7 @@ export const asyncRoutes = [
         name: 'personInfo',
         meta: {
           title: 'personalInfo',
-          roles: ['admin', 'editor'] // or you can only set roles in sub nav
+          roles: 'sc_personal_info sc_personal' // or you can only set roles in sub nav
         }
       },
       {
@@ -399,32 +381,32 @@ export const asyncRoutes = [
         name: 'accountNumber',
         meta: {
           title: 'accountManage',
-          roles: ['admin', 'editor'] // or you can only set roles in sub nav
+          roles: 'sc_personal_account sc_personal' // or you can only set roles in sub nav
         }
       }
 
     ]
   },
   // 核销管理
-  // {
-  //   path: '/accountingManage ',
-  //   component: Layout,
+  {
+    path: '/accountingManage',
+    component: Layout,
+name:'accountingManage',
+    meta: { roles: 'sc_settlement'},
+    children: [
+      {
+        path: 'setting',
+        component: () => import('@/views/accountingManage/index'),
+        name: 'setting',
+        meta: {
+          icon: 'moneyMenu',
+          title: 'financialManage',
+          roles: 'sc_settlement' // or you can only set roles in sub nav
+        }
+      }
 
-  //   meta: { roles: ['admin', 'editor'] },
-  //   children: [
-  //     {
-  //       path: 'setting',
-  //       component: () => import('@/views/accountingManage/index'),
-  //       name: 'setting',
-  //       meta: {
-  //         icon: 'moneyMenu',
-  //         title: 'financialManage',
-  //         roles: ['admin', 'editor'] // or you can only set roles in sub nav
-  //       }
-  //     }
-
-  //   ]
-  // },
+    ]
+  },
 
   // {
   //   path: '/permission',

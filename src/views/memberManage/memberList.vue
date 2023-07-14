@@ -274,7 +274,6 @@ export default {
             placeholder: 'commen.brandMessage' /* todo 修改 placeholder 提示语*/,
             category: 1 /* todo 修改  (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)，(7: 按钮)，（8：）*/,
             source: true /* todo 修改  true 本地数据 false 接口数据 必须get 请求 返回格式必须统一*/,
-            options:this.cardTypeList ,
             customParameters: 'memberCardID' /* 对应api的参数名称*/,
             classname: '' /* 默认为空*/,
             classnameitem: '' /* 默认为空*/,

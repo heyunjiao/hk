@@ -70,21 +70,21 @@ const documentType = [{
 }]
 // 账户权限
 const accountAuth = [
-  { value: '1', label: "useCommonAll.reservationCourse", disabled: true},
+  { value: '1', label: "useCommonAll.reservationCourse", },
   {
     value: '2',
     label: "useCommonAll.instoreConsume",
-    disabled: true
+    
   },
   {
     value: '3',
     label: "useCommonAll.inlineConsume",
-    disabled: true
+    
   },
   {
     value: '4',
     label: "useCommonAll.sportProject",
-    disabled: true
+    
   },
 
 ]

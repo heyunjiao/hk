@@ -1,10 +1,14 @@
 
 import selectOption from "@/views/global-data/selectOption";
-const cardTypeList=JSON.parse(localStorage.getItem('cardTypeList'))
+import {
 
+  GetMemberCardList,
+ 
+} from "@/api/member";
 let userMixin={
     data(){
     return{
+      cardTypeList: [],
       
           formObj: {
             profilePictureUrl: "",
@@ -330,7 +334,7 @@ let userMixin={
                 searchable: false,
                 formStatus: true,
                 customParameters: "memberCardID",
-                options:cardTypeList
+                options:this.cardTypeList
               },
               {
                 // 多选框组
@@ -339,7 +343,7 @@ let userMixin={
                 assemblyname: "多选框组",
                 label: "useCommonAll.permissionTtem",
                 value: [],
-                disabled: true,
+                disabled:  this.$route.query.id?true:false,
                 type: "",
                 hidelabels: true,
                 classname: "",
@@ -605,7 +609,24 @@ let userMixin={
           },
 
     }},
+    created(){
+    this.getCradList()
+    },
     methods:{
+      getCradList() {
+        GetMemberCardList().then((res) => {
+          res.result.forEach((i) => {
+            i["label"] = i.title;
+            i["value"] = i.id;
+            i["disabled"] = false;
+          });
+          this.cardTypeList = res.result;
+          this.formObj2.formData[0].options= this.cardTypeList
+          if (this.query.id) {
+            this.getDetailInfo();
+          }
+        });
+      },
     statusFn(value){
     console.log(value,888);
     this.formObj.formData[1].label='停用'

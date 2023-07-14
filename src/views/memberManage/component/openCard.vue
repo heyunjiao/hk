@@ -68,7 +68,6 @@ import {
   AddCustomer,
   GetCustomer,
   UpdateCustomer,
-  GetMemberCardList,
   ActivateCustomer,
   GetMainMemberList,
 } from "@/api/member";
@@ -88,7 +87,6 @@ export default {
       submitObj: {},
       obj: {},
       query: {},
-      cardTypeList: [],
       mainCardList: [],
       mainParam: {
         pageNum: 1,
@@ -129,7 +127,6 @@ export default {
     this.getMainCardList();
 
     this.query = this.$route.query;
-    this.getCradList();
     if (this.query.type === "view") {
       this.formObj.formDisabled = true;
       this.formObj4.formDisabled = true;
@@ -165,19 +162,7 @@ export default {
         this.mainCardList = res.result.dataList;
       }
     },
-    getCradList() {
-      GetMemberCardList().then((res) => {
-        res.result.forEach((i) => {
-          i["label"] = i.title;
-          i["value"] = i.id;
-          i["disabled"] = false;
-        });
-        this.cardTypeList = res.result;
-        if (this.query.id) {
-          this.getDetailInfo();
-        }
-      });
-    },
+   
     async getDetailInfo() {
       const res = await GetCustomer(this.query.id);
       this.status = res.result.status;
@@ -253,7 +238,7 @@ export default {
         hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
         classname: "" /*自定义class*/,
         message: "brandMessage" /*校验提示语*/,
-        disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+        disabled:  this.$route.query.id?true:false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
         placeholder: "brandMessage" /*提示语*/,
         category: 14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
         check: true /*是否校验*/,
@@ -272,7 +257,7 @@ export default {
         hidelabels: true /*是否展示label*/ /*是否展示label标题*/,
         classname: "" /*自定义class*/,
         message: "brandMessage" /*校验提示语*/,
-        disabled: true /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
+        disabled:  this.$route.query.id?true:false /*是否禁用*/ /*是否禁用 true 禁用 false 启用*/,
         placeholder: "brandMessage" /*提示语*/,
         category: 14 /*(0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
         check: true /*是否校验*/,

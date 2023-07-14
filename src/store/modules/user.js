@@ -11,8 +11,8 @@ const state = {
   avatar: '',
   introduction: '',
   roles: [],
-  userinfo:{},
-  cardTypeList:[]
+  userinfo: {},
+  cardTypeList: []
 }
 
 const mutations = {
@@ -30,30 +30,34 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+    // console.log(roles, 'roles-state');
   },
   SET_CARDLIST: (state, cardTypeList) => {
     state.cardTypeList = cardTypeList
-    localStorage.setItem('cardTypeList',JSON.stringify(cardTypeList))
+    localStorage.setItem('cardTypeList', JSON.stringify(cardTypeList))
   },
   SET_USERINFO: (state, userinfo) => {
     state.userinfo = userinfo
     localStorage.setItem('userInfo', JSON.stringify(userinfo))
 
   }
- 
+
 }
 
 const actions = {
   // user login
-  login({ commit,dispatch }, userInfo) {
+  login({ commit, dispatch }, userInfo) {
+    // commit('SET_ROLES', [])
+
     const { account, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ account: account.trim(), password: password }).then(response => {
-        const {result} = response
-        commit('SET_USERINFO',result.userInfo)
-        commit('SET_TOKEN', 'Bearer'+' '+result.accessToken)
-        setToken('Bearer'+' '+result.accessToken)
-       dispatch ('getCradList')
+        const { result } = response
+        commit('SET_USERINFO', result.userInfo)
+        commit('SET_TOKEN', 'Bearer' + ' ' + result.accessToken)
+        setToken('Bearer' + ' ' + result.accessToken)
+      
+
         resolve()
       }).catch(error => {
         reject(error)
@@ -61,43 +65,42 @@ const actions = {
     })
   },
 
-    getCradList({commit}){
-    GetMemberCardList().then(res=>{
+  getCradList({ commit }) {
+    GetMemberCardList().then(res => {
       res.result.forEach(i => {
-        i['label']=i.title
-        i['value']=i.id
-        i['disabled']=false
+        i['label'] = i.title
+        i['value'] = i.id
+        i['disabled'] = false
       });
-      commit('SET_CARDLIST',res.result)
+      commit('SET_CARDLIST', res.result)
     })
-    
-    
-    },
+
+
+  },
   // get user info
   getInfo({ commit, state }) {
+    console.log(state);
+    if(localStorage.getItem('permission')){
+      commit('SET_ROLES',JSON.parse( localStorage.getItem('permission')))
+     
+
+
+    }else {
+      commit('SET_ROLES',state.userinfo.permissions)
+    
+    }
+
     return new Promise((resolve, reject) => {
-      // getInfo(state.token).then(response => {
-      //   const { data } = response
+      if (state.roles&& state.roles.length>1) {
+      console.log(state.roles,8888);
 
-      //   if (!data) {
-      //     reject('Verification failed, please Login again.')
-      //   }
+       localStorage.setItem('permission',JSON.stringify(state.roles))
+        resolve(state.roles)
 
-      //   const { roles, name, avatar, introduction } = data
+        dispatch ('changeRoles',state.roles)
 
-      //   // roles must be a non-empty array
-      //   if (!roles || roles.length <= 0) {
-      //     reject('getInfo: roles must be a non-null array!')
-      //   }
+      }
 
-      commit('SET_ROLES', ['admin'])
-      // commit('SET_NAME', name)
-      // commit('SET_AVATAR', avatar)
-      // commit('SET_INTRODUCTION', introduction)
-      // resolve(data)
-      // }).catch(error => {
-      //   reject(error)
-      // })
     })
   },
 
@@ -105,17 +108,17 @@ const actions = {
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
       // logout(state.token).then(() => {
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
-        removeToken()
-        resetRouter()
-        localStorage.clear()
+      commit('SET_TOKEN', '')
+      commit('SET_ROLES', [])
+      removeToken()
+      resetRouter()
+      localStorage.clear()
+      // changeRoles()
+      // reset visited views and cached views
+      // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
+      dispatch('tagsView/delAllViews', null, { root: true })
 
-        // reset visited views and cached views
-        // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
-        dispatch('tagsView/delAllViews', null, { root: true })
-
-        resolve()
+      resolve()
       // }).catch(error => {
       //   reject(error)
       // })
@@ -140,7 +143,7 @@ const actions = {
     commit('SET_TOKEN', token)
     setToken(token)
 
-    const { roles } = await dispatch('getInfo')
+    const  roles = await dispatch('getInfo')
 
     resetRouter()
 
