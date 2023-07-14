@@ -284,7 +284,7 @@ export default {
             classname: "" /* 自定义class*/,
             message: "brandMessage" /* 校验提示语*/,
             disabled: false /* 是否禁用*/ /* 是否禁用 true 禁用 false 启用*/,
-            placeholder: "" /* 提示语*/,
+            placeholder: "brandMessage" /* 提示语*/,
             category: 0 /* (0: input), (1: select), (2: radio), (3: checkbox 多选)， (4: timePicker 时间选择器)， (5: datePicker 日期选择器)， (6: switch 开关)*/,
             check: true /* 是否校验*/,
             iconChekc: false /* 是否展示icon*/,
@@ -488,7 +488,7 @@ export default {
 
           break;
         case 'administrator':
-          this.$refs.tree.setCheckedKeys(['sc_customer', 'sc_booking', 'sc_order', 'sc_personal', 'sc_club', 'sc_settlement','sc_club_room','sc_employee', 'sc_club_class','sc_personal_info','sc_personal_account', ]);
+          this.$refs.tree.setCheckedKeys(['sc_customer', 'sc_booking', 'sc_order', 'sc_personal', 'sc_club', 'sc_settlement','sc_club_room','sc_employee', 'sc_club_class','sc_personal_info','sc_personal_account' ]);
 
           break;
 
